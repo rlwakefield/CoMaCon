@@ -1,0 +1,27 @@
+﻿@section core {
+    <div style="display:flex;justify-content:center;flex-direction: column;">
+        <div style="display:flex;justify-content:center;">
+            <h1>What would you like to do?</h1>
+        </div>
+        <div style="display:flex;justify-content:space-around;">
+            <div style="width:70%;display:flex;justify-content:space-around;">
+                @* <button style="font-size:x-large;max-height:7.5rem;min-height:5rem;max-width:7.5rem;border-radius: 10px;" onclick="createWebApplication()">Create WebApp</button> *@
+                <button style="font-size:x-large;max-height:7.5rem;min-height:5rem;max-width:7.5rem;border-radius: 10px;" onclick="openModal()">Open WebApp</button>
+                @* <button style="font-size:x-large;max-height:7.5rem;min-height:5rem;max-width:7.5rem;border-radius: 10px;" onclick="createLocalConfiguration()">Create Local Config</button> *@
+                @* <button style="font-size:x-large;max-height:7.5rem;min-height:5rem;max-width:7.5rem;border-radius: 10px;" onclick="openLocalConfiguration()">Open Local Config</button> *@
+            </div>
+        </div>
+    </div>
+    <script>
+        // console.log("Home Page Loaded");
+        // console.log(window.location);
+        if (window.location.href.endsWith("/")) {
+            apiRootUrl = window.location.href.slice(0, -1);
+            sessionStorage.setItem('apiRootUrl', apiRootUrl);
+        } else {
+            apiRootUrl = window.location;
+            sessionStorage.setItem('apiRootUrl', apiRootUrl);
+        }
+        document.getElementById("core-action-buttons-div").style.display = "none";
+    </script>
+}

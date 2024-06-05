@@ -1,0 +1,1675 @@
+/********************************************************
+ *            General Styling (Not sectioned)
+ ********************************************************/
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.BlockDescription {
+	padding: 0 10px;
+	/*visibility: hidden;*/
+}
+
+.ExtraRowSection {
+	padding: 0 10px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+	/*float: left;*/
+	width: 50%;
+	padding: 0 10px;
+	align-content: baseline;
+	margin-bottom: 0.5rem;
+}
+
+.setting-element {
+	/* display: inline-flex; */
+	margin-top: 16px;
+	margin-bottom: 16px;
+	align-items: baseline;
+	justify-content: space-between;
+}
+
+/* Clear floats after the columns */
+/*.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}*/
+
+.TrustedCertificatesClients {
+	margin-top: 5px;
+	margin-bottom: 0;
+	border-bottom: 1px solid grey;
+}
+
+.CoreSectionsButtons {
+	margin-right: 1rem;
+	display: none;
+}
+
+.CoreSectionsButtons button {
+	background-color: inherit;
+	float: left;
+	border: 0.25px solid grey;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	margin: 5px 0;
+	/*height: 60px;*/
+	/*width: 115px;*/
+}
+
+/* Change background color of buttons on hover */
+.CoreSectionsButtons button:hover {
+	background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.CoreSectionsButtons button.active {
+	background-color: #ccc;
+}
+
+.sections h2 {
+	margin-top: 0;
+}
+
+/* Style the tab Sections */
+.sections {
+	display: none;
+	/* padding-top: 1rem; */
+	padding-left: 10px;
+	padding-bottom: 5px;
+	margin-top: 1rem;
+	width: 100%;
+}
+
+.home {
+	border: none;
+}
+
+header h1 {
+	font-size: 3rem;
+	margin: 0;
+	padding-left: 0.5%;
+}
+
+.h1-container {
+	background-color: #cccccc;
+	border-radius: 25px 25px 0 0;
+}
+
+.core-section-buttons {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	flex-wrap: wrap;
+	margin-bottom: 0.5rem;
+}
+
+.core-section-buttons-outer {
+	border: 2px black solid;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.core-section-buttons-inner {
+	width: 30vh;
+	/*min-height: 5rem;*/
+	max-height: 60vh;
+	overflow-y: auto;
+}
+
+.core-section-buttons-inner p {
+	margin: 0.5rem 0 0 0.5rem;
+	font-size: x-large;
+	font-weight: bold;
+}
+
+.core-section-buttons-inner ul {
+	list-style: none;
+	margin: 5px 0 5px 0;
+	padding-inline-start: 20px;
+}
+
+.core-section-buttons-inner li {
+	list-style-type: none;
+    display: flex;
+	align-items: center;
+	margin: 2.5px 0;
+}
+
+.core-section-buttons-inner li::before {
+	content: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" viewBox="0 0 24 24"%3E%3Cpath d="m12.563 5.25 6.75 6.75-6.75 6.75"%3E%3C/path%3E%3Cpath d="M18.375 12H4.687"%3E%3C/path%3E%3C/svg%3E');
+	margin-right: 2.5px;
+}
+
+.core-section-buttons-inner li:not(:last-child) {
+	/* Applying top border for all li elements except the last one */
+	border-bottom: 2px solid black;
+}
+
+.core-section-buttons-inner a {
+	text-decoration: none;
+}
+
+.body-core-section {
+	display: flex;
+}
+
+.core-action-buttons-div {
+	border: 2px solid black;
+	background-color: #cccccc;
+	padding-top: 2.5px;
+	padding-bottom: 2.5px;
+	display: flex;
+	justify-content: space-between;
+	border-radius: 0 0 5px 5px;
+}
+
+.core-action-buttons {
+	border: none;
+	background: none;
+	font-size: large;
+}
+
+.core-action-buttons-div button:hover {
+	cursor: pointer;
+	background-color: #a9a9a9;
+}
+
+.longTextInputBox {
+	width: 300px;
+}
+
+.tallScrollableSection {
+	height: 40rem;
+}
+
+input[type=number] {
+	width: 5rem;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.folderingPercentageTooHigh {
+	color: red;
+	font-weight: bolder;
+	text-decoration: underline;
+}
+
+#Foldering-Total-Percentage-Text {
+	padding-right: 5px;
+}
+
+.passwordShowHideButton {
+	padding: 0;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 2.5px;
+}
+
+.invalidUrl {
+	border-color: #FFA500;
+	border-width: 4px;
+}
+
+.validUrl {
+	border-color: #00ff00;
+	border-width: 2px;
+}
+
+.inputElement {
+	display: inline-flex;
+}
+
+.Optimize-Windows-Authentication {
+	/*display: none;*/
+	width: max-content;
+	height: min-content;
+	margin: 0 5px;
+}
+
+.Optimize-Windows-Authentication option {
+	border-bottom: 1px solid black;
+}
+
+
+/********************************************************
+ *              Loader/Spinner styling
+ ********************************************************/
+.loader {
+	margin: auto;
+	border: 5px solid #EAF0F6;
+	border-radius: 50%;
+	border-top: 5px solid #0061b0;
+	width: 11px;
+	height: 11px;
+	animation: spinner 0.75s linear infinite;
+	display: none;
+}
+
+@keyframes spinner {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+
+/********************************************************
+ *   Alert Modal Styling (Need to see what this is for)
+ ********************************************************/
+/*
+The Alert Modal Styling. Might move this to another stylesheet file possibly.
+*/
+.AlertModal {
+	display: none;
+	border: 1px solid black;
+	z-index: 1; /* Sit on top */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    left: 0;
+    top: 0;
+    position: fixed;
+    overflow: auto;
+	padding-top: 100px;
+}
+
+.AlertModal-Container {
+	background-color: #fefefe;
+	max-width: 36rem;
+    min-width: 30rem;
+	margin: auto;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.AlertModal-TitleBar {
+	/* display: flex; */
+	background-color: lightgrey;
+	border-bottom: 1px solid black;
+}
+
+.AlertModal-TitleBar p {
+	margin: 0;
+	padding: 0.5rem;
+}
+
+.AlertModal-Body {
+	width: 90%;
+	margin: 0.5rem auto 0.5rem auto;
+}
+
+.AlertModal-Button {
+	display: flex;
+	justify-content: right;
+	margin: 0.5rem;
+}
+
+.AlertModal-Button button {
+	width: 3rem;
+	margin: 0.5rem;
+}
+
+
+/********************************************************
+ *                 Tooltip Styling
+ ********************************************************/
+.tooltipimage {
+	/*Need to use this to control the size of the image.*/
+}
+
+ /*Tooltip text*/ 
+.tooltiptext {
+	visibility: hidden;
+	width: 240px;
+	background-color: black;
+	color: #fff;
+	text-align: left;
+	padding: 5px;
+	border-radius: 6px;
+	/*Position the tooltip text - see examples below!*/ 
+	position: absolute;
+	z-index: 1;
+}
+
+ /*Show the tooltip text when you mouse over the tooltip container*/ 
+.tooltipimage:hover + .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}
+
+
+/********************************************************
+ *                 Tooltip Styling V2
+ ********************************************************/
+/*.tooltipimage {*/
+	/*Need to use this to control the size of the image.*/
+/*}
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+}*/
+
+/* Tooltip text */
+/*.tooltiptext {
+	visibility: hidden;
+	width: 120px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	top: -5px;
+	left: 110%;
+}
+
+.tooltip .tooltiptext::after {
+	content: " ";
+	position: absolute;
+	bottom: 100%;*/ /* At the top of the tooltip */
+	/*left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent transparent black transparent;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}*/
+
+
+/********************************************************
+ *                  Tab Styling
+ ********************************************************/
+/* Style the tab */
+.tab {
+	display: flex;
+	flex-wrap: wrap;
+	/* flex-direction: row; */
+	overflow: hidden;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;
+	border-radius: 5px;
+	padding: 2px;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+	background-color: inherit;
+	float: left;
+	border: 0.25px solid grey;
+	outline: none;
+	cursor: pointer;
+	padding: 7px 8px;
+	transition: 0.3s;
+	margin: 2px;
+	white-space: normal;
+	/* width: 150px; */
+	max-width: 175px;
+	height: 3.5rem;
+	/* text-align: center; */
+	border-radius: 5px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+	background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+	background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent,
+.tabcontentCoreConfiguration,
+.tabcontentSub,
+.tabcontentIntegrationsSub,
+.tabcontentNavigationPanelSub,
+.tabcontentCustomValidationSub,
+.tabcontentCoreConfigurationConnectionStringsSub,
+.tabcontentIisConfiguration,
+.tabcontentWorkViewSub,
+.tabcontentHylandAuthenticationSub,
+.tabcontentPlatterManagementSub,
+.tabcontentHylandServicesSub,
+.tabcontentLobBrokerSub,
+.tabcontentMiscellaneousSub {
+	display: none;
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	/*border-top: none;*/
+	border-radius: 5px;
+	margin-top: 0.5rem;
+	/*width: 100%;*/
+}
+
+/* Style the Main tab */
+.tabHeader {
+	display: grid;
+	gap: 1px;
+	grid-template-columns: repeat(4, 1fr);
+	width: 25%;
+}
+
+.tabHeaderMain {
+	background-color: #f1f1f1;
+	border: 1px solid #ccc;
+	border-bottom: none;
+}
+
+/* Style the buttons inside the tab */
+.tabHeader button {
+	background-color: inherit;
+	float: left;
+	border: 0.25px solid grey;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	margin: 0.5px 1px 0.5px 1px;
+	height: 60px;
+	width: 115px;
+	align-content: center;
+}
+
+/* Change background color of buttons on hover */
+.tabHeader button:hover {
+	background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tabHeader button.active {
+	background-color: #ccc;
+}
+
+.tablinks {
+	min-width: 75px;
+}
+
+.tablinksMain {
+	border-radius: 5px;
+}
+
+
+/********************************************************
+ *                  Slider Styling
+ ********************************************************/
+/* The switch - the box around the slider */
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 42px;
+	height: 26px;
+}
+
+	/* Hide default HTML checkbox */
+	.switch input {
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+
+/* The slider */
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+	.slider:before {
+		position: absolute;
+		content: "";
+		height: 18px;
+		width: 18px;
+		left: 4px;
+		bottom: 4px;
+		background-color: white;
+		-webkit-transition: .4s;
+		transition: .4s;
+	}
+
+input:checked + .slider {
+	background-color: #2196F3;
+}
+
+input:focus + .slider {
+	box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+	-webkit-transform: translateX(16px);
+	-ms-transform: translateX(16px);
+	transform: translateX(16px);
+}
+
+/* Rounded sliders */
+.slider.round {
+	border-radius: 26px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
+}
+
+.settingElement {
+	display: flex;
+	align-items: center;
+	margin-top: 16px;
+	margin-bottom: 16px;
+	justify-content: space-between;
+}
+
+.settingElement div {
+	gap: 2px;
+	/*display: flex;
+	align-items: center;*/
+}
+
+.labelElement {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+}
+
+
+/********************************************************
+ *           Section with Title Bar Styling
+ ********************************************************/
+.sectionWithTitleBar {
+	border: 1px solid black;
+	margin-bottom: 5px;
+	border-radius: 5px;
+}
+
+.sectionWithTitleBar .titleBar {
+	border-bottom: 1px solid black;
+	background-color: lightgray;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-radius: 5px 5px 0 0;
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sectionWithTitleBar .coreSection {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+
+/********************************************************
+ *                  Processing Styling
+ ********************************************************/
+.ProcessingWebConfigValuesProgress {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.ProcessingWebConfigValuesProgress-Content {
+	background-color: #fefefe;
+	margin: auto;
+	/* padding: 20px; */
+	border: 1px solid black;
+	width: 80%;
+	/* Animation CSS */
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+.ProcessingWebConfigValuesProgress-Section {
+	display: flex;
+	padding-top: 1rem;
+	align-items: center;
+	font-size: xx-large;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+@keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+.ProcessingWebConfigValuesProgress-Bar {
+	height: 2.5rem;
+	width: 25rem
+}
+
+
+/********************************************************
+ *             Diagnostics Settings Styling
+ ********************************************************/
+/* Styles the Diagnostics Settings fields. */
+.DestinationTypeFields {
+	display: none;
+	padding: 5px 5px;
+}
+
+.DiagnosticSettingRoutes {
+	margin-top: 8px;
+	margin-bottom: 0;
+	border-bottom: 1px solid grey;
+	padding-bottom: 2px;
+}
+
+.diagnosticsSettingsRouteDuplicateNameInputField {
+	border-color: #ff0000;
+	border-width: 4px;
+}
+
+.diagnosticsSettingsRouteDuplicateNameSelectList {
+	color: #ff0000;
+	font-style: italic;
+}
+
+.diagnosticsSettingsRouteSelected {
+	background-color: #d3d3d3;
+}
+
+
+/********************************************************
+ *          Custom Validation Tab/Section Styling
+ ********************************************************/
+.CustomValidationPagesList,
+.CustomValidationPagesListKeywordsList {
+	list-style: none;
+	padding-left: 5px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.CustomValidationPagesListSection {
+	border: 1px solid black;
+	padding-left: 5px;
+	padding-right: 5px;
+	height: 500px;
+	overflow-y: scroll;
+}
+
+.CustomValidationPagesListSection {
+	border: 1px solid black;
+	padding-left: 5px;
+	padding-right: 5px;
+	height: 500px;
+	overflow-y: scroll;
+}
+
+.CustomValidationApplicationListKeywordsList {
+	list-style: none;
+	padding-left: 5px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.CustomValidationPagesListKeywordsListContainer {
+	border: 1px solid black;
+	padding-left: 5px;
+	padding-right: 5px;
+	height: 500px;
+	overflow-y: scroll;
+}
+
+.CustomValidationPagesListKeywordsButtons {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 5px;
+}
+
+.CustomValidationApplicationListKeywordsButtons {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 5px;
+}
+
+.CustomValidationPages,
+.CustomValidationPagesKeywords,
+.CustomValidationApplicationKeywords {
+	margin-top: 8px;
+	margin-bottom: 0;
+	border-bottom: 1px solid grey;
+}
+
+.customValidationPagesItemSelected {
+	background-color: #d3d3d3;
+}
+
+.customValidationApplicationKeywordItemSelected {
+	background-color: #d3d3d3;
+}
+
+.customValidationPagesKeywordsItemSelected {
+	background-color: #d3d3d3;
+}
+
+.customValidationPagesKeywordsDuplicateNameSelectList {
+	color: #ff0000;
+	font-style: italic;
+}
+
+.customValidationPagesKeywordsDuplicateNameInputField {
+	border-color: #ff0000;
+	border-width: 4px;
+}
+
+.customValidationApplicationKeywordsDuplicateNameSelectList {
+	color: #ff0000;
+	font-style: italic;
+}
+
+.customValidationApplicationKeywordsDuplicateNameInputField {
+	border-color: #ff0000;
+	border-width: 4px;
+}
+
+
+/********************************************************
+ *             Core Configuration Tab Styling
+ ********************************************************/
+.DiskGroupAliases {
+	margin-top: 5px;
+	margin-bottom: 0;
+	border-bottom: 1px solid grey;
+}
+
+.Invisible {
+	visibility: hidden;
+}
+
+
+/********************************************************
+ *          Copy Web Application Modal Styling
+ ********************************************************/
+h2 {
+	margin: 0.25rem;
+}
+
+.CopyWebApplicationModal {
+	display: none;
+	margin: auto;
+	z-index: 1; /* Sit on top */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	left: 0;
+	top: 0;
+	position: fixed;
+	overflow: auto;
+}
+
+.CopyWebApplicationModal div {
+	display: flex;
+}
+
+.CopyWebApplicationModal-Container {
+	border: 1px solid black;
+	max-width: 36rem;
+	min-width: 30rem;
+	background-color: #fefefe;
+	margin: auto;
+	/* Animation CSS */
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s;
+	flex-direction: column;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+@keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+.CopyWebApplicationModal-TitleBar-Container-Styling {
+	border-bottom: 1px solid black;
+	background-color: rgb(211, 211, 211);
+}
+
+.CopyWebApplicationModal-TitleBar-Container {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 0.25rem;
+	flex: auto;
+}
+
+.CopyWebApplicationModal-BodySection {
+	flex-direction: column;
+}
+
+.CopyWebApplicationModal-Body-InformationSection {
+	padding: 0 1rem;
+	margin-bottom: 1rem;
+}
+
+.CopyWebApplicationModal-BodySection-FieldSection {
+	flex-direction: column;
+}
+
+.CopyWebApplicationModal-Body-FieldContainer {
+	justify-content: space-between;
+	padding: 0 1rem;
+	margin-bottom: 1rem;
+	flex-direction: row;
+}
+
+div.CopyWebApplicationModal-Body-FieldContainer-Label {
+	display: block;
+}
+
+.CopyWebApplicationModal-Body-FieldContainer-Field {
+	margin-left: 1rem;
+}
+
+.CopyWebApplicationModal-Body-ActionButtons {
+	justify-content: right;
+	margin: 0 1rem 0.5rem 0;
+}
+
+.CopyWebApplicationModal-Body-ActionButtons-ButtonsContainer {
+	display: flex;
+	justify-content: space-around;
+	width: 9rem;
+}
+
+.CopyWebApplicationModal-Body-ActionButtons-ButtonsContainer button {
+	font-size: medium;
+}
+
+/* The Close Button */
+.close {
+	color: #727272;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.FieldVarificationIcon {
+	margin-left: 5px;
+}
+
+.underline {
+	text-decoration-line: underline;
+}
+
+
+/********************************************************
+ *                 Error Modal Styling
+ ********************************************************/
+#SaveErrors-Modal {
+	display: none;
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 50px; /* Location of the box */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	overflow: auto; /* Enable scroll if needed */
+}
+
+.errorSelected td {
+	background-color: lightskyblue;
+	color: black;
+}
+
+#SaveErrors-Modal h2 {
+	margin: 0;
+}
+
+.SaveErrors {
+	display: flex;
+	margin: 0 1rem 1rem 1rem;
+}
+
+.SaveErrors-Content {
+	background-color: #fefefe;
+	width: 60%;
+	margin: auto;
+	border: 1px solid black;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+/*General styling to apply to all items*/
+.SaveErrors div {
+	margin: auto;
+}
+
+/*Element specific styling*/
+.SaveErrors-ErrorSection {
+	justify-content: center;
+	display: flex;
+}
+
+.SaveErrors-ErrorText {
+	width: 75%;
+	text-align: center;
+}
+
+/*Table styling*/
+.SaveErrors-ErrorTable table {
+	border: 0.5px solid black;
+	margin-bottom: 1rem;
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	-webkit-user-select: none;
+	user-select: none;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+.SaveErrors-ErrorTable table, th {
+	resize: horizontal;
+	overflow: auto;
+}
+
+.SaveErrors-ErrorTable tbody td {
+	border-bottom: 1px solid grey;
+	padding-left: 5px;
+	cursor: default;
+	padding-right: 10px;
+}
+
+.SaveErrors-ErrorTable th {
+	background-color: darkgrey;
+	cursor: pointer;
+	position: sticky;
+	top: 0;
+	border: 1px solid black;
+	white-space: nowrap;
+}
+
+.SaveErrors-ErrorTable tbody tr:nth-child(even) {
+	background-color: rgb(224, 224, 224);
+}
+
+.SaveErrors-ErrorTable tbody td:not(:last-child) {
+	border-right: 1px solid #999; /* Adjust the border properties as needed */
+}
+
+.SaveErrors-ButtonContainer {
+	display: flex;
+	width: 25%;
+	justify-content: space-around;
+}
+
+.SaveErrors-ViewButton {
+	font-size: larger;
+}
+
+.SaveErrors-CancelButton {
+	font-size: larger;
+}
+
+
+/********************************************************
+ *                Generic Modal Styling
+ ********************************************************/
+/* The Modal (background) */
+.chooseWebApplicationModal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.chooseWebApplicationModal-content {
+	background-color: #fefefe;
+	margin: auto;
+	/* padding: 20px; */
+	border: 1px solid black;
+	width: 80%;
+	/* Animation CSS */
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+@keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+/* The Close Button */
+.close {
+	color: #727272;
+	float: right;
+	margin-left: auto;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+
+#chooseWebApplicationModal table {
+	margin-bottom: 1rem;
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	user-select: none;
+	-webkit-user-select: none;
+	min-width: max-content;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+#chooseWebApplicationModal table, th {
+	resize: horizontal;
+	overflow: auto;
+}
+
+#chooseWebApplicationModal td {
+	border-bottom: 1px solid grey;
+	padding-left: 5px;
+	cursor: default;
+	padding-right: 10px;
+}
+
+#chooseWebApplicationModal th {
+	background-color: darkgrey;
+	cursor: pointer;
+	position: sticky;
+	top: 0;
+	border: 1px solid black;
+}
+
+#chooseWebApplicationModal tr:nth-child(even) {
+	background-color: rgb(224, 224, 224);
+}
+
+.ChooseApplicationTitleBar {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid black;
+	align-items: center;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	background-color: lightgrey;
+}
+
+.applicationSelected td {
+	background-color: lightskyblue;
+	color: black;
+}
+
+.chooseWebApplicationModal-Table-Wrapper {
+	width: 90%;
+	border: 1px solid black;
+	margin: 1.5rem auto 0 auto;
+	height: auto;
+	overflow: scroll;
+	max-height: 15rem;
+	min-height: 10rem;
+}
+
+.chooseWebApplication-Buttons {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: right;
+	padding: 1rem;
+}
+
+.chooseWebApplication-RefreshButton {
+	width: 5rem;
+	margin-right: 0.5rem;
+	font-size: medium;
+}
+
+.chooseWebApplication-OpenButton {
+	width: 5rem;
+	margin: 0 0.5rem 0 0.5rem;
+	font-size: medium;
+}
+
+.chooseWebApplication-CancelButton {
+	width: 5rem;
+	margin-left: 0.5rem;
+	font-size: medium;
+}
+
+.loadingWebApplicationsProgressSection {
+	display: flex;
+	padding-top: 1rem;
+	align-items: center;
+	font-size: xx-large;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+.loadingWebApplicationsProgressBar {
+	height: 2.5rem;
+	width: 25rem
+}
+
+.chooseWebApplicationModalTableButtonsContainer {
+	display: none;
+}
+
+
+/********************************************************
+ *                Notification Styling
+ ********************************************************/
+#container {
+	display: flex;
+	position: relative;
+	/*width: 28px;*/
+	margin-right: 0.5rem;
+	align-items: center;
+}
+
+#notification-bell {
+	height: 1.75rem;
+	max-width: 100%;
+}
+
+#notification-count {
+	min-width: 16px;
+	height: 16px;
+	right: 0;
+	top: 0;
+	box-sizing: content-box;
+	white-space: nowrap;
+	border-radius: 50%;
+	background-color: red;
+	color: white;
+	text-align: center;
+	line-height: 16px;
+	position: absolute;
+	font-weight: bold;
+	/*font-size: 12px;*/
+}
+
+#container button {
+	all: unset;
+}
+
+
+/********************************************************
+ *            Successful Save Modal Styling
+ ********************************************************/
+.modal-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 999;
+	opacity: 0;
+	transition: opacity 1.5s ease;
+}
+
+.modal-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	border-radius: 50%;
+	width: 150px;
+	height: 150px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+
+/********************************************************
+ *            Error Loading Modal Styling
+ ********************************************************/
+.errorLoadModal {
+	display: none;
+	margin: auto;
+	z-index: 1; /* Sit on top */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	left: 0;
+	top: 0;
+	position: fixed;
+	overflow: auto;
+}
+
+.errorLoadModal-content {
+	border: 1px solid black;
+	max-width: 36rem;
+	min-width: 30rem;
+	background-color: #fefefe;
+	margin: auto;
+	/* Animation CSS */
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s;
+	flex-direction: column;
+	padding: 1rem;
+}
+
+
+/********************************************************
+*                Connection Strings V2
+********************************************************/
+.connectionStringSelected {
+	background-color: #d3d3d3;
+}
+
+.ConnectionStrings {
+	margin-top: 5px;
+	margin-bottom: 0;
+	border-bottom: 1px solid grey;
+}
+
+.connectionStringDuplicateNameInputField {
+	border-color: #ff0000;
+	border-width: 4px;
+}
+
+.connectionStringDuplicateNameSelectList {
+	color: #ff0000;
+	font-style: italic;
+}
+
+.requiredAlertSvg,
+.idpRequiredAlertSvg,
+.coreConnectionStringRequiredAlertSvg,
+.sqlConnectionStringRequiredAlertSvg,
+.oracleConnectionStringRequiredAlertSvg {
+	display: none;
+}
+
+.connectionStringOption::after {
+	content: attr(error-text-to-append);
+}
+
+.duplicateConnectionStringName::after {
+	/*color: red;*/
+	/*font-weight: bold;*/
+	/*content: " (Duplicate)";*/
+}
+
+.incompleteConnectionString::after {
+	/*content: " (Incomplete)";*/
+}
+
+.duplicateDiagnosticSettingsRouteName {
+	color: red;
+}
+
+.customValidationAppLevelOption::after,
+.customValidationPageLevelOptionKeyword::after {
+	content: attr(error-text-to-append);
+}
+
+/********************************************************
+ * Public Access Viewer - Next Gen -- Required Keywords Styling
+ ********************************************************/
+/* Table Styling */
+.RequiredKeywordsTable table {
+	border: 0.5px solid black;
+	margin-bottom: 1rem;
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	user-select: none;
+	-webkit-user-select: none;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+.RequiredKeywordsTable table, th {
+	resize: horizontal;
+	overflow: auto;
+}
+
+.RequiredKeywordsTable tbody td {
+	border-bottom: 1px solid grey;
+	padding-left: 5px;
+	cursor: default;
+	padding-right: 10px;
+	text-align: center;
+}
+
+.RequiredKeywordsTable th {
+	background-color: darkgrey;
+	cursor: pointer;
+	position: sticky;
+	top: 0;
+	border: 1px solid black;
+	white-space: nowrap;
+}
+
+.RequiredKeywordsTable tbody tr:nth-child(even) {
+	background-color: rgb(224, 224, 224);
+}
+
+.RequiredKeywordsTable tbody td:not(:last-child) {
+	border-right: 1px solid #999; /* Adjust the border properties as needed */
+}
+
+.requiredKeywordSelected td {
+	background-color: lightskyblue;
+	color: black;
+}
+
+
+/********************************************************
+ *         Styling for the left-hand links area
+ ********************************************************/
+.LinksHeader {
+	margin: 0.5rem 0 0 0;
+	font-size: x-large;
+	font-weight: bold;
+}
+
+
+/********************************************************
+*         Unknown Configurtion Keys Modal Styling
+********************************************************/
+#UnknownConfigurationKeys-Modal {
+	display: none;
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 50px; /* Location of the box */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	overflow: auto; /* Enable scroll if needed */
+}
+
+#UnknownConfigurationKeys-Modal h2 {
+	margin: 0;
+}
+
+.UnknownConfigurationKeys {
+	display: block;
+	margin: 0 1rem 1rem 1rem;
+}
+
+.UnknownConfigurationKeys-Content {
+	background-color: #fefefe;
+	max-width: 80%;
+	margin: auto;
+	border: 1px solid black;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+/*General styling to apply to all items*/
+.UnknownConfigurationKeys div {
+	margin: auto;
+}
+
+/*Element specific styling*/
+.UnknownConfigurationKeys-Section {
+	justify-content: center;
+	display: block;
+}
+
+.UnknownConfigurationKeys-Text {
+	width: 75%;
+	text-align: center;
+}
+
+/*Elements Table styling*/
+.UnknownConfigurationKeys-ElementsTable table {
+	border: 0.5px solid black;
+	margin-bottom: 1rem;
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+.UnknownConfigurationKeys-ElementsTable table, th {
+	resize: horizontal;
+	overflow: auto;
+}
+
+.UnknownConfigurationKeys-ElementsTable tbody td {
+	border-bottom: 1px solid grey;
+	padding-left: 5px;
+	cursor: default;
+	padding-right: 10px;
+}
+
+.UnknownConfigurationKeys-ElementsTable th {
+	background-color: darkgrey;
+	cursor: pointer;
+	position: sticky;
+	top: 0;
+	border: 1px solid black;
+	white-space: nowrap;
+}
+
+.UnknownConfigurationKeys-ElementsTable tbody tr:nth-child(even) {
+	background-color: rgb(224, 224, 224);
+}
+
+.UnknownConfigurationKeys-ElementsTable tbody td:not(:last-child) {
+	border-right: 1px solid #999; /* Adjust the border properties as needed */
+}
+
+/*Attributes Table styling*/
+.UnknownConfigurationKeys-AttributesTable table {
+	border: 0.5px solid black;
+	margin-bottom: 1rem;
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	-webkit-user-select: none;
+	user-select: none;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+.UnknownConfigurationKeys-AttributesTable table, th {
+	resize: horizontal;
+	overflow: auto;
+}
+
+.UnknownConfigurationKeys-AttributesTable tbody td {
+	border-bottom: 1px solid grey;
+	padding-left: 5px;
+	cursor: default;
+	padding-right: 10px;
+}
+
+.UnknownConfigurationKeys-AttributesTable th {
+	background-color: darkgrey;
+	cursor: pointer;
+	position: sticky;
+	top: 0;
+	border: 1px solid black;
+	white-space: nowrap;
+}
+
+.UnknownConfigurationKeys-AttributesTable tbody tr:nth-child(even) {
+	background-color: rgb(224, 224, 224);
+}
+
+.UnknownConfigurationKeys-AttributesTable tbody td:not(:last-child) {
+	border-right: 1px solid #999; /* Adjust the border properties as needed */
+}
+
+/*Buttons Styling*/
+.UnknownConfigurationKeys-ButtonContainer {
+	display: flex;
+	width: 25%;
+	justify-content: space-around;
+}
+
+.UnknownConfigurationKeys-ButtonContainer button {
+	font-size: medium;
+	margin: 0 0.5rem;
+}
+
+#UnknownConfigurationKeys-CloseModal {
+	margin: 0;
+	font-size: large;
+	font-weight: bold;
+}
+
+#UnknownConfigurationKeys-CloseModal:hover {
+	cursor: pointer;
+}
+
+
+
+.keywordTypeAheadOption::after {
+	content: attr(error-text-to-append);
+}
+
+
+
+/********************************************************
+ *             Diagnostics Settings Styling
+ ********************************************************/
+.ProfilesPanel {
+	height: 250px;
+	overflow-y: scroll;
+	border: 1px solid black;
+	display: flex;
+}
+
+.ProfilesPanel div {
+	width: 50%;
+}
+
+.profile-element {
+	margin: 8px 0;
+	display: flex;
+}
+
+
+/********************************************************
+ *                  Name
+ ********************************************************/

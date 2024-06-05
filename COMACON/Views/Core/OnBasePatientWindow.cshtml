@@ -1,0 +1,1140 @@
+﻿@{
+    ViewData["Title"] = "OnBase Patient Window";
+}
+
+<div id="AdfsSettingsSection" class="tabcontent">
+    <div class="row">
+        <p class="BlockDescription">The following keys are the settings for enabling ADFS. In order to properly configure ADFS, you must run the "Configure For ADFS" menu item in the Tools menu.</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Authentication-Mode">Authentication Mode: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <select name="Authentication-Mode" id="Authentication-Mode">
+                        <option value="Windows">Windows</option>
+                        <option value="None">None</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>ADFS Enabled: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="ADFS-Enabled" class="switch">
+                        <input onclick="adfsEnabledCheckbox(this)" id="ADFS-Enabled" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Request-Validation-Mode">Request Validation Mode: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">The certificate identified by the thumbprint in the trustedIssuers element is the token-signing certificate found on the ADFS server.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="text" name="Request-Validation-Mode" id="Request-Validation-Mode" disabled>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Synchronize User Attributes: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Synchronize-User-Attributes" class="switch">
+                        <input name="Synchronize-User-Attributes" id="Synchronize-User-Attributes" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Authentication Only: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Authentication-Only" class="switch">
+                        <input name="Authentication-Only" id="Authentication-Only" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Cookie Handler - Require SSL: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Cookie-Handler-Require-SSL" class="switch">
+                        <input name="Cookie-Handler-Require-SSL" id="Cookie-Handler-Require-SSL" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Audience URI's
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Audience-URI">Audience URI: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">The Audience URI identifies the relying party (RP - this application).  This much exactly (case, trailing slash, etc.) match the Relying Party Trust Identifier on the ADFS sever.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-Fields" type="url" name="Audience-URI" id="Audience-URI" oninput="updateAudienceUri(this)" disabled>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <div style="display: flex; width: 40%; justify-content: space-around;">
+                            <button id="AudienceURI-AddButton" onclick="addAudienceUri()">Add</button>
+                            <button id="AudienceURI-DeleteButton" onclick="deleteAudienceUri()" disabled>Delete</button>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;margin: 1rem 0 1rem 0;">
+                        <select class="" name="AudienceURI-SelectList" id="AudienceURI-SelectList" size="8" style="max-width:90%;min-width:50%" onchange="audienceUriChanged(this)">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Trusted Issuers
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Trusted-Issuer-Thumbprint">Trusted Issuer Thumbprint: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">The certificate identified by the thumbprint in the trustedIssuers element is the token-signing certificate found on the ADFS server.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-Fields" type="text" name="Trusted-Issuer-Thumbprint" id="Trusted-Issuer-Thumbprint" oninput="updateTrustedIssuerThumbprint(this)" disabled>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Trusted-Issuer-Name">Trusted Issuer Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-Fields" type="text" name="Trusted-Issuer-Name" id="Trusted-Issuer-Name" oninput="updateTrustedIssuerName(this)" disabled>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <div style="display: flex; width: 40%; justify-content: space-around;">
+                            <button id="TrustedIssuer-AddButton" onclick="addTrustedIssuer()">Add</button>
+                            <button id="TrustedIssuer-DeleteButton" onclick="deleteTrustedIssuer()" disabled>Delete</button>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;margin: 1rem 0 1rem 0;">
+                        <select class="" name="TrustedIssuers-SelectList" id="TrustedIssuers-SelectList" size="8" style="max-width:90%;min-width:50%" onchange="trustedIssuerChanged(this)">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    system.identitymodel.services
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="wsFederation-Issuer">wsFederation Issuer: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-services-Fields" type="text" name="wsFederation-Issuer" id="wsFederation-Issuer">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="wsFederation-Realm">wsFederation Realm: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-services-Fields" type="text" name="wsFederation-Realm" id="wsFederation-Realm">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Certificate-X509-Find-Type">Certificate X509 Find Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-services-Fields" type="text" name="Certificate-X509-Find-Type" id="Certificate-X509-Find-Type">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Certificate-Find-Value">Certificate Find Value: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-services-Fields" type="text" name="Certificate-Find-Value" id="Certificate-Find-Value">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Certificate-Store-Location">Certificate Store Location: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-services-Fields" type="text" name="Certificate-Store-Location" id="Certificate-Store-Location">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Certificate-Store-Name">Certificate Store Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select class="adfs-system-identityModel-services-Fields" name="Certificate-Store-Name" id="Certificate-Store-Name">
+                                <option value="AddressBook">AddressBook</option>
+                                <option value="AuthRoot">AuthRoot</option>
+                                <option value="CertificateAuthority">CertificateAuthority</option>
+                                <option value="Disallowed">Disallowed</option>
+                                <option value="My" selected>My</option>
+                                <option value="Root">Root</option>
+                                <option value="TrustedPeople">TrustedPeople</option>
+                                <option value="TrustedPublisher">TrustedPublisher</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="HealthcarePopIntegrationSection" class="tabcontent">
+    <div class="row">
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Validate Against Checksum: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Validate-Against-Checksum" class="switch">
+                        <input id="Validate-Against-Checksum" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Enable Legacy Checksum Fallback: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Enable-Legacy-Checksum-Fallback" class="switch">
+                        <input id="Enable-Legacy-Checksum-Fallback" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Checksum-Key">Checksum Key: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="text" name="Checksum-Key" id="Checksum-Key">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Encrypt Healthcare Pop Integration Configuration: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Encrypt-Healthcare-Pop-Integration-Configuration" class="switch">
+                        <input id="Encrypt-Healthcare-Pop-Integration-Configuration" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="LoginSection" class="tabcontent">
+    <div class="row">
+        <p class="BlockDescription">Sets the Default Context</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Login Credentials
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Default-Username">Default Username: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Default-Username" id="Default-Username">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Default-Password">Default Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="password" name="Default-Password" id="Default-Password">
+                            <button class="passwordShowHideButton" id="Login-ShowHide-Password" onclick="passwordFieldShowHide('Default-Password',this)">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.873 17.129c-1.845-1.31-3.305-3.014-4.13-4.09a1.693 1.693 0 0 1 0-2.077C4.236 9.013 7.818 5 12 5c1.876 0 3.63.807 5.13 1.874"></path>
+                                    <path d="M14.13 9.887a3 3 0 1 0-4.243 4.242"></path>
+                                    <path d="M4 20 20 4"></path>
+                                    <path d="M10 18.704A7.124 7.124 0 0 0 12 19c4.182 0 7.764-4.013 9.257-5.962a1.694 1.694 0 0 0-.001-2.078A22.939 22.939 0 0 0 19.57 9"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Authentication
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Force OnBase Authentication: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Force-OnBase-Authentication" class="switch">
+                                <input id="Force-OnBase-Authentication" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Autologin: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Autologin" class="switch">
+                                <input id="Autologin" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Identity Provider
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="IdP-Server-Location">IdP Server Location: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <div id="IdP-Server-Location-Loader" class="loader"></div>
+                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="IdP-Server-Location-RequiredSvg" class="idpRequiredAlertSvg">
+                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                            </svg>
+                            <input type="url" name="IdP-Server-Location" id="IdP-Server-Location" oninput="validateIdentityProviderFields(this)">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="IdP-Tenant">IdP Tenant: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="IdP-Tenant-RequiredSvg" class="idpRequiredAlertSvg">
+                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                            </svg>
+                            <input type="text" name="IdP-Tenant" id="IdP-Tenant" oninput="validateIdentityProviderFields(this)">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="IdP-Client">IdP Client: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="IdP-Client-RequiredSvg" class="idpRequiredAlertSvg">
+                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                            </svg>
+                            <input type="text" name="IdP-Client" id="IdP-Client" oninput="validateIdentityProviderFields(this)">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="IdP-Secret">IdP Secret: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="IdP-Secret-RequiredSvg" class="idpRequiredAlertSvg">
+                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                            </svg>
+                            <input type="text" name="IdP-Secret" id="IdP-Secret" oninput="validateIdentityProviderFields(this)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+        </div>
+    </div>
+</div>
+<div id="OnBasePatientWindowSection" class="tabcontent">
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Core
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Data-Source">Data Source: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Data-Source" id="Data-Source">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Virtual-Directory">Virtual Directory: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">The root location of the virtual directory where the Web Server resides.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="url" name="Virtual-Directory" id="Virtual-Directory">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Allow Insecure Connections: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This setting controls if the server will accept only https connections or not. If you set this to false all incoming requests have to be made over https. If you set this to true then both http and https connections are accepted. The recommended setting is false.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Allow-Insecure-Connections" class="switch">
+                                <input id="Allow-Insecure-Connections" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enable Default Login: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">Set to true to get login credentials from the web.config (this file).</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Enable-Default-Login" class="switch">
+                                <input id="Enable-Default-Login" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Emergency Access Diaglog Settings
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Emergency-Access-Dialog-Title">Title: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Emergency-Access-Dialog-Title" id="Emergency-Access-Dialog-Title">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Emergency-Access-Dialog-Message">Message: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Emergency-Access-Dialog-Message" id="Emergency-Access-Dialog-Message">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Emergency-Access-Dialog-Other-Reason-Label">Other Reason Label: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Emergency-Access-Dialog-Other-Reason-Label" id="Emergency-Access-Dialog-Other-Reason-Label">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Show Emergency Access "Show Documents"" Checkboxes: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Show-Emergency-Access-Show-Documents-Checkboxes" class="switch">
+                                <input id="Show-Emergency-Access-Show-Documents-Checkboxes" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Show Other Reason In Emergency Access Dialog: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Show-Other-Reason-In-Emergency-Access-Dialog" class="switch">
+                                <input id="Show-Other-Reason-In-Emergency-Access-Dialog" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Other Reason Text Box Always Available In Emergency Access Dialog: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Other-Reason-Text-Box-Always-Available-In-Emergency-Access-Dialog" class="switch">
+                                <input id="Other-Reason-Text-Box-Always-Available-In-Emergency-Access-Dialog" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Session Settings
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Session Expire: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">The end user will be logged out when no activity is detected.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Enable-Session-Expiration" class="switch">
+                                <input id="Enable-Session-Expiration" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Session-Timeout">Session Timeout (Minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Session-Timeout" id="Session-Timeout">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Prompt On Session Expire: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">Prompts the user with a warning 30 seconds before the session expires.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Prompt-On-Session-Expire" class="switch">
+                                <input id="Prompt-On-Session-Expire" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar" id="Menus-SettingElement">
+                <div class="titleBar" name="Title-Bar">
+                    Menus
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement" id="Workflow-Menu-Setting-Element">
+                        <div class="labelElement">
+                            <span>Workflow Menu: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Workflow-Menu" class="switch">
+                                <input id="Workflow-Menu" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement" id="Create-Document-Menu-Setting-Element">
+                        <div class="labelElement">
+                            <span>Create Document Menu: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Create-Document-Menu" class="switch">
+                                <input id="Create-Document-Menu" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement" id="File-Menu-Setting-Element">
+                        <div class="labelElement">
+                            <span>File Menu: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="File-Menu" class="switch">
+                                <input id="File-Menu" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement" id="Send-To-Print-Queue-Menu-Setting-Element">
+                        <div class="labelElement">
+                            <span>Send To Print Queue Menu: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Send-To-Print-Queue-Menu" class="switch">
+                                <input id="Send-To-Print-Queue-Menu" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement" id="Re-Index-Menu-Setting-Element">
+                        <div class="labelElement">
+                            <span>Re-Index Menu: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Re-Index-Menu" class="switch">
+                                <input id="Re-Index-Menu" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Thumbnail Hitlist Viewer
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Allow Caching: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">Whether to allow web server caching of images.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Allow-Caching" class="switch">
+                                <input id="Allow-Caching" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Maximum-Width">Maximum Width: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Maximum-Width" id="Maximum-Width" value="50">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Maximum-Height">Maximum Height: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Maximum-Height" id="Maximum-Height" value="50">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Preview-Maximum-Width">Preview Maxiumum Width: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Preview-Maximum-Width" id="Preview-Maximum-Width" value="400">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Preview-Maximum-Height">Preview Maxiumum Height: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Preview-Maximum-Height" id="Preview-Maximum-Height" value="400">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Display List Labels
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="System-List-Display-Label">System List Display Label: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="System-List-Display-Label" id="System-List-Display-Label">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Personal-List-Display-Label">Personal List Display Label: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Personal-List-Display-Label" id="Personal-List-Display-Label">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Timestamp Settings
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Timestamp-Time-Limit">Timestamp Time Limit: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" name="Timestamp-Time-Limit" id="Timestamp-Time-Limit">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enable Timestamp: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Enable-Timestamp" class="switch">
+                                <input id="Enable-Timestamp" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Viewer Settings
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Allow View Source: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Allow-View-Source" class="switch">
+                                <input id="Allow-View-Source" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enable Split View: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Enable-Split-View" class="switch">
+                                <input id="Enable-Split-View" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Prevent Viewer Client Caching: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">Preventing caching will impact Viewer performance.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Prevent-Viewer-Client-Caching" class="switch">
+                                <input id="Prevent-Viewer-Client-Caching" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    OPW Specific Settings
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enable Patient Search: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Enable-Patient-Search" class="switch">
+                                <input id="Enable-Patient-Search" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Federated Search With MPI: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Federated-Search-With-MPI" class="switch">
+                                <input id="Federated-Search-With-MPI" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enable Patient Context Syncing: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Enable-Patient-Context-Syncing" class="switch">
+                                <input id="Enable-Patient-Context-Syncing" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enable Workstation Name DNS Lookup: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Enable-Workstation-Name-DNS-Lookup" class="switch">
+                                <input id="Enable-Workstation-Name-DNS-Lookup" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Design Settings
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Row Coloring: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">Make every other row have a shaded background in the document select list.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Row-Coloring" class="switch">
+                                <input id="Row-Coloring" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Selected-Tab-Single-Color">Selected Tab Single Color: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="color" name="Selected-Tab-Single-Color" id="Selected-Tab-Single-Color">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ExtraRowSection">
+        <div class="sectionWithTitleBar">
+            <div class="titleBar" name="Title-Bar">
+                Miscellaneous
+            </div>
+            <div class="coreSection">
+                <div class="row">
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>HTML Only Documents Print As PDF's: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="HTML-Only-Documents-Print-As-PDFs" class="switch">
+                                    <input id="HTML-Only-Documents-Print-As-PDFs" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Hide Toolbar Print Button: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="Hide-Toolbar-Print-Button" class="switch">
+                                    <input id="Hide-Toolbar-Print-Button" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement" id="Enable-Bowser-PDF-Viewer-Setting-Element">
+                            <div class="labelElement">
+                                <span>Enable Bowser PDF Viewer: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="Enable-Bowser-PDF-Viewer" class="switch">
+                                    <input id="Enable-Bowser-PDF-Viewer" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Web-Theme">Web Theme: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <select name="Web-Theme" id="Web-Theme" disabled>
+                                    <option value="XP" selected>XP</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Enable E-Form Standard Printing: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="Enable-EForm-Standard-Printing" class="switch">
+                                    <input id="Enable-EForm-Standard-Printing" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Auto Display Note Panel PDF Office: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span class="tooltiptext">Automatically display the note panel when viewing PDF and Office documents.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="Auto-Display-Note-Panel-PDF-Office" class="switch">
+                                    <input id="Auto-Display-Note-Panel-PDF-Office" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement" id="Keyword-Panel-View-Type-Setting-Element">
+                            <div class="labelElement">
+                                <label for="Keyword-Panel-View-Type">Keyword Panel View Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <select name="Keyword-Panel-View-Type" id="Keyword-Panel-View-Type">
+                                    <option value="flat" selected>flat</option>
+                                    <option value="button">button</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="settingElement" id="JSON-Serialization-Max-Length-Setting-Element">
+                            <div class="labelElement">
+                                <label for="JSON-Serialization-Max-Length">Keyword Panel View Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <input type="number" name="JSON-Serialization-Max-Length" id="JSON-Serialization-Max-Length">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ServerConfigurationSection" class="tabcontent">
+    <div class="row">
+        <p class="BlockDescription">The following settings are used to configure the server.</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Application Server
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Application-Server-URL">Application Server URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <div id="Application-Server-URL-Loader" class="loader"></div>
+                            <input type="url" name="Application-Server-URL" id="Application-Server-URL" oninput="resetBorderStyling(event)" onfocusout="testUrl(event)">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Service-Client-Type">Service Client Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select name="Service-Client-Type" id="Service-Client-Type">
+                                <option value="SOAP" selected>SOAP</option>
+                                <option value="Remoting">Remoting</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Upload Settings
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div>
+                            <label for="HTTP-Runtime-Maximum-Request-Length">HTTP Runtime Maximum Request Length (KB): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div>
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="HTTP-Runtime-Maximum-Request-Length" id="HTTP-Runtime-Maximum-Request-Length">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="HTTP-Runtime-Execution-Timeout">HTTP Runtime Execution Timeout (Seconds): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="HTTP-Runtime-Execution-Timeout" id="HTTP-Runtime-Execution-Timeout">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ExtraRowSection">
+        <div class="sectionWithTitleBar">
+            <div class="titleBar" name="Title-Bar">
+                Miscellaneous
+            </div>
+            <div class="coreSection">
+                <div class="row">
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Tracing-Info-Level">Tracing Info Level: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <select name="Tracing-Info-Level" id="Tracing-Info-Level">
+                                    <option value="0">0 - Off</option>
+                                    <option value="1">1 - Minimal</option>
+                                    <option value="2">2 - Normal</option>
+                                    <option value="3">3 - Detailed</option>
+                                    <option value="4">4 - Verbose</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Samesite-Cookie-Policy">Samesite Cookie Policy: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <select name="Samesite-Cookie-Policy" id="Samesite-Cookie-Policy">
+                                    <option value="Lax">Lax</option>
+                                    <option value="Strict">Strict</option>
+                                    <option value="None">None</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Stream-Settings">Stream Settings Buffer Size (Bytes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <input type="number" pattern="[0-9]*" inputmode="numeric" name="Stream-Settings" id="Stream-Settings">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@********************************************************
+ *                      Sections
+ ********************************************************@
+@section CoreButtons {
+    <p class="LinksHeader">OnBase Configuration</p>
+    <div class="core-section-buttons">
+        <div class="core-section-buttons-outer">
+            <div class="core-section-buttons-inner">
+                <ul>
+                    <li><a id="DiagnosticsSettingsLink" href="javascript:openSection('DiagnosticsSettings')">Diagnostics Settings</a></li>
+                    <li><a id="HealthcarePopIntegrationLink" href="javascript:openSection('HealthcarePopIntegration')">Healthcare Pop Integration</a></li>
+                    <li><a id="LoginLink" href="javascript:openSection('Login')">Login</a></li>
+                    <li><a id="OnBasePatientWindowLink" href="javascript:openSection('OnBasePatientWindow')">OnBase Patient Window</a></li>
+                    <li><a id="ServerConfigurationLink" href="javascript:openSection('ServerConfiguration')">Server Configuration</a></li>
+                    <li><a id="AdfsSettingsLink" href="javascript:openSection('AdfsSettings')">ADFS Settings</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+
+@section IisLinks {
+    <p class="LinksHeader">IIS Configuration</p>
+    <div class="core-section-buttons">
+        <div class="core-section-buttons-outer">
+            <div class="core-section-buttons-inner">
+                <ul class="LinksList">
+                    <li><a id="IISApplicationLink" href="javascript:openSection('IISApplication')">IIS Application</a></li>
+                    <li><a id="IISApplicationPoolLink" href="javascript:openSection('IISApplicationPool')">IIS Application Pool</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--************************Confidential and Proprietary************************
+* File Name: version.xml
+********************Copyright (c) Hyland Software, Inc. 1991-2022******************-->
+<appSettings>
+        <add key="version_num" value="21,1,38,1000" />
+  <add key="jquery_version_num" value="3.5.1" />
+  <add key="jquery_migrate_version_num" value="3.0.1" />
+  <add key="jquery_ui_version_num" value="1.13.0" />
+</appSettings>

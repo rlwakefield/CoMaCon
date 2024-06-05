@@ -1,0 +1,245 @@
+﻿@{
+    ViewData["Title"] = "Gateway Caching Server";
+}
+
+<div id="GatewayCachingServerSection" class="tabcontent">
+    <div class="row">
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Gateway-Name">Gateway Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="text" name="Gateway-Name" id="Gateway-Name">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Cache-Path">Cache Path: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="text" name="Cache-Path" id="Cache-Path">
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="DataSource">DataSource: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="text" name="DataSource" id="DataSource">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Allow Insecure Connections: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Allow-Insecure-Connections" class="switch">
+                        <input id="Allow-Insecure-Connections" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ServerConfigurationSection" class="tabcontent">
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Login
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="GWCS-Username">Username: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="GWCS-Username" id="GWCS-Username">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="GWCS-Password">Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="password" name="GWCS-Password" id="GWCS-Password">
+                            <button class="passwordShowHideButton" id="-ShowHide-Password" onclick="passwordFieldShowHide('GWCS-Password',this)">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.873 17.129c-1.845-1.31-3.305-3.014-4.13-4.09a1.693 1.693 0 0 1 0-2.077C4.236 9.013 7.818 5 12 5c1.876 0 3.63.807 5.13 1.874"></path>
+                                    <path d="M14.13 9.887a3 3 0 1 0-4.243 4.242"></path>
+                                    <path d="M4 20 20 4"></path>
+                                    <path d="M10 18.704A7.124 7.124 0 0 0 12 19c4.182 0 7.764-4.013 9.257-5.962a1.694 1.694 0 0 0-.001-2.078A22.939 22.939 0 0 0 19.57 9"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Encrypt Login Settings: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Encrypt-Login-Settings" class="switch">
+                                <input id="Encrypt-Login-Settings" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Upload Settings
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div>
+                            <label for="HTTP-Runtime-Maximum-Request-Length">HTTP Runtime Maximum Request Length (KB): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div>
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="HTTP-Runtime-Maximum-Request-Length" id="HTTP-Runtime-Maximum-Request-Length">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="HTTP-Runtime-Execution-Timeout">HTTP Runtime Execution Timeout (Seconds): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="HTTP-Runtime-Execution-Timeout" id="HTTP-Runtime-Execution-Timeout">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Application Server
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Application-Server-URL">Application Server URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <div id="Application-Server-URL-Loader" class="loader"></div>
+                            <input type="url" name="Application-Server-URL" id="Application-Server-URL" oninput="resetBorderStyling(event)" onfocusout="testUrl(event)">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Service-Client-Type">Service Client Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select name="Service-Client-Type" id="Service-Client-Type">
+                                <option value="SOAP" selected>SOAP</option>
+                                <option value="Remoting">Remoting</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Allow NT Authentication On Forwarding: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Allow-NT-Authentication-On-Forwarding" class="switch">
+                                <input id="Allow-NT-Authentication-On-Forwarding" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Optimized Service Pipeline: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Optimized-Service-Pipeline" class="switch">
+                                <input id="Optimized-Service-Pipeline" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Stream-Settings">Stream Settings (Bytes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Stream-Settings" id="Stream-Settings" value="64000">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@********************************************************
+ *                      Sections
+ ********************************************************@
+@* This is the section for the "menu bar" at the top. *@
+@* @section MenuBar {
+    <div class="core-action-buttons-div">
+        <div style="display: flex;">
+            <button id="Open-Web-Application-Core-Action-Button" class="core-action-buttons" type="button" onclick="openModal()"><u>Open Web Application</u></button>
+            <button id="Copy-Web-Application-Core-Action-Button" class="core-action-buttons Web-Application-Button" type="button" onclick="openCopyWebApplicationModal()"><u>Copy Web Application</u></button>
+            <button id="Save-Web-Application-Core-Action-Button" class="core-action-buttons Web-Application-Button" type="button" onclick="configOkToSave()"><u>Save Web Application</u></button>
+        </div>
+        <div id="container">
+            <button onclick="showErrorModal()">
+                <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.066 15.86a11.443 11.443 0 0 1-.575-3.57V9.291a7.673 7.673 0 0 0-1.902-5.169 7.707 7.707 0 0 0-4.863-2.583c-1.041-.108-2.1 0-3.105.34A7.142 7.142 0 0 0 6.93 3.46a7.384 7.384 0 0 0-1.812 2.513 7.6 7.6 0 0 0-.647 3.033v3.3a11.414 11.414 0 0 1-.574 3.555L3 18.514l.719.987h5.257c0 .79.322 1.56.879 2.118a3.02 3.02 0 0 0 2.118.88c.789 0 1.56-.323 2.116-.88a3.02 3.02 0 0 0 .881-2.118h5.257l.718-.987-.88-2.655Zm-7.035 4.72a1.496 1.496 0 0 1-1.058.448 1.495 1.495 0 0 1-1.059-.45 1.495 1.495 0 0 1-.45-1.057h2.998a1.407 1.407 0 0 1-.43 1.059h-.002Zm-8.273-2.565.556-1.671c.434-1.302.659-2.665.665-4.037V9.006c0-.845.18-1.67.52-2.424a5.78 5.78 0 0 1 1.454-2.01 5.831 5.831 0 0 1 2.154-1.256 5.81 5.81 0 0 1 2.475-.27 6.22 6.22 0 0 1 3.895 2.1 6.2 6.2 0 0 1 1.506 4.164v3.015c0 1.364.216 2.727.665 4.037l.556 1.67H4.76v-.019l-.001.002Z"></path>
+                </svg>
+                <div id="notification-count" class="" style="display: none;">
+                    <span id="notification-span"></span>
+                </div>
+            </button>
+        </div>
+    </div>
+} *@
+
+@section CoreButtons {
+    <p class="LinksHeader">OnBase Configuration</p>
+    <div class="core-section-buttons">
+        <div class="core-section-buttons-outer">
+            <div class="core-section-buttons-inner">
+                <ul>
+                    <li><a id="DiagnosticsSettingsLink" href="javascript:openSection('DiagnosticsSettings')">Diagnostics Settings</a></li>
+                    <li><a id="GatewayCachingServerLink" href="javascript:openSection('GatewayCachingServer')">Gateway Caching Server</a></li>
+                    <li><a id="ServerConfigurationLink" href="javascript:openSection('ServerConfiguration')">Server Configuration</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+
+@section IisLinks {
+    <p class="LinksHeader">IIS Configuration</p>
+    <div class="core-section-buttons">
+        <div class="core-section-buttons-outer">
+            <div class="core-section-buttons-inner">
+                <ul class="LinksList">
+                    <li><a id="IISApplicationLink" href="javascript:openSection('IISApplication')">IIS Application</a></li>
+                    <li><a id="IISApplicationPoolLink" href="javascript:openSection('IISApplicationPool')">IIS Application Pool</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
