@@ -10,22 +10,28 @@ This is my personal concept of what a web based version of the WAMCON (Web Appli
 
 
 # Installation Instructions
-__$${\color{red}This \space will \space be \space changed/updated \space as \space soon \space as \space I \space get \space the \space BETA \space fully \space up \space and \space running.}$$__
-Please follow the following steps to install and setup COMACON in your environment. (NOTE: Make sure you are in the "main" branch to do the installation.)
-# PREREQS
+### PREREQS
 You will need to install the .NET 6.0 Windows Hosting Bundle on the server you are using to test this. You can find it here: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
-# Core Installation
-1. (1)Click on the green "Code" button and (2) choose to "Download ZIP".
-![image](https://github.com/rlwakefield/COMACON-MVC/assets/33588807/003eb29d-c3a4-4792-8a54-90868ffc18e9)
-2. Once the file downloads, then unzip it.
-3. Open the unzipped folder and navigate to "COMACON-MVC-main\COMACON" and locate the "v0.1.0.zip" ZIP file. You will want to unzip and extract the files out of this file.
-4. Now you will need to copy these files into a folder under "C:\inetpub\wwwroot".
-5. Now go into IIS and go to your Application Pools. You will want to create a NEW application pool called "COMACON" and have it configured the save as the DefaultAppPool Application Pool.
-6. Next you will want to convert this newly created folder (from step #4) to an Application. Use the newly created Application Pool in step #5 on this application.
-7. The last step you will need to do is you will need to update the user that is running the Application Pool for the COMACON to an admin user. The reason for this is because a lot of the code used needs to have elevated rights in order to run and unfortunately, there really isn't a way around this. So this is a step that needs to happen. This can be done by going to the Application Pools --> Click on the COMACON Application Pool --> Click Advanced Settings in the right-hand pane --> locate the Identity element and then click the 3 dot button in the field --> Change the type to "Custom Account" and then click on the Set... button --> type in the username, password, and confirm password and then just save everything. (NOTE: I am working on getting this cahnged so the user doesn't have to be an admin, but at this point in time, it is needed due to some of the means of reading and updating IIS settings.)
-8. At this point, COMACON should be available to be loaded by going to your browser and going to the URL of "http://{servername}/COMACON" or "https://{servername}/COMACON" (if your server is configured for HTTPS communications.)
+You will also need to have IIS installed and configured on the server you wish to have hosting the COMACON.
 
-Please make sure to open any issues whenever you encounter them. I might need to get a copy of the web.config file that you were working with so I can do further testing on my side. Of course, please remove any PII from the files as I would hate to eassume that risk. 😄 Thanks!
+### Core Installation
+1. Download the latest release [here](https://github.com/rlwakefield/CoMaCon/releases).
+2. Once the file downloads, right-click on it and select properties. Then unblock the file and click OK.
+3. Copy the .zip file to the server that will be hosting the COMACON.
+**On the server hosting the COMACON**
+4. Unzip the copied .zip file.
+5. Now go into IIS and go to the Application Pools. Create a NEW application pool called "COMACON" and leave default settings.
+6. Open up File Explorer and navigate to "C:\inetpub\wwwroot".
+7. Create a folder named "COMACON" here.
+8. Copy the files extracted from the .zip file in step #4 above into the folder created in step #7.
+9. Go back into IIS and right-click on the Default Site and click refresh.
+10. Expand the Default Site and locate a folder called "COMACON".
+11. Right-click on that folder and select "Convert to Application".
+12. Change the Application Pool to the COMACON one and then click OK.
+13. Finally, you need to update the user running the Application Pool to be an administrator on the server. This is due to code being used to read/write IIS settings. This can be done by going to the Application Pools --> Click on the COMACON Application Pool --> Click Advanced Settings in the right-hand pane --> locate the Identity element and then click the 3 dot button in the field --> Change the type to "Custom Account" and then click on the Set... button --> type in the username, password, and confirm password and then just save everything. (NOTE: I am working on getting this cahnged so the user doesn't have to be an admin, but at this point in time, it is needed due to some of the means of reading and updating IIS settings.)
+11. At this point, COMACON should be available to be loaded by going to your browser and going to the URL of "http://{servername}/COMACON" or "https://{servername}/COMACON" (if your server is configured for HTTPS communications.)
+
+Please make sure to open any issues whenever you encounter them. I might need to get a copy of the web.config file that you were working with so I can do further testing on my side. Of course, please remove any PII from the files as I would hate to assume that risk. 😄 Thanks!
 
 
 # Future Enhancements
@@ -36,7 +42,14 @@ Obviously I am always open to other features, suggestions, etc., but right now m
 
 
 # Upgrade Instructions
-(TBD)
+1. Download the latest release [here](https://github.com/rlwakefield/CoMaCon/releases).
+2. Once the file downloads, right-click on it and select properties. Then unblock the file and click OK.
+3. Copy the .zip file to the server that will be hosting the COMACON.
+**On the server hosting the COMACON**
+4. Unzip the copied .zip file.
+5. Delete all of the files from the current COMACON folder in the "C:\inetpub\wwwroot\COMACON" folder.
+6. Copy all of the files from the unzipped .zip file to the "C:\inetpub\wwwroot\COMACON" folder.
+7. Recycle the COMACON Application Pool and you are good to go.
 
 
 # Issue Reporting/Enhancement Suggestions
