@@ -2871,10 +2871,10 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
             case "ADFS":
                 SaveAdfs(xmlDoc, node, ds);
                 break;
-            case "Custom Validation":
+            case "CustomValidation":
                 SaveCustomValidationSection(xmlDoc, node, ds);
                 break;
-            case "Navigation Panel":
+            case "NavigationPanel":
                 SaveNavigationPanelSection(xmlDoc, node, ds);
                 break;
             case "Healthcare Web Viewer Origin URL":

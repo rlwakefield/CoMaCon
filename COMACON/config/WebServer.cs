@@ -281,8 +281,8 @@ internal sealed class DefaultWebServerConfiguration : WebServerConfiguration
         GenericHelperMethods.SaveKnownKeys(core, "Hyland.Web.HealthcareWebViewer", HylandWebHealthcareWebViewer, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "system.diagnostics", systemdiagnostics, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "ADFS", root, configurationDocument);
-        GenericHelperMethods.SaveKnownKeys(core, "Custom Validation", CustomValidation, configurationDocument);
-        GenericHelperMethods.SaveKnownKeys(core, "Navigation Panel", NavigationPanel, configurationDocument);
+        GenericHelperMethods.SaveKnownKeys(core, "CustomValidation", CustomValidation, configurationDocument);
+        GenericHelperMethods.SaveKnownKeys(core, "NavigationPanel", NavigationPanel, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "Healthcare Web Viewer Origin URL", HylandWebHealthcareWebViewer, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "Keyword Dropdown Typeahead", appSettings, configurationDocument);
         foreach (Key k in core.knownKeys)
@@ -358,8 +358,8 @@ internal sealed class DefaultWebServerConfiguration : WebServerConfiguration
         GenericHelperMethods.SaveKnownKeys(core, "Hyland.Web.HealthcareWebViewer", HylandWebHealthcareWebViewer, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "system.diagnostics", systemdiagnostics, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "ADFS", root, configurationDocument);
-        GenericHelperMethods.SaveKnownKeys(core, "Custom Validation", CustomValidation, configurationDocument);
-        GenericHelperMethods.SaveKnownKeys(core, "Navigation Panel", NavigationPanel, configurationDocument);
+        GenericHelperMethods.SaveKnownKeys(core, "CustomValidation", CustomValidation, configurationDocument);
+        GenericHelperMethods.SaveKnownKeys(core, "NavigationPanel", NavigationPanel, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "Healthcare Web Viewer Origin URL", HylandWebHealthcareWebViewer, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "Keyword Dropdown Typeahead", appSettings, configurationDocument);
         foreach (Key k in core.knownKeys)
@@ -435,8 +435,8 @@ internal sealed class DefaultWebServerConfiguration : WebServerConfiguration
         GenericHelperMethods.SaveKnownKeys(core, "Hyland.Web.HealthcareWebViewer", HylandWebHealthcareWebViewer, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "system.diagnostics", systemdiagnostics, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "ADFS", root, configurationDocument);
-        GenericHelperMethods.SaveKnownKeys(core, "Custom Validation", CustomValidation, configurationDocument);
-        GenericHelperMethods.SaveKnownKeys(core, "Navigation Panel", NavigationPanel, configurationDocument);
+        GenericHelperMethods.SaveKnownKeys(core, "CustomValidation", CustomValidation, configurationDocument);
+        GenericHelperMethods.SaveKnownKeys(core, "NavigationPanel", NavigationPanel, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "Healthcare Web Viewer Origin URL", HylandWebHealthcareWebViewer, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "Keyword Dropdown Typeahead", appSettings, configurationDocument);
         foreach (Key k in core.knownKeys)
@@ -513,8 +513,8 @@ internal sealed class DefaultWebServerConfiguration : WebServerConfiguration
         GenericHelperMethods.SaveKnownKeys(core, "Hyland.Web.HealthcareWebViewer", HylandWebHealthcareWebViewer, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "system.diagnostics", systemdiagnostics, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "ADFS", root, configurationDocument);
-        GenericHelperMethods.SaveKnownKeys(core, "Custom Validation", CustomValidation, configurationDocument);
-        GenericHelperMethods.SaveKnownKeys(core, "Navigation Panel", NavigationPanel, configurationDocument);
+        GenericHelperMethods.SaveKnownKeys(core, "CustomValidation", CustomValidation, configurationDocument);
+        GenericHelperMethods.SaveKnownKeys(core, "NavigationPanel", NavigationPanel, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "Healthcare Web Viewer Origin URL", HylandWebHealthcareWebViewer, configurationDocument);
         GenericHelperMethods.SaveKnownKeys(core, "Keyword Dropdown Typeahead", appSettings, configurationDocument);
         foreach (Key k in core.knownKeys)

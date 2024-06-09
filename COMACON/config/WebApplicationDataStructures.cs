@@ -4728,6 +4728,419 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
 
     /*
      ***********************************************************
+     *                   Elements To Save
+     ***********************************************************
+     */
+    /* Version 21.1 Arrays */
+    private readonly List<string> AgendaOnline211ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "Hyland.Applications.AgendaPubAccess.PublicComment",
+        "Hyland.Logging"
+    };
+
+    private readonly List<string> ApplicationServer211ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "ADFS",
+        "Hyland.ResponsiveApps",
+        "Hyland.PlatterManagement",
+        "Hyland.Services",
+        "Hyland.XMLServices.DocumentConnector",
+        "Hyland.Core.FullText",
+        "Hyland.WorkView.Core",
+        "Hyland.Core.IDOL",
+        "root",
+        "Hyland.Core.Wopi",
+        "Hyland.Integrations.LOBBroker.LOBBRokerConfigSection",
+        "Hyland.Authentication",
+        "Hyland.Authentication-TrustedClients"
+    };
+
+    private readonly List<string> ElectronicPlanReview211ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging"
+    };
+
+    private readonly List<string> GatewayCachingServer211ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging"
+    };
+
+    private readonly List<string> HealthcareFormManager211ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "system.diagnostics",
+        "Hyland.Services.Client"
+    };
+
+    private readonly List<string> PatientWindow211ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "Hyland.Logging",
+        "ADFS"
+    };
+
+    private readonly List<string> PublicAccessViewerLegacy211ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web"
+    };
+
+    private readonly List<string> PublicAccessViewerNextGen211ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web"
+    };
+
+    private readonly List<string> ReportingViewer211ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "system.diagnostics",
+        "system.web.extensions"
+    };
+
+    private readonly List<string> WebServer211ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "Hyland.Web.DashboardViewer",
+        "Hyland.Web.HealthcareWebViewer",
+        "system.diagnostics",
+        "ADFS",
+        "CustomValidation",
+        "NavigationPanel",
+        "Healthcare Web Viewer Origin URL",
+        "Keyword Dropdown Typeahead"
+    };
+
+    /* Version 22.1 Arrays */
+    private readonly List<string> AgendaOnline221ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "Hyland.Applications.AgendaPubAccess.PublicComment",
+        "Hyland.Logging"
+    };
+
+    private readonly List<string> ApplicationServer221ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "ADFS",
+        "Hyland.ResponsiveApps",
+        "Hyland.PlatterManagement",
+        "Hyland.Services",
+        "Hyland.XMLServices.DocumentConnector",
+        "Hyland.Core.FullText",
+        "Hyland.WorkView.Core",
+        "root",
+        "Hyland.Core.Wopi",
+        "Hyland.Integrations.LOBBroker.LOBBRokerConfigSection",
+        "Hyland.Authentication",
+        "Hyland.Authentication-TrustedClients"
+    };
+
+    private readonly List<string> ElectronicPlanReview221ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging"
+    };
+
+    private readonly List<string> GatewayCachingServer221ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging"
+    };
+
+    private readonly List<string> HealthcareFormManager221ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "system.diagnostics",
+        "Hyland.Services.Client"
+    };
+
+    private readonly List<string> PatientWindow221ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "Hyland.Logging",
+        "ADFS"
+    };
+
+    private readonly List<string> PublicAccessViewerNextGen221ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web"
+    };
+
+    private readonly List<string> ReportingViewer221ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "system.diagnostics",
+        "system.web.extensions"
+    };
+
+    private readonly List<string> WebServer221ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "Hyland.Web.DashboardViewer",
+        "Hyland.Web.HealthcareWebViewer",
+        "system.diagnostics",
+        "ADFS",
+        "CustomValidation",
+        "NavigationPanel",
+        "Healthcare Web Viewer Origin URL",
+        "Keyword Dropdown Typeahead"
+    };
+
+    /* Version 23.1 Arrays */
+    private readonly List<string> AgendaOnline231ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "Hyland.Applications.AgendaPubAccess.PublicComment",
+        "Hyland.Logging"
+    };
+
+    private readonly List<string> ApplicationServer231ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "ADFS",
+        "Hyland.ResponsiveApps",
+        "Hyland.PlatterManagement",
+        "Hyland.Services",
+        "Hyland.XMLServices.DocumentConnector",
+        "Hyland.Core.FullText",
+        "Hyland.WorkView.Core",
+        "root",
+        "Hyland.Core.Wopi",
+        "Hyland.Integrations.LOBBroker.LOBBRokerConfigSection",
+        "Hyland.Authentication",
+        "Hyland.Authentication-TrustedClients"
+    };
+
+    private readonly List<string> ElectronicPlanReview231ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging"
+    };
+
+    private readonly List<string> GatewayCachingServer231ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging"
+    };
+
+    private readonly List<string> HealthcareFormManager231ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "system.diagnostics",
+        "Hyland.Services.Client"
+    };
+
+    private readonly List<string> PatientWindow231ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "Hyland.Logging",
+        "ADFS"
+    };
+
+    private readonly List<string> PublicAccessViewerNextGen231ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web"
+    };
+
+    private readonly List<string> ReportingViewer231ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "system.diagnostics",
+        "system.web.extensions"
+    };
+
+    private readonly List<string> WebServer231ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "Hyland.Web.DashboardViewer",
+        "Hyland.Web.HealthcareWebViewer",
+        "system.diagnostics",
+        "ADFS",
+        "CustomValidation",
+        "NavigationPanel",
+        "Healthcare Web Viewer Origin URL",
+        "Keyword Dropdown Typeahead"
+    };
+
+    /* Version 24.1 Arrays */
+    private readonly List<string> AgendaOnline241ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "Hyland.Applications.AgendaPubAccess.PublicComment",
+        "Hyland.Logging"
+    };
+
+    private readonly List<string> ApplicationServer241ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "ADFS",
+        "Hyland.ResponsiveApps",
+        "Hyland.PlatterManagement",
+        "Hyland.Services",
+        "Hyland.XMLServices.DocumentConnector",
+        "Hyland.Core.FullText",
+        "Hyland.WorkView.Core",
+        "root",
+        "Hyland.Core.Wopi",
+        "Hyland.Integrations.LOBBroker.LOBBRokerConfigSection",
+        "Hyland.Authentication",
+        "Hyland.Authentication-TrustedClients"
+    };
+
+    private readonly List<string> ElectronicPlanReview241ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging"
+    };
+
+    private readonly List<string> HealthcareFormManager241ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "system.diagnostics",
+        "Hyland.Services.Client"
+    };
+
+    private readonly List<string> PatientWindow241ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "Hyland.Logging",
+        "ADFS"
+    };
+
+    private readonly List<string> PublicAccessViewerNextGen241ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web"
+    };
+
+    private readonly List<string> ReportingViewer241ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "system.diagnostics",
+        "system.web.extensions"
+    };
+
+    private readonly List<string> WebServer241ElementsToSave = new List<string>
+    {
+        "appSettings",
+        "Hyland.Services.Client",
+        "system.web",
+        "system.webServer",
+        "Hyland.Logging",
+        "Hyland.Web.DashboardViewer",
+        "Hyland.Web.HealthcareWebViewer",
+        "system.diagnostics",
+        "ADFS",
+        "CustomValidation",
+        "NavigationPanel",
+        "Healthcare Web Viewer Origin URL",
+        "Keyword Dropdown Typeahead"
+    };
+
+
+    /*
+     ***********************************************************
      *                      Methods!!!
      ***********************************************************
      */
@@ -4957,6 +5370,59 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         };
 
         if (lists.TryGetValue(type.Replace(" ", "").Replace("-", "") + version + "ElementsToHide", out var result))
+        {
+            return result;
+        }
+        else
+        {
+            throw new KeyNotFoundException($"No dictionary found with the key {type.Replace(" ", "").Replace("-", "") + "ElementsToHide"}");
+        }
+    }
+
+    public List<string> getElementsToSave(string type, string version)
+    {
+        Dictionary<string, List<string>> elements = new Dictionary<string, List<string>>
+        {
+            { "AgendaOnline211ElementsToSave", ApplicationServer211ElementsToSave },
+            { "ApplicationServer211ElementsToSave", ApplicationServer211ElementsToSave },
+            { "ElectronicPlanReview211ElementsToSave", ElectronicPlanReview211ElementsToSave },
+            { "GatewayCachingServer211ElementsToSave", GatewayCachingServer211ElementsToSave },
+            { "HealthcareFormManager211ElementsToSave", HealthcareFormManager211ElementsToSave },
+            { "PatientWindow211ElementsToSave", PatientWindow211ElementsToSave },
+            { "PublicAccessViewerLegacy211ElementsToSave", PublicAccessViewerLegacy211ElementsToSave },
+            { "PublicAccessViewerNextGen211ElementsToSave", PublicAccessViewerNextGen211ElementsToSave },
+            { "ReportingViewer211ElementsToSave", ReportingViewer211ElementsToSave },
+            { "WebServer211ElementsToSave", WebServer211ElementsToSave },
+            { "AgendaOnline221ElementsToSave", AgendaOnline221ElementsToSave },
+            { "ApplicationServer221ElementsToSave", ApplicationServer221ElementsToSave },
+            { "ElectronicPlanReview221ElementsToSave", ElectronicPlanReview221ElementsToSave },
+            { "GatewayCachingServer221ElementsToSave", GatewayCachingServer221ElementsToSave },
+            { "HealthcareFormManager221ElementsToSave", HealthcareFormManager221ElementsToSave },
+            { "PatientWindow221ElementsToSave", PatientWindow221ElementsToSave },
+            { "PublicAccessViewerNextGen221ElementsToSave", PublicAccessViewerNextGen221ElementsToSave },
+            { "ReportingViewer221ElementsToSave", ReportingViewer221ElementsToSave },
+            { "WebServer221ElementsToSave", WebServer221ElementsToSave },
+            { "AgendaOnline231ElementsToSave", AgendaOnline231ElementsToSave },
+            { "ApplicationServer231ElementsToSave", ApplicationServer231ElementsToSave },
+            { "ElectronicPlanReview231ElementsToSave", ElectronicPlanReview231ElementsToSave },
+            { "GatewayCachingServer231ElementsToSave", GatewayCachingServer231ElementsToSave },
+            { "HealthcareFormManager231ElementsToSave", HealthcareFormManager231ElementsToSave },
+            { "PatientWindow231ElementsToSave", PatientWindow231ElementsToSave },
+            { "PublicAccessViewerNextGen231ElementsToSave", PublicAccessViewerNextGen231ElementsToSave },
+            { "ReportingViewer231ElementsToSave", ReportingViewer231ElementsToSave },
+            { "WebServer231ElementsToSave", WebServer231ElementsToSave },
+            { "AgendaOnline241ElementsToSave", AgendaOnline241ElementsToSave },
+            { "ApplicationServer241ElementsToSave", ApplicationServer241ElementsToSave },
+            { "ElectronicPlanReview241ElementsToSave", ElectronicPlanReview241ElementsToSave },
+            { "HealthcareFormManager241ElementsToSave", HealthcareFormManager241ElementsToSave },
+            { "PatientWindow241ElementsToSave", PatientWindow241ElementsToSave },
+            { "PublicAccessViewerNextGen241ElementsToSave", PublicAccessViewerNextGen241ElementsToSave },
+            { "ReportingViewer241ElementsToSave", ReportingViewer241ElementsToSave },
+            { "WebServer241ElementsToSave", WebServer241ElementsToSave }
+
+        };
+
+        if (elements.TryGetValue(type.Replace(" ", "").Replace("-", "") + version + "ElementsToHide", out var result))
         {
             return result;
         }
