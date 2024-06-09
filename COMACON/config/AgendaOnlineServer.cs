@@ -220,7 +220,7 @@ internal sealed class DefaultAgendaOnlineServerConfiguration : AgendaOnlineServe
         ServerManager manager = new ServerManager();
         Configuration config = manager.GetWebConfiguration(siteName + applicationPath + applicationName);
 
-        //string serializedObject = ComaconHelperProxy.Get(applicationPath, applicationName, webApplicationType, "231");
+        //string serializedObject = ComaconHelperProxy.Get(applicationPath, applicationName, webApplicationType, "241");
         //var translator = JsonConvert.DeserializeObject<NETCoreToNetFrameworkTranslator>(serializedObject);
 
         XmlNode root = xmlDoc.DocumentElement;

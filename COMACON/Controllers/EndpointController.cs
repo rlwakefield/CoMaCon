@@ -23,6 +23,7 @@ namespace COMACON.Controllers
         private readonly ReportingViewerConfiguration ReportingViewerConfiguration;
         private readonly WebServerConfiguration WebServerConfiguration;
         private readonly Core Core;
+        private readonly LoadSaveWebApplications LoadSaveWebApplications;
 
         public EndpointController(ApplicationServerConfiguration applicationServerConfiguration,
             AgendaOnlineServerConfiguration agendaOnlineServerConfiguration,
@@ -34,7 +35,8 @@ namespace COMACON.Controllers
             PublicAccessViewerNextGenConfiguration publicAccessViewerNextGenConfiguration,
             ReportingViewerConfiguration reportingViewerConfiguration,
             WebServerConfiguration webServerConfiguration,
-            Core core)
+            Core core,
+            LoadSaveWebApplications loadSaveWebApplications)
         {
             ApplicationServerConfiguration = applicationServerConfiguration;
             AgendaOnlineServerConfiguration = agendaOnlineServerConfiguration;
@@ -47,6 +49,7 @@ namespace COMACON.Controllers
             ReportingViewerConfiguration = reportingViewerConfiguration;
             WebServerConfiguration = webServerConfiguration;
             Core = core;
+            LoadSaveWebApplications = loadSaveWebApplications;
         }
 
         // GET: api/Endpoint/UrlValidation
@@ -83,26 +86,36 @@ namespace COMACON.Controllers
 
             switch (type)
             {
-                case "Application Server":
-                    return ApplicationServerConfiguration.LoadApplicationServerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
                 case "Agenda Online":
-                    return AgendaOnlineServerConfiguration.LoadAgendaOnlineServerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    //return AgendaOnlineServerConfiguration.LoadAgendaOnlineServerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    return LoadSaveWebApplications.LoadWebApplicationConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                case "Application Server":
+                    //return ApplicationServerConfiguration.LoadApplicationServerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    return LoadSaveWebApplications.LoadWebApplicationConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
                 case "Electronic Plan Review":
-                    return ElectronicPlanReviewConfiguration.LoadElectronicPlanReviewConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    //return ElectronicPlanReviewConfiguration.LoadElectronicPlanReviewConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    return LoadSaveWebApplications.LoadWebApplicationConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
                 case "Gateway Caching Server":
-                    return GatewayCachingServerConfiguration.LoadGatewayCachingServerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    //return GatewayCachingServerConfiguration.LoadGatewayCachingServerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    return LoadSaveWebApplications.LoadWebApplicationConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
                 case "Healthcare Form Manager":
-                    return HealthcareFormManagerConfiguration.LoadHealthcareFormManagerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    //return HealthcareFormManagerConfiguration.LoadHealthcareFormManagerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    return LoadSaveWebApplications.LoadWebApplicationConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
                 case "Patient Window":
-                    return OnBasePatientWindowConfiguration.LoadOnBasePatientWindowConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    //return OnBasePatientWindowConfiguration.LoadOnBasePatientWindowConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    return LoadSaveWebApplications.LoadWebApplicationConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
                 case "Public Access - Legacy":
-                    return PublicAccessViewerLegacyConfiguration.LoadPublicAccessViewerLegacyConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    //return PublicAccessViewerLegacyConfiguration.LoadPublicAccessViewerLegacyConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    return LoadSaveWebApplications.LoadWebApplicationConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
                 case "Public Access - Next Gen":
-                    return PublicAccessViewerNextGenConfiguration.LoadPublicAccessViewerNextGenConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    //return PublicAccessViewerNextGenConfiguration.LoadPublicAccessViewerNextGenConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    return LoadSaveWebApplications.LoadWebApplicationConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
                 case "Reporting Viewer":
-                    return ReportingViewerConfiguration.LoadReportingViewerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    //return ReportingViewerConfiguration.LoadReportingViewerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    return LoadSaveWebApplications.LoadWebApplicationConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
                 case "Web Server":
-                    return WebServerConfiguration.LoadWebServerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    //return WebServerConfiguration.LoadWebServerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
+                    return LoadSaveWebApplications.LoadWebApplicationConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
             }
 
             return null;

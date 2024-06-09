@@ -45,6 +45,7 @@ builder.Services.AddTransient<PublicAccessViewerNextGenConfiguration, DefaultPub
 builder.Services.AddTransient<ReportingViewerConfiguration, DefaultReportingViewerConfiguration>();
 builder.Services.AddTransient<WebServerConfiguration, DefaultWebServerConfiguration>();
 builder.Services.AddTransient<Core, DefaultCore>();
+builder.Services.AddTransient<LoadSaveWebApplications, DefaultLoadSaveWebApplications>();
 
 var app = builder.Build();
 

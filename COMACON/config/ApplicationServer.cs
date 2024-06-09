@@ -280,7 +280,7 @@ internal sealed class DefaultApplicationServerConfiguration : ApplicationServerC
 
         //Get the serialized output and store it.
         //Log.Logger.Information("Getting the potentially protected sections of the web.config.");
-        //string serializedObject = ComaconHelperProxy.Get(applicationPath, applicationName, webApplicationType, "231");
+        //string serializedObject = ComaconHelperProxy.Get(applicationPath, applicationName, webApplicationType, "241");
         //Deserialize the object.
         //var translator = JsonConvert.DeserializeObject<NETCoreToNetFrameworkTranslator>(serializedObject);
 
