@@ -37,7 +37,13 @@ public class WebApplicationDataStructuresTests
                     {"appSettings","add","MaxPoolSize","2","Max-Pool-Size","5","","",""},
                     {"appSettings","add","webpages:Enabled","1","webpages-Enabled","false","","",""}
                 }
+            },
+        {
+            "Hyland.Logging", new string[,]
+            {
+
             }
+        }
         };
 
         Dictionary<string, string[,]> value = dwads.getWebApplicationSectionsTranslator("Agenda Online", "211");
@@ -1388,7 +1394,13 @@ public class WebApplicationDataStructuresTests
                     {"appSettings","add","MaxPoolSize","2","Max-Pool-Size","5","","",""},
                     {"appSettings","add","webpages:Enabled","1","webpages-Enabled","false","","",""}
                 }
+            },
+        {
+            "Hyland.Logging", new string[,]
+            {
+
             }
+        }
         };
 
         Dictionary<string, string[,]> value = dwads.getWebApplicationSectionsTranslator("Agenda Online", "221");
@@ -1527,7 +1539,6 @@ public class WebApplicationDataStructuresTests
             {
                 "appSettings", new string[,]
                 {
-                    {"appSettings","add","allowedDomain","2","Allowed-Domain","[APP SERVER]","","",""},
                     {"appSettings","add","dmsVirtualRoot","2","Virtual-Directory","https://localhost/HealthcareFormManager","","",""},
                     {"appSettings","add","dmsDataSource","2","Data-Source","[DATASOURCE]","","",""},
                     {"appSettings","add","AllowViewSource","1","Allow-View-Source","false","","",""},
@@ -1705,7 +1716,6 @@ public class WebApplicationDataStructuresTests
                     {"Hyland.Services.Client","ApplicationServer","Url","2","Application-Server-URL","https://localhost/AppServer/Service.rem","","",""},
                     {"Hyland.Services.Client","ApplicationServer","ServiceClientType","2","Service-Client-Type","Remoting","","",""},
                     {"Hyland.Services.Client","RequestTimeoutSeconds","Value","2","SOAP-Client-Request-Timeout","100","","10",""},
-                    {"Hyland.Services.Client","AllowNTAuthenticationOnForwarding","Enabled","1","Allow-NT-Authentication-On-Forwarding","False","","",""},
                     {"Hyland.Services.Client","StreamingSettings","BufferSize","2","Stream-Settings","64000","","",""}
                 }
             },
@@ -1962,7 +1972,7 @@ public class WebApplicationDataStructuresTests
             {
                 "root", new string[,]
                 {
-                    {"root","Hyland.Core.IDOL","ImageCompression","2","Image-Compression","70","","",""}
+                    
                 }
             },
             {
@@ -2638,7 +2648,13 @@ public class WebApplicationDataStructuresTests
                     {"appSettings","add","webpages:Enabled","1","webpages-Enabled","false","","",""},
                     {"appSettings","add","GoogleAnalytics","2","Google-Analytics","","","",""}
                 }
+            },
+        {
+            "Hyland.Logging", new string[,]
+            {
+
             }
+        }
         };
 
         Dictionary<string, string[,]> value = dwads.getWebApplicationSectionsTranslator("Agenda Online", "231");
@@ -2777,7 +2793,6 @@ public class WebApplicationDataStructuresTests
             {
                 "appSettings", new string[,]
                 {
-                    {"appSettings","add","allowedDomain","2","Allowed-Domain","[APP SERVER]","","",""},
                     {"appSettings","add","dmsVirtualRoot","2","Virtual-Directory","https://localhost/HealthcareFormManager","","",""},
                     {"appSettings","add","dmsDataSource","2","Data-Source","[DATASOURCE]","","",""},
                     {"appSettings","add","AllowViewSource","1","Allow-View-Source","false","","",""},
@@ -2969,7 +2984,6 @@ public class WebApplicationDataStructuresTests
                     {"Hyland.Services.Client","ApplicationServer","Url","2","Application-Server-URL","https://localhost/AppServer/Service.rem","","",""},
                     {"Hyland.Services.Client","ApplicationServer","ServiceClientType","2","Service-Client-Type","Remoting","","",""},
                     {"Hyland.Services.Client","RequestTimeoutSeconds","Value","2","SOAP-Client-Request-Timeout","100","","10",""},
-                    {"Hyland.Services.Client","AllowNTAuthenticationOnForwarding","Enabled","1","Allow-NT-Authentication-On-Forwarding","False","","",""},
                     {"Hyland.Services.Client","StreamingSettings","BufferSize","2","Stream-Settings","64000","","",""}
                 }
             },
@@ -3233,7 +3247,7 @@ public class WebApplicationDataStructuresTests
             {
                 "root", new string[,]
                 {
-                    {"root","Hyland.Core.IDOL","ImageCompression","2","Image-Compression","70","","",""}
+                    
                 }
             },
             {
@@ -3909,7 +3923,13 @@ public class WebApplicationDataStructuresTests
                     {"appSettings","add","webpages:Enabled","1","webpages-Enabled","false","","",""},
                     {"appSettings","add","GoogleAnalytics","2","Google-Analytics","","","",""}
                 }
+            },
+        {
+            "Hyland.Logging", new string[,]
+            {
+
             }
+        }
         };
 
         Dictionary<string, string[,]> value = dwads.getWebApplicationSectionsTranslator("Agenda Online", "241");
@@ -4003,7 +4023,6 @@ public class WebApplicationDataStructuresTests
             {
                 "appSettings", new string[,]
                 {
-                    {"appSettings","add","allowedDomain","2","Allowed-Domain","[APP SERVER]","","",""},
                     {"appSettings","add","dmsVirtualRoot","2","Virtual-Directory","https://localhost/HealthcareFormManager","","",""},
                     {"appSettings","add","dmsDataSource","2","Data-Source","[DATASOURCE]","","",""},
                     {"appSettings","add","AllowViewSource","1","Allow-View-Source","false","","",""},
@@ -4195,7 +4214,6 @@ public class WebApplicationDataStructuresTests
                     {"Hyland.Services.Client","ApplicationServer","Url","2","Application-Server-URL","https://localhost/AppServer/Service.rem","","",""},
                     {"Hyland.Services.Client","ApplicationServer","ServiceClientType","2","Service-Client-Type","Remoting","","",""},
                     {"Hyland.Services.Client","RequestTimeoutSeconds","Value","2","SOAP-Client-Request-Timeout","100","","10",""},
-                    {"Hyland.Services.Client","AllowNTAuthenticationOnForwarding","Enabled","1","Allow-NT-Authentication-On-Forwarding","False","","",""},
                     {"Hyland.Services.Client","StreamingSettings","BufferSize","2","Stream-Settings","64000","","",""}
                 }
             },
@@ -4459,7 +4477,7 @@ public class WebApplicationDataStructuresTests
             {
                 "root", new string[,]
                 {
-                    {"root","Hyland.Core.IDOL","ImageCompression","2","Image-Compression","70","","",""}
+                    
                 }
             },
             {
@@ -5071,6 +5089,1344 @@ public class WebApplicationDataStructuresTests
         };
 
         string[] value = dwads.getDiagnosticsSettingsProfiles("24.1.7.1000");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetAgendaOnline211ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string> {
+            "Google-Analytics"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Agenda Online","211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetAgendaOnline221ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string> {
+            "Google-Analytics"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Agenda Online", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetAgendaOnline231ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string> {
+            
+        };
+
+        List<string> value = dwads.getElementsToHideList("Agenda Online", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetAgendaOnline241ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string> {
+            
+        };
+
+        List<string> value = dwads.getElementsToHideList("Agenda Online", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetApplicationServer211ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "ShareBaseLink-SettingElement",
+            "ShareBaseSection",
+            "Doc-Linker-SMART-On-FHIR-Application-ID-SettingElement",
+            "Use-New-Keyword-Data-Cache-Implementation-SettingElement",
+            "Configuration-Import-Database-Timeout-SettingElement",
+            "PIM:HyRCS:ExternalBaseUri-SettingElement",
+            "PIM:HyRCS:Port-SettingElement",
+            "PIM:ImageProcess-SettingElement",
+            "PIM:ChromiumProcess-SettingElement",
+            "HyRCS:PageCountLimit-SettingElement"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Application Server", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetApplicationServer221ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "Hyland-Services-AppPool-Username-ElementSection",
+            "Hyland-Services-AppPool-Password-ElementSection",
+            "Doc-Linker-SMART-On-FHIR-Application-ID-SettingElement",
+            "Use-New-Keyword-Data-Cache-Implementation-SettingElement",
+            "Configuration-Import-Database-Timeout-SettingElement",
+            "PIM:HyRCS:ExternalBaseUri-SettingElement",
+            "PIM:HyRCS:Port-SettingElement",
+            "PIM:ImageProcess-SettingElement",
+            "PIM:ChromiumProcess-SettingElement",
+            "HyRCS:PageCountLimit-SettingElement",
+            "IDOLLink-SettingElement",
+            "IDOLSection"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Application Server", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetApplicationServer231ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "Hyland-Services-AppPool-Username-ElementSection",
+            "Hyland-Services-AppPool-Password-ElementSection",
+            "Integrations-EIS-Use-HTML-Client-Type-SettingElement",
+            "WOPISection",
+            "WOPILink-SettingElement",
+            "IDOLLink-SettingElement",
+            "IDOLSection"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Application Server", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetApplicationServer241ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "Hyland-Services-AppPool-Username-ElementSection",
+            "Hyland-Services-AppPool-Password-ElementSection",
+            "IDOLLink-SettingElement",
+            "IDOLSection"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Application Server", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetElectronicPlanReview211ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+
+        };
+
+        List<string> value = dwads.getElementsToHideList("Electronic Plan Review", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetElectronicPlanReview221ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+
+        };
+
+        List<string> value = dwads.getElementsToHideList("Electronic Plan Review", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetElectronicPlanReview231ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+
+        };
+
+        List<string> value = dwads.getElementsToHideList("Electronic Plan Review", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetElectronicPlanReview241ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+
+        };
+
+        List<string> value = dwads.getElementsToHideList("Electronic Plan Review", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetGatewayCachingServer211ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            
+        };
+
+        List<string> value = dwads.getElementsToHideList("Gateway Caching Server", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetGatewayCachingServer221ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            
+        };
+
+        List<string> value = dwads.getElementsToHideList("Gateway Caching Server", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetGatewayCachingServer231ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            
+        };
+
+        List<string> value = dwads.getElementsToHideList("Gateway Caching Server", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetHealthcareFormManager211ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+
+        };
+
+        List<string> value = dwads.getElementsToHideList("Healthcare Form Manager", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetHealthcareFormManager221ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "Allowed-Domain-SectionElement"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Healthcare Form Manager", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetHealthcareFormManager231ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "Allowed-Domain-SectionElement"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Healthcare Form Manager", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetHealthcareFormManager241ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "Allowed-Domain-SectionElement"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Healthcare Form Manager", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPatientWindow211ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "Enable-Bowser-PDF-Viewer-Setting-Element",
+            "Keyword-Panel-View-Type-Setting-Element",
+            "Re-Index-Menu-Setting-Element",
+            "Send-To-Print-Queue-Menu-Setting-Element",
+            "File-Menu-Setting-Element",
+            "Create-Document-Menu-Setting-Element",
+            "Workflow-Menu-Setting-Element",
+            "JSON-Serialization-Max-Length",
+            "Menus-SettingElement"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Patient Window", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPatientWindow221ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "Enable-Bowser-PDF-Viewer-Setting-Element",
+            "Keyword-Panel-View-Type-Setting-Element",
+            "Re-Index-Menu-Setting-Element",
+            "Send-To-Print-Queue-Menu-Setting-Element",
+            "File-Menu-Setting-Element",
+            "Create-Document-Menu-Setting-Element",
+            "Workflow-Menu-Setting-Element",
+            "JSON-Serialization-Max-Length",
+            "Menus-SettingElement"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Patient Window", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPatientWindow231ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+
+        };
+
+        List<string> value = dwads.getElementsToHideList("Patient Window", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPatientWindow241ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+
+        };
+
+        List<string> value = dwads.getElementsToHideList("Patient Window", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPublicAccessLegacy211ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+
+        };
+
+        List<string> value = dwads.getElementsToHideList("Public Access - Legacy", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPublicAccessNextGen211ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "Always-Wildcard-Alphanumeric-Keywords-SettingElement"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Public Access - Next Gen", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPublicAccessNextGen221ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "Always-Wildcard-Alphanumeric-Keywords-SettingElement",
+            "Allow-NT-Authentication-On-Forwarding-SettingElement"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Public Access - Next Gen", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPublicAccessNextGen231ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "Allow-NT-Authentication-On-Forwarding-SettingElement"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Public Access - Next Gen", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPublicAccessNextGen241ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "Allow-NT-Authentication-On-Forwarding-SettingElement"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Public Access - Next Gen", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetReportingViewer211ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "Dashboard-Cache-Timeout-SettingElement"
+        };
+
+        List<string> value = dwads.getElementsToHideList("Reporting Viewer", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetReportingViewer221ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            
+        };
+
+        List<string> value = dwads.getElementsToHideList("Reporting Viewer", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetReportingViewer231ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+
+        };
+
+        List<string> value = dwads.getElementsToHideList("Reporting Viewer", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetReportingViewer241ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+
+        };
+
+        List<string> value = dwads.getElementsToHideList("Reporting Viewer", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetWebServer211ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "Ping-Timer-For-Scan-Service-SettingElement",
+            "Use-Legacy-SharePoint-Authentication-SettingElement",
+            "Target-Origin-SettingElement"
+        };
+
+        List<string> value = dwads.getElementsToHideList("WebServer", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetWebServer221ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "EDM-Briefcase-SettingElement",
+            "Native-Mail-System-SettingElement",
+            "Use-Web-Mail-SettingElement",
+            "Web-Client-Type-SettingElement",
+            "First-Page-Menu-SettingElement",
+            "Goto-Page-Menu-SettingElement",
+            "Last-Page-Menu-SettingElement",
+            "Mail-Recipient-Menu-SettingElement",
+            "Next-Page-Menu-SettingElement",
+            "Pages-Menu-SettingElement",
+            "Previous-Page-Menu-SettingElement",
+            "Text-Search-Menu-SettingElement",
+            "Viewer-Control-Menu-SettingElement",
+            "Zoom-In-Menu-SettingElement",
+            "Zoom-Out-Menu-SettingElement",
+            "Autozoom-Thumbnail-Configuration-SettingElement",
+            "Open-Microsoft-Office-Documents-in-Separate-Window-SettingElement",
+            "Silverlight-SectionElement",
+            "Enable-Desktop-Host-SettingElement",
+            "Multi-Form-Viewer-Origin-SettingElement",
+            "ActiveXSection",
+            "ActiveXLink-SettingElement",
+            "Use-Legacy-SharePoint-Authentication-SettingElement",
+            "Target-Origin-SettingElement",
+            "ActiveXOnlySection"
+        };
+
+        List<string> value = dwads.getElementsToHideList("WebServer", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetWebServer231ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "EDM-Briefcase-SettingElement",
+            "Native-Mail-System-SettingElement",
+            "Use-Web-Mail-SettingElement",
+            "Web-Client-Type-SettingElement",
+            "First-Page-Menu-SettingElement",
+            "Goto-Page-Menu-SettingElement",
+            "Last-Page-Menu-SettingElement",
+            "Mail-Recipient-Menu-SettingElement",
+            "Next-Page-Menu-SettingElement",
+            "Pages-Menu-SettingElement",
+            "Previous-Page-Menu-SettingElement",
+            "Text-Search-Menu-SettingElement",
+            "Viewer-Control-Menu-SettingElement",
+            "Zoom-In-Menu-SettingElement",
+            "Zoom-Out-Menu-SettingElement",
+            "Autozoom-Thumbnail-Configuration-SettingElement",
+            "Open-Microsoft-Office-Documents-in-Separate-Window-SettingElement",
+            "Silverlight-SectionElement",
+            "Enable-Desktop-Host-SettingElement",
+            "ActiveXSection",
+            "ActiveXLink-SettingElement",
+            "Reselect-Delta-SectionElement",
+            "WorkView-Client-URL-SettingElement",
+            "Target-Origin-SettingElement",
+            "ActiveXOnlySection"
+        };
+
+        List<string> value = dwads.getElementsToHideList("WebServer", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetWebServer241ElementsToHide()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "EDM-Briefcase-SettingElement",
+            "Native-Mail-System-SettingElement",
+            "Use-Web-Mail-SettingElement",
+            "Web-Client-Type-SettingElement",
+            "First-Page-Menu-SettingElement",
+            "Goto-Page-Menu-SettingElement",
+            "Last-Page-Menu-SettingElement",
+            "Mail-Recipient-Menu-SettingElement",
+            "Next-Page-Menu-SettingElement",
+            "Pages-Menu-SettingElement",
+            "Previous-Page-Menu-SettingElement",
+            "Text-Search-Menu-SettingElement",
+            "Viewer-Control-Menu-SettingElement",
+            "Zoom-In-Menu-SettingElement",
+            "Zoom-Out-Menu-SettingElement",
+            "Autozoom-Thumbnail-Configuration-SettingElement",
+            "Open-Microsoft-Office-Documents-in-Separate-Window-SettingElement",
+            "Silverlight-SectionElement",
+            "Enable-Desktop-Host-SettingElement",
+            "ActiveXSection",
+            "ActiveXLink-SettingElement",
+            "Reselect-Delta-SectionElement",
+            "WorkView-Client-URL-SettingElement",
+            "Dashboard-Cache-Timeout-SettingElement",
+            "Use-Theme-SettingElement",
+            "Healthcare-Web-Viewer-Session-Timeout-SettingElement",
+            "Allow-NT-Authentication-On-Forwarding-SettingElement",
+            "ActiveXOnlySection"
+        };
+
+        List<string> value = dwads.getElementsToHideList("WebServer", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetAgendaOnline211ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string> {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "Hyland.Applications.AgendaPubAccess.PublicComment",
+            "Hyland.Logging"
+        };
+
+        List<string> value = dwads.getElementsToSave("Agenda Online", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetAgendaOnline221ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string> {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "Hyland.Applications.AgendaPubAccess.PublicComment",
+            "Hyland.Logging"
+        };
+
+        List<string> value = dwads.getElementsToSave("Agenda Online", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetAgendaOnline231ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "Hyland.Applications.AgendaPubAccess.PublicComment",
+            "Hyland.Logging"
+        };
+
+        List<string> value = dwads.getElementsToSave("Agenda Online", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetAgendaOnline241ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "Hyland.Applications.AgendaPubAccess.PublicComment",
+            "Hyland.Logging"
+        };
+
+        List<string> value = dwads.getElementsToSave("Agenda Online", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetApplicationServer211ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "ADFS",
+            "Hyland.ResponsiveApps",
+            "Hyland.PlatterManagement",
+            "Hyland.Services",
+            "Hyland.XMLServices.DocumentConnector",
+            "Hyland.Core.FullText",
+            "Hyland.WorkView.Core",
+            "Hyland.Core.IDOL",
+            "root",
+            "Hyland.Core.Wopi",
+            "Hyland.Integrations.LOBBroker.LOBBRokerConfigSection",
+            "Hyland.Authentication",
+            "Hyland.Authentication-TrustedClients"
+        };
+
+        List<string> value = dwads.getElementsToSave("Application Server", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetApplicationServer221ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "ADFS",
+            "Hyland.ResponsiveApps",
+            "Hyland.PlatterManagement",
+            "Hyland.Services",
+            "Hyland.XMLServices.DocumentConnector",
+            "Hyland.Core.FullText",
+            "Hyland.WorkView.Core",
+            "root",
+            "Hyland.Core.Wopi",
+            "Hyland.Integrations.LOBBroker.LOBBRokerConfigSection",
+            "Hyland.Authentication",
+            "Hyland.Authentication-TrustedClients"
+        };
+
+        List<string> value = dwads.getElementsToSave("Application Server", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetApplicationServer231ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "ADFS",
+            "Hyland.ResponsiveApps",
+            "Hyland.PlatterManagement",
+            "Hyland.Services",
+            "Hyland.XMLServices.DocumentConnector",
+            "Hyland.Core.FullText",
+            "Hyland.WorkView.Core",
+            "root",
+            "Hyland.Integrations.LOBBroker.LOBBRokerConfigSection",
+            "Hyland.Authentication",
+            "Hyland.Authentication-TrustedClients"
+        };
+
+        List<string> value = dwads.getElementsToSave("Application Server", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetApplicationServer241ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "ADFS",
+            "Hyland.ResponsiveApps",
+            "Hyland.PlatterManagement",
+            "Hyland.Services",
+            "Hyland.XMLServices.DocumentConnector",
+            "Hyland.Core.FullText",
+            "Hyland.WorkView.Core",
+            "root",
+            "Hyland.Integrations.LOBBroker.LOBBRokerConfigSection",
+            "Hyland.Authentication",
+            "Hyland.Authentication-TrustedClients"
+        };
+
+        List<string> value = dwads.getElementsToSave("Application Server", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetElectronicPlanReview211ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging"
+        };
+
+        List<string> value = dwads.getElementsToSave("Electronic Plan Review", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetElectronicPlanReview221ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging"
+        };
+
+        List<string> value = dwads.getElementsToSave("Electronic Plan Review", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetElectronicPlanReview231ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging"
+        };
+
+        List<string> value = dwads.getElementsToSave("Electronic Plan Review", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetElectronicPlanReview241ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging"
+        };
+
+        List<string> value = dwads.getElementsToSave("Electronic Plan Review", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetGatewayCachingServer211ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging"
+        };
+
+        List<string> value = dwads.getElementsToSave("Gateway Caching Server", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetGatewayCachingServer221ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging"
+        };
+
+        List<string> value = dwads.getElementsToSave("Gateway Caching Server", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetGatewayCachingServer231ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging"
+        };
+
+        List<string> value = dwads.getElementsToSave("Gateway Caching Server", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetHealthcareFormManager211ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "system.diagnostics",
+            "Hyland.Services.Client"
+        };
+
+        List<string> value = dwads.getElementsToSave("Healthcare Form Manager", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetHealthcareFormManager221ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "system.diagnostics",
+            "Hyland.Services.Client"
+        };
+
+        List<string> value = dwads.getElementsToSave("Healthcare Form Manager", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetHealthcareFormManager231ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "system.diagnostics",
+            "Hyland.Services.Client"
+        };
+
+        List<string> value = dwads.getElementsToSave("Healthcare Form Manager", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetHealthcareFormManager241ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "system.diagnostics",
+            "Hyland.Services.Client"
+        };
+
+        List<string> value = dwads.getElementsToSave("Healthcare Form Manager", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPatientWindow211ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "Hyland.Logging",
+            "ADFS"
+        };
+
+        List<string> value = dwads.getElementsToSave("Patient Window", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPatientWindow221ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "Hyland.Logging",
+            "ADFS"
+        };
+
+        List<string> value = dwads.getElementsToSave("Patient Window", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPatientWindow231ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "Hyland.Logging",
+            "ADFS"
+        };
+
+        List<string> value = dwads.getElementsToSave("Patient Window", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPatientWindow241ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "Hyland.Logging",
+            "ADFS"
+        };
+
+        List<string> value = dwads.getElementsToSave("Patient Window", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPublicAccessLegacy211ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web"
+        };
+
+        List<string> value = dwads.getElementsToSave("Public Access - Legacy", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPublicAccessNextGen211ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web"
+        };
+
+        List<string> value = dwads.getElementsToSave("Public Access - Next Gen", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPublicAccessNextGen221ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web"
+        };
+
+        List<string> value = dwads.getElementsToSave("Public Access - Next Gen", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPublicAccessNextGen231ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web"
+        };
+
+        List<string> value = dwads.getElementsToSave("Public Access - Next Gen", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetPublicAccessNextGen241ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web"
+        };
+
+        List<string> value = dwads.getElementsToSave("Public Access - Next Gen", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetReportingViewer211ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "system.diagnostics",
+            "system.web.extensions"
+        };
+
+        List<string> value = dwads.getElementsToSave("Reporting Viewer", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetReportingViewer221ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "system.diagnostics",
+            "system.web.extensions"
+        };
+
+        List<string> value = dwads.getElementsToSave("Reporting Viewer", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetReportingViewer231ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "system.diagnostics",
+            "system.web.extensions"
+        };
+
+        List<string> value = dwads.getElementsToSave("Reporting Viewer", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetReportingViewer241ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "system.diagnostics",
+            "system.web.extensions"
+        };
+
+        List<string> value = dwads.getElementsToSave("Reporting Viewer", "241");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetWebServer211ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "Hyland.Web.DashboardViewer",
+            "Hyland.Web.HealthcareWebViewer",
+            "system.diagnostics",
+            "ADFS",
+            "CustomValidation",
+            "NavigationPanel"
+        };
+
+        List<string> value = dwads.getElementsToSave("Web Server", "211");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetWebServer221ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "Hyland.Web.DashboardViewer",
+            "Hyland.Web.HealthcareWebViewer",
+            "system.diagnostics",
+            "ADFS",
+            "CustomValidation",
+            "NavigationPanel"
+        };
+
+        List<string> value = dwads.getElementsToSave("Web Server", "221");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetWebServer231ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "Hyland.Web.DashboardViewer",
+            "Hyland.Web.HealthcareWebViewer",
+            "system.diagnostics",
+            "ADFS",
+            "CustomValidation",
+            "NavigationPanel"
+        };
+
+        List<string> value = dwads.getElementsToSave("Web Server", "231");
+
+        Assert.Equal(valueToCheckAgainst, value);
+    }
+
+    [Fact]
+    public void TestGetWebServer241ElementsToSave()
+    {
+        DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
+        List<string> valueToCheckAgainst = new List<string>
+        {
+            "appSettings",
+            "Hyland.Services.Client",
+            "system.web",
+            "system.webServer",
+            "Hyland.Logging",
+            "Hyland.Web.DashboardViewer",
+            "Hyland.Web.HealthcareWebViewer",
+            "system.diagnostics",
+            "ADFS",
+            "CustomValidation",
+            "NavigationPanel"
+        };
+
+        List<string> value = dwads.getElementsToSave("Web Server", "241");
 
         Assert.Equal(valueToCheckAgainst, value);
     }

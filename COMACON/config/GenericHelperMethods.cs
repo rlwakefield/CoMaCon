@@ -1238,10 +1238,20 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         switch (sect)
         {
             case "root":
+                ParseSpecificKeys(ds, node, sect);
+                break;
             case "system.web":
+                ParseSpecificKeys(ds, node, sect);
+                break;
             case "system.webServer":
+                ParseSpecificKeys(ds, node, sect);
+                break;
             case "system.diagnostics":
+                ParseSpecificKeys(ds, node, sect);
+                break;
             case "system.web.extensions":
+                ParseSpecificKeys(ds, node, sect);
+                break;
             case "Hyland.Web.DashboardViewer":
                 ParseSpecificKeys(ds, node, sect);
                 break;
@@ -1295,6 +1305,12 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
             case "Hyland.Web.HealthcareWebViewer":
                 ParseSpecificKeys(ds, node, sect);
                 ParseHealthcareWebViewerSourceWhitelist(ds, node);
+                break;
+            case "Hyland.XMLServices.DocumentConnector":
+                ParseSpecificKeys(ds, node, sect);
+                break;
+            case "Hyland.WorkView.Core":
+                ParseSpecificKeys(ds, node, sect);
                 break;
             default:
                 ParseAllElementsAndAttributesV2(ds, node, sect, xmlDocument);
@@ -1454,7 +1470,7 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
     {
         try
         {
-            ParseAllElementsAndAttributesV2(ds, node, sect, xmlDocument);
+            ParseSpecificKeys(ds, node, sect);
 
             XmlNode apps2 = node.SelectSingleNode("Apps");
             HylandResponsiveApps hra = new HylandResponsiveApps();
@@ -1614,12 +1630,23 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                 {
                     foreach (XmlAttribute attr in childNode.Attributes)
                     {
+                        Console.WriteLine();
+                        Console.WriteLine(attr.Name);
+                        Console.WriteLine();
                         Key k = FindKey(ds.knownKeys, section, childNode.Name, attr.Name);
 
                         if (k != null)
                         {
                             //Key was found, so we just need to update that keys Value variable.
-                            k.Value = childNode.Attributes[k.AttributeName].Value;
+                            if (k.AttributeName != "ServiceClientType" && childNode.Attributes[k.AttributeName].Value != "")
+                            {
+                                //Specific to the ServiceClientType attribute and the fact that it has to have a value.
+                                //So validating it isn't blank and going from there.
+                                k.Value = childNode.Attributes[k.AttributeName].Value;
+                            } else if (k.AttributeName == "ServiceClientType" && childNode.Attributes[k.AttributeName].Value != "")
+                            {
+                                k.Value = childNode.Attributes[k.AttributeName].Value;
+                            }
                         }
                         else
                         {

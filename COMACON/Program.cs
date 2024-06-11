@@ -34,16 +34,6 @@ builder.Services.AddTransient<ComaconHelperProxy, DefaultComaconHelperProxy>();
 builder.Services.AddTransient<GenericHelperMethods, DefaultGenericHelperMethods>();
 builder.Services.AddTransient<WebApplicationDataStructures, DefaultWebApplicationDataStructures>();
 
-builder.Services.AddTransient<ApplicationServerConfiguration, DefaultApplicationServerConfiguration>();
-builder.Services.AddTransient<AgendaOnlineServerConfiguration, DefaultAgendaOnlineServerConfiguration>();
-builder.Services.AddTransient<ElectronicPlanReviewConfiguration, DefaultElectronicPlanReviewConfiguration>();
-builder.Services.AddTransient<GatewayCachingServerConfiguration, DefaultGatewayCachingServerConfiguration>();
-builder.Services.AddTransient<HealthcareFormManagerConfiguration, DefaultHealthcareFormManagerConfiguration>();
-builder.Services.AddTransient<OnBasePatientWindowConfiguration, DefaultOnBasePatientWindowConfiguration>();
-builder.Services.AddTransient<PublicAccessViewerLegacyConfiguration, DefaultPublicAccessViewerLegacyConfiguration>();
-builder.Services.AddTransient<PublicAccessViewerNextGenConfiguration, DefaultPublicAccessViewerNextGenConfiguration>();
-builder.Services.AddTransient<ReportingViewerConfiguration, DefaultReportingViewerConfiguration>();
-builder.Services.AddTransient<WebServerConfiguration, DefaultWebServerConfiguration>();
 builder.Services.AddTransient<Core, DefaultCore>();
 builder.Services.AddTransient<LoadSaveWebApplications, DefaultLoadSaveWebApplications>();
 

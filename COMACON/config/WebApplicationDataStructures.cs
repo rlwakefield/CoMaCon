@@ -61,6 +61,16 @@ public interface WebApplicationDataStructures
     /// </returns>
     public List<string> getElementsToHideList(string type,
         string version);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="version"></param>
+    /// <returns>
+    /// 
+    /// </returns>
+    public List<string> getElementsToSave(string type,
+        string version);
 }
 
 
@@ -1093,6 +1103,12 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","MaxPoolSize","2","Max-Pool-Size","5","","",""},
                 {"appSettings","add","webpages:Enabled","1","webpages-Enabled","false","","",""}
             }
+        },
+        {
+            "Hyland.Logging", new string[,]
+            {
+
+            }
         }
     };
 
@@ -1933,6 +1949,12 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","MaxPoolSize","2","Max-Pool-Size","5","","",""},
                 {"appSettings","add","webpages:Enabled","1","webpages-Enabled","false","","",""}
             }
+        },
+        {
+            "Hyland.Logging", new string[,]
+            {
+
+            }
         }
     };
 
@@ -2045,7 +2067,6 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         {
             "appSettings", new string[,]
             {
-                {"appSettings","add","allowedDomain","2","Allowed-Domain","[APP SERVER]","","",""},
                 {"appSettings","add","dmsVirtualRoot","2","Virtual-Directory","https://localhost/HealthcareFormManager","","",""},
                 {"appSettings","add","dmsDataSource","2","Data-Source","[DATASOURCE]","","",""},
                 {"appSettings","add","AllowViewSource","1","Allow-View-Source","false","","",""},
@@ -2205,7 +2226,6 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"Hyland.Services.Client","ApplicationServer","Url","2","Application-Server-URL","https://localhost/AppServer/Service.rem","","",""},
                 {"Hyland.Services.Client","ApplicationServer","ServiceClientType","2","Service-Client-Type","Remoting","","",""},
                 {"Hyland.Services.Client","RequestTimeoutSeconds","Value","2","SOAP-Client-Request-Timeout","100","","10",""},
-                {"Hyland.Services.Client","AllowNTAuthenticationOnForwarding","Enabled","1","Allow-NT-Authentication-On-Forwarding","False","","",""},
                 {"Hyland.Services.Client","StreamingSettings","BufferSize","2","Stream-Settings","64000","","",""}
             }
         },
@@ -2444,7 +2464,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         {
             "root", new string[,]
             {
-                {"root","Hyland.Core.IDOL","ImageCompression","2","Image-Compression","70","","",""}
+                
             }
         },
         {
@@ -2703,6 +2723,12 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","webpages:Enabled","1","webpages-Enabled","false","","",""},
                 {"appSettings","add","GoogleAnalytics","2","Google-Analytics","","","",""}
             }
+        },
+        {
+            "Hyland.Logging", new string[,]
+            {
+
+            }
         }
     };
 
@@ -2815,7 +2841,6 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         {
             "appSettings", new string[,]
             {
-                {"appSettings","add","allowedDomain","2","Allowed-Domain","[APP SERVER]","","",""},
                 {"appSettings","add","dmsVirtualRoot","2","Virtual-Directory","https://localhost/HealthcareFormManager","","",""},
                 {"appSettings","add","dmsDataSource","2","Data-Source","[DATASOURCE]","","",""},
                 {"appSettings","add","AllowViewSource","1","Allow-View-Source","false","","",""},
@@ -2989,7 +3014,6 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"Hyland.Services.Client","ApplicationServer","Url","2","Application-Server-URL","https://localhost/AppServer/Service.rem","","",""},
                 {"Hyland.Services.Client","ApplicationServer","ServiceClientType","2","Service-Client-Type","Remoting","","",""},
                 {"Hyland.Services.Client","RequestTimeoutSeconds","Value","2","SOAP-Client-Request-Timeout","100","","10",""},
-                {"Hyland.Services.Client","AllowNTAuthenticationOnForwarding","Enabled","1","Allow-NT-Authentication-On-Forwarding","False","","",""},
                 {"Hyland.Services.Client","StreamingSettings","BufferSize","2","Stream-Settings","64000","","",""}
             }
         },
@@ -3235,7 +3259,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         {
             "root", new string[,]
             {
-                {"root","Hyland.Core.IDOL","ImageCompression","2","Image-Compression","70","","",""}
+                
             }
         },
         {
@@ -3496,6 +3520,12 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","webpages:Enabled","1","webpages-Enabled","false","","",""},
                 {"appSettings","add","GoogleAnalytics","2","Google-Analytics","","","",""}
             }
+        },
+        {
+            "Hyland.Logging", new string[,]
+            {
+
+            }
         }
     };
 
@@ -3572,7 +3602,6 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         {
             "appSettings", new string[,]
             {
-                {"appSettings","add","allowedDomain","2","Allowed-Domain","[APP SERVER]","","",""},
                 {"appSettings","add","dmsVirtualRoot","2","Virtual-Directory","https://localhost/HealthcareFormManager","","",""},
                 {"appSettings","add","dmsDataSource","2","Data-Source","[DATASOURCE]","","",""},
                 {"appSettings","add","AllowViewSource","1","Allow-View-Source","false","","",""},
@@ -3746,7 +3775,6 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"Hyland.Services.Client","ApplicationServer","Url","2","Application-Server-URL","https://localhost/AppServer/Service.rem","","",""},
                 {"Hyland.Services.Client","ApplicationServer","ServiceClientType","2","Service-Client-Type","Remoting","","",""},
                 {"Hyland.Services.Client","RequestTimeoutSeconds","Value","2","SOAP-Client-Request-Timeout","100","","10",""},
-                {"Hyland.Services.Client","AllowNTAuthenticationOnForwarding","Enabled","1","Allow-NT-Authentication-On-Forwarding","False","","",""},
                 {"Hyland.Services.Client","StreamingSettings","BufferSize","2","Stream-Settings","64000","","",""}
             }
         },
@@ -3992,7 +4020,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         {
             "root", new string[,]
             {
-                {"root","Hyland.Core.IDOL","ImageCompression","2","Image-Compression","70","","",""}
+                
             }
         },
         {
@@ -4474,7 +4502,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
 
     private readonly List<string> PublicAccessNextGen211ElementsToHide = new List<string>
     {
-        "Always-Wildcard-Alphanumeric-Keywords"
+        "Always-Wildcard-Alphanumeric-Keywords-SettingElement"
     };
 
     private readonly List<string> ReportingViewer211ElementsToHide = new List<string>
@@ -4523,7 +4551,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
 
     private readonly List<string> HealthcareFormManager221ElementsToHide = new List<string>
     {
-
+        "Allowed-Domain-SectionElement"
     };
 
     private readonly List<string> PatientWindow221ElementsToHide = new List<string>
@@ -4541,7 +4569,8 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
 
     private readonly List<string> PublicAccessNextGen221ElementsToHide = new List<string>
     {
-        "Always-Wildcard-Alphanumeric-Keywords"
+        "Always-Wildcard-Alphanumeric-Keywords-SettingElement",
+        "Allow-NT-Authentication-On-Forwarding-SettingElement"
     };
 
     private readonly List<string> ReportingViewer221ElementsToHide = new List<string>
@@ -4607,7 +4636,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
 
     private readonly List<string> HealthcareFormManager231ElementsToHide = new List<string>
     {
-
+        "Allowed-Domain-SectionElement"
     };
 
     private readonly List<string> PatientWindow231ElementsToHide = new List<string>
@@ -4617,7 +4646,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
 
     private readonly List<string> PublicAccessNextGen231ElementsToHide = new List<string>
     {
-
+        "Allow-NT-Authentication-On-Forwarding-SettingElement"
     };
 
     private readonly List<string> ReportingViewer231ElementsToHide = new List<string>
@@ -4675,7 +4704,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
 
     private readonly List<string> HealthcareFormManager241ElementsToHide = new List<string>
     {
-
+        "Allowed-Domain-SectionElement"
     };
 
     private readonly List<string> PatientWindow241ElementsToHide = new List<string>
@@ -4685,7 +4714,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
 
     private readonly List<string> PublicAccessNextGen241ElementsToHide = new List<string>
     {
-
+        "Allow-NT-Authentication-On-Forwarding-SettingElement"
     };
 
     private readonly List<string> ReportingViewer241ElementsToHide = new List<string>
@@ -4836,9 +4865,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         "system.diagnostics",
         "ADFS",
         "CustomValidation",
-        "NavigationPanel",
-        "Healthcare Web Viewer Origin URL",
-        "Keyword Dropdown Typeahead"
+        "NavigationPanel"
     };
 
     /* Version 22.1 Arrays */
@@ -4938,9 +4965,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         "system.diagnostics",
         "ADFS",
         "CustomValidation",
-        "NavigationPanel",
-        "Healthcare Web Viewer Origin URL",
-        "Keyword Dropdown Typeahead"
+        "NavigationPanel"
     };
 
     /* Version 23.1 Arrays */
@@ -4967,7 +4992,6 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         "Hyland.Core.FullText",
         "Hyland.WorkView.Core",
         "root",
-        "Hyland.Core.Wopi",
         "Hyland.Integrations.LOBBroker.LOBBRokerConfigSection",
         "Hyland.Authentication",
         "Hyland.Authentication-TrustedClients"
@@ -5040,9 +5064,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         "system.diagnostics",
         "ADFS",
         "CustomValidation",
-        "NavigationPanel",
-        "Healthcare Web Viewer Origin URL",
-        "Keyword Dropdown Typeahead"
+        "NavigationPanel"
     };
 
     /* Version 24.1 Arrays */
@@ -5069,7 +5091,6 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         "Hyland.Core.FullText",
         "Hyland.WorkView.Core",
         "root",
-        "Hyland.Core.Wopi",
         "Hyland.Integrations.LOBBroker.LOBBRokerConfigSection",
         "Hyland.Authentication",
         "Hyland.Authentication-TrustedClients"
@@ -5133,9 +5154,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         "system.diagnostics",
         "ADFS",
         "CustomValidation",
-        "NavigationPanel",
-        "Healthcare Web Viewer Origin URL",
-        "Keyword Dropdown Typeahead"
+        "NavigationPanel"
     };
 
 
@@ -5298,7 +5317,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         }
         else
         {
-            throw new KeyNotFoundException($"No dictionary found with the key {type.Replace(" ", "").Replace("-", "") + "LoginPages"}");
+            throw new KeyNotFoundException($"No dictionary found with the key {type.Replace(" ", "").Replace("-", "") + version + "LoginPages"}");
         }
     }
 
@@ -5375,7 +5394,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         }
         else
         {
-            throw new KeyNotFoundException($"No dictionary found with the key {type.Replace(" ", "").Replace("-", "") + "ElementsToHide"}");
+            throw new KeyNotFoundException($"No dictionary found with the key {type.Replace(" ", "").Replace("-", "") + version + "ElementsToHide"}");
         }
     }
 
@@ -5383,14 +5402,14 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
     {
         Dictionary<string, List<string>> elements = new Dictionary<string, List<string>>
         {
-            { "AgendaOnline211ElementsToSave", ApplicationServer211ElementsToSave },
+            { "AgendaOnline211ElementsToSave", AgendaOnline211ElementsToSave },
             { "ApplicationServer211ElementsToSave", ApplicationServer211ElementsToSave },
             { "ElectronicPlanReview211ElementsToSave", ElectronicPlanReview211ElementsToSave },
             { "GatewayCachingServer211ElementsToSave", GatewayCachingServer211ElementsToSave },
             { "HealthcareFormManager211ElementsToSave", HealthcareFormManager211ElementsToSave },
             { "PatientWindow211ElementsToSave", PatientWindow211ElementsToSave },
-            { "PublicAccessViewerLegacy211ElementsToSave", PublicAccessViewerLegacy211ElementsToSave },
-            { "PublicAccessViewerNextGen211ElementsToSave", PublicAccessViewerNextGen211ElementsToSave },
+            { "PublicAccessLegacy211ElementsToSave", PublicAccessViewerLegacy211ElementsToSave },
+            { "PublicAccessNextGen211ElementsToSave", PublicAccessViewerNextGen211ElementsToSave },
             { "ReportingViewer211ElementsToSave", ReportingViewer211ElementsToSave },
             { "WebServer211ElementsToSave", WebServer211ElementsToSave },
             { "AgendaOnline221ElementsToSave", AgendaOnline221ElementsToSave },
@@ -5399,7 +5418,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             { "GatewayCachingServer221ElementsToSave", GatewayCachingServer221ElementsToSave },
             { "HealthcareFormManager221ElementsToSave", HealthcareFormManager221ElementsToSave },
             { "PatientWindow221ElementsToSave", PatientWindow221ElementsToSave },
-            { "PublicAccessViewerNextGen221ElementsToSave", PublicAccessViewerNextGen221ElementsToSave },
+            { "PublicAccessNextGen221ElementsToSave", PublicAccessViewerNextGen221ElementsToSave },
             { "ReportingViewer221ElementsToSave", ReportingViewer221ElementsToSave },
             { "WebServer221ElementsToSave", WebServer221ElementsToSave },
             { "AgendaOnline231ElementsToSave", AgendaOnline231ElementsToSave },
@@ -5408,7 +5427,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             { "GatewayCachingServer231ElementsToSave", GatewayCachingServer231ElementsToSave },
             { "HealthcareFormManager231ElementsToSave", HealthcareFormManager231ElementsToSave },
             { "PatientWindow231ElementsToSave", PatientWindow231ElementsToSave },
-            { "PublicAccessViewerNextGen231ElementsToSave", PublicAccessViewerNextGen231ElementsToSave },
+            { "PublicAccessNextGen231ElementsToSave", PublicAccessViewerNextGen231ElementsToSave },
             { "ReportingViewer231ElementsToSave", ReportingViewer231ElementsToSave },
             { "WebServer231ElementsToSave", WebServer231ElementsToSave },
             { "AgendaOnline241ElementsToSave", AgendaOnline241ElementsToSave },
@@ -5416,19 +5435,18 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             { "ElectronicPlanReview241ElementsToSave", ElectronicPlanReview241ElementsToSave },
             { "HealthcareFormManager241ElementsToSave", HealthcareFormManager241ElementsToSave },
             { "PatientWindow241ElementsToSave", PatientWindow241ElementsToSave },
-            { "PublicAccessViewerNextGen241ElementsToSave", PublicAccessViewerNextGen241ElementsToSave },
+            { "PublicAccessNextGen241ElementsToSave", PublicAccessViewerNextGen241ElementsToSave },
             { "ReportingViewer241ElementsToSave", ReportingViewer241ElementsToSave },
             { "WebServer241ElementsToSave", WebServer241ElementsToSave }
-
         };
 
-        if (elements.TryGetValue(type.Replace(" ", "").Replace("-", "") + version + "ElementsToHide", out var result))
+        if (elements.TryGetValue(type.Replace(" ", "").Replace("-", "") + version + "ElementsToSave", out var result))
         {
             return result;
         }
         else
         {
-            throw new KeyNotFoundException($"No dictionary found with the key {type.Replace(" ", "").Replace("-", "") + "ElementsToHide"}");
+            throw new KeyNotFoundException($"No dictionary found with the key {type.Replace(" ", "").Replace("-", "") + version + "ElementsToSave"}");
         }
     }
 }
