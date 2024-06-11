@@ -131,3 +131,9 @@ function validateRequiredAgendaFieldsInputForAdd() {
         setAddButtonDisabled(true);
     }
 }
+
+
+/********************************************************
+ *         Agenda Online Integrations Functions
+ ********************************************************/
+function 

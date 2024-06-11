@@ -188,8 +188,130 @@
         </div>
     </div>
 </div>
-<div id="PublicCommentIntegrationSection" class="tabcontent">
-    <div class="row">
+<div id="PublicCommentIntegrationsSection" class="tabcontent">
+    <div style="display:flex; justify-content:space-between;">
+        <div class="column" style="width:30%; padding:0;">
+            <select id="PublicCommentIntegrations-SelectList" size="30" onchange="" style="width: 100%;">
+            </select>
+            <div style="display: flex;justify-content: space-around;padding-top: 5px;">
+                <button onclick="" type="button">Add</button>
+                <button onclick="" type="button">Copy</button>
+                <button onclick="" type="button">Delete</button>
+            </div>
+        </div>
+        <div class="column" style="width:65%;padding:0;">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Integration-Name">Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="text" name="Integration-Name" id="Integration-Name">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Integration-URL">URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="url" name="Integration-URL" id="Integration-URL">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Integration-Token">Token: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="text" name="Integration-Token" id="Integration-Token">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Availability-From-Meeting-Start">Availability From Meeting Start: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" name="Availability-From-Meeting-Start" id="Availability-From-Meeting-Start">
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Agenda Unity Form Fields
+                </div>
+                <div class="coreSection">
+                    <div class="row">
+                        <div class="column">
+                            <div style="display: flex; justify-content: center;margin: 1rem 0 1rem 0;">
+                                <select class="" name="Form-Field-Select-List" id="Form-Field-Select-List" size="8" style="max-width:90%;min-width:50%" onchange="formFieldSelected(this)">
+                                </select>
+                            </div>
+                            <div style="display: flex; justify-content: center;">
+                                <div style="display: flex; width: 40%; justify-content: space-around;">
+                                    <button id="FormFieldSelectList-AddButton" onclick="" disabled>Add</button>
+                                    <button id="FormFieldSelectList-DeleteButton" onclick="" disabled>Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="settingElement">
+                                <div class="labelElement">
+                                    <label for="Form-Field-Name">Field Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                    <span class="tooltiptext">This is the help text.</span>
+                                </div>
+                                <div class="inputElement">
+                                    <input type="text" name="Form-Field-Name" id="Form-Field-Name" readonly>
+                                </div>
+                            </div>
+                            <div class="settingElement">
+                                <div class="labelElement">
+                                    <label for="Form-Field-ID">Form Field ID: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                    <span class="tooltiptext">This is the help text.</span>
+                                </div>
+                                <div class="inputElement">
+                                    <input type="text" name="Form-Field-ID" id="Form-Field-ID">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Meeting Types
+                </div>
+                <div class="coreSection">
+                    <div class="row">
+                        <div class="column">
+                            <div style="display: flex; justify-content: center;margin: 1rem 0 1rem 0;">
+                                <select class="" name="Meeting-Type-Name-Select-List" id="Meeting-Type-Name-Select-List" size="8" style="max-width:90%;min-width:50%" onchange="">
+                                </select>
+                            </div>
+                            <div style="display: flex; justify-content: center;">
+                                <div style="display: flex; width: 40%; justify-content: space-around;">
+                                    <button id="Meeting-Type-Name-Select-List-AddButton" onclick="" disabled>Add</button>
+                                    <button id="Meeting-Type-Name-Select-List-DeleteButton" onclick="" disabled>Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="settingElement">
+                                <div class="labelElement">
+                                    <label for="Meeting-Type-Name">Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                    <span class="tooltiptext">This is the help text.</span>
+                                </div>
+                                <div class="inputElement">
+                                    <input type="text" name="Meeting-Type-Name" id="Meeting-Type-Name">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* <div class="row">
         <div class="column">
             <div class="sectionWithTitleBar">
                 <div class="titleBar" name="Title-Bar">
@@ -239,7 +361,6 @@
                     Meeting Type(s)
                 </div>
                 <div class="coreSection">
-                    @* TODO: Need to convert this a select list and all due to the potential of having multiple names if valid to do so. *@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Meeting-Type-Name">Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
@@ -289,7 +410,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> *@
 </div>
 
 
@@ -304,7 +425,7 @@
                 <ul>
                     <li><a id="AgendaOnlineLink" href="javascript:openSection('AgendaOnline')">Agenda Online</a></li>
                     <li><a id="DiagnosticsSettingsLink" href="javascript:openSection('DiagnosticsSettings')">Diagnostics Settings</a></li>
-                    <li><a id="PublicCommentIntegrationLink" href="javascript:openSection('PublicCommentIntegration')">Public Comment Integration</a></li>
+                    <li><a id="PublicCommentIntegrationsLink" href="javascript:openSection('PublicCommentIntegrations')">Public Comment Integrations</a></li>
                     <li><a id="SettingsLink" href="javascript:openSection('Settings')">Settings</a></li>
                 </ul>
             </div>

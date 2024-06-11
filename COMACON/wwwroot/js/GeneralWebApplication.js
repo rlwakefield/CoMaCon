@@ -104,10 +104,13 @@ let diskGroupAliases = [];
 let NavigationPanelContexts = [];
 let NavigationPanelContextsIdNumber = 1;
 
-/* Keyword Drop Down Type Ahead Character Minimums Variabels */
+/* Keyword Drop Down Type Ahead Character Minimums Variables */
 let keywordTypeAheadArray = [];
 let keywordTypeAheadIdNumber = 0;
 
+/* Agenda Online Public Comment Integrations Variables */
+let AgendaOnlineIntegrations = [];
+let AgendaOnlineIntegrationsIdNumber = 0;
 
 
 /********************************************************
@@ -1238,6 +1241,10 @@ async function parseData(config) {
     await parseElementsToHide(config["elementsToHide"]);
 
     switch (config["Type"]) {
+        case "Agenda Online":
+            //await parseHylandApplicationsAgendaPubAccessPublicComment(config["hylandApplicationsAgendaPubAccessPublicComment"]);
+            await parseHylandApplicationsAgendaPubAccessPublicCommentIntegrations(config);
+            break;
         case "Application Server":
             await parseADFS(config["hylandAuthenticationADFS"]);
             await parseConnectionStrings(config["connectionStrings"]);
@@ -1245,9 +1252,6 @@ async function parseData(config) {
             await parseHylandPlatterManagement(config["hylandPlatterManagement"]);
             await parseWindowsAuthOptimization(config["WindowsAuthOptimizeFor"]);
             await parseSessionAdministration(config["sessionAdministration"]);
-            break;
-        case "Agenda Online":
-            await parseHylandApplicationsAgendaPubAccessPublicComment(config["hylandApplicationsAgendaPubAccessPublicComment"]);
             break;
         case "Electronic Plan Review":
             await prepareAndSetDefaultTimeZoneOptions();
@@ -1543,6 +1547,21 @@ async function parseHylandApplicationsAgendaPubAccessPublicComment(config) {
         newFieldDropDownOption.value = AgendaOnlineAgendaFields[i]["Name"];
         newFieldDropDownOption.text = AgendaOnlineAgendaFields[i]["Name"];
         selectListFieldsDropDown.append(newFieldDropDownOption);
+    }
+}
+
+async function parseHylandApplicationsAgendaPubAccessPublicCommentIntegrations(config) {
+    AgendaOnlineIntegrations = config["publicCommentIntegrations"];
+
+    if (AgendaOnlineIntegrations.length > 0) {
+        for (let i = 0; i < AgendaOnlineIntegrations.length; i++) {
+            let opt = document.createElement("option");
+            opt.value = "AgendaOnlineIntegration" + AgendaOnlineIntegrationsIdNumber;
+            opt.innerText = AgendaOnlineIntegrations[i].Name;
+            document.getElementById("PublicCommentIntegrations-SelectList").append(opt);
+            AgendaOnlineIntegrations[i].id = "AgendaOnlineIntegration" + AgendaOnlineIntegrationsIdNumber;
+            AgendaOnlineIntegrationsIdNumber++;
+        }
     }
 }
 

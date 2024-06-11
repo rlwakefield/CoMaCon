@@ -1271,8 +1271,9 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                 ParseAppSettingsKeysV2(ds, node, sect, xmlDocument);
                 break;
             case "Hyland.Applications.AgendaPubAccess.PublicComment":
-                ParseSpecificKeys(ds, node, sect);
-                ParseHylandApplicationsAgendaPubAccessPublicCommentExtraKeys(ds, node, sect);
+                //ParseSpecificKeys(ds, node, sect);
+                //ParseHylandApplicationsAgendaPubAccessPublicCommentExtraKeys(ds, node, sect);
+                ParseHylandApplicationsAgendaPubAccessPublicComment(ds, node, sect);
                 break;
             case "Hyland.Logging":
                 ParseHylandLogging(ds, node, wads);
@@ -2364,6 +2365,74 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                 }
             }
             ds.hylandApplicationsAgendaPubAccessPublicComment = h;
+        }
+        catch (Exception e)
+        {
+            Log.Logger.Warning(e.Message);
+            Log.Logger.Warning(e.StackTrace);
+            Log.Logger.Warning("Error processing Hyland.Applications.AgendaPubAccessPublicComment keys.");
+        }
+    }
+
+    private void ParseHylandApplicationsAgendaPubAccessPublicComment(webApplicationWebConfigConfiguration ds, XmlNode node, string sect)
+    {
+        try
+        {
+            XmlNodeList integrations = node.SelectNodes("integrations/integration");
+
+            foreach(XmlNode n in integrations)
+            {
+                HylandApplicationsAgendaPubAccessPublicComment h = new HylandApplicationsAgendaPubAccessPublicComment();
+                h.Name = n.Attributes["name"].Value;
+                h.URL = n.Attributes["url"].Value;
+                h.Token = n.Attributes["token"].Value;
+                h.AvailabilityFromMeetingStart = n.Attributes["AvailabilityFromMeetingStart"].Value;
+
+                foreach (XmlNode n1 in node.SelectSingleNode("integrations/integration/agenda_fields"))
+                {
+                    if (n1.Name == "field")
+                    {
+                        AgendaField af = new AgendaField();
+                        af.Name = n1.Attributes["name"].Value;
+                        af.FormFieldID = n1.Attributes["form_field_id"].Value;
+                        h.agendaFields.Add(af);
+                    }
+                }
+
+                foreach (XmlNode n2 in node.SelectSingleNode("integrations/integration/meeting_types"))
+                {
+                    if (n2.Name == "meeting_type")
+                    {
+                        MeetingType mt = new MeetingType();
+                        mt.Name = n2.Attributes["name"].Value;
+                        h.meetingTypes.Add(mt);
+                    }
+                }
+
+                ds.publicCommentIntegrations.Add(h);
+            }
+
+            //foreach (XmlNode n in node.SelectSingleNode("integrations/integration/meeting_types"))
+            //{
+            //    if (n.Name == "meeting_type")
+            //    {
+            //        MeetingType mt = new MeetingType();
+            //        mt.Name = n.Attributes["name"].Value;
+            //        h.meetingTypes.Add(mt);
+            //    }
+            //}
+
+            //foreach (XmlNode n1 in node.SelectSingleNode("integrations/integration/agenda_fields"))
+            //{
+            //    if (n1.Name == "field")
+            //    {
+            //        AgendaField af = new AgendaField();
+            //        af.Name = n1.Attributes["name"].Value;
+            //        af.FormFieldID = n1.Attributes["form_field_id"].Value;
+            //        h.agendaFields.Add(af);
+            //    }
+            //}
+            //ds.hylandApplicationsAgendaPubAccessPublicComment = h;
         }
         catch (Exception e)
         {
