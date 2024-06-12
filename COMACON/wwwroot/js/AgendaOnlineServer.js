@@ -152,6 +152,7 @@ function integrationSelected(selection) {
 }
 
 async function setIntegrationFields(integration) {
+    await resetAllIntegrationFields();
     document.getElementById("Integration-Name").value = integration.Name;
     document.getElementById("Integration-URL").value = integration.URL;
     document.getElementById("Integration-Token").value = integration.Token;
@@ -165,7 +166,7 @@ async function setIntegrationFields(integration) {
 }
 
 async function setAgendaUnityFormFieldsSelectList(AgendaOnlineAgendaFields) {
-    console.log(AgendaOnlineAgendaFields);
+    //console.log(AgendaOnlineAgendaFields);
     let selectListFieldsDropDown = document.getElementById("Form-Field-Select-List");
     for (let i = 0; i < AgendaOnlineAgendaFields.length; i++) {
         let newFieldDropDownOption = document.createElement("option");
@@ -221,10 +222,8 @@ function unityFormFieldSelected(fieldSelected) {
     document.getElementById("Form-Field-ID").value = formFieldObject.FormFieldID;
     
     if (AgendaOnlineIntegrationsRequiredMeetingTypes.includes(formFieldObject.Name)) {
-        console.log("Field in array");
         disableAllAgendaOnlineIntegrationsFields(["Form-Field-ID"], false);
     } else {
-        console.log("Field not in array");
         disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsMeetingTypesFieldIds, false);
     }
 }
@@ -242,7 +241,7 @@ async function addNewIntegration() {
     //console.log(newIntegrationObject);
     await resetAllIntegrationFields();
     setIntegrationFields(newIntegrationObject);
-    console.log(AgendaOnlineIntegrations);
+    //console.log(AgendaOnlineIntegrations);
 }
 
 function deleteIntegration() {
@@ -262,6 +261,20 @@ function deleteIntegration() {
     setAgendaOnlineIntegrationsButtons(["PublicCommentIntegrations-CopyButton", "PublicCommentIntegrations-DeleteButton"], true);
     setAgendaOnlineIntegrationsUnityFormsFieldsButtons(["FormFieldSelectList-AddButton"], true);
     setAgendaOnlineIntegrationsMeetingTypesButtons(["Meeting-Type-Name-Select-List-AddButton"], true);
+}
+
+function copyIntegration() {
+    let currentlySelectedObject = structuredClone(AgendaOnlineIntegrations.find(item => item.id === document.getElementById("PublicCommentIntegrations-SelectList").value));
+    console.log(currentlySelectedObject);
+    currentlySelectedObject.id = "AgendaOnlineIntegrations" + AgendaOnlineIntegrationsIdNumber;
+    AgendaOnlineIntegrationsIdNumber++;
+    AgendaOnlineIntegrations.push(currentlySelectedObject);
+    console.log(AgendaOnlineIntegrations);
+    let newIntegrationOption = document.createElement("option");
+    newIntegrationOption.value = currentlySelectedObject.id;
+    newIntegrationOption.text = currentlySelectedObject.Name;
+    document.getElementById("PublicCommentIntegrations-SelectList").append(newIntegrationOption);
+    document.getElementById("PublicCommentIntegrations-SelectList").selectedIndex = document.getElementById("PublicCommentIntegrations-SelectList").length - 1;
 }
 
 async function resetAllIntegrationFields() {
