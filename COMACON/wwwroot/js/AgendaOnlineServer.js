@@ -1,5 +1,10 @@
 ﻿let AgendaOnlineAgendaFields = [];
-
+let AgendaOnlineIntegrations = [];
+let AgendaOnlineIntegrationsIdNumber = 0;
+let AgendaOnlineIntegrationsAllFieldIds = ["Integration-Name", "Integration-URL", "Integration-Token", "Availability-From-Meeting-Start", "Form-Field-Name", "Form-Field-Name", "Form-Field-ID", "Meeting-Type-Name"];
+let AgendaOnlineIntegrationsCoreFieldIds = ["Integration-Name", "Integration-URL", "Integration-Token", "Availability-From-Meeting-Start"];
+let AgendaOnlineIntegrationsUnityFormsFieldIds = ["Form-Field-Name", "Form-Field-ID"];
+let AgendaOnlineIntegrationsMeetingTypesFieldIds = ["Meeting-Type-Name"];
 
 /********************************************************
  *              Agenda Form Field Functions
@@ -136,4 +141,54 @@ function validateRequiredAgendaFieldsInputForAdd() {
 /********************************************************
  *         Agenda Online Integrations Functions
  ********************************************************/
-function 
+function integrationSelected(selection) {
+    let objectFound = AgendaOnlineIntegrations.find(item => item.id === selection.value);
+    console.log(objectFound);
+
+    setIntegrationFields(objectFound);
+    setAgendaOnlineIntegrationsButtons("PublicCommentIntegrations-CopyButton", true);
+    setAgendaOnlineIntegrationsButtons("PublicCommentIntegrations-DeleteButton", true);
+}
+
+async function setIntegrationFields(integration) {
+    document.getElementById("Integration-Name").value = integration.Name;
+    document.getElementById("Integration-URL").value = integration.URL;
+    document.getElementById("Integration-Token").value = integration.Token;
+    document.getElementById("Availability-From-Meeting-Start").value = integration.AvailabilityFromMeetingStart;
+    await setAgendaUnityFormFieldsSelectList(integration.agendaUnityFormFields);
+    await setMeetingTypesSelectList(integration.meetingTypes);
+    await disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsCoreFieldIds,false);
+}
+
+async function setAgendaUnityFormFieldsSelectList(AgendaOnlineAgendaFields) {
+    console.log(AgendaOnlineAgendaFields);
+    let selectListFieldsDropDown = document.getElementById("Form-Field-Select-List");
+    for (let i = 0; i < AgendaOnlineAgendaFields.length; i++) {
+        let newFieldDropDownOption = document.createElement("option");
+        newFieldDropDownOption.value = AgendaOnlineAgendaFields[i]["Name"];
+        newFieldDropDownOption.text = AgendaOnlineAgendaFields[i]["Name"];
+        selectListFieldsDropDown.append(newFieldDropDownOption);
+    }
+}
+
+async function setMeetingTypesSelectList(meetingTypes) {
+    let meetingTypeNames = "";
+    for (let i = 0; i < meetingTypes.length; i++) {
+        if (i == 0) {
+            meetingTypeNames += meetingTypes[i]["Name"];
+        } else {
+            meetingTypeNames += "," + meetingTypes[i]["Name"];
+        }
+    }
+    document.getElementById("Meeting-Type-Name").value = meetingTypeNames;
+}
+
+async function setAgendaOnlineIntegrationsButtons(buttonId, elementStatus) {
+    document.getElementById(buttonId).disabled = elementStatus;
+}
+
+async function disableAllAgendaOnlineIntegrationsFields(arrayOfFields, status) {
+    arrayOfFields.forEach(element => {
+        document.getElementById(element).disabled = status;
+    });
+}

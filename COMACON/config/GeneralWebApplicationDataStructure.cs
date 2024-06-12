@@ -102,7 +102,7 @@ public class HylandApplicationsAgendaPubAccessPublicComment
     public string? Token { get; set; }
     public string? AvailabilityFromMeetingStart { get; set; }
     public List<MeetingType> meetingTypes = new List<MeetingType>();
-    public List<AgendaField> agendaFields = new List<AgendaField>();
+    public List<AgendaField> agendaUnityFormFields = new List<AgendaField>();
     public string? id { get; set; }
 }
 

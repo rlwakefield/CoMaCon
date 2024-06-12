@@ -108,10 +108,6 @@ let NavigationPanelContextsIdNumber = 1;
 let keywordTypeAheadArray = [];
 let keywordTypeAheadIdNumber = 0;
 
-/* Agenda Online Public Comment Integrations Variables */
-let AgendaOnlineIntegrations = [];
-let AgendaOnlineIntegrationsIdNumber = 0;
-
 
 /********************************************************
  *                  Page Load SCript
@@ -1563,6 +1559,8 @@ async function parseHylandApplicationsAgendaPubAccessPublicCommentIntegrations(c
             AgendaOnlineIntegrationsIdNumber++;
         }
     }
+
+    await disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsAllFieldIds,true);
 }
 
 async function parseHylandLogging(config) {

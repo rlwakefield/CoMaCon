@@ -2361,7 +2361,7 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                     AgendaField af = new AgendaField();
                     af.Name = n1.Attributes["name"].Value;
                     af.FormFieldID = n1.Attributes["form_field_id"].Value;
-                    h.agendaFields.Add(af);
+                    h.agendaUnityFormFields.Add(af);
                 }
             }
             ds.hylandApplicationsAgendaPubAccessPublicComment = h;
@@ -2395,7 +2395,7 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                         AgendaField af = new AgendaField();
                         af.Name = n1.Attributes["name"].Value;
                         af.FormFieldID = n1.Attributes["form_field_id"].Value;
-                        h.agendaFields.Add(af);
+                        h.agendaUnityFormFields.Add(af);
                     }
                 }
 
@@ -3520,7 +3520,7 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
 
             node.SelectSingleNode("integrations/integration/agenda_fields").RemoveAll();
             XmlNode afs = node.SelectSingleNode("integrations/integration/agenda_fields");
-            foreach (AgendaField af in core.hylandApplicationsAgendaPubAccessPublicComment.agendaFields)
+            foreach (AgendaField af in core.hylandApplicationsAgendaPubAccessPublicComment.agendaUnityFormFields)
             {
                 XmlElement ele1 = configurationDocument.CreateElement("field");
                 ele1.SetAttribute("name", af.Name);
