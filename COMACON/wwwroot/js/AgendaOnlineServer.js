@@ -1,13 +1,15 @@
 ﻿let AgendaOnlineAgendaFields = [];
 let AgendaOnlineIntegrations = [];
 let AgendaOnlineIntegrationsIdNumber = 0;
+let AgendaOnlineIntegrationsUnityFormsFieldsIdNumber = 0;
+let AgendaOnlineIntegrationsMeetingTypesIdNumber = 0;
 let AgendaOnlineIntegrationsAllFieldIds = ["Integration-Name", "Integration-URL", "Integration-Token", "Availability-From-Meeting-Start", "Form-Field-Name", "Form-Field-Name", "Form-Field-ID", "Meeting-Type-Name"];
 let AgendaOnlineIntegrationsCoreFieldIds = ["Integration-Name", "Integration-URL", "Integration-Token", "Availability-From-Meeting-Start"];
 let AgendaOnlineIntegrationsUnityFormsFieldIds = ["Form-Field-Name", "Form-Field-ID"];
 let AgendaOnlineIntegrationsMeetingTypesFieldIds = ["Meeting-Type-Name"];
 let AgendaOnlineIntegrationsRequiredMeetingTypes = ["meeting_name", "meeting_date", "item_id", "item_title"];
 let AgendaOnlineIntegrationsNewIntegrationObject = { "meetingTypes": [{ "Name": "" }], "agendaUnityFormFields": [{ "Name": "meeting_name", "FormFieldID": "" }, { "Name": "meeting_date", "FormFieldID": "" }, { "Name": "item_id", "FormFieldID": "" }, { "Name": "item_title", "FormFieldID": "" }], "Name": "[Integration Name]", "URL": "[URL from Unity forms config]", "Token": "[Token from Unity forms config]", "AvailabilityFromMeetingStart": "0", "id": "" };
-let AgendaOnlineIntegrationsNewMeetingTypeObject = { "Name": "[Name]", "FormFieldID": "[Field ID from Unity Form]" };
+let AgendaOnlineIntegrationsNewUnityFormFieldObject = { "Name": "[Name]", "FormFieldID": "[Field ID from Unity Form]" };
 
 /********************************************************
  *              Agenda Form Field Functions
@@ -170,22 +172,30 @@ async function setAgendaUnityFormFieldsSelectList(AgendaOnlineAgendaFields) {
     let selectListFieldsDropDown = document.getElementById("Form-Field-Select-List");
     for (let i = 0; i < AgendaOnlineAgendaFields.length; i++) {
         let newFieldDropDownOption = document.createElement("option");
-        newFieldDropDownOption.value = AgendaOnlineAgendaFields[i]["Name"];
         newFieldDropDownOption.text = AgendaOnlineAgendaFields[i]["Name"];
+        if (AgendaOnlineAgendaFields[i].id == "") {
+            newFieldDropDownOption.value = "AgendaOnlineIntegrationsUnityFormsFields" + AgendaOnlineIntegrationsUnityFormsFieldsIdNumber
+            AgendaOnlineAgendaFields[i].id = "AgendaOnlineIntegrationsUnityFormsFields" + AgendaOnlineIntegrationsUnityFormsFieldsIdNumber;
+        } else {
+            newFieldDropDownOption.value = AgendaOnlineAgendaFields[i].id;
+        }
         selectListFieldsDropDown.append(newFieldDropDownOption);
     }
 }
 
 async function setMeetingTypesSelectList(meetingTypes) {
-    let meetingTypeNames = "";
+    let selectListMeetingTypesDropDown = document.getElementById("Meeting-Type-Name-Select-List");
     for (let i = 0; i < meetingTypes.length; i++) {
-        if (i == 0) {
-            meetingTypeNames += meetingTypes[i]["Name"];
+        let newFieldDropDownOption = document.createElement("option");
+        newFieldDropDownOption.text = meetingTypes[i]["Name"];
+        if (meetingTypes[i].id == "") {
+            newFieldDropDownOption.value = "AgendaOnlineIntegrationsMeetingTypes" + AgendaOnlineIntegrationsMeetingTypesIdNumber;
+            meetingTypes[i].id = "AgendaOnlineIntegrationsMeetingTypes" + AgendaOnlineIntegrationsMeetingTypesIdNumber;
         } else {
-            meetingTypeNames += "," + meetingTypes[i]["Name"];
+            newFieldDropDownOption.value = meetingTypes[i].id;
         }
+        selectListMeetingTypesDropDown.append(newFieldDropDownOption);
     }
-    document.getElementById("Meeting-Type-Name").value = meetingTypeNames;
 }
 
 async function setAgendaOnlineIntegrationsButtons(buttonIdArrays, elementStatus) {
@@ -264,7 +274,7 @@ function deleteIntegration() {
 }
 
 function copyIntegration() {
-    let currentlySelectedObject = structuredClone(AgendaOnlineIntegrations.find(item => item.id === document.getElementById("PublicCommentIntegrations-SelectList").value));
+    let currentlySelectedObject = JSON.parse(JSON.stringify(AgendaOnlineIntegrations.find(item => item.id === document.getElementById("PublicCommentIntegrations-SelectList").value)));
     console.log(currentlySelectedObject);
     currentlySelectedObject.id = "AgendaOnlineIntegrations" + AgendaOnlineIntegrationsIdNumber;
     AgendaOnlineIntegrationsIdNumber++;
@@ -283,4 +293,16 @@ async function resetAllIntegrationFields() {
     });
     document.getElementById("Form-Field-Select-List").innerHTML = "";
     document.getElementById("Meeting-Type-Name-Select-List").innerHTML = "";
+}
+
+function addNewUnityFormField() {
+    let newUnityFormFieldObject = JSON.parse(JSON.stringify(AgendaOnlineIntegrationsNewUnityFormFieldObject));
+    let selectListDropDown = document.getElementById("Form-Field-Select-List");
+    document.getElementById("Form-Field-Name").value = newUnityFormFieldObject.Name;
+    document.getElementById("Form-Field-ID").value = newUnityFormFieldObject.FormFieldID;
+    let newOption = document.createElement("option");
+    newOption.value = newUnityFormFieldObject.Name;
+    newOption.innerText = newUnityFormFieldObject.Name;
+    selectListDropDown.append(newOption);
+    disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsUnityFormsFieldIds, false);
 }

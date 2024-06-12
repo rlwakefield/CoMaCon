@@ -109,12 +109,14 @@ public class HylandApplicationsAgendaPubAccessPublicComment
 public class MeetingType
 {
     public string? Name { get; set; }
+    public string? id { get; set; } = "";
 }
 
 public class AgendaField
 {
     public string? Name { get; set; }
     public string? FormFieldID { get; set; }
+    public string? id { get; set; } = "";
 }
 
 
