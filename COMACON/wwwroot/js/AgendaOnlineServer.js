@@ -161,6 +161,7 @@ async function setIntegrationFields(integration) {
     await disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsCoreFieldIds, false);
     await setAgendaOnlineIntegrationsButtons(["PublicCommentIntegrations-CopyButton", "PublicCommentIntegrations-DeleteButton"], false);
     await setAgendaOnlineIntegrationsUnityFormsFieldsButtons(["FormFieldSelectList-AddButton"], false);
+    await setAgendaOnlineIntegrationsMeetingTypesButtons(["Meeting-Type-Name-Select-List-AddButton"], false);
 }
 
 async function setAgendaUnityFormFieldsSelectList(AgendaOnlineAgendaFields) {
@@ -199,6 +200,12 @@ async function setAgendaOnlineIntegrationsUnityFormsFieldsButtons(buttonIdArrays
     });
 }
 
+async function setAgendaOnlineIntegrationsMeetingTypesButtons(buttonIdArrays, elementStatus) {
+    buttonIdArrays.forEach(element => {
+        document.getElementById(element).disabled = elementStatus;
+    });
+}
+
 async function disableAllAgendaOnlineIntegrationsFields(arrayOfFields, status) {
     arrayOfFields.forEach(element => {
         document.getElementById(element).disabled = status;
@@ -222,7 +229,7 @@ function unityFormFieldSelected(fieldSelected) {
     }
 }
 
-function addNewIntegration() {
+async function addNewIntegration() {
     let newIntegrationObject = JSON.parse(JSON.stringify(AgendaOnlineIntegrationsNewIntegrationObject));
     newIntegrationObject.id = "AgendaOnlineIntegration" + AgendaOnlineIntegrationsIdNumber;
     AgendaOnlineIntegrationsIdNumber++;
@@ -233,6 +240,34 @@ function addNewIntegration() {
     document.getElementById("PublicCommentIntegrations-SelectList").append(newIntegrationOption);
     document.getElementById("PublicCommentIntegrations-SelectList").selectedIndex = document.getElementById("PublicCommentIntegrations-SelectList").length - 1;
     //console.log(newIntegrationObject);
+    await resetAllIntegrationFields();
     setIntegrationFields(newIntegrationObject);
     console.log(AgendaOnlineIntegrations);
+}
+
+function deleteIntegration() {
+    let selectedIntegrationId = document.getElementById("PublicCommentIntegrations-SelectList").value;
+    for (let i = 0; i < AgendaOnlineIntegrations.length; i++) {
+        if (AgendaOnlineIntegrations[i].id == selectedIntegrationId) {
+            AgendaOnlineIntegrations.splice(i, 1);
+        }
+    }
+    //Delete the current selected option from the select list.
+    let selectListDropDown = document.getElementById("PublicCommentIntegrations-SelectList");
+    //let selectedIndex = selectListDropDown.selectedIndex;
+    selectListDropDown.remove(selectListDropDown.selectedIndex);
+    resetAllIntegrationFields();
+    disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsAllFieldIds, true);
+    disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsAllFieldIds, true);
+    setAgendaOnlineIntegrationsButtons(["PublicCommentIntegrations-CopyButton", "PublicCommentIntegrations-DeleteButton"], true);
+    setAgendaOnlineIntegrationsUnityFormsFieldsButtons(["FormFieldSelectList-AddButton"], true);
+    setAgendaOnlineIntegrationsMeetingTypesButtons(["Meeting-Type-Name-Select-List-AddButton"], true);
+}
+
+async function resetAllIntegrationFields() {
+    AgendaOnlineIntegrationsAllFieldIds.forEach(element => {
+        document.getElementById(element).value = "";
+    });
+    document.getElementById("Form-Field-Select-List").innerHTML = "";
+    document.getElementById("Meeting-Type-Name-Select-List").innerHTML = "";
 }
