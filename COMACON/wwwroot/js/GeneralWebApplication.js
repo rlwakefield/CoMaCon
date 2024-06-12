@@ -1560,7 +1560,8 @@ async function parseHylandApplicationsAgendaPubAccessPublicCommentIntegrations(c
         }
     }
 
-    await disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsAllFieldIds,true);
+    await disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsAllFieldIds, true);
+    await setAgendaOnlineIntegrationsButtons(["PublicCommentIntegrations-CopyButton", "PublicCommentIntegrations-DeleteButton"], true);
 }
 
 async function parseHylandLogging(config) {
