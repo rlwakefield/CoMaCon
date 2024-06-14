@@ -317,6 +317,12 @@ async function resetUnityFormFields() {
     });
 }
 
+async function resetMeetingTypesFields() {
+    AgendaOnlineIntegrationsMeetingTypesFieldIds.forEach(element => {
+        document.getElementById(element).value = "";
+    });
+}
+
 function addNewUnityFormField() {
     let currentlySelectedObject = AgendaOnlineIntegrations.find(item => item.id === document.getElementById("PublicCommentIntegrations-SelectList").value);
     let newUnityFormFieldObject = JSON.parse(JSON.stringify(AgendaOnlineIntegrationsNewUnityFormFieldObject));
@@ -372,4 +378,21 @@ function addNewMeetingType() {
     currentlySelectedObject.meetingTypes.push(newMeetingTypeObject);
     document.getElementById("Meeting-Type-Name-Select-List").selectedIndex = document.getElementById("Meeting-Type-Name-Select-List").length - 1;
     setAgendaOnlineIntegrationsMeetingTypesButtons(["Meeting-Type-Name-Select-List-DeleteButton"], false);
+}
+
+function deleteMeetingType() {
+    resetMeetingTypesFields();
+    setAgendaOnlineIntegrationsMeetingTypesButtons(["Meeting-Type-Name-Select-List-DeleteButton"], true);
+    disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsMeetingTypesFieldIds, true);
+    let currentlySelectedObject = AgendaOnlineIntegrations.find(item => item.id === document.getElementById("PublicCommentIntegrations-SelectList").value);
+    let currentMeetingTypeId = document.getElementById("Meeting-Type-Name-Select-List").value;
+    for (let i = 0; i < currentlySelectedObject.meetingTypes.length; i++) {
+        if (currentlySelectedObject.meetingTypes[i].id == currentMeetingTypeId) {
+            currentlySelectedObject.meetingTypes.splice(i, 1);
+        }
+    }
+    console.log(AgendaOnlineIntegrations);
+    //Delete the current selected option from the select list.
+    let selectListDropDown = document.getElementById("Meeting-Type-Name-Select-List");
+    selectListDropDown.remove(selectListDropDown.selectedIndex);
 }
