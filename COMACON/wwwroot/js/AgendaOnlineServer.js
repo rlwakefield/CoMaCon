@@ -149,8 +149,6 @@ function validateRequiredAgendaFieldsInputForAdd() {
  ********************************************************/
 function integrationSelected(selection) {
     let objectFound = AgendaOnlineIntegrations.find(item => item.id === selection.value);
-    //console.log(objectFound);
-
     setIntegrationFields(objectFound);
 }
 
@@ -169,7 +167,7 @@ async function setIntegrationFields(integration) {
 }
 
 async function setAgendaUnityFormFieldsSelectList(AgendaOnlineAgendaFields) {
-    console.log(AgendaOnlineAgendaFields);
+    //console.log(AgendaOnlineAgendaFields);
     let selectListFieldsDropDown = document.getElementById("Form-Field-Select-List");
     for (let i = 0; i < AgendaOnlineAgendaFields.length; i++) {
         let newFieldDropDownOption = document.createElement("option");
@@ -186,7 +184,7 @@ async function setAgendaUnityFormFieldsSelectList(AgendaOnlineAgendaFields) {
 }
 
 async function setMeetingTypesSelectList(meetingTypes) {
-    console.log(meetingTypes);
+    //console.log(meetingTypes);
     let selectListMeetingTypesDropDown = document.getElementById("Meeting-Type-Name-Select-List");
     for (let i = 0; i < meetingTypes.length; i++) {
         let newFieldDropDownOption = document.createElement("option");
@@ -203,7 +201,6 @@ async function setMeetingTypesSelectList(meetingTypes) {
 }
 
 async function setAgendaOnlineIntegrationsButtons(buttonIdArrays, elementStatus) {
-    //document.getElementById(buttonId).disabled = elementStatus;
     buttonIdArrays.forEach(element => {
         document.getElementById(element).disabled = elementStatus;
     });
@@ -228,12 +225,8 @@ async function disableAllAgendaOnlineIntegrationsFields(arrayOfFields, status) {
 }
 
 function unityFormFieldSelected(fieldSelected) {
-    console.log();
-    console.log(fieldSelected.value);
     let objectFound = AgendaOnlineIntegrations.find(item => item.id === document.getElementById("PublicCommentIntegrations-SelectList").value);
-    console.log(objectFound);
     let formFieldObject = (objectFound.agendaUnityFormFields).find(item => item.id === fieldSelected.value);
-    console.log(formFieldObject);
     document.getElementById("Form-Field-Name").value = formFieldObject.Name;
     document.getElementById("Form-Field-ID").value = formFieldObject.FormFieldID;
     
@@ -264,10 +257,8 @@ async function addNewIntegration() {
     newIntegrationOption.text = newIntegrationObject.Name;
     document.getElementById("PublicCommentIntegrations-SelectList").append(newIntegrationOption);
     document.getElementById("PublicCommentIntegrations-SelectList").selectedIndex = document.getElementById("PublicCommentIntegrations-SelectList").length - 1;
-    //console.log(newIntegrationObject);
     await resetAllIntegrationFields();
     setIntegrationFields(newIntegrationObject);
-    //console.log(AgendaOnlineIntegrations);
 }
 
 function deleteIntegration() {
@@ -277,13 +268,10 @@ function deleteIntegration() {
             AgendaOnlineIntegrations.splice(i, 1);
         }
     }
-    //Delete the current selected option from the select list.
     let selectListDropDown = document.getElementById("PublicCommentIntegrations-SelectList");
-    //let selectedIndex = selectListDropDown.selectedIndex;
     selectListDropDown.remove(selectListDropDown.selectedIndex);
     resetAllIntegrationFields();
     disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsAllFieldIds, true);
-    //disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsAllFieldIds, true);
     setAgendaOnlineIntegrationsButtons(["PublicCommentIntegrations-CopyButton", "PublicCommentIntegrations-DeleteButton"], true);
     setAgendaOnlineIntegrationsUnityFormsFieldsButtons(["FormFieldSelectList-AddButton"], true);
     setAgendaOnlineIntegrationsMeetingTypesButtons(["Meeting-Type-Name-Select-List-AddButton"], true);
@@ -291,11 +279,9 @@ function deleteIntegration() {
 
 function copyIntegration() {
     let currentlySelectedObject = JSON.parse(JSON.stringify(AgendaOnlineIntegrations.find(item => item.id === document.getElementById("PublicCommentIntegrations-SelectList").value)));
-    console.log(currentlySelectedObject);
     currentlySelectedObject.id = "AgendaOnlineIntegrations" + AgendaOnlineIntegrationsIdNumber;
     AgendaOnlineIntegrationsIdNumber++;
     AgendaOnlineIntegrations.push(currentlySelectedObject);
-    console.log(AgendaOnlineIntegrations);
     let newIntegrationOption = document.createElement("option");
     newIntegrationOption.value = currentlySelectedObject.id;
     newIntegrationOption.text = currentlySelectedObject.Name;
@@ -352,12 +338,6 @@ function deleteUnityFormField() {
             currentlySelectedObject.agendaUnityFormFields.splice(i, 1);
         }
     }
-    //(currentlySelectedObject.agendaUnityFormFields).forEach(element => {
-    //    if (element.id == document.getElementById("Form-Field-Select-List").value) {
-    //        currentlySelectedObject.splice(element, 1);
-    //    }
-    //});
-    console.log(AgendaOnlineIntegrations);
     //Delete the current selected option from the select list.
     let selectListDropDown = document.getElementById("Form-Field-Select-List");
     selectListDropDown.remove(selectListDropDown.selectedIndex);
@@ -391,8 +371,54 @@ function deleteMeetingType() {
             currentlySelectedObject.meetingTypes.splice(i, 1);
         }
     }
-    console.log(AgendaOnlineIntegrations);
     //Delete the current selected option from the select list.
     let selectListDropDown = document.getElementById("Meeting-Type-Name-Select-List");
     selectListDropDown.remove(selectListDropDown.selectedIndex);
+}
+
+function integrationfieldUpdated(field) {
+    let currentlySelectedObject = AgendaOnlineIntegrations.find(item => item.id === document.getElementById("PublicCommentIntegrations-SelectList").value);
+    switch (field.id) {
+        case "Integration-Name":
+            //Update the name of the integration in the object.
+            currentlySelectedObject.Name = field.value;
+            //Update the name of the integration in the select list.
+            document.getElementById("PublicCommentIntegrations-SelectList").options[document.getElementById("PublicCommentIntegrations-SelectList").selectedIndex].text = field.value;
+            break;
+        case "Integration-URL":
+            //Update the URL of the integration in the object.
+            currentlySelectedObject.URL = field.value;
+            break;
+        case "Integration-Token":
+            //Update the Token of the integration in the object.
+            currentlySelectedObject.Token = field.value;
+            break;
+        case "Availability-From-Meeting-Start":
+            //Update the Availability From Meeting Start of the integration in the object.
+            currentlySelectedObject.AvailabilityFromMeetingStart = field.value;
+            break;
+        case "Form-Field-Name":
+            //Get the currently selected object from the Unity Form Fields array of the currently selected object.
+            let unityFormFieldObject = (currentlySelectedObject.agendaUnityFormFields).find(item => item.id === document.getElementById("Form-Field-Select-List").value);
+            //Update the name of the Unity Form Field in the object.
+            unityFormFieldObject.Name = field.value;
+            //Update the name of the Unity Form Field in the select list.
+            document.getElementById("Form-Field-Select-List").options[document.getElementById("Form-Field-Select-List").selectedIndex].text = field.value;
+            break;
+        case "Form-Field-ID":
+            //Get the currently selected object from the Unity Form Fields array of the currently selected object.
+            let unityFormFieldObjectID = (currentlySelectedObject.agendaUnityFormFields).find(item => item.id === document.getElementById("Form-Field-Select-List").value);
+            //Update the ID of the Unity Form Field in the object.
+            unityFormFieldObjectID.FormFieldID = field.value;
+            break;
+        case "Meeting-Type-Name":
+            //Get the currently selected object from the Meeting Types array of the currently selected object.
+            let meetingTypeObject = (currentlySelectedObject.meetingTypes).find(item => item.id === document.getElementById("Meeting-Type-Name-Select-List").value);
+            //Update the name of the Meeting Type in the object.
+            meetingTypeObject.Name = field.value;
+            //Update the name of the Meeting Type in the select list.
+            document.getElementById("Meeting-Type-Name-Select-List").options[document.getElementById("Meeting-Type-Name-Select-List").selectedIndex].text = field.value;
+            break;
+    }
+    console.log(AgendaOnlineIntegrations);
 }
