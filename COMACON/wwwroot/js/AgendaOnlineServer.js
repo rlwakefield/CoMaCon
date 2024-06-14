@@ -247,6 +247,13 @@ function unityFormFieldSelected(fieldSelected) {
     }
 }
 
+function meetingtypeSelected(meetingTypeSelected) {
+    let objectFound = AgendaOnlineIntegrations.find(item => item.id === document.getElementById("PublicCommentIntegrations-SelectList").value);
+    let meetingTypeObject = (objectFound.meetingTypes).find(item => item.id === meetingTypeSelected.value);
+    document.getElementById("Meeting-Type-Name").value = meetingTypeObject.Name;
+    disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsMeetingTypesFieldIds, false);
+}
+
 async function addNewIntegration() {
     let newIntegrationObject = JSON.parse(JSON.stringify(AgendaOnlineIntegrationsNewIntegrationObject));
     newIntegrationObject.id = "AgendaOnlineIntegration" + AgendaOnlineIntegrationsIdNumber;
@@ -364,4 +371,5 @@ function addNewMeetingType() {
     disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsMeetingTypesFieldIds, false);
     currentlySelectedObject.meetingTypes.push(newMeetingTypeObject);
     document.getElementById("Meeting-Type-Name-Select-List").selectedIndex = document.getElementById("Meeting-Type-Name-Select-List").length - 1;
+    setAgendaOnlineIntegrationsMeetingTypesButtons(["Meeting-Type-Name-Select-List-DeleteButton"], false);
 }
