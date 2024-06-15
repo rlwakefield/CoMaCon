@@ -178,6 +178,8 @@ async function setAgendaUnityFormFieldsSelectList(AgendaOnlineAgendaFields) {
         } else {
             newFieldDropDownOption.value = AgendaOnlineAgendaFields[i].id;
         }
+        newFieldDropDownOption.classList.add("unityFormFieldOption");
+        newFieldDropDownOption.setAttributeNode(document.createAttribute("error-text-to-append"));
         AgendaOnlineIntegrationsUnityFormsFieldsIdNumber++;
         selectListFieldsDropDown.append(newFieldDropDownOption);
     }
@@ -195,6 +197,8 @@ async function setMeetingTypesSelectList(meetingTypes) {
         } else {
             newFieldDropDownOption.value = meetingTypes[i].id;
         }
+        newFieldDropDownOption.classList.add("meetingTypeOption");
+        newFieldDropDownOption.setAttributeNode(document.createAttribute("error-text-to-append"));
         AgendaOnlineIntegrationsMeetingTypesIdNumber++;
         selectListMeetingTypesDropDown.append(newFieldDropDownOption);
     }
@@ -319,6 +323,8 @@ function addNewUnityFormField() {
     document.getElementById("Form-Field-ID").value = newUnityFormFieldObject.FormFieldID;
     let newOption = document.createElement("option");
     newOption.value = newUnityFormFieldObject.id;
+    newOption.classList.add("unityFormFieldOption");
+    newOption.setAttributeNode(document.createAttribute("error-text-to-append"));
     newOption.innerText = newUnityFormFieldObject.Name;
     selectListDropDown.append(newOption);
     disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsUnityFormsFieldIds, false);
@@ -353,11 +359,15 @@ function addNewMeetingType() {
     let newOption = document.createElement("option");
     newOption.value = newMeetingTypeObject.id;
     newOption.innerText = newMeetingTypeObject.Name;
+    newOption.classList.add("meetingTypeOption");
+    newOption.setAttributeNode(document.createAttribute("error-text-to-append"));
     selectListDropDown.append(newOption);
     disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsMeetingTypesFieldIds, false);
     currentlySelectedObject.meetingTypes.push(newMeetingTypeObject);
     document.getElementById("Meeting-Type-Name-Select-List").selectedIndex = document.getElementById("Meeting-Type-Name-Select-List").length - 1;
     setAgendaOnlineIntegrationsMeetingTypesButtons(["Meeting-Type-Name-Select-List-DeleteButton"], false);
+    //checkForDuplicateMeetingTypes(currentlySelectedObject, newMeetingTypeObject, newMeetingTypeObject.Name);
+    checkForDuplicateMeetingTypesV2(currentlySelectedObject)
 }
 
 function deleteMeetingType() {
@@ -369,11 +379,13 @@ function deleteMeetingType() {
     for (let i = 0; i < currentlySelectedObject.meetingTypes.length; i++) {
         if (currentlySelectedObject.meetingTypes[i].id == currentMeetingTypeId) {
             currentlySelectedObject.meetingTypes.splice(i, 1);
+            checkForDuplicateMeetingTypes(currentlySelectedObject, currentlySelectedObject.meetingTypes[i], "");
         }
     }
     //Delete the current selected option from the select list.
     let selectListDropDown = document.getElementById("Meeting-Type-Name-Select-List");
     selectListDropDown.remove(selectListDropDown.selectedIndex);
+    checkForDuplicateMeetingTypesV2(currentlySelectedObject);
 }
 
 function integrationfieldUpdated(field) {
@@ -418,7 +430,70 @@ function integrationfieldUpdated(field) {
             meetingTypeObject.Name = field.value;
             //Update the name of the Meeting Type in the select list.
             document.getElementById("Meeting-Type-Name-Select-List").options[document.getElementById("Meeting-Type-Name-Select-List").selectedIndex].text = field.value;
+            //checkForDuplicateMeetingTypes(currentlySelectedObject, meetingTypeObject, field.value);
+            checkForDuplicateMeetingTypesV2(currentlySelectedObject);
             break;
     }
     console.log(AgendaOnlineIntegrations);
+}
+
+function checkForDuplicateMeetingTypesV2(currentlySelectedIntegration) {
+    const groupByName = (array) => {
+        return array.reduce((result, currentItem) => {
+            // Extract the 'Name' value
+            const key = currentItem.Name;
+
+            // If the key doesn't exist in the result object, create an array for it
+            if (!result[key]) {
+                result[key] = [];
+            }
+
+            // Push the current item to the array for the key
+            result[key].push(currentItem);
+
+            return result;
+        }, {}); // Initial value is an empty object
+    };
+
+    let groupedByName = groupByName(currentlySelectedIntegration.meetingTypes);
+    console.log(groupedByName);
+
+    let selectList = document.getElementById("Meeting-Type-Name-Select-List");
+    Object.keys(groupedByName).forEach(key => {
+        if (groupedByName[key].length > 1) {
+            //Loop over the array and add the text " (Duplicate)" to the error-text-to-append attribute.
+            groupedByName[key].forEach(item => {
+                //Loop over the options in the select list.
+                for (let i = 0; i < selectList.length; i++) {
+                    //If the option is the one that is duplicated, then add the class "duplicateMeetingTypeName" to it.
+                    if (selectList.options[i].value === item.id) {
+                        selectList.options[i].classList.add("duplicateMeetingTypeName");
+                        //Add the text " (Duplicate)" to the error-text-to-append attribute.
+                        selectList.options[i].setAttribute("error-text-to-append", " (Duplicate)");
+                    }
+                }
+            });
+        } else {
+            groupedByName[key].forEach(item => {
+                //Loop over the options in the select list.
+                for (let i = 0; i < selectList.length; i++) {
+                    //Once the option is found, remove the class "duplicateMeetingTypeName" from it.
+                    if (selectList.options[i].value === item.id) {
+                        selectList.options[i].classList.remove("duplicateMeetingTypeName");
+                        //Replace the text " (Duplicate)" with "" in error-text-to-append attribute.
+                        let errorTextToReplace = selectList.options[i].attributes["error-text-to-append"].value;
+                        //Replace the string " (Duplicate)" with "" on the errorTextToReplace variable.
+                        selectList.options[i].attributes["error-text-to-append"].value = errorTextToReplace.replace(' (Duplicate)', '');
+                        //selectList.options[i].attributes["error-text-to-append"].value.replace(' (Duplicate)', '');
+                    }
+                }
+            });
+        }
+    });
+
+    if (document.getElementsByClassName("duplicateMeetingTypeName").length > 0) {
+        pushErrorToArray(agendaOnlineDuplicateMeetingTypeNamesArray);
+    } else {
+        spliceErrorFromArray("agendaOnlineDuplicateMeetingTypeNames");
+    }
 }
