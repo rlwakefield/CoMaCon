@@ -599,6 +599,7 @@ function pushWebApplicationConfiguration() {
 function processWebApplicationSaveResponse(data) {
     document.getElementById("ProcessingWebConfigValuesProgress").style.display = "none";
     successfulSave();
+    configurationChanged = false;
 }
 
 function saveIisConfiguration(config) {
