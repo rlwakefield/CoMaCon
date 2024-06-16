@@ -367,7 +367,7 @@ function addNewMeetingType() {
     document.getElementById("Meeting-Type-Name-Select-List").selectedIndex = document.getElementById("Meeting-Type-Name-Select-List").length - 1;
     setAgendaOnlineIntegrationsMeetingTypesButtons(["Meeting-Type-Name-Select-List-DeleteButton"], false);
     //checkForDuplicateMeetingTypes(currentlySelectedObject, newMeetingTypeObject, newMeetingTypeObject.Name);
-    checkForDuplicateMeetingTypesV2(currentlySelectedObject)
+    checkForDuplicateMeetingTypes(currentlySelectedObject)
 }
 
 function deleteMeetingType() {
@@ -385,7 +385,7 @@ function deleteMeetingType() {
     //Delete the current selected option from the select list.
     let selectListDropDown = document.getElementById("Meeting-Type-Name-Select-List");
     selectListDropDown.remove(selectListDropDown.selectedIndex);
-    checkForDuplicateMeetingTypesV2(currentlySelectedObject);
+    checkForDuplicateMeetingTypes(currentlySelectedObject);
 }
 
 function integrationfieldUpdated(field) {
@@ -431,13 +431,13 @@ function integrationfieldUpdated(field) {
             //Update the name of the Meeting Type in the select list.
             document.getElementById("Meeting-Type-Name-Select-List").options[document.getElementById("Meeting-Type-Name-Select-List").selectedIndex].text = field.value;
             //checkForDuplicateMeetingTypes(currentlySelectedObject, meetingTypeObject, field.value);
-            checkForDuplicateMeetingTypesV2(currentlySelectedObject);
+            checkForDuplicateMeetingTypes(currentlySelectedObject);
             break;
     }
     console.log(AgendaOnlineIntegrations);
 }
 
-function checkForDuplicateMeetingTypesV2(currentlySelectedIntegration) {
+function checkForDuplicateMeetingTypes(currentlySelectedIntegration) {
     const groupByName = (array) => {
         return array.reduce((result, currentItem) => {
             // Extract the 'Name' value

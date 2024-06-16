@@ -1780,6 +1780,7 @@ async function saveData() {
             await saveSessionAdministration();
             break;
         case "Agenda Online":
+            await saveHylandApplicationsAgendaPubAccessPublicComment();
             break;
         case "Electronic Plan Review":
             break;
@@ -1810,6 +1811,10 @@ async function saveData() {
             await saveHealthcareWebViewerSourceOrigins();
             break;
     }
+}
+
+async function saveHylandApplicationsAgendaPubAccessPublicComment() {
+    coreConfigData["publicCommentIntegrations"] = AgendaOnlineIntegrations;
 }
 
 async function saveSessionAdministration() {
@@ -1886,25 +1891,25 @@ async function saveHylandLogging() {
     coreConfigData["hylandLogging"]["windowsEventLogging"]["SourceName"] = document.getElementById("DiagnosticsSettings-WindowsEventLogging-SourceName").value;
 }
 
-async function saveHylandApplicationsAgendaPubAccessPublicComment() {
-    let meetingtypenames = document.getElementById("Meeting-Type-Name").value;
+//async function saveHylandApplicationsAgendaPubAccessPublicComment() {
+//    let meetingtypenames = document.getElementById("Meeting-Type-Name").value;
 
-    if (meetingtypenames.includes(',')) {
-        let resultingArray = meetingtypenames.split(',');
-        coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"] = [];
-        for (let i = 0; i < resultingArray.length; i++) {
-            let obj = {
-                Name: resultingArray[0]
-            };
-            coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"].push(obj);
-        }
-    } else {
-        coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"][0].Name = meetingtypenames;
-    }
+//    if (meetingtypenames.includes(',')) {
+//        let resultingArray = meetingtypenames.split(',');
+//        coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"] = [];
+//        for (let i = 0; i < resultingArray.length; i++) {
+//            let obj = {
+//                Name: resultingArray[0]
+//            };
+//            coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"].push(obj);
+//        }
+//    } else {
+//        coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"][0].Name = meetingtypenames;
+//    }
 
-    //Save the Agenda Fields elements and values and all.
-    coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["agendaFields"] = AgendaOnlineAgendaFields;
-}
+//    //Save the Agenda Fields elements and values and all.
+//    coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["agendaFields"] = AgendaOnlineAgendaFields;
+//}
 
 async function saveAdfs() {
     coreConfigData["hylandAuthenticationADFS"]["systemIdentityModel"]["audienceUris"] = audienceUrisData;

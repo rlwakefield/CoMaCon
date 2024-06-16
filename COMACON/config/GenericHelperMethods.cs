@@ -2382,57 +2382,38 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
 
             foreach(XmlNode n in integrations)
             {
-                HylandApplicationsAgendaPubAccessPublicComment h = new HylandApplicationsAgendaPubAccessPublicComment();
-                h.Name = n.Attributes["name"].Value;
-                h.URL = n.Attributes["url"].Value;
-                h.Token = n.Attributes["token"].Value;
-                h.AvailabilityFromMeetingStart = n.Attributes["AvailabilityFromMeetingStart"].Value;
-
-                foreach (XmlNode n1 in node.SelectSingleNode("integrations/integration/agenda_fields"))
+                if(n.Attributes["name"].Value != "")
                 {
-                    if (n1.Name == "field")
-                    {
-                        AgendaField af = new AgendaField();
-                        af.Name = n1.Attributes["name"].Value;
-                        af.FormFieldID = n1.Attributes["form_field_id"].Value;
-                        h.agendaUnityFormFields.Add(af);
-                    }
-                }
+                    HylandApplicationsAgendaPubAccessPublicComment h = new HylandApplicationsAgendaPubAccessPublicComment();
+                    h.Name = n.Attributes["name"].Value;
+                    h.URL = n.Attributes["url"].Value;
+                    h.Token = n.Attributes["token"].Value;
+                    h.AvailabilityFromMeetingStart = n.Attributes["AvailabilityFromMeetingStart"].Value;
 
-                foreach (XmlNode n2 in node.SelectSingleNode("integrations/integration/meeting_types"))
-                {
-                    if (n2.Name == "meeting_type")
+                    foreach (XmlNode n1 in node.SelectSingleNode("integrations/integration/agenda_fields"))
                     {
-                        MeetingType mt = new MeetingType();
-                        mt.Name = n2.Attributes["name"].Value;
-                        h.meetingTypes.Add(mt);
+                        if (n1.Name == "field")
+                        {
+                            AgendaField af = new AgendaField();
+                            af.Name = n1.Attributes["name"].Value;
+                            af.FormFieldID = n1.Attributes["form_field_id"].Value;
+                            h.agendaUnityFormFields.Add(af);
+                        }
                     }
-                }
 
-                ds.publicCommentIntegrations.Add(h);
+                    foreach (XmlNode n2 in node.SelectSingleNode("integrations/integration/meeting_types"))
+                    {
+                        if (n2.Name == "meeting_type")
+                        {
+                            MeetingType mt = new MeetingType();
+                            mt.Name = n2.Attributes["name"].Value;
+                            h.meetingTypes.Add(mt);
+                        }
+                    }
+
+                    ds.publicCommentIntegrations.Add(h);
+                }
             }
-
-            //foreach (XmlNode n in node.SelectSingleNode("integrations/integration/meeting_types"))
-            //{
-            //    if (n.Name == "meeting_type")
-            //    {
-            //        MeetingType mt = new MeetingType();
-            //        mt.Name = n.Attributes["name"].Value;
-            //        h.meetingTypes.Add(mt);
-            //    }
-            //}
-
-            //foreach (XmlNode n1 in node.SelectSingleNode("integrations/integration/agenda_fields"))
-            //{
-            //    if (n1.Name == "field")
-            //    {
-            //        AgendaField af = new AgendaField();
-            //        af.Name = n1.Attributes["name"].Value;
-            //        af.FormFieldID = n1.Attributes["form_field_id"].Value;
-            //        h.agendaFields.Add(af);
-            //    }
-            //}
-            //ds.hylandApplicationsAgendaPubAccessPublicComment = h;
         }
         catch (Exception e)
         {
@@ -2953,7 +2934,8 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                 }
                 break;
             case "Hyland.Applications.AgendaPubAccess.PublicComment":
-                SaveHylandApplicationsAgendaPubAccessPublicCommentExtraKeys(xmlDoc, node, ds);
+                //SaveHylandApplicationsAgendaPubAccessPublicCommentExtraKeys(xmlDoc, node, ds);
+                SaveHylandApplicationsAgendaPubAccessPublicComment(xmlDoc, node, ds);
                 break;
             case "Hyland.Logging":
                 SaveHylandLoggingDiagnosticsRoutes(xmlDoc, node, ds);
@@ -3532,6 +3514,89 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         {
             Log.Logger.Error(e.Message);
             Log.Logger.Error(e.StackTrace);
+        }
+    }
+
+    private void SaveHylandApplicationsAgendaPubAccessPublicComment(XmlDocument xmlDoc, XmlNode node, webApplicationWebConfigConfiguration ds)
+    {
+        try
+        {
+            //Remove all child nodes from the "integrations" node.
+            node.SelectSingleNode("integrations").RemoveAll();
+
+            XmlNode initialComment = xmlDoc.CreateComment(@"AvailabilityFromMeetingStart: 
+     This value is in hours. It is based on the start time of the meeting.
+     This value determines when the Make Comment button is no longer available in the meeting.
+     This value can be a whole number, decimal, or negative value (a negative value disables the button by the number of hours specified before the meeting start time).
+     The default value is 0, meaning that once the meeting start time passes, the button is disabled.");
+            node.SelectSingleNode("integrations").AppendChild(initialComment);
+
+            /*Sample Integration XML for structure.
+             
+             <integration name="Silly Name" url="[URL from Unity forms config]" token="[Token from Unity forms config]" AvailabilityFromMeetingStart="0">
+        <meeting_types>
+          <meeting_type name="Test" />
+        </meeting_types>
+        <agenda_fields>
+          <field name="meeting_name" form_field_id="" />
+          <field name="meeting_date" form_field_id="" />
+          <field name="item_id" form_field_id="" />
+          <field name="item_title" form_field_id="" />
+        </agenda_fields>
+      </integration>*/
+
+            if(ds.publicCommentIntegrations.Count > 0)
+            {
+                foreach(HylandApplicationsAgendaPubAccessPublicComment h in ds.publicCommentIntegrations)
+                {
+                    XmlNode integration = xmlDoc.CreateElement("integration");
+                    XmlAttribute name = xmlDoc.CreateAttribute("name");
+                    name.Value = h.Name;
+                    integration.Attributes.Append(name);
+                    XmlAttribute url = xmlDoc.CreateAttribute("url");
+                    url.Value = h.URL;
+                    integration.Attributes.Append(url);
+                    XmlAttribute token = xmlDoc.CreateAttribute("token");
+                    token.Value = h.Token;
+                    integration.Attributes.Append(token);
+                    XmlAttribute AvailabilityFromMeetingStart = xmlDoc.CreateAttribute("AvailabilityFromMeetingStart");
+                    AvailabilityFromMeetingStart.Value = h.AvailabilityFromMeetingStart;
+                    integration.Attributes.Append(AvailabilityFromMeetingStart);
+
+                    XmlNode meeting_types = xmlDoc.CreateElement("meeting_types");
+                    foreach(MeetingType mt in h.meetingTypes)
+                    {
+                        XmlNode meeting_type = xmlDoc.CreateElement("meeting_type");
+                        XmlAttribute name1 = xmlDoc.CreateAttribute("name");
+                        name1.Value = mt.Name;
+                        meeting_type.Attributes.Append(name1);
+                        meeting_types.AppendChild(meeting_type);
+                    }
+                    integration.AppendChild(meeting_types);
+
+                    XmlNode agenda_fields = xmlDoc.CreateElement("agenda_fields");
+                    foreach(AgendaField af in h.agendaUnityFormFields)
+                    {
+                        XmlNode field = xmlDoc.CreateElement("field");
+                        XmlAttribute name2 = xmlDoc.CreateAttribute("name");
+                        name2.Value = af.Name;
+                        field.Attributes.Append(name2);
+                        XmlAttribute form_field_id = xmlDoc.CreateAttribute("form_field_id");
+                        form_field_id.Value = af.FormFieldID;
+                        field.Attributes.Append(form_field_id);
+                        agenda_fields.AppendChild(field);
+                    }
+                    integration.AppendChild(agenda_fields);
+
+                    node.SelectSingleNode("integrations").AppendChild(integration);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Logger.Warning(e.Message);
+            Log.Logger.Warning(e.StackTrace);
+            Log.Logger.Warning("Error processing Hyland.Applications.AgendaPubAccessPublicComment keys.");
         }
     }
 
