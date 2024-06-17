@@ -2339,40 +2339,40 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         }
     }
 
-    private void ParseHylandApplicationsAgendaPubAccessPublicCommentExtraKeys(webApplicationWebConfigConfiguration ds, XmlNode node, string sect)
-    {
-        try
-        {
-            HylandApplicationsAgendaPubAccessPublicComment h = new HylandApplicationsAgendaPubAccessPublicComment();
-            foreach (XmlNode n in node.SelectSingleNode("integrations/integration/meeting_types"))
-            {
-                if (n.Name == "meeting_type")
-                {
-                    MeetingType mt = new MeetingType();
-                    mt.Name = n.Attributes["name"].Value;
-                    h.meetingTypes.Add(mt);
-                }
-            }
+    //private void ParseHylandApplicationsAgendaPubAccessPublicCommentExtraKeys(webApplicationWebConfigConfiguration ds, XmlNode node, string sect)
+    //{
+    //    try
+    //    {
+    //        HylandApplicationsAgendaPubAccessPublicComment h = new HylandApplicationsAgendaPubAccessPublicComment();
+    //        foreach (XmlNode n in node.SelectSingleNode("integrations/integration/meeting_types"))
+    //        {
+    //            if (n.Name == "meeting_type")
+    //            {
+    //                MeetingType mt = new MeetingType();
+    //                mt.Name = n.Attributes["name"].Value;
+    //                h.meetingTypes.Add(mt);
+    //            }
+    //        }
 
-            foreach (XmlNode n1 in node.SelectSingleNode("integrations/integration/agenda_fields"))
-            {
-                if (n1.Name == "field")
-                {
-                    AgendaField af = new AgendaField();
-                    af.Name = n1.Attributes["name"].Value;
-                    af.FormFieldID = n1.Attributes["form_field_id"].Value;
-                    h.agendaUnityFormFields.Add(af);
-                }
-            }
-            ds.hylandApplicationsAgendaPubAccessPublicComment = h;
-        }
-        catch (Exception e)
-        {
-            Log.Logger.Warning(e.Message);
-            Log.Logger.Warning(e.StackTrace);
-            Log.Logger.Warning("Error processing Hyland.Applications.AgendaPubAccessPublicComment keys.");
-        }
-    }
+    //        foreach (XmlNode n1 in node.SelectSingleNode("integrations/integration/agenda_fields"))
+    //        {
+    //            if (n1.Name == "field")
+    //            {
+    //                AgendaField af = new AgendaField();
+    //                af.Name = n1.Attributes["name"].Value;
+    //                af.FormFieldID = n1.Attributes["form_field_id"].Value;
+    //                h.agendaUnityFormFields.Add(af);
+    //            }
+    //        }
+    //        ds.hylandApplicationsAgendaPubAccessPublicComment = h;
+    //    }
+    //    catch (Exception e)
+    //    {
+    //        Log.Logger.Warning(e.Message);
+    //        Log.Logger.Warning(e.StackTrace);
+    //        Log.Logger.Warning("Error processing Hyland.Applications.AgendaPubAccessPublicComment keys.");
+    //    }
+    //}
 
     private void ParseHylandApplicationsAgendaPubAccessPublicComment(webApplicationWebConfigConfiguration ds, XmlNode node, string sect)
     {
@@ -3487,35 +3487,35 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         }
     }
 
-    public void SaveHylandApplicationsAgendaPubAccessPublicCommentExtraKeys(XmlDocument configurationDocument, XmlNode node, webApplicationWebConfigConfiguration core)
-    {
-        try
-        {
-            node.SelectSingleNode("integrations/integration/meeting_types").RemoveAll();
-            XmlNode mts = node.SelectSingleNode("integrations/integration/meeting_types");
-            foreach (MeetingType mt in core.hylandApplicationsAgendaPubAccessPublicComment.meetingTypes)
-            {
-                XmlElement ele = configurationDocument.CreateElement("meeting_type");
-                ele.SetAttribute("name", mt.Name);
-                mts.AppendChild(ele);
-            }
+    //public void SaveHylandApplicationsAgendaPubAccessPublicCommentExtraKeys(XmlDocument configurationDocument, XmlNode node, webApplicationWebConfigConfiguration core)
+    //{
+    //    try
+    //    {
+    //        node.SelectSingleNode("integrations/integration/meeting_types").RemoveAll();
+    //        XmlNode mts = node.SelectSingleNode("integrations/integration/meeting_types");
+    //        foreach (MeetingType mt in core.hylandApplicationsAgendaPubAccessPublicComment.meetingTypes)
+    //        {
+    //            XmlElement ele = configurationDocument.CreateElement("meeting_type");
+    //            ele.SetAttribute("name", mt.Name);
+    //            mts.AppendChild(ele);
+    //        }
 
-            node.SelectSingleNode("integrations/integration/agenda_fields").RemoveAll();
-            XmlNode afs = node.SelectSingleNode("integrations/integration/agenda_fields");
-            foreach (AgendaField af in core.hylandApplicationsAgendaPubAccessPublicComment.agendaUnityFormFields)
-            {
-                XmlElement ele1 = configurationDocument.CreateElement("field");
-                ele1.SetAttribute("name", af.Name);
-                ele1.SetAttribute("form_field_id", af.FormFieldID);
-                afs.AppendChild(ele1);
-            }
-        }
-        catch (Exception e)
-        {
-            Log.Logger.Error(e.Message);
-            Log.Logger.Error(e.StackTrace);
-        }
-    }
+    //        node.SelectSingleNode("integrations/integration/agenda_fields").RemoveAll();
+    //        XmlNode afs = node.SelectSingleNode("integrations/integration/agenda_fields");
+    //        foreach (AgendaField af in core.hylandApplicationsAgendaPubAccessPublicComment.agendaUnityFormFields)
+    //        {
+    //            XmlElement ele1 = configurationDocument.CreateElement("field");
+    //            ele1.SetAttribute("name", af.Name);
+    //            ele1.SetAttribute("form_field_id", af.FormFieldID);
+    //            afs.AppendChild(ele1);
+    //        }
+    //    }
+    //    catch (Exception e)
+    //    {
+    //        Log.Logger.Error(e.Message);
+    //        Log.Logger.Error(e.StackTrace);
+    //    }
+    //}
 
     private void SaveHylandApplicationsAgendaPubAccessPublicComment(XmlDocument xmlDoc, XmlNode node, webApplicationWebConfigConfiguration ds)
     {

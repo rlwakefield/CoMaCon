@@ -41,7 +41,7 @@ public class webApplicationWebConfigConfiguration
     public HylandLogging? hylandLogging;
     public HylandIdentityProviderUrl? hylandIdentityProviderUrl;
     public List<RequiredKeywords> requiredKeywords = new List<RequiredKeywords>();
-    public HylandApplicationsAgendaPubAccessPublicComment? hylandApplicationsAgendaPubAccessPublicComment;
+    //public HylandApplicationsAgendaPubAccessPublicComment? hylandApplicationsAgendaPubAccessPublicComment;
     public HylandAuthenticationADFS? hylandAuthenticationADFS;
     public HylandAuthentication? hylandAuthentication;
     public HylandResponsiveApps? hylandResponsiveApps;
