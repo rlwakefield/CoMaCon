@@ -21,10 +21,6 @@ public class WebApplicationDataStructuresTests
             {
                 "Hyland.Applications.AgendaPubAccess.PublicComment", new string[,]
                 {
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","name","2","Integration-Name","","","",""},
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","url","2","Integration-URL","","","",""},
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","token","2","Integration-Token","","","",""},
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","AvailabilityFromMeetingStart","2","Availability-From-Meeting-Start","","","",""}
                 }
             },
             {
@@ -1378,10 +1374,6 @@ public class WebApplicationDataStructuresTests
             {
                 "Hyland.Applications.AgendaPubAccess.PublicComment", new string[,]
                 {
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","name","2","Integration-Name","","","",""},
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","url","2","Integration-URL","","","",""},
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","token","2","Integration-Token","","","",""},
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","AvailabilityFromMeetingStart","2","Availability-From-Meeting-Start","","","",""}
                 }
             },
             {
@@ -2631,10 +2623,6 @@ public class WebApplicationDataStructuresTests
             {
                 "Hyland.Applications.AgendaPubAccess.PublicComment", new string[,]
                 {
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","name","2","Integration-Name","","","",""},
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","url","2","Integration-URL","","","",""},
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","token","2","Integration-Token","","","",""},
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","AvailabilityFromMeetingStart","2","Availability-From-Meeting-Start","","","",""}
                 }
             },
             {
@@ -3906,10 +3894,6 @@ public class WebApplicationDataStructuresTests
             {
                 "Hyland.Applications.AgendaPubAccess.PublicComment", new string[,]
                 {
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","name","2","Integration-Name","","","",""},
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","url","2","Integration-URL","","","",""},
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","token","2","Integration-Token","","","",""},
-                    {"Hyland.Applications.AgendaPubAccess.PublicComment","integrations/integration","AvailabilityFromMeetingStart","2","Availability-From-Meeting-Start","","","",""}
                 }
             },
             {

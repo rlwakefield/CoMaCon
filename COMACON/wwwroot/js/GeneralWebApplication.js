@@ -43,7 +43,8 @@ const DiagnosticsSettingsProfiles = [];
 //["errorId", "Location", "Title", "Description"];
 const folderingHeightErrorArray = ["folderingHeightPercentage", "Foldering", "Height Percentage", "All 3 height values must equal a sum of 100% exactly."];
 const keywordTypeaheadCharacterCountArray = ["keywordTypeaheadCharacterCount", "Miscellaneous", "Keyword Typeahead", "No duplicate Keyword ID numbers allowed"];
-const agendaOnlineDuplicateFormFieldNamesArray = ["agendaOnlineDuplicateFormFieldNames", "PublicCommentIntegration", "Field Name", "No duplicate Field Names are allowed."];
+const agendaOnlineDuplicateFormFieldNamesArray = ["agendaOnlineDuplicateFormFieldNames", "PublicCommentIntegration", "Field Name", "No duplicate Unity Form Field Names are allowed."];
+const agendaOnlineDuplicateMeetingTypeNamesArray = ["agendaOnlineDuplicateMeetingTypeNames", "PublicCommentIntegration", "Duplicate Meeting Type Name", "Duplicate Meeting Type Names are not allowed."];
 const connectionStringDataSourceNameErrorArray = ["connectionStringDataSourceName", "ConnectionStrings", "Data Source Name", "You have a duplicate Data Source Name or an incomplete Connection String."];
 const diagnosticSettingsRouteNameErrorArray = ["diagnosticSettingsRouteName", "DiagnosticsSettings", "Duplicate Route Name", "You have a duplicate Diagnostics Route Name. All Route Names need to be unique."];
 const applicationPoolMissingCredentialsErrorArray = ["applicationPoolMissingCredentials", "IISApplicationPool", "Missing Username/Password", "The username or password fields are not filled in. Please fill in to allow saving."];
@@ -104,10 +105,9 @@ let diskGroupAliases = [];
 let NavigationPanelContexts = [];
 let NavigationPanelContextsIdNumber = 1;
 
-/* Keyword Drop Down Type Ahead Character Minimums Variabels */
+/* Keyword Drop Down Type Ahead Character Minimums Variables */
 let keywordTypeAheadArray = [];
 let keywordTypeAheadIdNumber = 0;
-
 
 
 /********************************************************
@@ -599,6 +599,7 @@ function pushWebApplicationConfiguration() {
 function processWebApplicationSaveResponse(data) {
     document.getElementById("ProcessingWebConfigValuesProgress").style.display = "none";
     successfulSave();
+    configurationChanged = false;
 }
 
 function saveIisConfiguration(config) {
@@ -1238,6 +1239,10 @@ async function parseData(config) {
     await parseElementsToHide(config["elementsToHide"]);
 
     switch (config["Type"]) {
+        case "Agenda Online":
+            //await parseHylandApplicationsAgendaPubAccessPublicComment(config["hylandApplicationsAgendaPubAccessPublicComment"]);
+            await parseHylandApplicationsAgendaPubAccessPublicCommentIntegrations(config);
+            break;
         case "Application Server":
             await parseADFS(config["hylandAuthenticationADFS"]);
             await parseConnectionStrings(config["connectionStrings"]);
@@ -1245,9 +1250,6 @@ async function parseData(config) {
             await parseHylandPlatterManagement(config["hylandPlatterManagement"]);
             await parseWindowsAuthOptimization(config["WindowsAuthOptimizeFor"]);
             await parseSessionAdministration(config["sessionAdministration"]);
-            break;
-        case "Agenda Online":
-            await parseHylandApplicationsAgendaPubAccessPublicComment(config["hylandApplicationsAgendaPubAccessPublicComment"]);
             break;
         case "Electronic Plan Review":
             await prepareAndSetDefaultTimeZoneOptions();
@@ -1546,6 +1548,24 @@ async function parseHylandApplicationsAgendaPubAccessPublicComment(config) {
     }
 }
 
+async function parseHylandApplicationsAgendaPubAccessPublicCommentIntegrations(config) {
+    AgendaOnlineIntegrations = config["publicCommentIntegrations"];
+
+    if (AgendaOnlineIntegrations.length > 0) {
+        for (let i = 0; i < AgendaOnlineIntegrations.length; i++) {
+            let opt = document.createElement("option");
+            opt.value = "AgendaOnlineIntegration" + AgendaOnlineIntegrationsIdNumber;
+            opt.innerText = AgendaOnlineIntegrations[i].Name;
+            document.getElementById("PublicCommentIntegrations-SelectList").append(opt);
+            AgendaOnlineIntegrations[i].id = "AgendaOnlineIntegration" + AgendaOnlineIntegrationsIdNumber;
+            AgendaOnlineIntegrationsIdNumber++;
+        }
+    }
+
+    await disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsAllFieldIds, true);
+    await setAgendaOnlineIntegrationsButtons(["PublicCommentIntegrations-CopyButton", "PublicCommentIntegrations-DeleteButton"], true);
+}
+
 async function parseHylandLogging(config) {
     if (config != null) {
         document.getElementById("DiagnosticsSettings-TruncateLogValues").value = config["truncateloggingcharacters"];
@@ -1761,6 +1781,7 @@ async function saveData() {
             await saveSessionAdministration();
             break;
         case "Agenda Online":
+            await saveHylandApplicationsAgendaPubAccessPublicComment();
             break;
         case "Electronic Plan Review":
             break;
@@ -1791,6 +1812,10 @@ async function saveData() {
             await saveHealthcareWebViewerSourceOrigins();
             break;
     }
+}
+
+async function saveHylandApplicationsAgendaPubAccessPublicComment() {
+    coreConfigData["publicCommentIntegrations"] = AgendaOnlineIntegrations;
 }
 
 async function saveSessionAdministration() {
@@ -1867,25 +1892,25 @@ async function saveHylandLogging() {
     coreConfigData["hylandLogging"]["windowsEventLogging"]["SourceName"] = document.getElementById("DiagnosticsSettings-WindowsEventLogging-SourceName").value;
 }
 
-async function saveHylandApplicationsAgendaPubAccessPublicComment() {
-    let meetingtypenames = document.getElementById("Meeting-Type-Name").value;
+//async function saveHylandApplicationsAgendaPubAccessPublicComment() {
+//    let meetingtypenames = document.getElementById("Meeting-Type-Name").value;
 
-    if (meetingtypenames.includes(',')) {
-        let resultingArray = meetingtypenames.split(',');
-        coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"] = [];
-        for (let i = 0; i < resultingArray.length; i++) {
-            let obj = {
-                Name: resultingArray[0]
-            };
-            coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"].push(obj);
-        }
-    } else {
-        coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"][0].Name = meetingtypenames;
-    }
+//    if (meetingtypenames.includes(',')) {
+//        let resultingArray = meetingtypenames.split(',');
+//        coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"] = [];
+//        for (let i = 0; i < resultingArray.length; i++) {
+//            let obj = {
+//                Name: resultingArray[0]
+//            };
+//            coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"].push(obj);
+//        }
+//    } else {
+//        coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"][0].Name = meetingtypenames;
+//    }
 
-    //Save the Agenda Fields elements and values and all.
-    coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["agendaFields"] = AgendaOnlineAgendaFields;
-}
+//    //Save the Agenda Fields elements and values and all.
+//    coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["agendaFields"] = AgendaOnlineAgendaFields;
+//}
 
 async function saveAdfs() {
     coreConfigData["hylandAuthenticationADFS"]["systemIdentityModel"]["audienceUris"] = audienceUrisData;
