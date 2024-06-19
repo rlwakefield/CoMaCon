@@ -124,7 +124,6 @@ async function onPageLoadLogic() {
         loadWebApplicationConfiguration(object[0].webConfigPhysicalPath, object[0].type, object[0].version, object[0].site, object[0].name, object[0].path, object[0].physicalPath, object[0].bitness);
     } else {
         //Need to redirect the user back to the home page.
-
     }
 }
 
@@ -1300,7 +1299,9 @@ async function parseData(config) {
         if (event.target.tagName.toLowerCase() === 'input') {
             //console.log(`Input changed: ${event.target.name}, Value: ${event.target.value}`);
             // Perform your desired operations here
-            configurationChanged = true;
+            if (event.target.id != "checkbox") {
+                configurationChanged = true;
+            }
         }
     });
 
@@ -3172,6 +3173,38 @@ function validateIdentityProviderFields(field) {
     }
 }
 
+
+/********************************************************
+*            Dark/Light Mode Toggle Functions
+********************************************************/
+function toggleDarkLightMode() {
+    //Elements to add "dark_mode" class to:
+    document.body.classList.toggle('dark_mode');
+    document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.toggle('dark_mode');
+    document.getElementById("Loading-Web-Applications-Progress-Section").classList.toggle('dark_mode');
+
+    //Elements to add "dark_mode_titlebar" class to:
+    document.getElementById("h1-container").classList.toggle('dark_mode_titlebar');
+    document.getElementById("core-action-buttons-div").classList.toggle('dark_mode_titlebar');
+    //document.getElementById("ChooseApplicationTitleBar").classList.toggle('dark_mode_titlebar');
+    Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
+        element.classList.toggle('dark_mode_titlebar')
+    });
+
+    //Elements to add "dark_mode_table" class to:
+
+
+    //Elements to add "dark_mode_button" class to:
+    Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
+        element.classList.toggle('dark_mode_button')
+    });
+
+    //Elements to add "dark_mode_select" class to:
+    console.log(document.getElementsByTagName("select"));
+    Array.from(document.getElementsByTagName("select")).forEach(element => {
+        element.classList.toggle('dark_mode_select');
+    });
+}
 
 
 /********************************************************
