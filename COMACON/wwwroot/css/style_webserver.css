@@ -1218,7 +1218,7 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 .chooseWebApplicationModal-Table-Wrapper {
 	width: 90%;
 	border: 1px solid black;
-	margin: 1.5rem auto 0 auto;
+	margin: 0 auto 0 auto;
 	height: auto;
 	overflow: scroll;
 	max-height: 15rem;
@@ -1266,6 +1266,7 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 
 .chooseWebApplicationModalTableButtonsContainer {
 	display: none;
+	padding-top: 1.5rem;
 }
 
 
@@ -1712,8 +1713,8 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
     color: #e6edf3;
 }
 
-.dark_mode_texturlinput {
-
+.dark_mode_links {
+	color: #e6edf3 !important;
 }
 
 

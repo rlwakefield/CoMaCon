@@ -73,7 +73,7 @@
         <!-- Copy Web Application Modal -->
         <div id="CopyWebApplicationModal" class="CopyWebApplicationModal">
             <!-- Window Container -->
-            <div class="CopyWebApplicationModal-Container">
+            <div id="CopyWebApplicationModal-Container" class="CopyWebApplicationModal-Container">
                 <!-- Title Bar Container for styling -->
                 <div class="CopyWebApplicationModal-TitleBar-Container-Styling">
                     <!-- Actual Title Bar Container -->
@@ -162,7 +162,7 @@
         </div>
         <!-- Error Load Modal -->
         <div class="errorLoadModal" id="errorLoadModal">
-            <div class="errorLoadModal-content">
+        <div id="errorLoadModal-content" class="errorLoadModal-content">
                 <div>
                     <p>The following error(s) happened when loading your Web Application:</p>
                     <ul id="errorLoadModal-ErrorList">
@@ -203,7 +203,7 @@
         </div>
         <!-- Configuration Errors Modal Window -->
         <div id="SaveErrors-Modal" class="sectionWithTitleBar">
-            <div class="SaveErrors-Content">
+        <div id="SaveErrors-Content" class="SaveErrors-Content">
                 <div class="titleBar" name="Title-Bar">
                     <h2>Errors</h2>
                 </div>
@@ -314,7 +314,7 @@
                 <div style="display:flex;justify-content:space-between;padding-left: 0.5%;">
                     <a style="color:inherit;text-decoration: none;" href="/"><h1 b-8gj57b4bak="">COMACON</h1></a>
                     <div style="margin: auto 5px;padding-left: 0.5%;">
-                        <input type="checkbox" class="checkbox" id="checkbox" onclick="toggleDarkLightMode()">
+                        <input type="checkbox" class="checkbox" id="checkbox" onclick="toggleDarkLightMode(this)">
                         <label for="checkbox" class="checkbox-label">
                             <i class="fas fa-moon">
                                 <svg width="18" height="18" fill="none" stroke="#f39c12" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

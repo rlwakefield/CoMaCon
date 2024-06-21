@@ -114,6 +114,15 @@ let keywordTypeAheadIdNumber = 0;
  *                  Page Load SCript
  ********************************************************/
 async function onPageLoadLogic() {
+    console.log(localStorage.getItem("darkModeState"));
+    if (localStorage.getItem("darkModeState") != null) {
+        if (localStorage.getItem("darkModeState") == "true") {
+            document.getElementById("checkbox").checked = true;
+        } else {
+            document.getElementById("checkbox").checked = false;
+        }
+        toggleDarkLightMode(document.getElementById("checkbox"));
+    }
     if (sessionStorage.getItem('WebApplicationChosenArray') != null && sessionStorage.getItem('WebApplicationChosenArray') != undefined) {
         let object = JSON.parse(sessionStorage.getItem('WebApplicationChosenArray'));
         sessionStorage.removeItem('WebApplicationChosenArray');
@@ -205,7 +214,6 @@ async function parseWebApplicationsResponse(applications) {
 }
 
 async function createAvailableWebApplicationsTable(webApplications) {
-
     let table = document.getElementById("webApplicationTable");
     let tbody = document.createElement("tbody");
     Array.from(webApplications).forEach((element) => {
@@ -3177,33 +3185,112 @@ function validateIdentityProviderFields(field) {
 /********************************************************
 *            Dark/Light Mode Toggle Functions
 ********************************************************/
-function toggleDarkLightMode() {
-    //Elements to add "dark_mode" class to:
-    document.body.classList.toggle('dark_mode');
-    document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.toggle('dark_mode');
-    document.getElementById("Loading-Web-Applications-Progress-Section").classList.toggle('dark_mode');
+function toggleDarkLightMode(checkbox) {
+    ////Elements to add "dark_mode" class to:
+    //document.body.classList.toggle('dark_mode');
+    //document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.toggle('dark_mode');
+    //document.getElementById("Loading-Web-Applications-Progress-Section").classList.toggle('dark_mode');
+    //document.getElementById("CopyWebApplicationModal").classList.toggle('dark_mode');
 
-    //Elements to add "dark_mode_titlebar" class to:
-    document.getElementById("h1-container").classList.toggle('dark_mode_titlebar');
-    document.getElementById("core-action-buttons-div").classList.toggle('dark_mode_titlebar');
-    //document.getElementById("ChooseApplicationTitleBar").classList.toggle('dark_mode_titlebar');
-    Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
-        element.classList.toggle('dark_mode_titlebar')
-    });
+    ////Elements to add "dark_mode_titlebar" class to:
+    //document.getElementById("h1-container").classList.toggle('dark_mode_titlebar');
+    //document.getElementById("core-action-buttons-div").classList.toggle('dark_mode_titlebar');
+    ////document.getElementById("ChooseApplicationTitleBar").classList.toggle('dark_mode_titlebar');
+    //Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
+    //    element.classList.toggle('dark_mode_titlebar')
+    //});
+    //Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
+    //    element.classList.toggle('dark_mode_titlebar');
+    //});
 
-    //Elements to add "dark_mode_table" class to:
+    ////Elements to add "dark_mode_table" class to:
 
 
-    //Elements to add "dark_mode_button" class to:
-    Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
-        element.classList.toggle('dark_mode_button')
-    });
+    ////Elements to add "dark_mode_button" class to:
+    //Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
+    //    element.classList.toggle('dark_mode_button')
+    //});
 
-    //Elements to add "dark_mode_select" class to:
-    console.log(document.getElementsByTagName("select"));
-    Array.from(document.getElementsByTagName("select")).forEach(element => {
-        element.classList.toggle('dark_mode_select');
-    });
+    ////Elements to add "dark_mode_select" class to:
+    //Array.from(document.getElementsByTagName("select")).forEach(element => {
+    //    element.classList.toggle('dark_mode_select');
+    //});
+    console.log(checkbox.checked);
+    if (checkbox.checked) {
+        localStorage.setItem("darkModeState", true);
+        //Elements to add "dark_mode" class to:
+        document.body.classList.add('dark_mode');
+        document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.add('dark_mode');
+        document.getElementById("Loading-Web-Applications-Progress-Section").classList.add('dark_mode');
+        document.getElementById("CopyWebApplicationModal-Container").classList.add('dark_mode');
+        document.getElementById("SaveErrors-Content").classList.add('dark_mode');
+
+        //Elements to add "dark_mode_titlebar" class to:
+        document.getElementById("h1-container").classList.add('dark_mode_titlebar');
+        document.getElementById("core-action-buttons-div").classList.add('dark_mode_titlebar');
+        document.getElementById("ChooseApplicationTitleBar").classList.add('dark_mode_titlebar');
+        Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
+            element.classList.add('dark_mode_titlebar')
+        });
+        Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
+            element.classList.add('dark_mode_titlebar');
+        });
+
+        //Elements to add "dark_mode_table" class to:
+
+
+        //Elements to add "dark_mode_button" class to:
+        Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
+            element.classList.add('dark_mode_button')
+        });
+
+        //Elements to add "dark_mode_select" class to:
+        Array.from(document.getElementsByTagName("select")).forEach(element => {
+            element.classList.add('dark_mode_select');
+        });
+
+        //Elements to add "dark_mode_links" class to:
+        Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
+            element.classList.add('dark_mode_links');
+        });
+    } else {
+        localStorage.setItem("darkModeState", false);
+        //Elements to add "dark_mode" class to:
+        document.body.classList.remove('dark_mode');
+        document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.remove('dark_mode');
+        document.getElementById("Loading-Web-Applications-Progress-Section").classList.remove('dark_mode');
+        document.getElementById("CopyWebApplicationModal-Container").classList.remove('dark_mode');
+        document.getElementById("SaveErrors-Content").classList.remove('dark_mode');
+
+        //Elements to add "dark_mode_titlebar" class to:
+        document.getElementById("h1-container").classList.remove('dark_mode_titlebar');
+        document.getElementById("core-action-buttons-div").classList.remove('dark_mode_titlebar');
+        document.getElementById("ChooseApplicationTitleBar").classList.remove('dark_mode_titlebar');
+        Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
+            element.classList.remove('dark_mode_titlebar')
+        });
+        Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
+            element.classList.remove('dark_mode_titlebar');
+        });
+
+        //Elements to add "dark_mode_table" class to:
+
+
+        //Elements to add "dark_mode_button" class to:
+        Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
+            element.classList.remove('dark_mode_button')
+        });
+
+        //Elements to add "dark_mode_select" class to:
+        Array.from(document.getElementsByTagName("select")).forEach(element => {
+            element.classList.remove('dark_mode_select');
+        });
+        Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
+            element.classList.remove('dark_mode_links');
+        });
+    }
+
+    console.log(localStorage.getItem("darkModeState"));
 }
 
 
