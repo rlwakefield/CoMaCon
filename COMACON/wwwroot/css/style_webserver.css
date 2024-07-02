@@ -1218,7 +1218,7 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 .chooseWebApplicationModal-Table-Wrapper {
 	width: 90%;
 	border: 1px solid black;
-	margin: 1.5rem auto 0 auto;
+	margin: 0 auto 0 auto;
 	height: auto;
 	overflow: scroll;
 	max-height: 15rem;
@@ -1266,6 +1266,7 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 
 .chooseWebApplicationModalTableButtonsContainer {
 	display: none;
+	padding-top: 1.5rem;
 }
 
 
@@ -1679,12 +1680,91 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 
 
 
+/********************************************************
+ *                  Dark Mode Styling
+ ********************************************************/
+.dark_mode {
+	color: #e6edf3;
+	background-color: #292c35;
+}
+
+.dark_mode_titlebar {
+	color: #e6edf3;
+	background-color: #161b22 !important;
+}
+
+.dark_mode_table {
+	color: #e6edf3;
+	background-color: #161b22;
+	border: 1px solid #e6edf3;
+}
+
+.dark_mode_button {
+	color: #e6edf3;
+}
+
+.dark_mode_select {
+	background-color: inherit;
+	color: inherit;
+}
+
+.dark_mode_select option {
+	background-color: #292c35;
+    color: #e6edf3;
+}
+
+.dark_mode_links {
+	color: #e6edf3 !important;
+}
 
 
 
 
+/********************************************************
+ *                  Slider Styling
+ ********************************************************/
+.checkbox {
+	opacity: 0;
+	position: absolute;
+}
 
+.checkbox-label {
+	background-color: #111;
+	width: 40px;
+	height: 16px;
+	border-radius: 50px;
+	position: relative;
+	padding: 5px;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 
+.fa-moon {
+	color: #f1c40f;
+	display: flex;
+}
+
+.fa-sun {
+	color: #f39c12;
+	display: flex;
+}
+
+.checkbox-label .ball {
+	background-color: #fff;
+	width: 22px;
+	height: 22px;
+	position: absolute;
+	left: 2px;
+	top: 2px;
+	border-radius: 50%;
+	transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .checkbox-label .ball {
+	transform: translateX(24px);
+}
 
 
 

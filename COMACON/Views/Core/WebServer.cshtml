@@ -470,7 +470,7 @@
     </div>
     <div class="row">
         <div class="column">
-            <div class="settingElement" style="justify-content: left;">
+            <div class="settingElement">
                 <div class="labelElement">
                     <span>Data Mining: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
                     <span class="tooltiptext">Enable/disable Monarch data mining integration.</span>
@@ -482,8 +482,6 @@
                     </label>
                 </div>
             </div>
-        </div>
-        <div class="column">
             <div class="sectionWithTitleBar">
                 <div class="titleBar" name="Title-Bar">
                     Data Mining Settings
@@ -528,6 +526,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="column">
         </div>
     </div>
 </div>
@@ -4012,31 +4012,31 @@
         <div class="core-section-buttons-outer">
             <div class="core-section-buttons-inner">
                 <ul>
-                    <li id="ActiveXLink-SettingElement"><a id="ActiveXLink" href="javascript:openSection('ActiveX')">ActiveX</a></li>
-                    <li><a id="ADFSSettingsLink" href="javascript:openSection('ADFSSettings')">ADFS Settings</a></li>
-                    <li><a id="CustomValidationLink" href="javascript:openSection('CustomValidation')">Custom Validation</a></li>
-                    <li><a id="DashboardViewerLink" href="javascript:openSection('DashboardViewer')">Dashboard Viewer</a></li>
-                    <li><a id="DataMiningLink" href="javascript:openSection('DataMining')">DataMining</a></li>
-                    <li><a id="DiagnosticsSettingsLink" href="javascript:openSection('DiagnosticsSettings')">Diagnostics Settings</a></li>
-                    <li><a id="DocPopLink" href="javascript:openSection('DocPop')">Doc Pop</a></li>
-                    <li><a id="DocumentImportLink" href="javascript:openSection('DocumentImport')">Document Import</a></li>
-                    <li><a id="EFormsLoginFormProcLink" href="javascript:openSection('EFormsLoginFormProc')">E-Forms - Login Form Proc</a></li>
-                    <li><a id="FolderingLink" href="javascript:openSection('Foldering')">Foldering</a></li>
-                    <li><a id="FolderPopLink" href="javascript:openSection('FolderPop')">Folder Pop</a></li>
-                    <li><a id="FormPopLink" href="javascript:openSection('FormPop')">Form Pop</a></li>
-                    <li><a id="HealthcareWebViewerLink" href="javascript:openSection('HealthcareWebViewer')">Healthcare Web Viewer</a></li>
-                    <li><a id="LoginLink" href="javascript:openSection('Login')">Login</a></li>
-                    <li><a id="MenusLink" href="javascript:openSection('Menus')">Menus</a></li>
-                    <li><a id="MiscellaneousLink" href="javascript:openSection('Miscellaneous')">Miscellaneous</a></li>
-                    <li><a id="NavigationPanelLink" href="javascript:openSection('NavigationPanel')">Navigation Panel</a></li>
-                    <li><a id="PacketPopLink" href="javascript:openSection('PacketPop')">Packet Pop</a></li>
-                    <li><a id="PDFPopLink" href="javascript:openSection('PDFPop')">PDF Pop</a></li>
-                    <li><a id="RetrievalLink" href="javascript:openSection('Retrieval')">Retrieval</a></li>
-                    <li><a id="ServerConfigurationLink" href="javascript:openSection('ServerConfiguration')">Server Configuration</a></li>
-                    <li><a id="ViewerLink" href="javascript:openSection('Viewer')">Viewer</a></li>
-                    <li><a id="WorkflowLink" href="javascript:openSection('Workflow')">Workflow</a></li>
-                    <li><a id="WorkViewLink" href="javascript:openSection('WorkView')">WorkView</a></li>
-                    <li><a id="WebClientLink" href="javascript:openSection('WebClient')">Web Client</a></li>
+                    <li id="ActiveXLink-SettingElement"><a class="sectionLinks" id="ActiveXLink" href="javascript:openSection('ActiveX')">ActiveX</a></li>
+                    <li id="ADFSSettingsLink"><a class="sectionLinks" id="ADFSSettingsLink" href="javascript:openSection('ADFSSettings')">ADFS Settings</a></li>
+                    <li id="CustomValidationLink"><a class="sectionLinks" id="CustomValidationLink" href="javascript:openSection('CustomValidation')">Custom Validation</a></li>
+                    <li id="DashboardViewerLink"><a class="sectionLinks" id="DashboardViewerLink" href="javascript:openSection('DashboardViewer')">Dashboard Viewer</a></li>
+                    <li id="DataMiningLink"><a class="sectionLinks" id="DataMiningLink" href="javascript:openSection('DataMining')">Data Mining</a></li>
+                    <li id="DiagnosticsSettingsLink"><a class="sectionLinks" id="DiagnosticsSettingsLink" href="javascript:openSection('DiagnosticsSettings')">Diagnostics Settings</a></li>
+                    <li id="DocPopLink"><a class="sectionLinks" id="DocPopLink" href="javascript:openSection('DocPop')">Doc Pop</a></li>
+                    <li id="DocumentImportLink"><a class="sectionLinks" id="DocumentImportLink" href="javascript:openSection('DocumentImport')">Document Import</a></li>
+                    <li id="EFormsLoginFormProcLink"><a class="sectionLinks" id="EFormsLoginFormProcLink" href="javascript:openSection('EFormsLoginFormProc')">E-Forms - Login Form Proc</a></li>
+                    <li id="FolderingLink"><a class="sectionLinks" id="FolderingLink" href="javascript:openSection('Foldering')">Foldering</a></li>
+                    <li id="FolderPopLink"><a class="sectionLinks" id="FolderPopLink" href="javascript:openSection('FolderPop')">Folder Pop</a></li>
+                    <li id="FormPopLink"><a class="sectionLinks" id="FormPopLink" href="javascript:openSection('FormPop')">Form Pop</a></li>
+                    <li id="HealthcareWebViewerLink"><a class="sectionLinks" id="HealthcareWebViewerLink" href="javascript:openSection('HealthcareWebViewer')">Healthcare Web Viewer</a></li>
+                    <li id="LoginLink"><a class="sectionLinks" id="LoginLink" href="javascript:openSection('Login')">Login</a></li>
+                    <li id="MenusLink"><a class="sectionLinks" id="MenusLink" href="javascript:openSection('Menus')">Menus</a></li>
+                    <li id="MiscellaneousLink"><a class="sectionLinks" id="MiscellaneousLink" href="javascript:openSection('Miscellaneous')">Miscellaneous</a></li>
+                    <li id="NavigationPanelLink"><a class="sectionLinks" id="NavigationPanelLink" href="javascript:openSection('NavigationPanel')">Navigation Panel</a></li>
+                    <li id="PacketPopLink"><a class="sectionLinks" id="PacketPopLink" href="javascript:openSection('PacketPop')">Packet Pop</a></li>
+                    <li id="PDFPopLink"><a class="sectionLinks" id="PDFPopLink" href="javascript:openSection('PDFPop')">PDF Pop</a></li>
+                    <li id="RetrievalLink"><a class="sectionLinks" id="RetrievalLink" href="javascript:openSection('Retrieval')">Retrieval</a></li>
+                    <li id="ServerConfigurationLink"><a class="sectionLinks" id="ServerConfigurationLink" href="javascript:openSection('ServerConfiguration')">Server Configuration</a></li>
+                    <li id="ViewerLink"><a class="sectionLinks" id="ViewerLink" href="javascript:openSection('Viewer')">Viewer</a></li>
+                    <li id="WorkflowLink"><a class="sectionLinks" id="WorkflowLink" href="javascript:openSection('Workflow')">Workflow</a></li>
+                    <li id="WorkViewLink"><a class="sectionLinks" id="WorkViewLink" href="javascript:openSection('WorkView')">WorkView</a></li>
+                    <li id="WebClientLink"><a class="sectionLinks" id="WebClientLink" href="javascript:openSection('WebClient')">Web Client</a></li>
                 </ul>
             </div>
         </div>
@@ -4049,8 +4049,8 @@
         <div class="core-section-buttons-outer">
             <div class="core-section-buttons-inner">
                 <ul class="LinksList">
-                    <li><a id="IISApplicationLink" href="javascript:openSection('IISApplication')">IIS Application</a></li>
-                    <li><a id="IISApplicationPoolLink" href="javascript:openSection('IISApplicationPool')">IIS Application Pool</a></li>
+                    <li><a class="sectionLinks" id="IISApplicationLink" href="javascript:openSection('IISApplication')">IIS Application</a></li>
+                    <li><a class="sectionLinks" id="IISApplicationPoolLink" href="javascript:openSection('IISApplicationPool')">IIS Application Pool</a></li>
                 </ul>
             </div>
         </div>
