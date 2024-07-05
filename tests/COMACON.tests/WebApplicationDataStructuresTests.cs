@@ -166,7 +166,8 @@ public class WebApplicationDataStructuresTests
                 {
                     {"Hyland.Services.Client","ApplicationServer","Url","2","Application-Server-URL","http://[server]/[virtual directory]/Service.asmx","","",""},
                     {"Hyland.Services.Client","ApplicationServer","ServiceClientType","2","Service-Client-Type","SOAP","","",""},
-                    {"Hyland.Services.Client","StreamingSettings","BufferSize","2","Stream-Settings","64000","","",""}
+                    {"Hyland.Services.Client","StreamingSettings","BufferSize","2","Stream-Settings","64000","","",""},
+                    {"Hyland.Services.Client","AllowNTAuthenticationOnForwarding","Enabled","1","Allow-NT-Authentication-On-Forwarding","false","","",""}
                 }
             },
             {
@@ -5332,7 +5333,8 @@ public class WebApplicationDataStructuresTests
         DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
         List<string> valueToCheckAgainst = new List<string>
         {
-            "Allowed-Domain-SectionElement"
+            "Allowed-Domain-SectionElement",
+            "Allow-NT-Authentication-On-Forwarding-SettingElement"
         };
 
         List<string> value = dwads.getElementsToHideList("Healthcare Form Manager", "221");
@@ -5346,7 +5348,8 @@ public class WebApplicationDataStructuresTests
         DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
         List<string> valueToCheckAgainst = new List<string>
         {
-            "Allowed-Domain-SectionElement"
+            "Allowed-Domain-SectionElement",
+            "Allow-NT-Authentication-On-Forwarding-SettingElement"
         };
 
         List<string> value = dwads.getElementsToHideList("Healthcare Form Manager", "231");
@@ -5360,7 +5363,8 @@ public class WebApplicationDataStructuresTests
         DefaultWebApplicationDataStructures dwads = new DefaultWebApplicationDataStructures();
         List<string> valueToCheckAgainst = new List<string>
         {
-            "Allowed-Domain-SectionElement"
+            "Allowed-Domain-SectionElement",
+            "Allow-NT-Authentication-On-Forwarding-SettingElement"
         };
 
         List<string> value = dwads.getElementsToHideList("Healthcare Form Manager", "241");

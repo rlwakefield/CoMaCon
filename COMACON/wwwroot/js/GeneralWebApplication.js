@@ -1274,6 +1274,7 @@ async function parseData(config) {
         case "Patient Window":
             await parseHylandIdentityProvider(config["hylandIdentityProviderUrl"]);
             await parseADFS(config["hylandAuthenticationADFS"]);
+            await parseTooltips(config["tooltips"]);
             break;
         case "Public Access - Legacy":
             await parseRequiredKeywords(config["requiredKeywords"]);
