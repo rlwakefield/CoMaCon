@@ -1269,10 +1269,12 @@ async function parseData(config) {
             break;
         case "Healthcare Form Manager":
             await parseHylandIdentityProvider(config["hylandIdentityProviderUrl"]);
+            await parseTooltips(config["tooltips"]);
             break;
         case "Patient Window":
             await parseHylandIdentityProvider(config["hylandIdentityProviderUrl"]);
             await parseADFS(config["hylandAuthenticationADFS"]);
+            await parseTooltips(config["tooltips"]);
             break;
         case "Public Access - Legacy":
             await parseRequiredKeywords(config["requiredKeywords"]);
