@@ -390,7 +390,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <label for="IIS-Configuration-Application-Application-Pool">Application Pool: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="IIS-Configuration-Application-Application-Pool-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <input type="text" name="IIS-Configuration-Application-Application-Pool" id="IIS-Configuration-Application-Application-Pool" disabled>
@@ -399,7 +399,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <label for="IIS-Configuration-Application-Default-Document">Default Document: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="IIS-Configuration-Application-Default-Document-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <input type="text" name="IIS-Configuration-Application-Default-Document" id="IIS-Configuration-Application-Default-Document">
@@ -408,7 +408,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <span>Pre-Load Enabled: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="IIS-Configuration-Application-PreLoad-Enabled-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <label for="IIS-Configuration-Application-PreLoad-Enabled" class="switch">
@@ -429,7 +429,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <span>Anonymous Authentication: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="IIS-Configuration-Application-Anonymous-Authentication-RootSpecific-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <label for="IIS-Configuration-Application-Anonymous-Authentication-RootSpecific" class="switch">
@@ -441,7 +441,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <span>ASP.NET Impersonation: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="IIS-Configuration-Application-ASPNET-Impersonation-RootSpecific-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <label for="IIS-Configuration-Application-ASPNET-Impersonation-RootSpecific" class="switch">
@@ -453,7 +453,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <span>Windows Authentication: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="IIS-Configuration-Application-Windows-Authentication-RootSpecific-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <label for="IIS-Configuration-Application-Windows-Authentication-RootSpecific" class="switch">
@@ -465,7 +465,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <span>Use Application Pool Credentials: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="IIS-Configuration-Application-Use-Application-Pool-Credentials-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <label for="IIS-Configuration-Application-Use-Application-Pool-Credentials" class="switch">
@@ -478,7 +478,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div name="IisConfigurationApplicationFileSpecificAuthentication" class="row" style="display: none;">
+                            @* <div name="IisConfigurationApplicationFileSpecificAuthentication" class="row" style="display: none;">
                                 <div class="sectionWithTitleBar">
                                     <div class="titleBar" name="Title-Bar">
                                         File Specific Authentication
@@ -537,7 +537,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> *@
                         </div>
                         <div id="IISApplicationPoolSection" class="tabcontent">
                             <div class="row">
@@ -550,7 +550,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <label for="Iis-Configuration-Application-AppPool-General-Net-CLR-Version">.NET CLR Version: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="Iis-Configuration-Application-AppPool-General-Net-CLR-Version-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <input type="text" name="Iis-Configuration-Application-AppPool-General-Net-CLR-Version" id="Iis-Configuration-Application-AppPool-General-Net-CLR-Version" disabled>
@@ -559,7 +559,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <span>Enable 32-Bit Applications: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="Iis-Configuration-Application-AppPool-General-Enable-32-Bit-Applications-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <label for="Iis-Configuration-Application-AppPool-General-Enable-32-Bit-Applications" class="switch">
@@ -571,7 +571,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <label for="Iis-Configuration-Application-AppPool-General-Managed-Pipeline-Mode">Managed Pipeline Mode: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="Iis-Configuration-Application-AppPool-General-Managed-Pipeline-Mode-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <select name="Iis-Configuration-Application-AppPool-General-Managed-Pipeline-Mode" id="Iis-Configuration-Application-AppPool-General-Managed-Pipeline-Mode">
@@ -583,7 +583,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <label for="Iis-Configuration-Application-AppPool-General-Queue-Length">Queue Length: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="Iis-Configuration-Application-AppPool-General-Queue-Length-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <input type="number" pattern="[0-9]*" inputmode="numeric" name="Iis-Configuration-Application-AppPool-General-Queue-Length" id="Iis-Configuration-Application-AppPool-General-Queue-Length" value="10000">
@@ -592,7 +592,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <label for="Iis-Configuration-Application-AppPool-General-Start-Mode">Start Mode: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="Iis-Configuration-Application-AppPool-General-Start-Mode-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <select name="Iis-Configuration-Application-AppPool-General-Start-Mode" id="Iis-Configuration-Application-AppPool-General-Start-Mode">
@@ -613,7 +613,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <label for="Iis-Configuration-Application-AppPool-Process-Model-Identity-Type">Identity Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Type-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <select name="Iis-Configuration-Application-AppPool-Process-Model-Identity-Type" id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Type" onchange="processModelIdentityTypeChanged(this)">
@@ -628,7 +628,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <label for="Iis-Configuration-Application-AppPool-Process-Model-Identity-Username">Identity (Username): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Username-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Username-RequiredSvg" class="requiredAlertSvg">
@@ -640,7 +640,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <label for="Iis-Configuration-Application-AppPool-Process-Model-Identity-Password">Identity (Password): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Password-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Password-RequiredSvg" class="requiredAlertSvg">
@@ -660,7 +660,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <label for="Iis-Configuration-Application-AppPool-Process-Model-Idle-Time-out">Idle Time-out (Minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="Iis-Configuration-Application-AppPool-Process-Model-Idle-Time-out-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <input type="number" pattern="[0-9]*" inputmode="numeric" name="Iis-Configuration-Application-AppPool-Process-Model-Idle-Time-out" id="Iis-Configuration-Application-AppPool-Process-Model-Idle-Time-out">
@@ -669,7 +669,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <span>Ping Enabled: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="Iis-Configuration-Application-AppPool-Process-Model-Ping-Enabled-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <label for="Iis-Configuration-Application-AppPool-Process-Model-Ping-Enabled" class="switch">
@@ -692,7 +692,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <label for="Iis-Configuration-Application-AppPool-Cpu-Limit-Interval">Limit Interval (minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="Iis-Configuration-Application-AppPool-Cpu-Limit-Interval-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <input type="number" pattern="[0-9]*" inputmode="numeric" name="Iis-Configuration-Application-AppPool-Cpu-Limit-Interval" id="Iis-Configuration-Application-AppPool-Cpu-Limit-Interval">
@@ -710,7 +710,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <span>Enabled</span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="Iis-Configuration-Application-AppPool-Rapid-Fail-Protection-Enabled-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <label for="Iis-Configuration-Application-AppPool-Rapid-Fail-Protection-Enabled" class="switch">
@@ -733,7 +733,7 @@
                                             <div class="settingElement">
                                                 <div class="labelElement">
                                                     <label for="Iis-Configuration-Application-AppPool-Regular-Time-Interval">Regular Time Interval (minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                    <span class="tooltiptext">This is the help text.</span>
+                                                    <span id="Iis-Configuration-Application-AppPool-Regular-Time-Interval-Tooltip" class="tooltiptext">This is the help text.</span>
                                                 </div>
                                                 <div class="inputElement">
                                                     <input type="number" pattern="[0-9]*" inputmode="numeric" name="Iis-Configuration-Application-AppPool-Regular-Time-Interval" id="Iis-Configuration-Application-AppPool-Regular-Time-Interval" value="0">
@@ -757,7 +757,7 @@
                                         <div class="settingElement">
                                             <div class="labelElement">
                                                 <label for="DiagnosticsSettings-TruncateLogValues">Number of characters to truncate log sections to: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                <span class="tooltiptext">This is the help text.</span>
+                                                <span id="DiagnosticsSettings-TruncateLogValues-Tooltip" class="tooltiptext">This is the help text.</span>
                                             </div>
                                             <div class="inputElement">
                                                 <input type="number" pattern="[0-9]*" inputmode="numeric" name="DiagnosticsSettings-TruncateLogValues" id="DiagnosticsSettings-TruncateLogValues">
@@ -766,7 +766,7 @@
                                         <div class="settingElement">
                                             <div class="labelElement">
                                                 <label for="DiagnosticsSettings-WindowsEventLogging-SourceName">Windows Event Logging Source Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                                <span class="tooltiptext">This is the help text.</span>
+                                                <span id="DiagnosticsSettings-WindowsEventLogging-SourceName-Tooltip" class="tooltiptext">This is the help text.</span>
                                             </div>
                                             <div class="inputElement">
                                                 <input type="text" name="DiagnosticsSettings-WindowsEventLogging-SourceName" id="DiagnosticsSettings-WindowsEventLogging-SourceName">
@@ -776,7 +776,7 @@
                                 </div>
                             </div>
                             <div class="" style="display:flex;justify-content:space-between;">
-                                <div class="column" style="width: 30%;padding:0;">
+                                <div class="column" style="min-width: fit-content;max-width: 30%;padding:0;">
                                     <select id="DiagnosticsSettingsRoutes-SelectList" size="30" onchange="diagnosticsSettingRouteSelected(this)" style="width: 100%;">
                                     </select>
                                     <div style="display: flex;justify-content: space-around;padding-top: 5px;">

@@ -1244,11 +1244,13 @@ async function parseData(config) {
     await parseIisConfiguration(config["IisConfiguration"]);
     await parseHylandLogging(config["hylandLogging"]);
     await parseElementsToHide(config["elementsToHide"]);
+    /*await parseTooltips(config["tooltips"]);*/
 
     switch (config["Type"]) {
         case "Agenda Online":
             //await parseHylandApplicationsAgendaPubAccessPublicComment(config["hylandApplicationsAgendaPubAccessPublicComment"]);
             await parseHylandApplicationsAgendaPubAccessPublicCommentIntegrations(config);
+            await parseTooltips(config["tooltips"]);
             break;
         case "Application Server":
             await parseADFS(config["hylandAuthenticationADFS"]);
@@ -1332,6 +1334,16 @@ async function parseData(config) {
             return confirmationMessage;
         }
     });
+}
+
+async function parseTooltips(config) {
+    for (let i = 0; i < config.length; i++) {
+        if (config[i]["tooltip"].includes("<br>")) {
+            document.getElementById(config[i]["htmlId"]).innerHTML = config[i]["tooltip"];
+        } else {
+            document.getElementById(config[i]["htmlId"]).innerText = config[i]["tooltip"];
+        }
+    }
 }
 
 async function parseElementsToHide(config) {

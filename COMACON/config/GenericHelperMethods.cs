@@ -579,51 +579,43 @@ public interface GenericHelperMethods
     /// 
     /// </summary>
     /// 
-    /// <param name="ComaconHelperProxy"></param>
-    /// <param name="webApplicationType"></param>
-    /// <param name="webApplicationVersion"></param>
-    /// <param name="applicationName"></param>
-    /// <param name="applicationPath"></param>
-    /// <param name="root"></param>
-    /// <param name="webconfigconfig"></param>
-    /// <param name="config"></param>
-    /// <param name="xmlDoc"></param>
-    /// <param name="webApplicationDataStructures"></param>
-    /// <param name="siteName"></param>
-    /// <param name="physicalPath"></param>
-    /// <param name="bitness"></param>
-    /// <param name="appSettings"></param>
-    /// <param name="systemweb"></param>
-    /// <param name="manager"></param>
-    /// <returns>
-    /// 
-    /// </returns>
-    //public void processWebApplication(ComaconHelperProxy ComaconHelperProxy,
-    //    string webApplicationType,
-    //    string webApplicationVersion,
-    //    string applicationName,
-    //    string applicationPath,
-    //    XmlNode root,
-    //    webApplicationWebConfigConfiguration webconfigconfig,
-    //    Configuration config,
-    //    XmlDocument xmlDoc,
-    //    WebApplicationDataStructures webApplicationDataStructures,
-    //    string siteName,
-    //    string physicalPath,
-    //    string bitness,
-    //    XmlNode appSettings,
-    //    XmlNode systemweb,
-    //    ServerManager manager);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// 
     /// <param name="physicalPath"></param>
     /// <param version="version"></param>
     /// <returns>
     /// 
     /// </returns>
-    public void CheckHylandDllFiles(string physicalPath, string version);
+    public void CheckHylandDllFiles(string physicalPath,
+        string version);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// 
+    /// <param name="webconfigconfig"></param>
+    /// <param version="type"></param>
+    /// <param version="version"></param>
+    /// <param version="wads"></param>
+    /// <returns>
+    /// 
+    /// </returns>
+    public void getTootips(webApplicationWebConfigConfiguration webconfigconfig,
+        string type,
+        string version,
+        WebApplicationDataStructures wads);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// 
+    /// <param name="webconfigconfig"></param>
+    /// <param version="type"></param>
+    /// <param version="version"></param>
+    /// <param version="wads"></param>
+    /// <returns>
+    /// 
+    /// </returns>
+    public void getGenericWebApplicationTooltips(webApplicationWebConfigConfiguration webconfigconfig,
+        string type,
+        string version,
+        WebApplicationDataStructures wads);
 }
 
 internal class DefaultGenericHelperMethods : GenericHelperMethods
@@ -1135,62 +1127,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         }
     }
 
-    //public void processWebApplication(ComaconHelperProxy ComaconHelperProxy, string webApplicationType, string webApplicationVersion, string applicationName, string applicationPath, XmlNode root, webApplicationWebConfigConfiguration webconfigconfig, Configuration config, XmlDocument xmlDoc, WebApplicationDataStructures webApplicationDataStructures, string siteName, string physicalPath, string bitness, XmlNode appSettings, XmlNode systemweb, ServerManager manager)
-    //{
-
-
-    //    switch (webApplicationType)
-    //    {
-    //        case "Web Server":
-    //            processTranslator(ComaconHelperProxy, webApplicationType, webApplicationVersion, applicationName, applicationPath, root, webconfigconfig, config, xmlDoc, webApplicationDataStructures);
-    //            ParseCoreConfigurationData(webconfigconfig, webApplicationType, webApplicationVersion, applicationName, siteName, physicalPath, applicationPath, bitness);
-    //            ParseWebApplicationSectionsTranslator(webApplicationDataStructures, webconfigconfig, root, xmlDoc, webApplicationType, webApplicationVersion);
-    //            getElementsToHide(webconfigconfig, webApplicationType, webApplicationVersion, webApplicationDataStructures);
-    //            ParseKeys(webconfigconfig, appSettings, "KeywordDropdownTypeaheadCharacterMinimum");
-    //            getHealthcareWebViewerEnabled(webconfigconfig, root.SelectSingleNode("system.webServer"));
-    //            break;
-    //    }
-
-    //    LoadIisConfiguration(webconfigconfig, manager, siteName, applicationPath, applicationName, systemweb, config);
-    //}
-
-    //public void processWebApplicationV2(ComaconHelperProxy ComaconHelperProxy, webApplicationWebConfigConfiguration webconfigconfig, WebApplicationDataStructures webApplicationDataStructures, TextReader reader, string webApplicationType, string webApplicationVersion, string siteName, string applicationName, string applicationPath, string physicalPath, string bitness)
-    //{
-    //    //Pre-paring work.
-    //    var validXml = reader.ReadToEnd();
-
-    //    XmlDocument xmlDoc = new XmlDocument();
-    //    xmlDoc.LoadXml(validXml);
-
-    //    ServerManager manager = new ServerManager();
-    //    Configuration config = manager.GetWebConfiguration(siteName + applicationPath + applicationName);
-
-    //    XmlNode root = xmlDoc.DocumentElement;
-    //    XmlNode appSettings = root.SelectSingleNode("appSettings");
-    //    XmlNode systemweb = root.SelectSingleNode("system.web");
-
-    //    switch (webApplicationType)
-    //    {
-    //        case "Web Server":
-    //            switch (webApplicationVersion)
-    //            {
-    //                case "211":
-    //                    break;
-    //                default:
-    //                    processTranslator(ComaconHelperProxy, webApplicationType, webApplicationVersion, applicationName, applicationPath, root, webconfigconfig, config, xmlDoc, webApplicationDataStructures);
-    //                    ParseCoreConfigurationData(webconfigconfig, webApplicationType, webApplicationVersion, applicationName, siteName, physicalPath, applicationPath, bitness);
-    //                    ParseWebApplicationSectionsTranslator(webApplicationDataStructures, webconfigconfig, root, xmlDoc, webApplicationType, webApplicationVersion);
-    //                    getElementsToHide(webconfigconfig, webApplicationType, webApplicationVersion, webApplicationDataStructures);
-    //                    ParseKeys(webconfigconfig, appSettings, "KeywordDropdownTypeaheadCharacterMinimum");
-    //                    getHealthcareWebViewerEnabled(webconfigconfig, root.SelectSingleNode("system.webServer"));
-    //                    break;
-    //            }
-    //            break;
-    //    }
-
-    //    LoadIisConfiguration(webconfigconfig, manager, siteName, applicationPath, applicationName, systemweb, config);
-    //}
-
     public void processTranslator(ComaconHelperProxy ComaconHelperProxy, string webApplicationType, string webApplicationVersion, string applicationName, string applicationPath, XmlNode root, webApplicationWebConfigConfiguration webconfigconfig, Configuration config, XmlDocument xmlDoc, WebApplicationDataStructures webApplicationDataStructures)
     {
         try
@@ -1226,7 +1162,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
             Log.Logger.Error("Type: {0}", webApplicationType);
             webconfigconfig.AddCriticalError("Error getting the string to send to COMACON Helper Utility. See the log file for more details.");
         }
-        
     }
 
 
@@ -2291,7 +2226,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         try
         {
             bool validattribute = false;
-            //string attrname = "";
             List<Key> tempkeys = new List<Key>();
             //Loops over all of the known keys.
             foreach (Key k in ds.knownKeys)
@@ -2339,41 +2273,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         }
     }
 
-    //private void ParseHylandApplicationsAgendaPubAccessPublicCommentExtraKeys(webApplicationWebConfigConfiguration ds, XmlNode node, string sect)
-    //{
-    //    try
-    //    {
-    //        HylandApplicationsAgendaPubAccessPublicComment h = new HylandApplicationsAgendaPubAccessPublicComment();
-    //        foreach (XmlNode n in node.SelectSingleNode("integrations/integration/meeting_types"))
-    //        {
-    //            if (n.Name == "meeting_type")
-    //            {
-    //                MeetingType mt = new MeetingType();
-    //                mt.Name = n.Attributes["name"].Value;
-    //                h.meetingTypes.Add(mt);
-    //            }
-    //        }
-
-    //        foreach (XmlNode n1 in node.SelectSingleNode("integrations/integration/agenda_fields"))
-    //        {
-    //            if (n1.Name == "field")
-    //            {
-    //                AgendaField af = new AgendaField();
-    //                af.Name = n1.Attributes["name"].Value;
-    //                af.FormFieldID = n1.Attributes["form_field_id"].Value;
-    //                h.agendaUnityFormFields.Add(af);
-    //            }
-    //        }
-    //        ds.hylandApplicationsAgendaPubAccessPublicComment = h;
-    //    }
-    //    catch (Exception e)
-    //    {
-    //        Log.Logger.Warning(e.Message);
-    //        Log.Logger.Warning(e.StackTrace);
-    //        Log.Logger.Warning("Error processing Hyland.Applications.AgendaPubAccessPublicComment keys.");
-    //    }
-    //}
-
     private void ParseHylandApplicationsAgendaPubAccessPublicComment(webApplicationWebConfigConfiguration ds, XmlNode node, string sect)
     {
         try
@@ -2403,7 +2302,7 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
 
                     foreach (XmlNode n2 in node.SelectSingleNode("integrations/integration/meeting_types"))
                     {
-                        if (n2.Name == "meeting_type")
+                        if (n2.Name == "meeting_type" && n2.Attributes["name"].Value != "")
                         {
                             MeetingType mt = new MeetingType();
                             mt.Name = n2.Attributes["name"].Value;
@@ -2758,150 +2657,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
             Log.Logger.Error(e.StackTrace);
         }
     }
-
-    //private void parseApplicationServerTranslator(NETCoreToNetFrameworkTranslator translator, webApplicationWebConfigConfiguration webconfigconfig)
-    //{
-    //    try
-    //    {
-    //        foreach (Key keys in webconfigconfig.knownKeys)
-    //        {
-    //            switch (keys.Section)
-    //            {
-    //                case "Hyland.Web.AppServerPop":
-    //                    switch (keys.PathName)
-    //                    {
-    //                        case "EnableChecksum":
-    //                            keys.Value = translator.ApplicationServer.AppServerPopIntegration.EnableCheckSum;
-    //                            break;
-    //                        case "ChecksumKey":
-    //                            keys.Value = translator.ApplicationServer.AppServerPopIntegration.ChecksumKey;
-    //                            break;
-    //                        case "EnableLegacyChecksumCreation":
-    //                            keys.Value = translator.ApplicationServer.AppServerPopIntegration.EnableLegacyChecksumCreation;
-    //                            break;
-    //                        case "IsEncrypted":
-    //                            keys.Value = translator.ApplicationServer.AppServerPopIntegration.IsEncrypted;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case "Hyland.Applications.Portals.ExternalAccess":
-    //                    switch (keys.PathName)
-    //                    {
-    //                        case "username":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerExernalAccess.Username;
-    //                            break;
-    //                        case "password":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerExernalAccess.Password;
-    //                            break;
-    //                        case "minPoolSize":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerExernalAccess.MinPoolSize;
-    //                            break;
-    //                        case "maxPoolSize":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerExernalAccess.MaxPoolSize;
-    //                            break;
-    //                        case "IsEncrypted":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerExernalAccess.IsEncrypted;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case "Hyland.ContentComposer.Core":
-    //                    switch (keys.PathName)
-    //                    {
-    //                        case "ClientId":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerContentComposer.ClientID;
-    //                            break;
-    //                        case "ClientSecret":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerContentComposer.ClientSecret;
-    //                            break;
-    //                        case "Username":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerContentComposer.Username;
-    //                            break;
-    //                        case "Password":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerContentComposer.Password;
-    //                            break;
-    //                        case "IsEncrypted":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerContentComposer.IsEncrypted;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case "Hyland.Core.Media.HostedApplicationServer":
-    //                    switch (keys.PathName)
-    //                    {
-    //                        case "url":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerMedia.URL;
-    //                            break;
-    //                        case "datasource":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerMedia.Datasource;
-    //                            break;
-    //                        case "username":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerMedia.Username;
-    //                            break;
-    //                        case "password":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerMedia.Password;
-    //                            break;
-    //                        case "IsEncrypted":
-    //                            keys.Value = translator.ApplicationServer.ApplicationServerMedia.IsEncrypted;
-    //                            break;
-    //                    }
-    //                    break;
-    //            }
-    //        }
-    //    }
-    //    catch (Exception e)
-    //    {
-    //        Log.Logger.Error(e.Message);
-    //        Log.Logger.Error(e.StackTrace);
-    //    }
-
-    //    try
-    //    {
-    //        /********************************************************
-    //         *                  Connection Strings
-    //         ********************************************************/
-    //        //! Will pull all of this from the translator object due to potential encryption.
-    //        //ConnectionStringsDataStructure cstrings = new ConnectionStringsDataStructure();
-    //        ConnectionStrings connectionStrings = new ConnectionStrings();
-    //        webconfigconfig.connectionStrings = connectionStrings;
-    //        if(translator.ApplicationServer.AppServerConnectionStrings.ConnectionStrings.Count > 0)
-    //        {
-    //            foreach (COMACONTranslationToHelperUtility.ConnectionString cstring in translator.ApplicationServer.AppServerConnectionStrings.ConnectionStrings)
-    //            {
-    //                ConnectionString cstring1 = new ConnectionString();
-    //                cstring1.Name = cstring.Name;
-    //                cstring1.Provider = cstring.ProviderName;
-    //                cstring1.IntegratedSecurity = cstring.IntegratedSecurity;
-    //                cstring1.UserId = cstring.UserID;
-    //                cstring1.Password = cstring.Password;
-    //                cstring1.AdditionalOptions = cstring.AdditionalParameters;
-    //                switch (cstring.ProviderName)
-    //                {
-    //                    case "System.Data.SqlClient":
-    //                        ConnectionStringSql cstringsql = new ConnectionStringSql();
-    //                        cstringsql.DataSource = cstring.DataSource;
-    //                        cstringsql.Database = cstring.Database;
-    //                        cstring1.sql = cstringsql;
-    //                        break;
-    //                    case "Oracle.ManagedDataAccess.Client":
-    //                        ConnectionStringOracle cstringoracle = new ConnectionStringOracle();
-    //                        cstringoracle.TNSConnectionString = cstring.TnsConnectionString;
-    //                        cstringoracle.Host = cstring.OracleHost;
-    //                        cstringoracle.Database = cstring.Database;
-    //                        cstringoracle.Protocol = cstring.OracleProtocol;
-    //                        cstringoracle.Port = cstring.OraclePort;
-    //                        cstring1.oracle = cstringoracle;
-    //                        break;
-    //                }
-    //                webconfigconfig.connectionStrings.connectionStrings.Add(cstring1);
-    //            }
-    //            connectionStrings.EncryptConnectionStrings = translator.ApplicationServer.AppServerConnectionStrings.IsEncrypted;
-    //        }
-    //    }
-    //    catch (Exception e)
-    //    {
-    //        Log.Logger.Error(e.Message);
-    //        Log.Logger.Error(e.StackTrace);
-    //    }
-    //}
 
 
     /********************************************************
@@ -5479,44 +5234,45 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                 }
                 break;
         }
-        ////Check if the Hyland.Applications.Web.dll file exists in the OtherDependencies folder.
-        //if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\OtherDependencies\Hyland.Applications.Web.dll") && File.Exists(physicalPath + @"\bin\Hyland.Applications.Web.dll"))
-        //{
-        //    File.Copy(physicalPath + @"\bin\Hyland.Applications.Web.dll", AppDomain.CurrentDomain.BaseDirectory + @"\OtherDependencies\Hyland.Applications.Web.dll");
-        //}
-        //else
-        //{
-        //    if(File.Exists(physicalPath + @"\bin\Hyland.Applications.Web.dll"))
-        //    {
-        //        FileVersionInfo webAppHylandApplicationsWebDllVersionInfo = FileVersionInfo.GetVersionInfo(physicalPath + @"\bin\Hyland.Applications.Web.dll");
-        //        FileVersionInfo comaconHylandApplicationsWebDllVersionInfo = FileVersionInfo.GetVersionInfo(AppDomain.CurrentDomain.BaseDirectory + @"\OtherDependencies\Hyland.Applications.Web.dll");
-        //        int comparisonResult = (new Version(comaconHylandApplicationsWebDllVersionInfo.FileVersion)).CompareTo(new Version(webAppHylandApplicationsWebDllVersionInfo.FileVersion));
+    }
 
-        //        if(comparisonResult < 0)
-        //        {
-        //            File.Copy(physicalPath + @"\bin\Hyland.Applications.Web.dll", AppDomain.CurrentDomain.BaseDirectory + @"\OtherDependencies\Hyland.Applications.Web.dll", true);
-        //        }
-        //    }
-        //}
+    public void getTootips(webApplicationWebConfigConfiguration webconfigconfig, string type, string version, WebApplicationDataStructures wads)
+    {
+        List<List<string>> tooltips = wads.getTooltips(type, version);
 
-        ////Check if the Hyland.Applications.Server.dll file exists in the OtherDependencies folder.
-        //if(!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\OtherDependencies\Hyland.Applications.Server.dll") && File.Exists(physicalPath + @"\bin\Hyland.Applications.Server.dll"))
-        //{
-        //    File.Copy(physicalPath + @"\bin\Hyland.Applications.Server.dll", AppDomain.CurrentDomain.BaseDirectory + @"\OtherDependencies\Hyland.Applications.Server.dll");
-        //}
-        //else
-        //{
-        //    if(File.Exists(physicalPath + @"\bin\Hyland.Applications.Server.dll"))
-        //    {
-        //        FileVersionInfo webAppHylandApplicationsServerDllVersionInfo = FileVersionInfo.GetVersionInfo(physicalPath + @"\bin\Hyland.Applications.Server.dll");
-        //        FileVersionInfo comaconHylandApplicationsServerDllVersionInfo = FileVersionInfo.GetVersionInfo(AppDomain.CurrentDomain.BaseDirectory + @"\OtherDependencies\Hyland.Applications.Server.dll");
-        //        int comparisonResult = (new Version(comaconHylandApplicationsServerDllVersionInfo.FileVersion)).CompareTo(new Version(webAppHylandApplicationsServerDllVersionInfo.FileVersion));
+        foreach (var tooltip in tooltips)
+        {
+            try
+            {
+                Tooltip tt = new Tooltip();
+                tt.htmlId = tooltip[0];
+                tt.tooltip = tooltip[1];
+                webconfigconfig.tooltips.Add(tt);
+            }
+            catch
+            {
+                Log.Logger.Warning("Error processing tooltip element: {0}", tooltip);
+            }
+        }
+    }
 
-        //        if (comparisonResult < 0)
-        //        {
-        //            File.Copy(physicalPath + @"\bin\Hyland.Applications.Server.dll", AppDomain.CurrentDomain.BaseDirectory + @"\OtherDependencies\Hyland.Applications.Server.dll", true);
-        //        }
-        //    }
-        //}
+    public void getGenericWebApplicationTooltips(webApplicationWebConfigConfiguration webconfigconfig, string type, string version, WebApplicationDataStructures wads)
+    {
+        Dictionary<string, string> tooltips = wads.getGenericWebApplicationTooltips(type, version);
+
+        foreach (var tooltip in tooltips)
+        {
+            try
+            {
+                Tooltip tt = new Tooltip();
+                tt.htmlId = tooltip.Key;
+                tt.tooltip = tooltip.Value;
+                webconfigconfig.tooltips.Add(tt);
+            }
+            catch
+            {
+                Log.Logger.Warning("Error processing tooltip element: {0}", tooltip);
+            }
+        }
     }
 }
