@@ -57,6 +57,7 @@ public class webApplicationWebConfigConfiguration
     public ElementsToHide elementsToHide = new ElementsToHide();
     public ProcessingErrors processingErrors = new ProcessingErrors();
     public List<HylandApplicationsAgendaPubAccessPublicComment> publicCommentIntegrations = new List<HylandApplicationsAgendaPubAccessPublicComment>();
+    public List<Tooltip> tooltips = new List<Tooltip>();
     
     public void AddCriticalError(string message)
     {
@@ -574,4 +575,14 @@ public class SavingResults
 {
     public List<string> CriticalErrors = new List<string>();
     public List<string> NonCriticalErrors = new List<string>();
+}
+
+
+/********************************************************
+*                   Tooltips Object
+********************************************************/
+public class Tooltip
+{
+    public string? htmlId { get; set; }
+    public string? tooltip { get; set; }
 }

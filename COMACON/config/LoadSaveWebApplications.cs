@@ -89,13 +89,15 @@ internal sealed class DefaultLoadSaveWebApplications : LoadSaveWebApplications
         GenericHelperMethods.ParseWebApplicationSectionsTranslator(webApplicationDataStructures, webconfigconfig, root, xmlDoc, webApplicationType, webApplicationVersion.Split('.')[0] + webApplicationVersion.Split('.')[1]);
         GenericHelperMethods.processTranslator(ComaconHelperProxy, webApplicationType, webApplicationVersion.Split('.')[0] + webApplicationVersion.Split('.')[1], applicationName, applicationPath, root, webconfigconfig, config, xmlDoc, webApplicationDataStructures);
         GenericHelperMethods.getElementsToHide(webconfigconfig, webApplicationType, webApplicationVersion.Split('.')[0] + webApplicationVersion.Split('.')[1], webApplicationDataStructures);
+        GenericHelperMethods.getTootips(webconfigconfig, webApplicationType, webApplicationVersion.Split('.')[0] + webApplicationVersion.Split('.')[1], webApplicationDataStructures);
+        GenericHelperMethods.getGenericWebApplicationTooltips(webconfigconfig, webApplicationType, webApplicationVersion.Split('.')[0] + webApplicationVersion.Split('.')[1], webApplicationDataStructures);
 
-        switch(webApplicationType)
+        switch (webApplicationType)
         {
             case "Application Server":
                 GenericHelperMethods.ParseSessionAdministration(webconfigconfig, physicalPath + @"\Admin\sessionAdminSecurity.config");
                 break;
-            case "Agenda Online Server":
+            case "Agenda Online":
                 break;
             case "Electronic Plan Review":
                 break;

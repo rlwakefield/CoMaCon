@@ -8,7 +8,7 @@ let AgendaOnlineIntegrationsCoreFieldIds = ["Integration-Name", "Integration-URL
 let AgendaOnlineIntegrationsUnityFormsFieldIds = ["Form-Field-Name", "Form-Field-ID"];
 let AgendaOnlineIntegrationsMeetingTypesFieldIds = ["Meeting-Type-Name"];
 let AgendaOnlineIntegrationsRequiredMeetingTypes = ["meeting_name", "meeting_date", "item_id", "item_title"];
-let AgendaOnlineIntegrationsNewIntegrationObject = { "meetingTypes": [{ "Name": "" }], "agendaUnityFormFields": [{ "Name": "meeting_name", "FormFieldID": "" }, { "Name": "meeting_date", "FormFieldID": "" }, { "Name": "item_id", "FormFieldID": "" }, { "Name": "item_title", "FormFieldID": "" }], "Name": "[Integration Name]", "URL": "[URL from Unity forms config]", "Token": "[Token from Unity forms config]", "AvailabilityFromMeetingStart": "0", "id": "" };
+let AgendaOnlineIntegrationsNewIntegrationObject = { "meetingTypes": [], "agendaUnityFormFields": [{ "Name": "meeting_name", "FormFieldID": "" }, { "Name": "meeting_date", "FormFieldID": "" }, { "Name": "item_id", "FormFieldID": "" }, { "Name": "item_title", "FormFieldID": "" }], "Name": "[Integration Name]", "URL": "[URL from Unity forms config]", "Token": "[Token from Unity forms config]", "AvailabilityFromMeetingStart": "0", "id": "" };
 let AgendaOnlineIntegrationsNewUnityFormFieldObject = { "Name": "[Name]", "FormFieldID": "[Field ID from Unity Form]", "id": "" };
 let AgendaOnlineIntegrationsNewMeetingTypeObject = { "Name": "[Name]", "id": "" };
 
