@@ -1264,6 +1264,9 @@ async function parseData(config) {
             await prepareAndSetDefaultTimeZoneOptions();
             await parseTooltips(config["tooltips"]);
             break;
+        case "Gateway Caching Server":
+            await parseTooltips(config["tooltips"]);
+            break;
         case "Healthcare Form Manager":
             await parseHylandIdentityProvider(config["hylandIdentityProviderUrl"]);
             break;
@@ -1339,7 +1342,7 @@ async function parseData(config) {
 
 async function parseTooltips(config) {
     for (let i = 0; i < config.length; i++) {
-        //console.log(config[i]);
+        console.log(config[i]);
         if (config[i]["tooltip"].includes("<br>")) {
             document.getElementById(config[i]["htmlId"]).innerHTML = config[i]["tooltip"];
         } else {

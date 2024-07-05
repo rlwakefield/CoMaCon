@@ -5351,20 +5351,20 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
 
     private readonly List<List<string>> GatewayCachingServer211Tooltips = new List<List<string>>
     {
-        new List<string> {"Application-Server-URL-Tooltip",""},
-        new List<string> {"Service-Client-Type-Tooltip",""},
+        new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
+        new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
         new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
         new List<string> {"Optimized-Service-Pipeline-Tooltip",""},
         new List<string> {"Stream-Settings-Tooltip",""},
-        new List<string> {"Gateway-Name-Tooltip",""},
-        new List<string> {"DataSource-Tooltip",""},
-        new List<string> {"Cache-Path-Tooltip",""},
-        new List<string> {"Allow-Insecure-Connections-Tooltip",""},
+        new List<string> {"Gateway-Name-Tooltip","Name of the Gateway Caching Server configured in Gateway Caching Server Configuration."},
+        new List<string> {"DataSource-Tooltip","The OnBase database this ASG is connecting to on the Application Server."},
+        new List<string> {"Cache-Path-Tooltip","This is the local disk path for the ASG cache. This should not be a UNC path."},
+        new List<string> {"Allow-Insecure-Connections-Tooltip","Allow non-HTTPS connections."},
         new List<string> {"HTTP-Runtime-Maximum-Request-Length-Tooltip",""},
         new List<string> {"HTTP-Runtime-Execution-Timeout-Tooltip",""},
-        new List<string> {"GWCS-Username-Tooltip",""},
-        new List<string> {"GWCS-Password-Tooltip",""},
-        new List<string> {"Encrypt-Login-Settings-Tooltip",""}
+        new List<string> {"GWCS-Username-Tooltip","Service Account that connects ASG to the Application Server. This user retrieves the documents that cache automatically."},
+        new List<string> {"GWCS-Password-Tooltip","Password for the Service Account."},
+        new List<string> {"Encrypt-Login-Settings-Tooltip", "Encrypt ASG settings for enhanced security." }
     };
 
     private readonly List<List<string>> HealthcareFormManager211Tooltips = new List<List<string>>
@@ -5955,20 +5955,20 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
 
     private readonly List<List<string>> GatewayCachingServer221Tooltips = new List<List<string>>
     {
-        new List<string> {"Application-Server-URL-Tooltip",""},
-        new List<string> {"Service-Client-Type-Tooltip",""},
+        new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
+        new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
         new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
         new List<string> {"Optimized-Service-Pipeline-Tooltip",""},
         new List<string> {"Stream-Settings-Tooltip",""},
-        new List<string> {"Gateway-Name-Tooltip",""},
-        new List<string> {"DataSource-Tooltip",""},
-        new List<string> {"Cache-Path-Tooltip",""},
-        new List<string> {"Allow-Insecure-Connections-Tooltip",""},
+        new List<string> {"Gateway-Name-Tooltip","Name of the Gateway Caching Server configured in Gateway Caching Server Configuration."},
+        new List<string> {"DataSource-Tooltip","The OnBase database this ASG is connecting to on the Application Server."},
+        new List<string> {"Cache-Path-Tooltip","This is the local disk path for the ASG cache. This should not be a UNC path."},
+        new List<string> {"Allow-Insecure-Connections-Tooltip","Allow non-HTTPS connections."},
         new List<string> {"HTTP-Runtime-Maximum-Request-Length-Tooltip",""},
         new List<string> {"HTTP-Runtime-Execution-Timeout-Tooltip",""},
-        new List<string> {"GWCS-Username-Tooltip",""},
-        new List<string> {"GWCS-Password-Tooltip",""},
-        new List<string> {"Encrypt-Login-Settings-Tooltip",""}
+        new List<string> {"GWCS-Username-Tooltip","Service Account that connects ASG to the Application Server. This user retrieves the documents that cache automatically."},
+        new List<string> {"GWCS-Password-Tooltip","Password for the Service Account."},
+        new List<string> {"Encrypt-Login-Settings-Tooltip", "Encrypt ASG settings for enhanced security." }
     };
 
     private readonly List<List<string>> HealthcareFormManager221Tooltips = new List<List<string>>
@@ -6519,20 +6519,20 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
 
     private readonly List<List<string>> GatewayCachingServer231Tooltips = new List<List<string>>
     {
-        new List<string> {"Application-Server-URL-Tooltip",""},
-        new List<string> {"Service-Client-Type-Tooltip",""},
+        new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
+        new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
         new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
         new List<string> {"Optimized-Service-Pipeline-Tooltip",""},
         new List<string> {"Stream-Settings-Tooltip",""},
-        new List<string> {"Gateway-Name-Tooltip",""},
-        new List<string> {"DataSource-Tooltip",""},
-        new List<string> {"Cache-Path-Tooltip",""},
-        new List<string> {"Allow-Insecure-Connections-Tooltip",""},
+        new List<string> {"Gateway-Name-Tooltip","Name of the Gateway Caching Server configured in Gateway Caching Server Configuration."},
+        new List<string> {"DataSource-Tooltip","The OnBase database this ASG is connecting to on the Application Server."},
+        new List<string> {"Cache-Path-Tooltip","This is the local disk path for the ASG cache. This should not be a UNC path."},
+        new List<string> {"Allow-Insecure-Connections-Tooltip","Allow non-HTTPS connections."},
         new List<string> {"HTTP-Runtime-Maximum-Request-Length-Tooltip",""},
         new List<string> {"HTTP-Runtime-Execution-Timeout-Tooltip",""},
-        new List<string> {"GWCS-Username-Tooltip",""},
-        new List<string> {"GWCS-Password-Tooltip",""},
-        new List<string> {"Encrypt-Login-Settings-Tooltip",""}
+        new List<string> {"GWCS-Username-Tooltip","Service Account that connects ASG to the Application Server. This user retrieves the documents that cache automatically."},
+        new List<string> {"GWCS-Password-Tooltip","Password for the Service Account."},
+        new List<string> {"Encrypt-Login-Settings-Tooltip", "Encrypt ASG settings for enhanced security." }
     };
 
     private readonly List<List<string>> HealthcareFormManager231Tooltips = new List<List<string>>
