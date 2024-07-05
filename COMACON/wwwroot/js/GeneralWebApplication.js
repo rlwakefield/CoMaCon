@@ -1269,6 +1269,7 @@ async function parseData(config) {
             break;
         case "Healthcare Form Manager":
             await parseHylandIdentityProvider(config["hylandIdentityProviderUrl"]);
+            await parseTooltips(config["tooltips"]);
             break;
         case "Patient Window":
             await parseHylandIdentityProvider(config["hylandIdentityProviderUrl"]);
