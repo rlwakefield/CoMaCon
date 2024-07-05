@@ -13,7 +13,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="EPR-Username">Username: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="EPR-Username-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="EPR-Username" id="EPR-Username">
@@ -22,7 +22,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="EPR-Password">Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="EPR-Password-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="password" name="EPR-Password" id="EPR-Password">
@@ -39,7 +39,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Data-Source">Data  Source: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Data-Source-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Data-Source" id="Data-Source">
@@ -48,7 +48,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Encrypt Electronic Plan Review: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Encrypt-Electronic-Plan-Review-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Encrypt-Electronic-Plan-Review" class="switch">
@@ -70,7 +70,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Application-Server-URL">Application Server URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Application-Server-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <div id="Application-Server-URL-Loader" class="loader"></div>
@@ -80,7 +80,7 @@
             <div class="settingElement">
                 <div>
                     <label for="HTTP-Runtime-Maximum-Request-Length">HTTP Runtime Maximum Request Length (KB): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="HTTP-Runtime-Maximum-Request-Length-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div>
                     <input type="number" pattern="[0-9]*" inputmode="numeric" name="HTTP-Runtime-Maximum-Request-Length" id="HTTP-Runtime-Maximum-Request-Length">
@@ -91,7 +91,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Service-Client-Type">Service Client Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Service-Client-Type-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <select name="Service-Client-Type" id="Service-Client-Type">
@@ -103,7 +103,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Max-Allowed-Content-Length">Max Allowed Content Length (Bytes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Max-Allowed-Content-Length-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" pattern="[0-9]*" inputmode="numeric" name="Max-Allowed-Content-Length" id="Max-Allowed-Content-Length">
@@ -123,7 +123,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Allow Sign On: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Allow-Sign-On-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Allow-Sign-On" class="switch">
@@ -135,7 +135,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Allow Sign Off: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Allow-Sign-Off-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Allow-Sign-Off" class="switch">
@@ -154,7 +154,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="File-Upload-Directory">File Upload Directory: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="File-Upload-Directory-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="File-Upload-Directory" id="File-Upload-Directory">
@@ -163,7 +163,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="File-Upload-Validator">File Upload Validator: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="File-Upload-Validator-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="File-Upload-Validator" id="File-Upload-Validator">
@@ -181,7 +181,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Public-CAPTCHA-Key">Public CAPTCHA Key: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Public-CAPTCHA-Key-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Public-CAPTCHA-Key" id="Public-CAPTCHA-Key">
@@ -190,7 +190,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Private-CAPTCHA-Key">Private CAPTCHA Key: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Private-CAPTCHA-Key-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Private-CAPTCHA-Key" id="Private-CAPTCHA-Key">
@@ -206,7 +206,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Password-Strength-Pattern">Password Strength Pattern: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Password-Strength-Pattern-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Password-Strength-Pattern" id="Password-Strength-Pattern">
@@ -215,7 +215,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Password-Strength-Message">Password Strength Message: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Password-Strength-Message-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Password-Strength-Message" id="Password-Strength-Message">
@@ -224,7 +224,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Reset-Password-Link-Lifetime">Reset Password Link Lifetime: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Reset-Password-Link-Lifetime-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="Reset-Password-Link-Lifetime" id="Reset-Password-Link-Lifetime">
@@ -245,7 +245,7 @@
                         <div class="settingElement">
                             <div class="labelElement">
                                 <label for="Stylesheet-Directory-Location">Stylesheet Directory Location: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                <span class="tooltiptext">This is the help text.</span>
+                                <span id="Stylesheet-Directory-Location-Tooltip" class="tooltiptext">This is the help text.</span>
                             </div>
                             <div class="inputElement">
                                 <input type="text" name="Stylesheet-Directory-Location" id="Stylesheet-Directory-Location">
@@ -254,7 +254,7 @@
                         <div class="settingElement">
                             <div class="labelElement">
                                 <label for="Search-Start-Year">Search Start Year: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                <span class="tooltiptext">This is the help text.</span>
+                                <span id="Search-Start-Year-Tooltip" class="tooltiptext">This is the help text.</span>
                             </div>
                             <div class="inputElement">
                                 <input type="number" name="Search-Start-Year" id="Search-Start-Year">
@@ -263,7 +263,7 @@
                         <div class="settingElement">
                             <div class="labelElement">
                                 <label for="Max-Lookup-Results">Max Lookup Results: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                <span class="tooltiptext">This is the help text.</span>
+                                <span id="Max-Lookup-Results-Tooltip" class="tooltiptext">This is the help text.</span>
                             </div>
                             <div class="inputElement">
                                 <input type="number" name="Max-Lookup-Results" id="Max-Lookup-Results">
@@ -274,7 +274,7 @@
                         <div class="settingElement">
                             <div class="labelElement">
                                 <label for="Default-User-Time-Zone">Default User Time Zone: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                <span class="tooltiptext">This is the help text.</span>
+                                <span id="Default-User-Time-Zone-Tooltip" class="tooltiptext">This is the help text.</span>
                             </div>
                             <div class="inputElement">
                                 <select name="Default-User-Time-Zone" id="Default-User-Time-Zone">
@@ -284,7 +284,7 @@
                         <div class="settingElement">
                             <div class="labelElement">
                                 <label for="Items-Per-Page">Items Per Page: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                <span class="tooltiptext">This is the help text.</span>
+                                <span id="Items-Per-Page-Tooltip" class="tooltiptext">This is the help text.</span>
                             </div>
                             <div class="inputElement">
                                 <input type="number" name="Items-Per-Page" id="Items-Per-Page">
@@ -293,7 +293,7 @@
                         <div class="settingElement">
                             <div class="labelElement">
                                 <label for="Discipline-Items-Per-Menu">Discipline Items Per Menu: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                <span class="tooltiptext">This is the help text.</span>
+                                <span id="Discipline-Items-Per-Menu-Tooltip" class="tooltiptext">This is the help text.</span>
                             </div>
                             <div class="inputElement">
                                 <input type="number" name="Discipline-Items-Per-Menu" id="Discipline-Items-Per-Menu">
@@ -302,7 +302,7 @@
                         <div class="settingElement">
                             <div class="labelElement">
                                 <label for="Username-Validation-Pattern">Username Validation Pattern: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                <span class="tooltiptext">This is the help text.</span>
+                                <span id="Username-Validation-Pattern-Tooltip" class="tooltiptext">This is the help text.</span>
                             </div>
                             <div class="inputElement">
                                 <input type="text" name="Username-Validation-Pattern" id="Username-Validation-Pattern">
@@ -320,7 +320,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Allow Single Sign On: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Allow-Single-Sign-On-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Allow-Single-Sign-On" class="switch">
@@ -332,7 +332,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Resolution-Mode">Resolution Mode: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Resolution-Mode-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Resolution-Mode" id="Resolution-Mode">
@@ -343,7 +343,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Token Authentication: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Token-Authentication-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Token-Authentication" class="switch">
@@ -355,7 +355,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Source-ID">Source ID: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Source-ID-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Source-ID" id="Source-ID">
@@ -376,11 +376,11 @@
         <div class="core-section-buttons-outer">
             <div class="core-section-buttons-inner">
                 <ul>
-                    <li><a id="DiagnosticsSettingsLink" href="javascript:openSection('DiagnosticsSettings')">Diagnostics Settings</a></li>
-                    <li><a id="ElectronicPlanReviewLink" href="javascript:openSection('ElectronicPlanReview')">Electronic Plan Review</a></li>
-                    <li><a id="ServerConfigurationLink" href="javascript:openSection('ServerConfiguration')">Server Configuration</a></li>
-                    <li><a id="SettingsLink" href="javascript:openSection('Settings')">Settings</a></li>
-                    <li><a id="SingleSignOnLink" href="javascript:openSection('SingleSignOn')">Single Sign-On</a></li>
+                    <li id="DiagnosticsSettingsLink-SettingElement"><a id="DiagnosticsSettingsLink" href="javascript:openSection('DiagnosticsSettings')">Diagnostics Settings</a></li>
+                    <li id="ElectronicPlanReviewLink-SettingElement"><a id="ElectronicPlanReviewLink" href="javascript:openSection('ElectronicPlanReview')">Electronic Plan Review</a></li>
+                    <li id="ServerConfigurationLink-SettingElement"><a id="ServerConfigurationLink" href="javascript:openSection('ServerConfiguration')">Server Configuration</a></li>
+                    <li id="SettingsLink-SettingElement"><a id="SettingsLink" href="javascript:openSection('Settings')">Settings</a></li>
+                    <li id="SingleSignOnLink-SettingElement"><a id="SingleSignOnLink" href="javascript:openSection('SingleSignOn')">Single Sign-On</a></li>
                 </ul>
             </div>
         </div>

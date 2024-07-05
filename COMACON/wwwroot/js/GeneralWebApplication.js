@@ -338,7 +338,7 @@ async function setBooleanFieldValue(config, elementID, booleanKeyName) {
 async function setOtherFieldValue(config, elementID, otherKeyName) {
     //console.log((config["minimumValue"]) != undefined);
     //console.log((config["maximumValue"]) != undefined);
-    //console.log(otherKeyName);
+    //console.log(config);
     document.getElementById(elementID).value = config[otherKeyName];
     if (config["minimumValue"] != "" && config["minimumValue"] != undefined) {
         if (config["maximumValue"] != "") {
@@ -356,7 +356,7 @@ async function setOtherFieldValue(config, elementID, otherKeyName) {
             });
             await validateNumericValue(document.getElementById(elementID));
         }
-    } else if (config["maximumValue"] != "" && config["maximumValue"] != undefined) {
+    } else if (config["maximumValue"] != "" && config["minimumValue"] != undefined) {
         document.getElementById(elementID).setAttribute("max", config["maximumValue"]);
         document.getElementById(elementID).addEventListener("input", function () {
             validateNumericValue(document.getElementById(elementID));
@@ -1262,6 +1262,7 @@ async function parseData(config) {
             break;
         case "Electronic Plan Review":
             await prepareAndSetDefaultTimeZoneOptions();
+            await parseTooltips(config["tooltips"]);
             break;
         case "Healthcare Form Manager":
             await parseHylandIdentityProvider(config["hylandIdentityProviderUrl"]);
@@ -1338,6 +1339,7 @@ async function parseData(config) {
 
 async function parseTooltips(config) {
     for (let i = 0; i < config.length; i++) {
+        //console.log(config[i]);
         if (config[i]["tooltip"].includes("<br>")) {
             document.getElementById(config[i]["htmlId"]).innerHTML = config[i]["tooltip"];
         } else {
