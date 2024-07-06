@@ -1287,6 +1287,7 @@ async function parseData(config) {
         case "Reporting Viewer":
             await parseWindowsAuthOptimization(config["WindowsAuthOptimizeFor"]);
             await parseHylandIdentityProvider(config["hylandIdentityProviderUrl"]);
+            await parseTooltips(config["tooltips"]);
             break;
         case "Web Server":
             await parseHylandIdentityProvider(config["hylandIdentityProviderUrl"]);
