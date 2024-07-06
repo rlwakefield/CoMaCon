@@ -5357,7 +5357,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
     {
         new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
         new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
-        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
+        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip","If enabled, allows the web server to forward NT credentials to the Application Server. Only turn this flag on when using NT authentication."},
         new List<string> {"Optimized-Service-Pipeline-Tooltip",""},
         new List<string> {"Stream-Settings-Tooltip",""},
         new List<string> {"Gateway-Name-Tooltip","Name of the Gateway Caching Server configured in Gateway Caching Server Configuration."},
@@ -5471,28 +5471,28 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
 
     private readonly List<List<string>> PublicAccessLegacy211Tooltips = new List<List<string>>
     {
-        new List<string> {"Encrypt-Doc-ID-Tooltip",""},
-        new List<string> {"Encrypt-Folder-ID-Tooltip",""},
-        new List<string> {"Checksum-Key-Tooltip",""},
-        new List<string> {"Use-Display-Columns-Tooltip",""},
-        new List<string> {"Query-Limit-Tooltip",""},
-        new List<string> {"Chunk-Size-Tooltip",""},
-        new List<string> {"Viewer-Mode-Tooltip",""},
-        new List<string> {"Cache-Path-Tooltip",""},
-        new List<string> {"Expiration-Time-Tooltip",""},
-        new List<string> {"Max-Cache-Size-Tooltip",""},
-        new List<string> {"Size-to-Cache-Tooltip",""},
-        new List<string> {"Size-to-Prompt-Tooltip",""},
+        new List<string> {"Encrypt-Doc-ID-Tooltip","Set to true to encrypt the document ID when displaying search results."},
+        new List<string> {"Encrypt-Folder-ID-Tooltip","Encrypt Folder ID"},
+        new List<string> {"Checksum-Key-Tooltip","The checksum key to use when document ID encryption is enabled."},
+        new List<string> {"Use-Display-Columns-Tooltip","Set to true to use the configured Custom Query display columns when displaying search results."},
+        new List<string> {"Query-Limit-Tooltip","Search results will be limited to this number. Set to 0 for unlimited queries."},
+        new List<string> {"Chunk-Size-Tooltip","Chunk size (in bytes) to use when downloading documents."},
+        new List<string> {"Viewer-Mode-Tooltip","Set to PDF to convert documents to PDF format and stream to the viewer. Set to Native to download files in their native format. Set to Native Optional to stream files as PDF and provide a link in the viewer to download the file in its native format."},
+        new List<string> {"Cache-Path-Tooltip","Cache path"},
+        new List<string> {"Expiration-Time-Tooltip","Expiration time (in days)"},
+        new List<string> {"Max-Cache-Size-Tooltip","Maximum cache size on disk (GB)"},
+        new List<string> {"Size-to-Cache-Tooltip","Documents with a file size equal to or greater than Size to Cache (MB) should be cached."},
+        new List<string> {"Size-to-Prompt-Tooltip","Documents with a file size equal to or greater than Size to Prompt (MB) will display the browser's open/save dialog."},
         new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
         new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
-        new List<string> {"SOAP-Client-Request-Timeout-Tooltip",""},
-        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
+        new List<string> {"SOAP-Client-Request-Timeout-Tooltip","Timeout (in seconds) for service requests when using the SOAP client. The HttpRuntime Execution Timeout on the Application Server must be greater than or equal to this value."},
+        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip","If enabled, allows the web server to forward NT credentials to the Application Server. Only turn this flag on when using NT authentication."},
         new List<string> {"Stream-Settings-Tooltip",""},
         new List<string> {"HTTP-Runtime-Execution-Timeout-Tooltip","Execution timeout (in seconds) for requests to the Application Server."},
-        new List<string> {"PAVL-Username-Tooltip",""},
-        new List<string> {"PAVL-Password-Tooltip",""},
-        new List<string> {"Data-Source-Tooltip",""},
-        new List<string> {"Encrypt-Public-Access-Configuration-Tooltip",""}
+        new List<string> {"PAVL-Username-Tooltip","Default User Name"},
+        new List<string> {"PAVL-Password-Tooltip","Default Password"},
+        new List<string> {"Data-Source-Tooltip","Default Data Source"},
+        new List<string> {"Encrypt-Public-Access-Configuration-Tooltip", "Encrypt Public Access keys for enhanced security." }
     };
 
     private readonly List<List<string>> PublicAccessNextGen211Tooltips = new List<List<string>>
@@ -5515,7 +5515,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
         new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
         new List<string> {"SOAP-Client-Request-Timeout-Tooltip",""},
-        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
+        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip","If enabled, allows the web server to forward NT credentials to the Application Server. Only turn this flag on when using NT authentication."},
         new List<string> {"Stream-Settings-Tooltip",""},
         new List<string> {"HTTP-Runtime-Execution-Timeout-Tooltip","Execution timeout (in seconds) for requests to the Application Server."},
         new List<string> {"PAVNG-Username-Tooltip",""},
@@ -5528,7 +5528,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
     {
         new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
         new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
-        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
+        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip","If enabled, allows the web server to forward NT credentials to the Application Server. Only turn this flag on when using NT authentication."},
         new List<string> {"Optimized-Service-Pipeline-Tooltip",""},
         new List<string> {"Request-Timeout-Tooltip",""},
         new List<string> {"Stream-Settings-Tooltip",""},
@@ -5557,7 +5557,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
     {
         new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
         new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
-        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
+        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip","If enabled, allows the web server to forward NT credentials to the Application Server. Only turn this flag on when using NT authentication."},
         new List<string> {"Stream-Settings-Tooltip",""},
         new List<string> {"Core-Data-Source-Tooltip",""},
         new List<string> {"Web-Virtual-Directory-Tooltip",""},
@@ -5970,7 +5970,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
     {
         new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
         new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
-        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
+        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip","If enabled, allows the web server to forward NT credentials to the Application Server. Only turn this flag on when using NT authentication."},
         new List<string> {"Optimized-Service-Pipeline-Tooltip",""},
         new List<string> {"Stream-Settings-Tooltip",""},
         new List<string> {"Gateway-Name-Tooltip","Name of the Gateway Caching Server configured in Gateway Caching Server Configuration."},
@@ -6112,7 +6112,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
     {
         new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
         new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
-        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
+        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip","If enabled, allows the web server to forward NT credentials to the Application Server. Only turn this flag on when using NT authentication."},
         new List<string> {"Optimized-Service-Pipeline-Tooltip",""},
         new List<string> {"Request-Timeout-Tooltip",""},
         new List<string> {"Stream-Settings-Tooltip",""},
@@ -6142,7 +6142,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
     {
         new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
         new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
-        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
+        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip","If enabled, allows the web server to forward NT credentials to the Application Server. Only turn this flag on when using NT authentication."},
         new List<string> {"Stream-Settings-Tooltip",""},
         new List<string> {"Core-Data-Source-Tooltip",""},
         new List<string> {"Web-Virtual-Directory-Tooltip",""},
@@ -6542,7 +6542,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
     {
         new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
         new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
-        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
+        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip","If enabled, allows the web server to forward NT credentials to the Application Server. Only turn this flag on when using NT authentication."},
         new List<string> {"Optimized-Service-Pipeline-Tooltip",""},
         new List<string> {"Stream-Settings-Tooltip",""},
         new List<string> {"Gateway-Name-Tooltip","Name of the Gateway Caching Server configured in Gateway Caching Server Configuration."},
@@ -6692,7 +6692,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
     {
         new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
         new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
-        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
+        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip","If enabled, allows the web server to forward NT credentials to the Application Server. Only turn this flag on when using NT authentication."},
         new List<string> {"Optimized-Service-Pipeline-Tooltip",""},
         new List<string> {"Request-Timeout-Tooltip",""},
         new List<string> {"Stream-Settings-Tooltip",""},
@@ -6722,7 +6722,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
     {
         new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
         new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
-        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
+        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip","If enabled, allows the web server to forward NT credentials to the Application Server. Only turn this flag on when using NT authentication."},
         new List<string> {"Stream-Settings-Tooltip",""},
         new List<string> {"Core-Data-Source-Tooltip",""},
         new List<string> {"Web-Virtual-Directory-Tooltip",""},
@@ -7263,7 +7263,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
     {
         new List<string> {"Application-Server-URL-Tooltip","The URL of the Application Server must end with 'Service.asmx' for SOAP or 'Service.rem' for Remoting."},
         new List<string> {"Service-Client-Type-Tooltip","The service client can use a remote or SOAP server."},
-        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip",""},
+        new List<string> {"Allow-NT-Authentication-On-Forwarding-Tooltip","If enabled, allows the web server to forward NT credentials to the Application Server. Only turn this flag on when using NT authentication."},
         new List<string> {"Optimized-Service-Pipeline-Tooltip",""},
         new List<string> {"Request-Timeout-Tooltip",""},
         new List<string> {"Stream-Settings-Tooltip",""},

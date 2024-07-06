@@ -1278,6 +1278,7 @@ async function parseData(config) {
             break;
         case "Public Access - Legacy":
             await parseRequiredKeywords(config["requiredKeywords"]);
+            await parseTooltips(config["tooltips"]);
             break;
         case "Public Access - Next Gen":
             await parseRequiredKeywords(config["requiredKeywords"]);
