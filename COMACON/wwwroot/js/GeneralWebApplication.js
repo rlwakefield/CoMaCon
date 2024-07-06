@@ -1282,6 +1282,7 @@ async function parseData(config) {
             break;
         case "Public Access - Next Gen":
             await parseRequiredKeywords(config["requiredKeywords"]);
+            await parseTooltips(config["tooltips"]);
             break;
         case "Reporting Viewer":
             await parseWindowsAuthOptimization(config["WindowsAuthOptimizeFor"]);
