@@ -1530,7 +1530,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","ItemCacheTimeout","2","Item-Cache-Timeout","60","","",""},
                 {"appSettings","add","RawImagesAllowed","1","Raw-Images","true","","",""},
                 {"appSettings","add","UseIsolatedImageProcess","1","Use-Isolated-Image-Process","true","","",""},
-                {"appSettings","add","CompressionQuality","2","Compression-Quality","70","","",""},
+                {"appSettings","add","CompressionQuality","2","Compression-Quality","80","","",""},
                 {"appSettings","add","EnableIsolatedChromiumProcess","1","Enable-Isolated-Chromium-Process","true","","",""},
                 {"appSettings","add","FormSaveToTiffTimeout","2","Form-Save-To-TIFF-Timeout","60","","",""},
                 {"appSettings","add","PrintImageFormViaPDF","1","Print-Image-Form-Via-PDF","false","","",""},
@@ -1595,12 +1595,12 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             "Hyland.PlatterManagement", new string[,]
             {
                 {"Hyland.PlatterManagement","Logging/FileIODetail","value","1","File-IO-Detail","false","","",""},
-                {"Hyland.PlatterManagement","ForeignStorageDevices/EMCTHRESHOLD","value","2","Foreign-Storage-EMC-Threshold","","","",""},
+                {"Hyland.PlatterManagement","ForeignStorageDevices/EMCTHRESHOLD","value","2","Foreign-Storage-EMC-Threshold","75","","",""},
                 {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheLocation","value","2","Foreign-Storage-PM-Cache-Location","","","",""},
-                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheTimeout","value","2","Foreign-Storage-PM-Cache-Timeout","","","",""},
-                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheSize","value","2","Foreign-Storage-PM-Cache-Size","","","",""},
+                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheTimeout","value","2","Foreign-Storage-PM-Cache-Timeout","60","","",""},
+                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheSize","value","2","Foreign-Storage-PM-Cache-Size","500","","",""},
                 {"Hyland.PlatterManagement","FileAccess/PMAccessLevel","value","2","PM-File-Access-Level","0","","",""},
-                {"Hyland.PlatterManagement","TemporaryFiles/TempFileExpirationThreshold","value","2","Temp-File-Expiration-Threshold-Time","","","",""}
+                {"Hyland.PlatterManagement","TemporaryFiles/TempFileExpirationThreshold","value","2","Temp-File-Expiration-Threshold-Time","5","","",""}
             }
         },
         {
@@ -1640,7 +1640,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         {
             "Hyland.WorkView.Core", new string[,]
             {
-                {"Hyland.WorkView.Core","UnityEditableFilterMaxRows","value","2","Unity-Editable-Filter-Max-Rows","20","","",""},
+                {"Hyland.WorkView.Core","UnityEditableFilterMaxRows","value","2","Unity-Editable-Filter-Max-Rows","250","","","2000"},
                 {"Hyland.WorkView.Core","ERPDateFormat","value","2","ERP-Date-Format-LOB-Broker","yyyyMMdd","","",""},
                 {"Hyland.WorkView.Core","FormattedTextIframeSupportedDomains","value","2","Formatted-Text-Iframe-Supported-Domains","","","",""}
             }
@@ -1677,7 +1677,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             {
                 {"system.web","httpRuntime","maxRequestLength","2","Http-Runtime-Maximum-Request-Length","30000","","",""},
                 {"system.web","httpRuntime","executionTimeout","2","Http-Runtime-Execution-Timeout","300","","",""},
-                {"system.web","sessionState","timeout","2","Session-Timeout-Length","20","","",""}
+                {"system.web","sessionState","timeout","2","Session-Timeout-Length","20","","2","1440"}
             }
         },
         {
@@ -1758,7 +1758,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","displaySingleDocument","1","Display-Single-Document","true","","",""},
                 {"appSettings","add","EnableBriefcaseEDM","1","EDM-Briefcase","true","","",""},
                 {"appSettings","add","DisplayRelatedDocuments","2","Display-Related-Documents","always","","",""},
-                {"appSettings","add","WorkflowUserInteractionHeight","2","Workflow-Height-px","375","","",""},
+                {"appSettings","add","WorkflowUserInteractionHeight","2","Workflow-Height-px","375","","150",""},
                 {"appSettings","add","ShowCombinedInbox","1","Show-Combined-Inbox","true","","",""},
                 {"appSettings","add","OverrideUILanguage","1","Override-UI-Language","false","","",""},
                 {"appSettings","add","DefaultUILocale","2","Default-UI-Local","default","","",""},
@@ -1860,7 +1860,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","EnableLegacyChecksumFallback","1","Enabled-Legacy-Checksum-Fallback","false","","",""},
                 {"appSettings","add","EnableLoginAutocomplete","1","Enable-Login-Autocomplete","false","","",""},
                 {"appSettings","add","WindowsServerLocaleFormat","2","Windows-Server-Locale-Format","","","",""},
-                {"appSettings","add","MaxImportQueueSize","2","Maximum-Import-Queue-Size","5","","",""},
+                {"appSettings","add","MaxImportQueueSize","2","Maximum-Import-Queue-Size","5","","1","25"},
                 {"appSettings","add","EnableDesktopHost","1","Enable-Desktop-Host","true","","",""},
                 {"appSettings","add","EnableBrowserPdfViewer","1","Enable-Browser-PDF-Viewer","true","","",""},
                 {"appSettings","add","MultiFormViewerOrigin","2","Multi-Form-Viewer-Origin","[origin]","","",""}
@@ -2328,7 +2328,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","ItemCacheTimeout","2","Item-Cache-Timeout","60","","",""},
                 {"appSettings","add","RawImagesAllowed","1","Raw-Images","true","","",""},
                 {"appSettings","add","UseIsolatedImageProcess","1","Use-Isolated-Image-Process","true","","",""},
-                {"appSettings","add","CompressionQuality","2","Compression-Quality","70","","",""},
+                {"appSettings","add","CompressionQuality","2","Compression-Quality","80","","",""},
                 {"appSettings","add","EnableIsolatedChromiumProcess","1","Enable-Isolated-Chromium-Process","true","","",""},
                 {"appSettings","add","FormSaveToTiffTimeout","2","Form-Save-To-TIFF-Timeout","60","","",""},
                 {"appSettings","add","PrintImageFormViaPDF","1","Print-Image-Form-Via-PDF","false","","",""},
@@ -2396,12 +2396,12 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             "Hyland.PlatterManagement", new string[,]
             {
                 {"Hyland.PlatterManagement","Logging/FileIODetail","value","1","File-IO-Detail","false","","",""},
-                {"Hyland.PlatterManagement","ForeignStorageDevices/EMCTHRESHOLD","value","2","Foreign-Storage-EMC-Threshold","","","",""},
+                {"Hyland.PlatterManagement","ForeignStorageDevices/EMCTHRESHOLD","value","2","Foreign-Storage-EMC-Threshold","75","","",""},
                 {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheLocation","value","2","Foreign-Storage-PM-Cache-Location","","","",""},
-                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheTimeout","value","2","Foreign-Storage-PM-Cache-Timeout","","","",""},
-                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheSize","value","2","Foreign-Storage-PM-Cache-Size","","","",""},
+                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheTimeout","value","2","Foreign-Storage-PM-Cache-Timeout","60","","",""},
+                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheSize","value","2","Foreign-Storage-PM-Cache-Size","500","","",""},
                 {"Hyland.PlatterManagement","FileAccess/PMAccessLevel","value","2","PM-File-Access-Level","0","","",""},
-                {"Hyland.PlatterManagement","TemporaryFiles/TempFileExpirationThreshold","value","2","Temp-File-Expiration-Threshold-Time","","","",""}
+                {"Hyland.PlatterManagement","TemporaryFiles/TempFileExpirationThreshold","value","2","Temp-File-Expiration-Threshold-Time","5","","",""}
             }
         },
         {
@@ -2439,7 +2439,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         {
             "Hyland.WorkView.Core", new string[,]
             {
-                {"Hyland.WorkView.Core","UnityEditableFilterMaxRows","value","2","Unity-Editable-Filter-Max-Rows","20","","",""},
+                {"Hyland.WorkView.Core","UnityEditableFilterMaxRows","value","2","Unity-Editable-Filter-Max-Rows","250","","","2000"},
                 {"Hyland.WorkView.Core","ERPDateFormat","value","2","ERP-Date-Format-LOB-Broker","yyyyMMdd","","",""},
                 {"Hyland.WorkView.Core","FormattedTextIframeSupportedDomains","value","2","Formatted-Text-Iframe-Supported-Domains","","","",""}
             }
@@ -2468,7 +2468,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             {
                 {"system.web","httpRuntime","maxRequestLength","2","Http-Runtime-Maximum-Request-Length","30000","","",""},
                 {"system.web","httpRuntime","executionTimeout","2","Http-Runtime-Execution-Timeout","300","","",""},
-                {"system.web","sessionState","timeout","2","Session-Timeout-Length","20","","",""}
+                {"system.web","sessionState","timeout","2","Session-Timeout-Length","20","","2","1440"}
             }
         },
         {
@@ -2547,7 +2547,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","PromptOnSessionExpire","1","Prompt-On-Session-Expire","true","","",""},
                 {"appSettings","add","displaySingleDocument","1","Display-Single-Document","true","","",""},
                 {"appSettings","add","DisplayRelatedDocuments","2","Display-Related-Documents","always","","",""},
-                {"appSettings","add","WorkflowUserInteractionHeight","2","Workflow-Height-px","375","","",""},
+                {"appSettings","add","WorkflowUserInteractionHeight","2","Workflow-Height-px","375","","150",""},
                 {"appSettings","add","ShowCombinedInbox","1","Show-Combined-Inbox","true","","",""},
                 {"appSettings","add","OverrideUILanguage","1","Override-UI-Language","false","","",""},
                 {"appSettings","add","DefaultUILocale","2","Default-UI-Local","default","","",""},
@@ -2630,7 +2630,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","EnableLegacyChecksumFallback","1","Enabled-Legacy-Checksum-Fallback","false","","",""},
                 {"appSettings","add","EnableLoginAutocomplete","1","Enable-Login-Autocomplete","false","","",""},
                 {"appSettings","add","WindowsServerLocaleFormat","2","Windows-Server-Locale-Format","","","",""},
-                {"appSettings","add","MaxImportQueueSize","2","Maximum-Import-Queue-Size","5","","",""},
+                {"appSettings","add","MaxImportQueueSize","2","Maximum-Import-Queue-Size","5","","1","25"},
                 {"appSettings","add","EnableBrowserPdfViewer","1","Enable-Browser-PDF-Viewer","true","","",""},
                 {"appSettings","add","pingTimerForScanServiceInSeconds","2","Ping-Timer-For-Scan-Service","10","","",""}
             }
@@ -3112,7 +3112,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","ItemCacheTimeout","2","Item-Cache-Timeout","60","","",""},
                 {"appSettings","add","RawImagesAllowed","1","Raw-Images","true","","",""},
                 {"appSettings","add","UseIsolatedImageProcess","1","Use-Isolated-Image-Process","true","","",""},
-                {"appSettings","add","CompressionQuality","2","Compression-Quality","70","","",""},
+                {"appSettings","add","CompressionQuality","2","Compression-Quality","80","","",""},
                 {"appSettings","add","EnableIsolatedChromiumProcess","1","Enable-Isolated-Chromium-Process","true","","",""},
                 {"appSettings","add","FormSaveToTiffTimeout","2","Form-Save-To-TIFF-Timeout","60","","",""},
                 {"appSettings","add","PrintImageFormViaPDF","1","Print-Image-Form-Via-PDF","false","","",""},
@@ -3187,12 +3187,12 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             "Hyland.PlatterManagement", new string[,]
             {
                 {"Hyland.PlatterManagement","Logging/FileIODetail","value","1","File-IO-Detail","false","","",""},
-                {"Hyland.PlatterManagement","ForeignStorageDevices/EMCTHRESHOLD","value","2","Foreign-Storage-EMC-Threshold","","","",""},
+                {"Hyland.PlatterManagement","ForeignStorageDevices/EMCTHRESHOLD","value","2","Foreign-Storage-EMC-Threshold","75","","",""},
                 {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheLocation","value","2","Foreign-Storage-PM-Cache-Location","","","",""},
-                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheTimeout","value","2","Foreign-Storage-PM-Cache-Timeout","","","",""},
-                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheSize","value","2","Foreign-Storage-PM-Cache-Size","","","",""},
+                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheTimeout","value","2","Foreign-Storage-PM-Cache-Timeout","60","","",""},
+                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheSize","value","2","Foreign-Storage-PM-Cache-Size","500","","",""},
                 {"Hyland.PlatterManagement","FileAccess/PMAccessLevel","value","2","PM-File-Access-Level","0","","",""},
-                {"Hyland.PlatterManagement","TemporaryFiles/TempFileExpirationThreshold","value","2","Temp-File-Expiration-Threshold-Time","","","",""}
+                {"Hyland.PlatterManagement","TemporaryFiles/TempFileExpirationThreshold","value","2","Temp-File-Expiration-Threshold-Time","5","","",""}
             }
         },
         {
@@ -3230,7 +3230,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         {
             "Hyland.WorkView.Core", new string[,]
             {
-                {"Hyland.WorkView.Core","UnityEditableFilterMaxRows","value","2","Unity-Editable-Filter-Max-Rows","20","","",""},
+                {"Hyland.WorkView.Core","UnityEditableFilterMaxRows","value","2","Unity-Editable-Filter-Max-Rows","250","","","2000"},
                 {"Hyland.WorkView.Core","ERPDateFormat","value","2","ERP-Date-Format-LOB-Broker","yyyyMMdd","","",""},
                 {"Hyland.WorkView.Core","FormattedTextIframeSupportedDomains","value","2","Formatted-Text-Iframe-Supported-Domains","","","",""}
             }
@@ -3259,7 +3259,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             {
                 {"system.web","httpRuntime","maxRequestLength","2","Http-Runtime-Maximum-Request-Length","30000","","",""},
                 {"system.web","httpRuntime","executionTimeout","2","Http-Runtime-Execution-Timeout","300","","",""},
-                {"system.web","sessionState","timeout","2","Session-Timeout-Length","20","","",""}
+                {"system.web","sessionState","timeout","2","Session-Timeout-Length","20","","2","1440"}
             }
         },
         {
@@ -3337,7 +3337,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","PromptOnSessionExpire","1","Prompt-On-Session-Expire","true","","",""},
                 {"appSettings","add","displaySingleDocument","1","Display-Single-Document","true","","",""},
                 {"appSettings","add","DisplayRelatedDocuments","2","Display-Related-Documents","always","","",""},
-                {"appSettings","add","WorkflowUserInteractionHeight","2","Workflow-Height-px","375","","",""},
+                {"appSettings","add","WorkflowUserInteractionHeight","2","Workflow-Height-px","375","","150",""},
                 {"appSettings","add","ShowCombinedInbox","1","Show-Combined-Inbox","true","","",""},
                 {"appSettings","add","OverrideUILanguage","1","Override-UI-Language","false","","",""},
                 {"appSettings","add","DefaultUILocale","2","Default-UI-Local","default","","",""},
@@ -3419,7 +3419,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","EnableLegacyChecksumFallback","1","Enabled-Legacy-Checksum-Fallback","false","","",""},
                 {"appSettings","add","EnableLoginAutocomplete","1","Enable-Login-Autocomplete","false","","",""},
                 {"appSettings","add","WindowsServerLocaleFormat","2","Windows-Server-Locale-Format","","","",""},
-                {"appSettings","add","MaxImportQueueSize","2","Maximum-Import-Queue-Size","5","","",""},
+                {"appSettings","add","MaxImportQueueSize","2","Maximum-Import-Queue-Size","5","","1","25"},
                 {"appSettings","add","EnableBrowserPdfViewer","1","Enable-Browser-PDF-Viewer","true","","",""},
                 {"appSettings","add","pingTimerForScanServiceInSeconds","2","Ping-Timer-For-Scan-Service","10","","",""},
                 {"appSettings","add","UseLegacySharePointAuthentication","1","Use-Legacy-SharePoint-Authentication","false","","",""},
@@ -3869,7 +3869,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","ItemCacheTimeout","2","Item-Cache-Timeout","60","","",""},
                 {"appSettings","add","RawImagesAllowed","1","Raw-Images","true","","",""},
                 {"appSettings","add","UseIsolatedImageProcess","1","Use-Isolated-Image-Process","true","","",""},
-                {"appSettings","add","CompressionQuality","2","Compression-Quality","70","","",""},
+                {"appSettings","add","CompressionQuality","2","Compression-Quality","80","","",""},
                 {"appSettings","add","EnableIsolatedChromiumProcess","1","Enable-Isolated-Chromium-Process","true","","",""},
                 {"appSettings","add","FormSaveToTiffTimeout","2","Form-Save-To-TIFF-Timeout","60","","",""},
                 {"appSettings","add","PrintImageFormViaPDF","1","Print-Image-Form-Via-PDF","false","","",""},
@@ -3944,12 +3944,12 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             "Hyland.PlatterManagement", new string[,]
             {
                 {"Hyland.PlatterManagement","Logging/FileIODetail","value","1","File-IO-Detail","false","","",""},
-                {"Hyland.PlatterManagement","ForeignStorageDevices/EMCTHRESHOLD","value","2","Foreign-Storage-EMC-Threshold","","","",""},
+                {"Hyland.PlatterManagement","ForeignStorageDevices/EMCTHRESHOLD","value","2","Foreign-Storage-EMC-Threshold","75","","",""},
                 {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheLocation","value","2","Foreign-Storage-PM-Cache-Location","","","",""},
-                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheTimeout","value","2","Foreign-Storage-PM-Cache-Timeout","","","",""},
-                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheSize","value","2","Foreign-Storage-PM-Cache-Size","","","",""},
+                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheTimeout","value","2","Foreign-Storage-PM-Cache-Timeout","60","","",""},
+                {"Hyland.PlatterManagement","ForeignStorageDevices/PmCacheSize","value","2","Foreign-Storage-PM-Cache-Size","500","","",""},
                 {"Hyland.PlatterManagement","FileAccess/PMAccessLevel","value","2","PM-File-Access-Level","0","","",""},
-                {"Hyland.PlatterManagement","TemporaryFiles/TempFileExpirationThreshold","value","2","Temp-File-Expiration-Threshold-Time","","","",""}
+                {"Hyland.PlatterManagement","TemporaryFiles/TempFileExpirationThreshold","value","2","Temp-File-Expiration-Threshold-Time","5","","",""}
             }
         },
         {
@@ -3987,7 +3987,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         {
             "Hyland.WorkView.Core", new string[,]
             {
-                {"Hyland.WorkView.Core","UnityEditableFilterMaxRows","value","2","Unity-Editable-Filter-Max-Rows","20","","",""},
+                {"Hyland.WorkView.Core","UnityEditableFilterMaxRows","value","2","Unity-Editable-Filter-Max-Rows","250","","","2000"},
                 {"Hyland.WorkView.Core","ERPDateFormat","value","2","ERP-Date-Format-LOB-Broker","yyyyMMdd","","",""},
                 {"Hyland.WorkView.Core","FormattedTextIframeSupportedDomains","value","2","Formatted-Text-Iframe-Supported-Domains","","","",""}
             }
@@ -4016,7 +4016,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             {
                 {"system.web","httpRuntime","maxRequestLength","2","Http-Runtime-Maximum-Request-Length","30000","","",""},
                 {"system.web","httpRuntime","executionTimeout","2","Http-Runtime-Execution-Timeout","300","","",""},
-                {"system.web","sessionState","timeout","2","Session-Timeout-Length","20","","",""}
+                {"system.web","sessionState","timeout","2","Session-Timeout-Length","20","","2","1440"}
             }
         },
         {
@@ -4093,7 +4093,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","PromptOnSessionExpire","1","Prompt-On-Session-Expire","true","","",""},
                 {"appSettings","add","displaySingleDocument","1","Display-Single-Document","true","","",""},
                 {"appSettings","add","DisplayRelatedDocuments","2","Display-Related-Documents","always","","",""},
-                {"appSettings","add","WorkflowUserInteractionHeight","2","Workflow-Height-px","375","","",""},
+                {"appSettings","add","WorkflowUserInteractionHeight","2","Workflow-Height-px","375","","150",""},
                 {"appSettings","add","ShowCombinedInbox","1","Show-Combined-Inbox","true","","",""},
                 {"appSettings","add","OverrideUILanguage","1","Override-UI-Language","false","","",""},
                 {"appSettings","add","DefaultUILocale","2","Default-UI-Local","default","","",""},
@@ -4175,7 +4175,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
                 {"appSettings","add","EnableLegacyChecksumFallback","1","Enabled-Legacy-Checksum-Fallback","false","","",""},
                 {"appSettings","add","EnableLoginAutocomplete","1","Enable-Login-Autocomplete","false","","",""},
                 {"appSettings","add","WindowsServerLocaleFormat","2","Windows-Server-Locale-Format","","","",""},
-                {"appSettings","add","MaxImportQueueSize","2","Maximum-Import-Queue-Size","5","","",""},
+                {"appSettings","add","MaxImportQueueSize","2","Maximum-Import-Queue-Size","5","","1","25"},
                 {"appSettings","add","EnableBrowserPdfViewer","1","Enable-Browser-PDF-Viewer","true","","",""},
                 {"appSettings","add","pingTimerForScanServiceInSeconds","2","Ping-Timer-For-Scan-Service","10","","",""},
                 {"appSettings","add","UseLegacySharePointAuthentication","1","Use-Legacy-SharePoint-Authentication","false","","",""},
