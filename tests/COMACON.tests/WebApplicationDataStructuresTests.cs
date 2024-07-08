@@ -2135,8 +2135,8 @@ public class WebApplicationDataStructuresTests
                     {"Hyland.Web.DashboardViewer","useTheme","value","2","Use-Theme","light","","",""},
                     {"Hyland.Web.DashboardViewer","enableExportDashboard","value","1","Enable-Export-Dashboard","true","","",""},
                     {"Hyland.Web.DashboardViewer","enableExportDashboardItems","value","1","Enable-Export-Dashboard-Items","true","","",""},
-                    {"Hyland.Web.DashboardViewer","reportPagingLimit","value","2","Reporting-Page-Limit","50","","",""},
-                    {"Hyland.Web.DashboardViewer","dashboardCacheTimeoutSeconds","value","2","Dashboard-Cache-Timeout","2","","",""}
+                    {"Hyland.Web.DashboardViewer","reportPagingLimit","value","2","Reporting-Page-Limit","50","","",""}
+                    //{"Hyland.Web.DashboardViewer","dashboardCacheTimeoutSeconds","value","2","Dashboard-Cache-Timeout","2","","",""}
                 }
             },
             {
@@ -3406,8 +3406,8 @@ public class WebApplicationDataStructuresTests
                     {"Hyland.Web.DashboardViewer","useTheme","value","2","Use-Theme","light","","",""},
                     {"Hyland.Web.DashboardViewer","enableExportDashboard","value","1","Enable-Export-Dashboard","true","","",""},
                     {"Hyland.Web.DashboardViewer","enableExportDashboardItems","value","1","Enable-Export-Dashboard-Items","true","","",""},
-                    {"Hyland.Web.DashboardViewer","reportPagingLimit","value","2","Reporting-Page-Limit","50","","",""},
-                    {"Hyland.Web.DashboardViewer","dashboardCacheTimeoutSeconds","value","2","Dashboard-Cache-Timeout","2","","",""}
+                    {"Hyland.Web.DashboardViewer","reportPagingLimit","value","2","Reporting-Page-Limit","50","","",""}
+                    //{"Hyland.Web.DashboardViewer","dashboardCacheTimeoutSeconds","value","2","Dashboard-Cache-Timeout","2","","",""}
                 }
             },
             {
@@ -5692,7 +5692,7 @@ public class WebApplicationDataStructuresTests
             "ActiveXLink-SettingElement",
             "Reselect-Delta-SectionElement",
             "WorkView-Client-URL-SettingElement",
-            "Dashboard-Cache-Timeout-SettingElement",
+            //"Dashboard-Cache-Timeout-SettingElement",
             "Use-Theme-SettingElement",
             "Healthcare-Web-Viewer-Session-Timeout-SettingElement",
             "Allow-NT-Authentication-On-Forwarding-SettingElement",
