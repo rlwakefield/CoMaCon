@@ -1244,13 +1244,12 @@ async function parseData(config) {
     await parseIisConfiguration(config["IisConfiguration"]);
     await parseHylandLogging(config["hylandLogging"]);
     await parseElementsToHide(config["elementsToHide"]);
-    /*await parseTooltips(config["tooltips"]);*/
+    await parseTooltips(config["tooltips"]);
 
     switch (config["Type"]) {
         case "Agenda Online":
             //await parseHylandApplicationsAgendaPubAccessPublicComment(config["hylandApplicationsAgendaPubAccessPublicComment"]);
             await parseHylandApplicationsAgendaPubAccessPublicCommentIntegrations(config);
-            await parseTooltips(config["tooltips"]);
             break;
         case "Application Server":
             await parseADFS(config["hylandAuthenticationADFS"]);
@@ -1259,36 +1258,29 @@ async function parseData(config) {
             await parseHylandPlatterManagement(config["hylandPlatterManagement"]);
             await parseWindowsAuthOptimization(config["WindowsAuthOptimizeFor"]);
             await parseSessionAdministration(config["sessionAdministration"]);
-            await parseTooltips(config["tooltips"]);
+            
             break;
         case "Electronic Plan Review":
             await prepareAndSetDefaultTimeZoneOptions();
-            await parseTooltips(config["tooltips"]);
             break;
         case "Gateway Caching Server":
-            await parseTooltips(config["tooltips"]);
             break;
         case "Healthcare Form Manager":
             await parseHylandIdentityProvider(config["hylandIdentityProviderUrl"]);
-            await parseTooltips(config["tooltips"]);
             break;
         case "Patient Window":
             await parseHylandIdentityProvider(config["hylandIdentityProviderUrl"]);
             await parseADFS(config["hylandAuthenticationADFS"]);
-            await parseTooltips(config["tooltips"]);
             break;
         case "Public Access - Legacy":
             await parseRequiredKeywords(config["requiredKeywords"]);
-            await parseTooltips(config["tooltips"]);
             break;
         case "Public Access - Next Gen":
             await parseRequiredKeywords(config["requiredKeywords"]);
-            await parseTooltips(config["tooltips"]);
             break;
         case "Reporting Viewer":
             await parseWindowsAuthOptimization(config["WindowsAuthOptimizeFor"]);
             await parseHylandIdentityProvider(config["hylandIdentityProviderUrl"]);
-            await parseTooltips(config["tooltips"]);
             break;
         case "Web Server":
             await parseHylandIdentityProvider(config["hylandIdentityProviderUrl"]);
