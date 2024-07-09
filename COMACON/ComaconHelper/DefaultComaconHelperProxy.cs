@@ -1,5 +1,8 @@
 ﻿using COMACON.config;
 using System.Diagnostics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace COMACON.ComaconHelper;
 
@@ -17,7 +20,7 @@ internal class DefaultComaconHelperProxy : ComaconHelperProxy
     public string Set(string applicationPath, string applicationName, string applicationType, string serializedOutputObject, string version)
     {
         var args = generateSetArguments(applicationPath, applicationName, applicationType, serializedOutputObject);
-        //Console.WriteLine(args);
+        Console.WriteLine(args);
         using var process = CreateProcess(args, version);
 
         process.Start();
@@ -100,7 +103,10 @@ internal class DefaultComaconHelperProxy : ComaconHelperProxy
         //argument 6
         string webApplicationType = type;
         //argument 7
-        string serializedobject = serializedOutput.Replace("\"", "\"\"");
+        //string serializedobject = serializedOutput.Replace("\"", "\"\"");
+        string serializedobject = Convert.ToBase64String(ProtectedData.Protect(Encoding.UTF8.GetBytes(serializedOutput), null, DataProtectionScope.CurrentUser));
+        //var encryptedBytes = ProtectedData.Protect(Encoding.UTF8.GetBytes(data), null, DataProtectionScope.CurrentUser);
+        //var encryptedString = Convert.ToBase64String(encryptedBytes);
         //string args = $"\"{action}\" \"{subAction}\" \"{appPath}\" \"{sectionsToLoad}\" \"{nothing}\" \"{webApplicationType}\" \"{serializedobject}\"";
         string args = $"\"{action}\" \"{appPath}\" \"{webApplicationType}\" \"{serializedobject}\"";
 

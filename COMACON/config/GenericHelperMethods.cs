@@ -7,6 +7,8 @@ using System.Reflection;
 using System.Xml.Linq;
 using COMACONTranslationToHelperUtility;
 using COMACON.ComaconHelper;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace COMACON.config;
 
@@ -1133,6 +1135,8 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         {
             //Get the serialized output and store it.
             string serializedObject = ComaconHelperProxy.Get(applicationPath, applicationName, webApplicationType, webApplicationVersion);
+
+            serializedObject = Encoding.UTF8.GetString(ProtectedData.Unprotect(Convert.FromBase64String(serializedObject), null, DataProtectionScope.CurrentUser));
 
             try
             {

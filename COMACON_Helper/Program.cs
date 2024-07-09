@@ -9,6 +9,9 @@ using System.Xml;
 using System.Data.SqlClient;
 using Oracle.ManagedDataAccess.Client;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
+using System.Text;
+
 
 namespace COMACON_Helper
 {
@@ -222,9 +225,13 @@ namespace COMACON_Helper
                         }
                     }
 
-                    Console.WriteLine(JsonConvert.SerializeObject(translatorToReturn));
+                    //var data = JsonConvert.SerializeObject(translatorToReturn);
+                    //var encryptedBytes = Convert.ToBase64String(ProtectedData.Protect(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(translatorToReturn)), null, DataProtectionScope.CurrentUser));
+                    //var encryptedString = Convert.ToBase64String(encryptedBytes);
+                    Console.WriteLine(Convert.ToBase64String(ProtectedData.Protect(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(translatorToReturn)), null, DataProtectionScope.CurrentUser)));
                     break;
                 case "set":
+                    serializedInputObject = Encoding.UTF8.GetString(ProtectedData.Unprotect(Convert.FromBase64String(serializedInputObject), null, DataProtectionScope.CurrentUser));
                     var translatorToSet = JsonConvert.DeserializeObject<NETCoreToNetFrameworkTranslator>(serializedInputObject);
                     //I have a list of Key objects underneath the translatorToSet.knownKeys object. However, I need to be able to group them by the section name and then process them in that way. How would I do so?
                     var groupedKeys = translatorToSet.knownKeys.GroupBy(key => key.Section);
