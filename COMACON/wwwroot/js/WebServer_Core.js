@@ -599,71 +599,57 @@ async function navigationPanelSelectionChanged() {
 
     let navPanelContextSelectedControlBars = navPanelContextSelected[0]["ControlBars"];
 
-    let innerHTMLString1 = "";
-    let innerHTMLString2 = "";
+    document.getElementById("NavPanel-ControlsBarsSection-Col0").innerHTML = "";
+    document.getElementById("NavPanel-ControlsBarsSection-Col1").innerHTML = "";
     for (let i = 0; i < navPanelContextSelectedControlBars.length; i++) {
         if (i % 2 == 0) {
             if (navPanelContextSelectedControlBars[i]["enabled"].toLowerCase() === 'true') {
-                innerHTMLString1 += `<div class="settingElement">
-            <div class="labelElement">
-                                <span>` + navPanelContextSelectedControlBars[i]["displayName"] + `:<img class="tooltipimage" src="/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark"> </span>
-                                <span class="tooltiptext">This is the help text.</span>
-                            </div>
-                            <div>
-                                <label for="` + navPanelContextSelectedControlBars[i]["name"] + `" class="switch">
-                                    <input id="` + navPanelContextSelectedControlBars[i]["name"] + `" type="checkbox" onclick="navPanelControlBarCheckboxChanged(this)" checked>
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>`
+                await addCheckedNavigationPanel(navPanelContextSelectedControlBars[i]["displayName"], navPanelContextSelectedControlBars[i]["name"], "NavPanel-ControlsBarsSection-Col0");
             } else {
-                innerHTMLString1 += `<div class="settingElement">
-            <div class="labelElement">
-                                <span>` + navPanelContextSelectedControlBars[i]["displayName"] + `:<img class="tooltipimage" src="/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark"> </span>
-                                <span class="tooltiptext">This is the help text.</span>
-                            </div>
-                            <div>
-                                <label for="` + navPanelContextSelectedControlBars[i]["name"] + `" class="switch">
-                                    <input id="` + navPanelContextSelectedControlBars[i]["name"] + `" type="checkbox" onclick="navPanelControlBarCheckboxChanged(this)">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>`
+                await addUncheckedNavigationPanel(navPanelContextSelectedControlBars[i]["displayName"], navPanelContextSelectedControlBars[i]["name"], "NavPanel-ControlsBarsSection-Col0");
             }
         } else {
             if (navPanelContextSelectedControlBars[i]["enabled"].toLowerCase() === 'true') {
-                innerHTMLString2 += `<div class="settingElement">
-            <div class="labelElement">
-                                <span>` + navPanelContextSelectedControlBars[i]["displayName"] + `:<img class="tooltipimage" src="/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark"> </span>
-                                <span class="tooltiptext">This is the help text.</span>
-                            </div>
-                            <div>
-                                <label for="` + navPanelContextSelectedControlBars[i]["name"] + `" class="switch">
-                                    <input id="` + navPanelContextSelectedControlBars[i]["name"] + `" type="checkbox" onclick="navPanelControlBarCheckboxChanged(this)" checked>
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>`
+                await addCheckedNavigationPanel(navPanelContextSelectedControlBars[i]["displayName"], navPanelContextSelectedControlBars[i]["name"], "NavPanel-ControlsBarsSection-Col1");
             } else {
-                innerHTMLString2 += `<div class="settingElement">
-            <div class="labelElement">
-                                <span>` + navPanelContextSelectedControlBars[i]["displayName"] + `:<img class="tooltipimage" src="/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark"> </span>
-                                <span class="tooltiptext">This is the help text.</span>
-                            </div>
-                            <div>
-                                <label for="` + navPanelContextSelectedControlBars[i]["name"] + `" class="switch">
-                                    <input id="` + navPanelContextSelectedControlBars[i]["name"] + `" type="checkbox" onclick="navPanelControlBarCheckboxChanged(this)">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>`
+                await addUncheckedNavigationPanel(navPanelContextSelectedControlBars[i]["displayName"], navPanelContextSelectedControlBars[i]["name"], "NavPanel-ControlsBarsSection-Col1");
             }
         }
     }
 
-    document.getElementById("NavPanel-ControlsBarsSection-Col0").innerHTML = innerHTMLString1;
-    document.getElementById("NavPanel-ControlsBarsSection-Col1").innerHTML = innerHTMLString2;
     await disableContextFields("false");
+}
+
+async function addCheckedNavigationPanel(displayName,name,column) {
+    let innerHTMLString = `<div class="settingElement">
+            <div class="labelElement">
+                                <span>` + displayName + `: </span><img class="tooltipimage" src="/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="" class="tooltiptext"></span>
+                            </div>
+                            <div>
+                                <label for="` + name + `" class="switch">
+                                    <input id="` + name + `" type="checkbox" onclick="navPanelControlBarCheckboxChanged(this)" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>`
+    document.getElementById(column).innerHTML += innerHTMLString;
+}
+
+async function addUncheckedNavigationPanel(displayName,name,column) {
+    let innerHTMLString = `<div class="settingElement">
+            <div class="labelElement">
+                                <span>` + displayName + `: </span><img class="tooltipimage" src="/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="" class="tooltiptext"></span>
+                            </div>
+                            <div>
+                                <label for="` + name + `" class="switch">
+                                    <input id="` + name + `" type="checkbox" onclick="navPanelControlBarCheckboxChanged(this)">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>`
+    document.getElementById(column).innerHTML = innerHTMLString;
 }
 
 async function navPanelContextFieldUpdated(field) {

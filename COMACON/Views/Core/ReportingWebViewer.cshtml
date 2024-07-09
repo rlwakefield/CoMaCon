@@ -9,7 +9,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Encrypt Dashboard Viewer Settings: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Encrypt-Dashboard-Viewer-Settings-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Encrypt-Dashboard-Viewer-Settings" class="switch">
@@ -30,7 +30,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="OB-Username">Username: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="OB-Username-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="OB-Username" id="OB-Username">
@@ -39,7 +39,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="OB-Password">Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="OB-Password-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="OB-Password" id="OB-Password">
@@ -48,7 +48,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Autologin: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Autologin-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Autologin" class="switch">
@@ -60,7 +60,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Allow HTTP Parameters: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Allow-HTTP-Parameters-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Allow-HTTP-Parameters" class="switch">
@@ -79,7 +79,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="IdP-Server-Location">IdP Server Location: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="IdP-Server-Location-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <div id="IdP-Server-Location-Loader" class="loader"></div>
@@ -92,7 +92,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="IdP-Tenant">IdP Tenant: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="IdP-Tenant-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="IdP-Tenant-RequiredSvg" class="idpRequiredAlertSvg">
@@ -104,7 +104,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="IdP-Client">IdP Client: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="IdP-Client-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="IdP-Client-RequiredSvg" class="idpRequiredAlertSvg">
@@ -116,7 +116,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="IdP-Secret">IdP Secret: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="IdP-Secret-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="IdP-Secret-RequiredSvg" class="idpRequiredAlertSvg">
@@ -137,7 +137,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Dashboard-Theme">Dashboard Theme: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Dashboard-Theme-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <select name="Dashboard-Theme" id="Dashboard-Theme">
@@ -149,7 +149,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Export Dashboard: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Export-Dashboard-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Export-Dashboard" class="switch">
@@ -161,7 +161,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Export Dashboard Items: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Export-Dashboard-Items-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Export-Dashboard-Items" class="switch">
@@ -173,7 +173,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Report-Paging-Limit">Report Paging Limit: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Report-Paging-Limit-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="Report-Paging-Limit" id="Report-Paging-Limit">
@@ -182,7 +182,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Dashboard-Tracing-Info-Level">Dashboard Tracing Info Level: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Dashboard-Tracing-Info-Level-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="Dashboard-Tracing-Info-Level" id="Dashboard-Tracing-Info-Level">
@@ -191,7 +191,7 @@
                     <div class="settingElement" id="Dashboard-Cache-Timeout-SettingElement">
                         <div class="labelElement">
                             <label for="Dashboard-Cache-Timeout">Dashboard Cache Timeout (seconds): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Dashboard-Cache-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="Dashboard-Cache-Timeout" id="Dashboard-Cache-Timeout">
@@ -213,7 +213,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Core-Data-Source">Data Source: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">The ADO.NET data source for the Web Server.</span>
+                            <span id="Core-Data-Source-Tooltip" class="tooltiptext">The ADO.NET data source for the Web Server.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Core-Data-Source" id="Core-Data-Source">
@@ -222,7 +222,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Web-Virtual-Directory">Virtual Directory: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">The root location of the virtual directory where the Web Server resides.</span>
+                            <span id="Web-Virtual-Directory-Tooltip" class="tooltiptext">The root location of the virtual directory where the Web Server resides.</span>
                         </div>
                         <div class="inputElement">
                             <input type="url" name="Web-Virtual-Directory" id="Web-Virtual-Directory">
@@ -231,7 +231,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Server-Designation">Server Designation: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">(Optional) Enter a value to designate which server the user is connecting to, which will display in the window title. This is helpful in a load balanced environment.</span>
+                            <span id="Server-Designation-Tooltip" class="tooltiptext">(Optional) Enter a value to designate which server the user is connecting to, which will display in the window title. This is helpful in a load balanced environment.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Server-Designation" id="Server-Designation">
@@ -240,7 +240,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Allow Insecure Connections: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This setting controls if the server will accept only https connections or not. If you set this to false all incoming requests have to be made over https. If you set this to true then both http and https connections are accepted. The recommended setting is false.</span>
+                            <span id="Allow-Insecure-Connections-Tooltip" class="tooltiptext">This setting controls if the server will accept only https connections or not. If you set this to false all incoming requests have to be made over https. If you set this to true then both http and https connections are accepted. The recommended setting is false.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Allow-Insecure-Connections" class="switch">
@@ -259,7 +259,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Tracing-Info-Level">Tracing Info Level: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Tracing-Info-Level-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <select name="Tracing-Info-Level" id="Tracing-Info-Level">
@@ -274,7 +274,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Stream-Settings">Stream Settings (Bytes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Stream-Settings-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" pattern="[0-9]*" inputmode="numeric" name="Stream-Settings" id="Stream-Settings" value="64000">
@@ -283,7 +283,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Optimized Service Pipeline: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Optimized-Service-Pipeline-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Optimized-Service-Pipeline" class="switch">
@@ -295,7 +295,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Request-Timeout">Request Timeout: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Request-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="Request-Timeout" id="Request-Timeout">
@@ -304,7 +304,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="JSON-Serialization-Max-Length">JSON Serialization Max Length: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="JSON-Serialization-Max-Length-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="JSON-Serialization-Max-Length" id="JSON-Serialization-Max-Length">
@@ -322,7 +322,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Application-Server-URL">Application Server URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Application-Server-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <div id="Application-Server-URL-Loader" class="loader"></div>
@@ -332,7 +332,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Service-Client-Type">Service Client Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Service-Client-Type-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <select name="Service-Client-Type" id="Service-Client-Type">
@@ -344,7 +344,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Allow NT Authentication On Forwarding: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Allow-NT-Authentication-On-Forwarding-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Allow-NT-Authentication-On-Forwarding" class="switch">
@@ -363,7 +363,7 @@
                     <div class="settingElement">
                         <div>
                             <label for="HTTP-Runtime-Maximum-Request-Length">HTTP Runtime Maximum Request Length (KB): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="HTTP-Runtime-Maximum-Request-Length-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div>
                             <input type="number" pattern="[0-9]*" inputmode="numeric" name="HTTP-Runtime-Maximum-Request-Length" id="HTTP-Runtime-Maximum-Request-Length">
@@ -372,7 +372,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Max-Allowed-Content-Length">Max Allowed Content Length (Bytes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Max-Allowed-Content-Length-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" pattern="[0-9]*" inputmode="numeric" name="Max-Allowed-Content-Length" id="Max-Allowed-Content-Length">
@@ -381,7 +381,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="HTTP-Runtime-Execution-Timeout">HTTP Runtime Execution Timeout (Seconds): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="HTTP-Runtime-Execution-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" pattern="[0-9]*" inputmode="numeric" name="HTTP-Runtime-Execution-Timeout" id="HTTP-Runtime-Execution-Timeout">
@@ -404,9 +404,9 @@
         <div class="core-section-buttons-outer">
             <div class="core-section-buttons-inner">
                 <ul>
-                    <li><a id="DiagnosticsSettingsLink" href="javascript:openSection('DiagnosticsSettings')">Diagnostics Settings</a></li>
-                    <li><a id="ReportingViewerLink" href="javascript:openSection('ReportingViewer')">Reporting Viewer</a></li>
-                    <li><a id="ServerConfigurationLink" href="javascript:openSection('ServerConfiguration')">Server Configuration</a></li>
+                    <li id="DiagnosticsSettingsLink-SettingElement"><a id="DiagnosticsSettingsLink" href="javascript:openSection('DiagnosticsSettings')">Diagnostics Settings</a></li>
+                    <li id="ReportingViewerLink-SettingElement"><a id="ReportingViewerLink" href="javascript:openSection('ReportingViewer')">Reporting Viewer</a></li>
+                    <li id="ServerConfigurationLink-SettingElement"><a id="ServerConfigurationLink" href="javascript:openSection('ServerConfiguration')">Server Configuration</a></li>
                 </ul>
             </div>
         </div>
