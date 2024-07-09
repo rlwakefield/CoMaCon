@@ -38,11 +38,10 @@ public class webApplicationWebConfigConfiguration
     public List<Key> unknownAttributeKeys = new List<Key>();
     public List<Key> unknownElementKeys = new List<Key>();
     public ConnectionStrings? connectionStrings;
-    //public List<HylandLoggingRoutes> routes = new List<HylandLoggingRoutes>();
     public HylandLogging? hylandLogging;
     public HylandIdentityProviderUrl? hylandIdentityProviderUrl;
     public List<RequiredKeywords> requiredKeywords = new List<RequiredKeywords>();
-    public HylandApplicationsAgendaPubAccessPublicComment? hylandApplicationsAgendaPubAccessPublicComment;
+    //public HylandApplicationsAgendaPubAccessPublicComment? hylandApplicationsAgendaPubAccessPublicComment;
     public HylandAuthenticationADFS? hylandAuthenticationADFS;
     public HylandAuthentication? hylandAuthentication;
     public HylandResponsiveApps? hylandResponsiveApps;
@@ -57,11 +56,11 @@ public class webApplicationWebConfigConfiguration
     public SessionAdministration? sessionAdministration;
     public ElementsToHide elementsToHide = new ElementsToHide();
     public ProcessingErrors processingErrors = new ProcessingErrors();
-    //public List<string> processingErrors2 = new List<string>();
+    public List<HylandApplicationsAgendaPubAccessPublicComment> publicCommentIntegrations = new List<HylandApplicationsAgendaPubAccessPublicComment>();
+    public List<Tooltip> tooltips = new List<Tooltip>();
+    
     public void AddCriticalError(string message)
     {
-        //processingErrors.Add(new Result { code = code, message = message });
-        //processingErrors2.Add(message);
         processingErrors.CriticalErrors.Add(message);
     }
     public void AddNonCriticalError(string message)
@@ -99,19 +98,26 @@ public class RequiredKeywords
 ********************************************************/
 public class HylandApplicationsAgendaPubAccessPublicComment
 {
+    public string? Name { get; set; }
+    public string? URL { get; set; }
+    public string? Token { get; set; }
+    public string? AvailabilityFromMeetingStart { get; set; }
     public List<MeetingType> meetingTypes = new List<MeetingType>();
-    public List<AgendaField> agendaFields = new List<AgendaField>();
+    public List<AgendaField> agendaUnityFormFields = new List<AgendaField>();
+    public string? id { get; set; }
 }
 
 public class MeetingType
 {
     public string? Name { get; set; }
+    public string? id { get; set; } = "";
 }
 
 public class AgendaField
 {
     public string? Name { get; set; }
     public string? FormFieldID { get; set; }
+    public string? id { get; set; } = "";
 }
 
 
@@ -222,7 +228,7 @@ public class Route
 
 public class WindowsEventLogging
 {
-    public string? SourceName { get; set; } = "Hyland Application Server";
+    public string? SourceName { get; set; }
 }
 
 public class Filter
@@ -315,16 +321,10 @@ public class TrustedClient
 ********************************************************/
 public class HylandAuthenticationADFS
 {
-    //SelectSingleNode("Hyland.Authentication/adfs").Attributes["enabled"]
     public string ADFSEnabled { get; set; } = "false";
-    //SelectSingleNode("system.web/httpRuntime").Attributes["requestValidationMode"]
     public string RequestValidationMode { get; set; } = "2.0";
-    //SelectSingleNode("system.web/authentication").Attributes["mode"]
     public string AuthenticationMode { get; set; } = "Windows";
-    
-    //SelectSingleNode("Hyland.Authentication/adfs").Attributes["synchronizeUserAttributes"]
     public string SynchronizeUserAttributes { get; set; } = "true";
-    //SelectSingleNode("Hyland.Authentication/adfs").Attributes["authenticationOnly"]
     public string AuthenticationOnly { get; set; } = "false";
     public SystemIdentityModel systemIdentityModel = new SystemIdentityModel();
     public SystemIdentityModelServices systemIdentityModelServices = new SystemIdentityModelServices();
@@ -353,8 +353,6 @@ public class TrustedIssuer
 
 public class SystemIdentityModelServices
 {
-    //TODO Need to determine if this is truly needed or not!
-    //SelectSingleNode("system.identityModel.services/federationConfiguration/cookieHandler").Attributes["requireSsl"]
     public string CookieHandlerRequireSSL { get; set; } = "false";
     public wsFederation wsFederation = new wsFederation();
     public ServiceCertificate serviceCertificate = new ServiceCertificate();
@@ -577,4 +575,14 @@ public class SavingResults
 {
     public List<string> CriticalErrors = new List<string>();
     public List<string> NonCriticalErrors = new List<string>();
+}
+
+
+/********************************************************
+*                   Tooltips Object
+********************************************************/
+public class Tooltip
+{
+    public string? htmlId { get; set; }
+    public string? tooltip { get; set; }
 }

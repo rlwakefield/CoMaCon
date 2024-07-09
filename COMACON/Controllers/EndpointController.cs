@@ -12,41 +12,14 @@ namespace COMACON.Controllers
     [ApiController]
     public class EndpointController : ControllerBase
     {
-        private readonly ApplicationServerConfiguration ApplicationServerConfiguration;
-        private readonly AgendaOnlineServerConfiguration AgendaOnlineServerConfiguration;
-        private readonly ElectronicPlanReviewConfiguration ElectronicPlanReviewConfiguration;
-        private readonly GatewayCachingServerConfiguration GatewayCachingServerConfiguration;
-        private readonly HealthcareFormManagerConfiguration HealthcareFormManagerConfiguration;
-        private readonly OnBasePatientWindowConfiguration OnBasePatientWindowConfiguration;
-        private readonly PublicAccessViewerLegacyConfiguration PublicAccessViewerLegacyConfiguration;
-        private readonly PublicAccessViewerNextGenConfiguration PublicAccessViewerNextGenConfiguration;
-        private readonly ReportingViewerConfiguration ReportingViewerConfiguration;
-        private readonly WebServerConfiguration WebServerConfiguration;
         private readonly Core Core;
+        private readonly LoadSaveWebApplications LoadSaveWebApplications;
 
-        public EndpointController(ApplicationServerConfiguration applicationServerConfiguration,
-            AgendaOnlineServerConfiguration agendaOnlineServerConfiguration,
-            ElectronicPlanReviewConfiguration electronicPlanReviewConfiguration,
-            GatewayCachingServerConfiguration gatewayCachingServerConfiguration,
-            HealthcareFormManagerConfiguration healthcareFormManagerConfiguration,
-            OnBasePatientWindowConfiguration onBasePatientWindowConfiguration,
-            PublicAccessViewerLegacyConfiguration publicAccessViewerLegacyConfiguration,
-            PublicAccessViewerNextGenConfiguration publicAccessViewerNextGenConfiguration,
-            ReportingViewerConfiguration reportingViewerConfiguration,
-            WebServerConfiguration webServerConfiguration,
-            Core core)
+        public EndpointController(Core core,
+            LoadSaveWebApplications loadSaveWebApplications)
         {
-            ApplicationServerConfiguration = applicationServerConfiguration;
-            AgendaOnlineServerConfiguration = agendaOnlineServerConfiguration;
-            ElectronicPlanReviewConfiguration = electronicPlanReviewConfiguration;
-            GatewayCachingServerConfiguration = gatewayCachingServerConfiguration;
-            HealthcareFormManagerConfiguration = healthcareFormManagerConfiguration;
-            OnBasePatientWindowConfiguration = onBasePatientWindowConfiguration;
-            PublicAccessViewerLegacyConfiguration = publicAccessViewerLegacyConfiguration;
-            PublicAccessViewerNextGenConfiguration = publicAccessViewerNextGenConfiguration;
-            ReportingViewerConfiguration = reportingViewerConfiguration;
-            WebServerConfiguration = webServerConfiguration;
             Core = core;
+            LoadSaveWebApplications = loadSaveWebApplications;
         }
 
         // GET: api/Endpoint/UrlValidation
@@ -80,46 +53,19 @@ namespace COMACON.Controllers
         public string GetConfiguration(string webconfig, string type, string version, string siteName, string applicationName, string applicationPath, string physicalPath, string bitness)
         {
             using var file = new System.IO.StreamReader(webconfig);
-
-            switch (type)
-            {
-                case "Application Server":
-                    return ApplicationServerConfiguration.LoadApplicationServerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
-                case "Agenda Online":
-                    return AgendaOnlineServerConfiguration.LoadAgendaOnlineServerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
-                case "Electronic Plan Review":
-                    return ElectronicPlanReviewConfiguration.LoadElectronicPlanReviewConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
-                case "Gateway Caching Server":
-                    return GatewayCachingServerConfiguration.LoadGatewayCachingServerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
-                case "Healthcare Form Manager":
-                    return HealthcareFormManagerConfiguration.LoadHealthcareFormManagerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
-                case "Patient Window":
-                    return OnBasePatientWindowConfiguration.LoadOnBasePatientWindowConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
-                case "Public Access - Legacy":
-                    return PublicAccessViewerLegacyConfiguration.LoadPublicAccessViewerLegacyConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
-                case "Public Access - Next Gen":
-                    return PublicAccessViewerNextGenConfiguration.LoadPublicAccessViewerNextGenConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
-                case "Reporting Viewer":
-                    return ReportingViewerConfiguration.LoadReportingViewerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
-                case "Web Server":
-                    return WebServerConfiguration.LoadWebServerConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
-            }
-
-            return null;
+            return LoadSaveWebApplications.LoadWebApplicationConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
         }
 
         [HttpGet("GetApplications")]
         public string GetApplications()
         {
             return Core.RetrieveWebApplications();
-            //return WebApplications.Parse();
         }
 
         [HttpGet("DuplicateAppPoolCheck")]
         public Boolean DuplicateAppPoolCheck(string appPoolName)
         {
             return Core.CheckDuplicateWebApplicationPool(appPoolName);
-            //return WebApplicationPoolDupChecker.Parse(appPoolName);
         }
 
         [HttpGet("DuplicateApplicationCheck")]
@@ -130,73 +76,22 @@ namespace COMACON.Controllers
                 string currentApplicationName)
         {
             return Core.CheckDuplicateWebApplication(physicalPath, applicationName, siteName, applicationPath, currentApplicationName);
-            //return WebApplicationDupChecker.Parse(physicalPath, applicationName, siteName, applicationPath, currentApplicationName);
         }
 
         [HttpGet("CopyWebApplication")]
         public string? CopyApplication(string webApplicationType, string newApplicationPoolName, string newApplicationName, string newApplicationPathName, string newApplicationSiteName, string newApplicationServerUrl, string currentApplicationPoolName, string currentApplicationName, string currentApplicationPathName, string currentSiteName, string currentPhysicalPath, string webApplicationVersion, string bitness)
         {
-            //string newPhysicalPath = WebServerWebApplicationCopy.Parse(newApplicationPoolName, newApplicationName, newApplicationPathName, newApplicationSiteName, newApplicationServerUrl, currentApplicationPoolName, currentApplicationName, currentApplicationPathName, currentSiteName, currentPhysicalPath);
             string newPhysicalPath = Core.CopyWebApplication(newApplicationPoolName, newApplicationName, newApplicationPathName, newApplicationSiteName, newApplicationServerUrl, currentApplicationPoolName, currentApplicationName, currentApplicationPathName, currentSiteName, currentPhysicalPath);
             var file = new StreamReader(newPhysicalPath + @"\web.config");
 
-            switch (webApplicationType)
-            {
-                case "Application Server":
-                    return ApplicationServerConfiguration.LoadApplicationServerConfiguration(file, webApplicationType, webApplicationVersion, newApplicationSiteName, newApplicationName, newApplicationPathName, newPhysicalPath, bitness);
-                case "Agenda Online":
-                    return AgendaOnlineServerConfiguration.LoadAgendaOnlineServerConfiguration(file, webApplicationType, webApplicationVersion, newApplicationSiteName, newApplicationName, newApplicationPathName, newPhysicalPath, bitness);
-                case "Electronic Plan Review":
-                    return ElectronicPlanReviewConfiguration.LoadElectronicPlanReviewConfiguration(file, webApplicationType, webApplicationVersion, newApplicationSiteName, newApplicationName, newApplicationPathName, newPhysicalPath, bitness);
-                case "Gateway Caching Server":
-                    return GatewayCachingServerConfiguration.LoadGatewayCachingServerConfiguration(file, webApplicationType, webApplicationVersion, newApplicationSiteName, newApplicationName, newApplicationPathName, newPhysicalPath, bitness);
-                case "Healthcare Form Manager":
-                    return HealthcareFormManagerConfiguration.LoadHealthcareFormManagerConfiguration(file, webApplicationType, webApplicationVersion, newApplicationSiteName, newApplicationName, newApplicationPathName, newPhysicalPath, bitness);
-                case "Patient Window":
-                    return OnBasePatientWindowConfiguration.LoadOnBasePatientWindowConfiguration(file, webApplicationType, webApplicationVersion, newApplicationSiteName, newApplicationName, newApplicationPathName, newPhysicalPath, bitness);
-                case "Public Access - Legacy":
-                    return PublicAccessViewerLegacyConfiguration.LoadPublicAccessViewerLegacyConfiguration(file, webApplicationType, webApplicationVersion, newApplicationSiteName, newApplicationName, newApplicationPathName, newPhysicalPath, bitness);
-                case "Public Access - Next Gen":
-                    return PublicAccessViewerNextGenConfiguration.LoadPublicAccessViewerNextGenConfiguration(file, webApplicationType, webApplicationVersion, newApplicationSiteName, newApplicationName, newApplicationPathName, newPhysicalPath, bitness);
-                case "Reporting Viewer":
-                    return ReportingViewerConfiguration.LoadReportingViewerConfiguration(file, webApplicationType, webApplicationVersion, newApplicationSiteName, newApplicationName, newApplicationPathName, newPhysicalPath, bitness);
-                case "Web Server":
-                    return WebServerConfiguration.LoadWebServerConfiguration(file, webApplicationType, webApplicationVersion, newApplicationSiteName, newApplicationName, newApplicationPathName, newPhysicalPath, bitness);
-            }
-
-            return null;
+            return LoadSaveWebApplications.LoadWebApplicationConfiguration(file, webApplicationType, webApplicationVersion, newApplicationSiteName, newApplicationName, newApplicationPathName, newPhysicalPath, bitness);
         }
 
         [HttpPost("SaveWebApplication")]
         public string SaveWebApplication([FromBody] JsonElement jsonDataStructure)
         {
             //Console.WriteLine(jsonDataStructure);
-            var jsonObject = JObject.Parse(jsonDataStructure.ToString());
-            switch (jsonObject["Type"].ToString())
-            {
-                case "Application Server":
-                    return ApplicationServerConfiguration.SaveApplicationServerConfiguration(jsonDataStructure.ToString());
-                case "Agenda Online":
-                    return AgendaOnlineServerConfiguration.SaveAgendaOnlineServerConfiguration(jsonDataStructure.ToString());
-                case "Electronic Plan Review":
-                    return ElectronicPlanReviewConfiguration.SaveElectronicPlanReviewConfiguration(jsonDataStructure.ToString());
-                case "Gateway Caching Server":
-                    return GatewayCachingServerConfiguration.SaveGatewayCachingServerConfiguration(jsonDataStructure.ToString());
-                case "Healthcare Form Manager":
-                    return HealthcareFormManagerConfiguration.SaveHealthcareFormManagerConfiguration(jsonDataStructure.ToString());
-                case "Patient Window":
-                    return OnBasePatientWindowConfiguration.SaveOnBasePatientWindowConfiguration(jsonDataStructure.ToString());
-                case "Public Access - Legacy":
-                    return PublicAccessViewerLegacyConfiguration.SavePublicAccessViewerLegacyConfiguration(jsonDataStructure.ToString());
-                case "Public Access - Next Gen":
-                    return PublicAccessViewerNextGenConfiguration.SavePublicAccessViewerNextGenConfiguration(jsonDataStructure.ToString());
-                case "Reporting Viewer":
-                    return ReportingViewerConfiguration.SaveReportingViewerServerConfiguration(jsonDataStructure.ToString());
-                case "Web Server":
-                    return WebServerConfiguration.SaveWebServerConfiguration(jsonDataStructure.ToString());
-                default:
-                    return "200";
-            }
+            return LoadSaveWebApplications.SaveWebApplicationConfiguration(jsonDataStructure.ToString());
         }
 
         [HttpPost("TestSqlConnectionString")]

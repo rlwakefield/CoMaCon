@@ -10,8 +10,8 @@
         <div class="column">
             <div class="settingElement">
                 <div class="labelElement">
-                    <label for="Authentication-Mode">Authentication Mode: <img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark"></label>
-                    <span class="tooltiptext">This is the help text.</span>
+                    <label for="Authentication-Mode">Authentication Mode: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Authentication-Mode-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <select name="Authentication-Mode" id="Authentication-Mode">
@@ -25,7 +25,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>ADFS Enabled: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="ADFS-Enabled-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="ADFS-Enabled" class="switch">
@@ -37,7 +37,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Request-Validation-Mode">Request Validation Mode: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">The certificate identified by the thumbprint in the trustedIssuers element is the token-signing certificate found on the ADFS server.</span>
+                    <span id="Request-Validation-Mode-Tooltip" class="tooltiptext">The certificate identified by the thumbprint in the trustedIssuers element is the token-signing certificate found on the ADFS server.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Request-Validation-Mode" id="Request-Validation-Mode" disabled>
@@ -46,7 +46,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Synchronize User Attributes: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Synchronize-User-Attributes-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Synchronize-User-Attributes" class="switch">
@@ -58,7 +58,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Authentication Only: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Authentication-Only-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Authentication-Only" class="switch">
@@ -70,7 +70,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Cookie Handler - Require SSL: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Cookie-Handler-Require-SSL-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Cookie-Handler-Require-SSL" class="switch">
@@ -91,7 +91,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Audience-URI">Audience URI: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">The Audience URI identifies the relying party (RP - this application).  This much exactly (case, trailing slash, etc.) match the Relying Party Trust Identifier on the ADFS sever.</span>
+                            <span id="Audience-URI-Tooltip" class="tooltiptext">The Audience URI identifies the relying party (RP - this application).  This much exactly (case, trailing slash, etc.) match the Relying Party Trust Identifier on the ADFS sever.</span>
                         </div>
                         <div class="inputElement">
                             <input class="adfs-system-identityModel-Fields" type="url" name="Audience-URI" id="Audience-URI" oninput="updateAudienceUri(this)" disabled>
@@ -117,7 +117,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Trusted-Issuer-Thumbprint">Trusted Issuer Thumbprint: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">The certificate identified by the thumbprint in the trustedIssuers element is the token-signing certificate found on the ADFS server.</span>
+                            <span id="Trusted-Issuer-Thumbprint-Tooltip" class="tooltiptext">The certificate identified by the thumbprint in the trustedIssuers element is the token-signing certificate found on the ADFS server.</span>
                         </div>
                         <div class="inputElement">
                             <input class="adfs-system-identityModel-Fields" type="text" name="Trusted-Issuer-Thumbprint" id="Trusted-Issuer-Thumbprint" oninput="updateTrustedIssuerThumbprint(this)" disabled>
@@ -126,7 +126,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Trusted-Issuer-Name">Trusted Issuer Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Trusted-Issuer-Name-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input class="adfs-system-identityModel-Fields" type="text" name="Trusted-Issuer-Name" id="Trusted-Issuer-Name" oninput="updateTrustedIssuerName(this)" disabled>
@@ -154,7 +154,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="wsFederation-Issuer">wsFederation Issuer: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="wsFederation-Issuer-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input class="adfs-system-identityModel-services-Fields" type="text" name="wsFederation-Issuer" id="wsFederation-Issuer">
@@ -163,7 +163,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="wsFederation-Realm">wsFederation Realm: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="wsFederation-Realm-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input class="adfs-system-identityModel-services-Fields" type="text" name="wsFederation-Realm" id="wsFederation-Realm">
@@ -172,7 +172,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Certificate-X509-Find-Type">Certificate X509 Find Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Certificate-X509-Find-Type-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input class="adfs-system-identityModel-services-Fields" type="text" name="Certificate-X509-Find-Type" id="Certificate-X509-Find-Type">
@@ -181,7 +181,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Certificate-Find-Value">Certificate Find Value: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Certificate-Find-Value-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input class="adfs-system-identityModel-services-Fields" type="text" name="Certificate-Find-Value" id="Certificate-Find-Value">
@@ -190,7 +190,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Certificate-Store-Location">Certificate Store Location: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Certificate-Store-Location-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input class="adfs-system-identityModel-services-Fields" type="text" name="Certificate-Store-Location" id="Certificate-Store-Location">
@@ -199,7 +199,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Certificate-Store-Name">Certificate Store Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Certificate-Store-Name-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <select class="adfs-system-identityModel-services-Fields" name="Certificate-Store-Name" id="Certificate-Store-Name">
@@ -233,7 +233,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Data-Source">Data Source: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Data-Source-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <select name="Data-Source" id="Data-Source">
@@ -243,7 +243,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Server-Designation">Server Designation: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">The name for this application server.<br>This is useful to see what server a user is conencted to in a load-balanced environment.</span>
+                            <span id="Server-Designation-Tooltip" class="tooltiptext">The name for this application server.<br>This is useful to see what server a user is conencted to in a load-balanced environment.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Server-Designation" id="Server-Designation">
@@ -259,7 +259,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Session Enable Timeout: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">Controls the timeout behavior for unused sessions. If enableTimeout is set to true the AppServer will timeout unused sessions and disconnect them. The timeout period is based on the ASP.NET session timeout found in the system.web\session section with a minimum of 10 minutes.</span>
+                            <span id="Session-Enable-Timeout-Tooltip" class="tooltiptext">Controls the timeout behavior for unused sessions. If enableTimeout is set to true the AppServer will timeout unused sessions and disconnect them. The timeout period is based on the ASP.NET session timeout found in the system.web\session section with a minimum of 10 minutes.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Session-Enable-Timeout" class="switch">
@@ -271,7 +271,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Session-Timeout-Length">Session Timeout Length: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Session-Timeout-Length-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="Session-Timeout-Length" id="Session-Timeout-Length">
@@ -289,7 +289,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Allow Insecure Connections: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This setting controls if the server will accept only https connections or not. If you set this to false all incoming requests have to be made over https. If you set this to true then both http and https connections are accepted. The recommended setting is false.</span>
+                            <span id="Allow-Insecure-Connections-Tooltip" class="tooltiptext">This setting controls if the server will accept only https connections or not. If you set this to false all incoming requests have to be made over https. If you set this to true then both http and https connections are accepted. The recommended setting is false.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Allow-Insecure-Connections" class="switch">
@@ -301,7 +301,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Use OS Authentication: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is used to determine if the connection to the database should be made with OS authentication or SQL Authentication. If enabled, the OS/domain user that is configured for this application needs to have to have the same database permissions as the "hsi" user would have.</span>
+                            <span id="Use-OS-Authentication-Tooltip" class="tooltiptext">This is used to determine if the connection to the database should be made with OS authentication or SQL Authentication. If enabled, the OS/domain user that is configured for this application needs to have to have the same database permissions as the "hsi" user would have.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Use-OS-Authentication" class="switch">
@@ -325,7 +325,7 @@
                         <div class="settingElement">
                             <div class="labelElement">
                                 <label for="Http-Runtime-Maximum-Request-Length">HTTP Runtime Maximum Request Length: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                <span class="tooltiptext">This is the help text.</span>
+                                <span id="Http-Runtime-Maximum-Request-Length-Tooltip" class="tooltiptext">This is the help text.</span>
                             </div>
                             <div class="inputElement">
                                 <input type="number" name="Http-Runtime-Maximum-Request-Length" id="Http-Runtime-Maximum-Request-Length">
@@ -334,7 +334,7 @@
                         <div class="settingElement">
                             <div class="labelElement">
                                 <label for="Http-Runtime-Execution-Timeout">HTTP Runtime Execution Timeout: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                <span class="tooltiptext">This is the help text.</span>
+                                <span id="Http-Runtime-Execution-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
                             </div>
                             <div class="inputElement">
                                 <input type="number" name="Http-Runtime-Execution-Timeout" id="Http-Runtime-Execution-Timeout">
@@ -345,7 +345,7 @@
                         <div class="settingElement">
                             <div class="labelElement">
                                 <label for="Max-Allowed-Content-Length">Max Allowed Content Length: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                <span class="tooltiptext">This is the help text.</span>
+                                <span id="Max-Allowed-Content-Length-Tooltip" class="tooltiptext">This is the help text.</span>
                             </div>
                             <div class="inputElement">
                                 <input type="text" name="Max-Allowed-Content-Length" id="Max-Allowed-Content-Length">
@@ -354,7 +354,7 @@
                         <div class="settingElement">
                             <div class="labelElement">
                                 <label for="Item-Cache-Timeout">Item Cache Timeout: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                                <span class="tooltiptext">The number of seconds an item will exist within the item cache before it will be expired.</span>
+                                <span id="Item-Cache-Timeout-Tooltip" class="tooltiptext">The number of seconds an item will exist within the item cache before it will be expired.</span>
                             </div>
                             <div class="inputElement">
                                 <input type="text" name="Item-Cache-Timeout" id="Item-Cache-Timeout">
@@ -372,7 +372,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Encrypt Connection Strings:</span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Encrypt-Connection-Strings-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Encrypt-Connection-Strings" class="switch">
@@ -567,7 +567,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Content-Composer-Client-ID">Content Composer Client ID: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Content-Composer-Client-ID-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Content-Composer-Client-ID" id="Content-Composer-Client-ID">
@@ -576,7 +576,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Content-Composer-Client-Secret">Content Composer Client Secret: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Content-Composer-Client-Secret-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Content-Composer-Client-Secret" id="Content-Composer-Client-Secret">
@@ -585,7 +585,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Encrypt Content Composer Settings: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Encrypt-Content-Composer-Settings-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Encrypt-Content-Composer-Settings" class="switch">
@@ -599,7 +599,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Content-Composer-Username">Content Composer Username: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Content-Composer-Username-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Content-Composer-Username" id="Content-Composer-Username">
@@ -608,7 +608,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Content-Composer-Password">Content Composer Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Content-Composer-Password-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Content-Composer-Password" id="Content-Composer-Password">
@@ -623,7 +623,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Integrations-EIS-AppNet-Directory">AppNet Directory: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">EIS to retrieve AppNetDirectory example: "http://localhost/AppNet".</span>
+                    <span id="Integrations-EIS-AppNet-Directory-Tooltip" class="tooltiptext">EIS to retrieve AppNetDirectory example: "http://localhost/AppNet".</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Integrations-EIS-AppNet-Directory" id="Integrations-EIS-AppNet-Directory">
@@ -632,7 +632,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Validate Message Schema: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">Set to true to perform validation on the Message Schema with XML Rendition.</span>
+                    <span id="Integrations-EIS-Validate-Message-Schema-Tooltip" class="tooltiptext">Set to true to perform validation on the Message Schema with XML Rendition.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Integrations-EIS-Validate-Message-Schema" class="switch">
@@ -644,7 +644,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Integrations-EIS-Data-Set-Cache-Cleanup-Interval">Data Set Cache Cleanup Interval (Minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Integrations-EIS-Data-Set-Cache-Cleanup-Interval-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Integrations-EIS-Data-Set-Cache-Cleanup-Interval" id="Integrations-EIS-Data-Set-Cache-Cleanup-Interval">
@@ -655,7 +655,7 @@
             <div class="settingElement" id="Integrations-EIS-Use-HTML-Client-Type-SettingElement">
                 <div class="labelElement">
                     <span>Use HTML Client Type: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Integrations-EIS-Use-HTML-Client-Type-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Integrations-EIS-Use-HTML-Client-Type" class="switch">
@@ -667,7 +667,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Continue On Validation Error: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Integrations-EIS-Continue-On-Validation-Error-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Integrations-EIS-Continue-On-Validation-Error" class="switch">
@@ -685,7 +685,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="EAC-Username">Username: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="EAC-Username-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="EAC-Username" id="EAC-Username">
@@ -694,7 +694,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="EAC-Password">Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="EAC-Password-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="EAC-Password" id="EAC-Password">
@@ -703,7 +703,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Encrypt EAC: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Encrypt-EAC-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Encrypt-EAC" class="switch">
@@ -717,7 +717,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="EAC-UserLevel-Minimum-Pool-Size">UserLevel Minimum Pool Size: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="EAC-UserLevel-Minimum-Pool-Size-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="EAC-UserLevel-Minimum-Pool-Size" id="EAC-UserLevel-Minimum-Pool-Size">
@@ -726,7 +726,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="EAC-UserLevel-Maximum-Pool-Size">UserLevel Maximum Pool Size: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="EAC-UserLevel-Maximum-Pool-Size-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="EAC-UserLevel-Maximum-Pool-Size" id="EAC-UserLevel-Maximum-Pool-Size">
@@ -744,7 +744,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Watch-Folder">Watch Folder: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Watch-Folder-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Watch-Folder" id="Watch-Folder">
@@ -753,7 +753,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Site-ID-Keyword-Type">Site ID Keyword Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Site-ID-Keyword-Type-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Site-ID-Keyword-Type" id="Site-ID-Keyword-Type">
@@ -764,7 +764,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Cleanup-Timer-Interval">Cleanup Timer Interval: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Cleanup-Timer-Interval-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Cleanup-Timer-Interval" id="Cleanup-Timer-Interval">
@@ -773,7 +773,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Max-File-Age">Max File Age: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Max-File-Age-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Max-File-Age" id="Max-File-Age">
@@ -791,7 +791,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Enable Search Log: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Enable-Search-Log-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Enable-Search-Log" class="switch">
@@ -803,7 +803,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Search-Log-Path">Search Log Path: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Search-Log-Path-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Search-Log-Path" id="Search-Log-Path">
@@ -812,7 +812,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Search-Timeout">Search Timeout: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Search-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Search-Timeout" id="Search-Timeout">
@@ -828,7 +828,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="GCS-Username">Username: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="GCS-Username-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="GCS-Username" id="GCS-Username">
@@ -837,7 +837,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="GCS-Password">Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="GCS-Password-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="GCS-Password" id="GCS-Password">
@@ -856,7 +856,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="GCS-Phone-Home-Interval">Phone Home Interval(Minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="GCS-Phone-Home-Interval-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="GCS-Phone-Home-Interval" id="GCS-Phone-Home-Interval">
@@ -865,7 +865,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Use Legacy Key For Usage Based Billing: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Use-Legacy-Key-For-Usage-Based-Billing-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Use-Legacy-Key-For-Usage-Based-Billing" class="switch">
@@ -888,7 +888,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>PPL Endpoint: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="PPL-Endpoint-Enabled-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="PPL-Endpoint-Enabled" class="switch">
@@ -900,7 +900,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="PPL-DocPop-URL">DocPop URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="PPL-DocPop-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="url" name="PPL-DocPop-URL" id="PPL-DocPop-URL">
@@ -916,7 +916,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Forms Endpoint: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Forms-Endpoint-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Forms-Endpoint" class="switch">
@@ -937,7 +937,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Web-BLOB Passthrough FHIR Endpoint: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Web-BLOB-Passthrough-FHIR-Endpoint-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Web-BLOB-Passthrough-FHIR-Endpoint" class="switch">
@@ -949,7 +949,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="SMART-On-FHIR-Application-ID">SMART On FHIR Application ID: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="SMART-On-FHIR-Application-ID-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="SMART-On-FHIR-Application-ID" id="SMART-On-FHIR-Application-ID">
@@ -958,7 +958,7 @@
                     <div class="settingElement" id="Doc-Linker-SMART-On-FHIR-Application-ID-SettingElement">
                         <div class="labelElement">
                             <label for="Doc-Linker-SMART-On-FHIR-Application-ID">Doc Linker SMART On FHIR Application ID: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Doc-Linker-SMART-On-FHIR-Application-ID-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Doc-Linker-SMART-On-FHIR-Application-ID" id="Doc-Linker-SMART-On-FHIR-Application-ID">
@@ -978,7 +978,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Hyland-Idp-Url">Idp Url: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Hyland-Idp-Url-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="url" name="Hyland-Idp-Url" id="Hyland-Idp-Url" onkeyup="hylandIdpUrlUpdated(this)">
@@ -987,7 +987,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Hyland-IdP-Audience-URL">Audience URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Hyland-IdP-Audience-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="url" name="Hyland-IdP-Audience-URL" id="Hyland-IdP-Audience-URL">
@@ -998,7 +998,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Hyland-IdP-Name-Claim-Type">Name Claim Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Hyland-IdP-Name-Claim-Type-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Hyland-IdP-Name-Claim-Type" id="Hyland-IdP-Name-Claim-Type">
@@ -1007,7 +1007,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Hyland-IdP-Api-Name">Api Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Hyland-IdP-Api-Name-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Hyland-IdP-Api-Name" id="Hyland-IdP-Api-Name">
@@ -1016,7 +1016,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Hyland-IdP-Api-Secret">Api Secret: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Hyland-IdP-Api-Secret-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Hyland-IdP-Api-Secret" id="Hyland-IdP-Api-Secret">
@@ -1037,7 +1037,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Hyland-Services-AppPool-Minimum-Sessions">Minimum Sessions: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Hyland-Services-AppPool-Minimum-Sessions-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="Hyland-Services-AppPool-Minimum-Sessions" id="Hyland-Services-AppPool-Minimum-Sessions">
@@ -1046,7 +1046,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Hyland-Services-AppPool-Maximum-Sessions">Maximum Sessions: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Hyland-Services-AppPool-Maximum-Sessions-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="Hyland-Services-AppPool-Maximum-Sessions" id="Hyland-Services-AppPool-Maximum-Sessions">
@@ -1057,7 +1057,7 @@
                     <div class="settingElement" id="Hyland-Services-AppPool-Username-ElementSection">
                         <div class="labelElement">
                             <label for="Hyland-Services-AppPool-Username">Username: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Hyland-Services-AppPool-Username-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Hyland-Services-AppPool-Username" id="Hyland-Services-AppPool-Username">
@@ -1066,7 +1066,7 @@
                     <div class="settingElement" id="Hyland-Services-AppPool-Password-ElementSection">
                         <div class="labelElement">
                             <label for="Hyland-Services-AppPool-Password">Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Hyland-Services-AppPool-Password-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Hyland-Services-AppPool-Password" id="Hyland-Services-AppPool-Password">
@@ -1095,7 +1095,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Use Query Context: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Use-Query-Context-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Use-Query-Context" class="switch">
@@ -1107,7 +1107,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Filter Exceptions: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Filter-Exceptions-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Filter-Exceptions" class="switch">
@@ -1121,7 +1121,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Endpoint Use Remoting: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Endpoint-Use-Remoting-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Endpoint-Use-Remoting" class="switch">
@@ -1144,7 +1144,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Application-Server-Callback-URL">Application Server Callback URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Application-Server-Callback-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="url" name="Application-Server-Callback-URL" id="Application-Server-Callback-URL">
@@ -1153,7 +1153,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Web-Server-Base-URL">Web Server Base URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Web-Server-Base-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="url" name="Web-Server-Base-URL" id="Web-Server-Base-URL">
@@ -1164,7 +1164,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Request Validation Minimum Version: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">
+                            <span id="Request-Validation-Minimum-Version-Tooltip" class="tooltiptext">
                                 Request Validation increases the security of your application server installation. It controls the level at which the application server will validate client requests.<br><br>
 
                                 Currently the only valid values for minVersion are 0 and 1. A value of zero (0) indicates that the application server will not validate incoming requests. Requests will still be authenticated, but will not be verified to be coming from a valid source. Anything other than zero (0) enables validation. A value of one (1) is currently the only supported validation level.<br><br>
@@ -1193,7 +1193,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Login-ID">Login ID: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Login-ID-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Login-ID" id="Login-ID">
@@ -1202,7 +1202,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Login-Password">Login Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Login-Password-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Login-Password" id="Login-Password">
@@ -1221,7 +1221,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Login-Datasource">Login Datasource: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Login-Datasource-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Login-Datasource" id="Login-Datasource">
@@ -1230,7 +1230,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Pool-Min">Pool Min: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Pool-Min-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Pool-Min" id="Pool-Min">
@@ -1239,7 +1239,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Pool-Max">Pool Max: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Pool-Max-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Pool-Max" id="Pool-Max">
@@ -1254,7 +1254,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Image-Compression">Image Compression(%): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Image-Compression-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Image-Compression" id="Image-Compression">
@@ -1265,7 +1265,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Remote OCR Engine: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Remote-OCR-Engine-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Remote-OCR-Engine" class="switch">
@@ -1277,7 +1277,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Remote-OCR-Engine-Remote-Server">Remote Server: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Remote-OCR-Engine-Remote-Server-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Remote-OCR-Engine-Remote-Server" id="Remote-OCR-Engine-Remote-Server">
@@ -1286,7 +1286,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Remote-OCR-Engine-Port">Port: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Remote-OCR-Engine-Port-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Remote-OCR-Engine-Port" id="Remote-OCR-Engine-Port">
@@ -1295,7 +1295,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Remote-OCR-Engine-Timeout">Timeout: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Remote-OCR-Engine-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Remote-OCR-Engine-Timeout" id="Remote-OCR-Engine-Timeout">
@@ -1310,7 +1310,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Enable LOB Broker Accounts Payable: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Enable-LOB-Broker-Accounts-Payable-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Enable-LOB-Broker-Accounts-Payable" class="switch">
@@ -1327,7 +1327,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Vendor-Cache-Search-Minimum-Characters">Vendor Cache Search Minimum Characters: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Vendor-Cache-Search-Minimum-Characters-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Vendor-Cache-Search-Minimum-Characters" id="Vendor-Cache-Search-Minimum-Characters">
@@ -1336,7 +1336,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Vendor-Master-Keyed-Lookup-Op">Vendor Master Keyed Lookup Op: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Vendor-Master-Keyed-Lookup-Op-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Vendor-Master-Keyed-Lookup-Op" id="Vendor-Master-Keyed-Lookup-Op">
@@ -1346,7 +1346,7 @@
                 <div class="labelElement">
                     <!-- Would be nice to make this into a field that is where you add something to a list and can order/re-order the listing. -->
                     <label for="Vendor-Master-Lookup-Sequence">Vendor Master Lookup Sequence: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Vendor-Master-Lookup-Sequence-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Vendor-Master-Lookup-Sequence" id="Vendor-Master-Lookup-Sequence">
@@ -1355,7 +1355,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Vendor Master Lookup Return Multiple: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Vendor-Master-Lookup-Return-Multiple-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Vendor-Master-Lookup-Return-Multiple" class="switch">
@@ -1367,7 +1367,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Vendor-Cache-AutoComplete-Result-Max">Vendor Cache AutoComplete Result Max: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Vendor-Cache-AutoComplete-Result-Max-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Vendor-Cache-AutoComplete-Result-Max" id="Vendor-Cache-AutoComplete-Result-Max">
@@ -1389,7 +1389,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Integrations-Media-URL">URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Integrations-Media-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="url" name="Integrations-Media-URL" id="Integrations-Media-URL">
@@ -1398,7 +1398,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Integrations-Media-Datasource">Datasource: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Integrations-Media-Datasource-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Integrations-Media-Datasource" id="Integrations-Media-Datasource">
@@ -1407,7 +1407,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Integrations-Media-Username">Username: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Integrations-Media-Username-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Integrations-Media-Username" id="Integrations-Media-Username">
@@ -1416,7 +1416,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Integrations-Media-Password">Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Integrations-Media-Password-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Integrations-Media-Password" id="Integrations-Media-Password">
@@ -1435,7 +1435,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Encrypt OnBase Cloud Settings: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Integrations-Media-Encrypt-OnBase-Cloud-Settings-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Integrations-Media-Encrypt-OnBase-Cloud-Settings" class="switch">
@@ -1458,7 +1458,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Content-Composer-IdP-Path">Content Composer IdP Path: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Content-Composer-IdP-Path-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Content-Composer-IdP-Path" id="Content-Composer-IdP-Path">
@@ -1474,7 +1474,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Statement-Composition-Cache-Limit">Statement Composition Cache Limit: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Statement-Composition-Cache-Limit-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="Statement-Composition-Cache-Limit" id="Statement-Composition-Cache-Limit">
@@ -1490,7 +1490,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Message-Broker-Monitor-Start-Delay">Message Broker Monitor Start Delay(Minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Message-Broker-Monitor-Start-Delay-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="Message-Broker-Monitor-Start-Delay" id="Message-Broker-Monitor-Start-Delay">
@@ -1508,7 +1508,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Data-Capture-Server-WCF-Endpoint-Address">Data Capture Server WCF Endpoint Address: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Data-Capture-Server-WCF-Endpoint-Address-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Data-Capture-Server-WCF-Endpoint-Address" id="Data-Capture-Server-WCF-Endpoint-Address">
@@ -1524,7 +1524,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Governance Rules As A Service Endpoint: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Governance-Rules-As-A-Service-Endpoint-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Governance-Rules-As-A-Service-Endpoint" class="switch">
@@ -1542,7 +1542,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Default-Storage-Path">Default Storage Path: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Default-Storage-Path-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Default-Storage-Path" id="Default-Storage-Path">
@@ -1551,7 +1551,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Enable Isolated Chromium Process: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Enable-Isolated-Chromium-Process-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Enable-Isolated-Chromium-Process" class="switch">
@@ -1563,7 +1563,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="TPCF-Worker-Location-Override">TPCF Worker Location Override: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="TPCF-Worker-Location-Override-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="TPCF-Worker-Location-Override" id="TPCF-Worker-Location-Override">
@@ -1572,7 +1572,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Sesame Enpoint: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Sesame-Endpoint-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Sesame-Endpoint" class="switch">
@@ -1584,7 +1584,7 @@
             <div class="settingElement" id="PIM:HyRCS:ExternalBaseUri-SettingElement">
                 <div class="labelElement">
                     <label for="PIM:HyRCS:ExternalBaseUri">PIM:HyRCS:ExternalBaseUri: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="PIM:HyRCS:ExternalBaseUri-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="PIM:HyRCS:ExternalBaseUri" id="PIM:HyRCS:ExternalBaseUri">
@@ -1593,7 +1593,7 @@
             <div class="settingElement" id="PIM:HyRCS:Port-SettingElement">
                 <div class="labelElement">
                     <label for="PIM:HyRCS:Port">PIM:HyRCS:Port: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="PIM:HyRCS:Port-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="PIM:HyRCS:Port" id="PIM:HyRCS:Port">
@@ -1602,7 +1602,7 @@
             <div class="settingElement" id="PIM:ImageProcess-SettingElement">
                 <div class="labelElement">
                     <span>PIM:ImageProcess: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="PIM:ImageProcess-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="PIM:ImageProcess" class="switch">
@@ -1614,7 +1614,7 @@
             <div class="settingElement" id="PIM:ChromiumProcess-SettingElement">
                 <div class="labelElement">
                     <span>PIM:ChromiumProcess: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="PIM:ChromiumProcess-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="PIM:ChromiumProcess" class="switch">
@@ -1628,7 +1628,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Use Isolated Image Process: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Use-Isolated-Image-Process-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Use-Isolated-Image-Process" class="switch">
@@ -1640,7 +1640,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Use OnBase Full Text: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Use-OnBase-Full-Text-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Use-OnBase-Full-Text" class="switch">
@@ -1652,7 +1652,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Keyword-Data-Cache-Timeout">Keyword Data Cache Timeout: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Keyword-Data-Cache-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Keyword-Data-Cache-Timeout" id="Keyword-Data-Cache-Timeout">
@@ -1661,7 +1661,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Identity-Model-Server-URI">Identity Model Server URI: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Identity-Model-Server-URI-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="url" name="Identity-Model-Server-URI" id="Identity-Model-Server-URI">
@@ -1670,7 +1670,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Allow Insecure External XSL: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Allow-Insecure-External-XSL-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Allow-Insecure-External-XSL" class="switch">
@@ -1682,7 +1682,7 @@
             <div class="settingElement" id="Use-New-Keyword-Data-Cache-Implementation-SettingElement">
                 <div class="labelElement">
                     <span>Use New Keyword Data Cache Implementation: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Use-New-Keyword-Data-Cache-Implementation-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Use-New-Keyword-Data-Cache-Implementation" class="switch">
@@ -1694,7 +1694,7 @@
             <div class="settingElement" id="Configuration-Import-Database-Timeout-SettingElement">
                 <div class="labelElement">
                     <label for="Configuration-Import-Database-Timeout">Configuration Import Database Timeout: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Configuration-Import-Database-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Configuration-Import-Database-Timeout" id="Configuration-Import-Database-Timeout">
@@ -1703,7 +1703,7 @@
             <div class="settingElement" id="HyRCS:PageCountLimit-SettingElement">
                 <div class="labelElement">
                     <label for="HyRCS:PageCountLimit">HyRCS:PageCountLimit: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="HyRCS:PageCountLimit-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="HyRCS:PageCountLimit" id="HyRCS:PageCountLimit">
@@ -1723,7 +1723,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="owin:oia:msgItemTypeId">owin:oia:msgItemTypeId: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="owin:oia:msgItemTypeId-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="owin:oia:msgItemTypeId" id="owin:oia:msgItemTypeId">
@@ -1732,7 +1732,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="owin:oia:tmpFilePath">owin:oia:tmpFilePath: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="owin:oia:tmpFilePath-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="owin:oia:tmpFilePath" id="owin:oia:tmpFilePath">
@@ -1741,7 +1741,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="owin:oia:cleanupIntervalInMs">owin:oia:cleanupIntervalInMs: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="owin:oia:cleanupIntervalInMs-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="owin:oia:cleanupIntervalInMs" id="owin:oia:cleanupIntervalInMs">
@@ -1750,7 +1750,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="owin:oia:lifeCycleId">owin:oia:lifeCycleId: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="owin:oia:lifeCycleId-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="owin:oia:lifeCycleId" id="owin:oia:lifeCycleId">
@@ -1759,7 +1759,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="owin:oia:tmpFileAgeInMs">owin:oia:tmpFileAgeInMs: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="owin:oia:tmpFileAgeInMs-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="owin:oia:tmpFileAgeInMs" id="owin:oia:tmpFileAgeInMs">
@@ -1777,7 +1777,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="OWIN-Application-Server-Origin">Application Server Origin: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="OWIN-Application-Server-Origin-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="OWIN-Application-Server-Origin" id="OWIN-Application-Server-Origin">
@@ -1786,7 +1786,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Automatic App Startup: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="OWIN-Automatic-App-Startup-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="OWIN-Automatic-App-Startup" class="switch">
@@ -1798,7 +1798,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="OWIN-App-Startup">App Startup: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="OWIN-App-Startup-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="OWIN-App-Startup" id="OWIN-App-Startup">
@@ -1831,7 +1831,7 @@
                     <div style="margin-top: 16px;margin-bottom: 16px;">
                         <div class="labelElement">
                             <label for="Alias-Old-Name">Old Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Alias-Old-Name-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Alias-Old-Name" id="Alias-Old-Name" oninput="diskGroupAliasesFieldUpdated(this)">
@@ -1843,7 +1843,7 @@
                     <div style="margin-top: 16px;margin-bottom: 16px;">
                         <div class="labelElement">
                             <label for="Alias-New-Name">New Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Alias-New-Name-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Alias-New-Name" id="Alias-New-Name" oninput="diskGroupAliasesFieldUpdated(this)">
@@ -1855,7 +1855,7 @@
                     <div style="margin-top: 16px;margin-bottom: 16px;">
                         <div class="labelElement">
                             <label for="Alias-Type">Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Alias-Type-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <select name="Alias-Type" id="Alias-Type" onchange="diskGroupAliasesFieldUpdated(this)">
@@ -1879,7 +1879,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Foreign-Storage-EMC-Threshold">EMC Threshold(KB): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Foreign-Storage-EMC-Threshold-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="Foreign-Storage-EMC-Threshold" id="Foreign-Storage-EMC-Threshold">
@@ -1888,7 +1888,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Foreign-Storage-PM-Cache-Location">Platter Management Cache Location: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Foreign-Storage-PM-Cache-Location-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Foreign-Storage-PM-Cache-Location" id="Foreign-Storage-PM-Cache-Location">
@@ -1899,7 +1899,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Foreign-Storage-PM-Cache-Timeout">Platter Management Cache Timeout(Minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Foreign-Storage-PM-Cache-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="Foreign-Storage-PM-Cache-Timeout" id="Foreign-Storage-PM-Cache-Timeout">
@@ -1908,7 +1908,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Foreign-Storage-PM-Cache-Size">PM Cache Size(MB): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Foreign-Storage-PM-Cache-Size-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="Foreign-Storage-PM-Cache-Size" id="Foreign-Storage-PM-Cache-Size">
@@ -1928,7 +1928,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>File IO Detail: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="File-IO-Detail-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="File-IO-Detail" class="switch">
@@ -1940,7 +1940,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Temp-File-Expiration-Threshold-Time">Temp File Expiration Threshold Time(Minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Temp-File-Expiration-Threshold-Time-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Temp-File-Expiration-Threshold-Time" id="Temp-File-Expiration-Threshold-Time">
@@ -1951,7 +1951,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="PM-File-Access-Level">Platter Management File Access Level: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="PM-File-Access-Level-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <select name="PM-File-Access-Level" id="PM-File-Access-Level">
@@ -1972,7 +1972,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Validate Against Checksum: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Pop-Integrations-Validate-Against-Checksum-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Pop-Integrations-Validate-Against-Checksum" class="switch">
@@ -1984,7 +1984,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Enable Legacy Checksum Creation: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Pop-Integrations-Enable-Legacy-Checksum-Creation-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Pop-Integrations-Enable-Legacy-Checksum-Creation" class="switch">
@@ -1998,7 +1998,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Pop-Integrations-Checksum-Key">Checksum Key: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Pop-Integrations-Checksum-Key-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Pop-Integrations-Checksum-Key" id="Pop-Integrations-Checksum-Key">
@@ -2007,7 +2007,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Encrypt Configuration: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Pop-Integrations-Encrypt-Configuration-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Pop-Integrations-Encrypt-Configuration" class="switch">
@@ -2031,7 +2031,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="SessionAdministration-User">User: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the helper text.</span>
+                            <span id="SessionAdministration-User-Tooltip" class="tooltiptext">This is the helper text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="SessionAdministration-User" id="SessionAdministration-User" oninput="sessionAdministrationUserFieldUpdated(this)" disabled>
@@ -2059,7 +2059,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="SessionAdministration-Role">Role: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the helper text.</span>
+                            <span id="SessionAdministration-Role-Tooltip" class="tooltiptext">This is the helper text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="SessionAdministration-Role" id="SessionAdministration-Role" oninput="sessionAdministrationRoleFieldUpdated(this)" disabled>
@@ -2087,7 +2087,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Max-Query-Execution-Parallelism">Max Queries to run in Parallel: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Max-Query-Execution-Parallelism-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Max-Query-Execution-Parallelism" id="Max-Query-Execution-Parallelism">
@@ -2096,7 +2096,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Folder-Fetch-Batch-Size">Folder Fetch Batch Size: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Folder-Fetch-Batch-Size-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Folder-Fetch-Batch-Size" id="Folder-Fetch-Batch-Size">
@@ -2107,7 +2107,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Database-Command-TimeOut">Database Command Timeout (seconds): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Database-Command-TimeOut-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Database-Command-TimeOut" id="Database-Command-TimeOut">
@@ -2122,7 +2122,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Trust Mode: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Trust-Mode-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Trust-Mode" class="switch">
@@ -2148,7 +2148,7 @@
                 <div style="margin-top: 16px;margin-bottom: 16px;">
                     <div class="labelElement">
                         <label for="Store-Location">Store Location</label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                        <span class="tooltiptext">This is the help text.</span>
+                        <span id="Store-Location-Tooltip" class="tooltiptext">This is the help text.</span>
                     </div>
                     <div class="inputElement">
                         <select name="Store-Location" id="Store-Location" onchange="trustedClientFieldUpdated('StoreLocation')" disabled>
@@ -2160,7 +2160,7 @@
                 <div style="margin-top: 16px;margin-bottom: 16px;">
                     <div class="labelElement">
                         <label for="Store-Name">Store Name</label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                        <span class="tooltiptext">This is the help text.</span>
+                        <span id="Store-Name-Tooltip" class="tooltiptext">This is the help text.</span>
                     </div>
                     <div class="inputElement">
                         <select name="Store-Name" id="Store-Name" onchange="trustedClientFieldUpdated('StoreName')" disabled>
@@ -2178,7 +2178,7 @@
                 <div style="margin-top: 16px;margin-bottom: 16px;">
                     <div class="labelElement">
                         <label for="Find-Type">Find Type</label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                        <span class="tooltiptext">This is the help text.</span>
+                        <span id="Find-Type-Tooltip" class="tooltiptext">This is the help text.</span>
                     </div>
                     <div class="inputElement">
                         <select name="Find-Type" id="Find-Type" onchange="trustedClientFieldUpdated('FindType')" disabled>
@@ -2203,7 +2203,7 @@
                 <div style="margin-top: 16px;margin-bottom: 16px;">
                     <div class="labelElement">
                         <label for="Find-Value">Find Value</label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                        <span class="tooltiptext">This is the help text.</span>
+                        <span id="Find-Value-Tooltip" class="tooltiptext">This is the help text.</span>
                     </div>
                     <div class="inputElement">
                         <input type="text" name="Find-Value" id="Find-Value" oninput="trustedClientFieldUpdated('FindValue')" disabled>
@@ -2215,7 +2215,7 @@
                 <div style="margin-top: 16px;margin-bottom: 16px;">
                     <div class="labelElement">
                         <label for="Description">Description</label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                        <span class="tooltiptext">This is the help text.</span>
+                        <span id="Description-Tooltip" class="tooltiptext">This is the help text.</span>
                     </div>
                     <div class="inputElement">
                         <input type="text" name="Description" id="Description" style="margin-bottom: 20px;" oninput="trustedClientFieldUpdated('Description')" disabled>
@@ -2232,7 +2232,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Document-Query-Warning-Threshold">Document Query Warning Threshold: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Document-Query-Warning-Threshold-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Document-Query-Warning-Threshold" id="Document-Query-Warning-Threshold" onchange="documentQueryWarningThresholdChanged()">
@@ -2241,7 +2241,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Document-Query-Limit">Document Query Limit: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Document-Query-Limit-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Document-Query-Limit" id="Document-Query-Limit" onchange="documentQueryLimitChanged()">
@@ -2262,7 +2262,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Form-Save-To-TIFF-Timeout">Form Save To TIFF Timeout: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Form-Save-To-TIFF-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="number" name="Form-Save-To-TIFF-Timeout" id="Form-Save-To-TIFF-Timeout">
@@ -2271,7 +2271,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Toggle Max Form Width: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Unity-Forms-Toggle-Max-Form-Width-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Unity-Forms-Toggle-Max-Form-Width" class="switch">
@@ -2292,7 +2292,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Print Image Form Via PDF: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Print-Image-Form-Via-PDF-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Print-Image-Form-Via-PDF" class="switch">
@@ -2315,7 +2315,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Raw Images: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Raw-Images-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Raw-Images" class="switch">
@@ -2327,7 +2327,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Compression-Quality">Compression Quality (%): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Compression-Quality-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="number" name="Compression-Quality" id="Compression-Quality">
@@ -2346,7 +2346,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>WOPI Endpoint: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="WOPI-Endpoint-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="WOPI-Endpoint" class="switch">
@@ -2358,7 +2358,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <span>Use Office Online Server: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Use-Office-Online-Server-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <label for="Use-Office-Online-Server" class="switch">
@@ -2372,7 +2372,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Office-Online-Server-URI">Office Online Server URI: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Office-Online-Server-URI-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="url" name="Office-Online-Server-URI" id="Office-Online-Server-URI">
@@ -2381,7 +2381,7 @@
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Office-Online-Server-Proxy-Base">Office Online Server Proxy Base: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                    <span class="tooltiptext">This is the help text.</span>
+                    <span id="Office-Online-Server-Proxy-Base-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
                     <input type="text" name="Office-Online-Server-Proxy-Base" id="Office-Online-Server-Proxy-Base">
@@ -2401,7 +2401,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Unity-Editable-Filter-Max-Rows">Unity Editable Filter Max Rows: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Unity-Editable-Filter-Max-Rows-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Unity-Editable-Filter-Max-Rows" id="Unity-Editable-Filter-Max-Rows">
@@ -2410,7 +2410,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="ERP-Date-Format-LOB-Broker">ERP Date Format LOB Broker: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="ERP-Date-Format-LOB-Broker-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="ERP-Date-Format-LOB-Broker" id="ERP-Date-Format-LOB-Broker">
@@ -2421,7 +2421,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Formatted-Text-Iframe-Supported-Domains">Formatted Text Iframe Supported Domains: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Formatted-Text-Iframe-Supported-Domains-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Formatted-Text-Iframe-Supported-Domains" id="Formatted-Text-Iframe-Supported-Domains">
@@ -2442,7 +2442,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>WorkView Mobile Endpoint: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="WorkView-Mobile-Endpoint-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="WorkView-Mobile-Endpoint" class="switch">
@@ -2456,7 +2456,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Mobile-Apps-Path">Mobile Apps Path: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Mobile-Apps-Path-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Mobile-Apps-Path" id="Mobile-Apps-Path">
@@ -2465,7 +2465,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="CORS-Policy">CORS Policy: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="CORS-Policy-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="CORS-Policy" id="CORS-Policy">
@@ -2485,7 +2485,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <span>Responsive Apps Endpoint: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Responsive-Apps-Endpoint-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <label for="Responsive-Apps-Endpoint" class="switch">
@@ -2502,7 +2502,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Responsive-Apps-WorkView-API-URL">WorkView API URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Responsive-Apps-WorkView-API-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="url" name="Responsive-Apps-WorkView-API-URL" id="Responsive-Apps-WorkView-API-URL">
@@ -2511,7 +2511,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Responsive-Apps-WorkView-Files-URL">WorkView Files URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Responsive-Apps-WorkView-Files-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="url" name="Responsive-Apps-WorkView-Files-URL" id="Responsive-Apps-WorkView-Files-URL">
@@ -2520,7 +2520,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Responsive-Apps-API-URL">API URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Responsive-Apps-API-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="url" name="Responsive-Apps-API-URL" id="Responsive-Apps-API-URL">
@@ -2531,7 +2531,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Identity-Provider-URL">Identity Provider URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Identity-Provider-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="url" name="Identity-Provider-URL" id="Identity-Provider-URL">
@@ -2540,7 +2540,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="Core-Access-Token-Lifetime">Core Access Token Lifetime (seconds): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="Core-Access-Token-Lifetime-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="Core-Access-Token-Lifetime" id="Core-Access-Token-Lifetime">
@@ -2553,7 +2553,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="App-Name">App Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="App-Name-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="text" name="App-Name" id="App-Name">
@@ -2562,7 +2562,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="App-Icon-URL">App Icon URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="App-Icon-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="url" name="App-Icon-URL" id="App-Icon-URL">
@@ -2571,7 +2571,7 @@
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="App-URL">App URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span class="tooltiptext">This is the help text.</span>
+                            <span id="App-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
                             <input type="url" name="App-URL" id="App-URL">
@@ -2596,35 +2596,35 @@
         <div class="core-section-buttons-outer">
             <div class="core-section-buttons-inner">
                 <ul class="LinksList">
-                    <li><a id="ADFSLink" href="javascript:openSection('ADFS')">ADFS</a></li>
-                    <li><a id="ApplicationServerLink" href="javascript:openSection('ApplicationServer')">Application Server</a></li>
-                    <li><a id="ConnectionStringsLink" href="javascript:openSection('ConnectionStrings')">Connection Strings</a></li>
-                    <li><a id="ContentComposerLink" href="javascript:openSection('ContentComposer')">Content Composer</a></li>
-                    <li><a id="DiagnosticsSettingsLink" href="javascript:openSection('DiagnosticsSettings')">Diagnostics Settings</a></li>
-                    <li><a id="EISLink" href="javascript:openSection('EIS')">EIS (Enterprise Integration Server)</a></li>
-                    <li><a id="ExternalAccessClientLink" href="javascript:openSection('ExternalAccessClient')">External Access Client</a></li>
-                    <li><a id="FrontOfficeScanningLink" href="javascript:openSection('FrontOfficeScanning')">Front Office Scanning</a></li>
-                    <li><a id="FullTextServiceLink" href="javascript:openSection('FullTextService')">Full-Text Service</a></li>
-                    <li><a id="GlobalCloudServicesLink" href="javascript:openSection('GlobalCloudServices')">Global Cloud Services</a></li>
-                    <li><a id="HealthcareLink" href="javascript:openSection('Healthcare')">Healthcare</a></li>
-                    <li><a id="HylandIdentityProviderLink" href="javascript:openSection('HylandIdentityProvider')">Hyland Identity Provider</a></li>
-                    <li><a id="HylandServicesLink" href="javascript:openSection('HylandServices')">Hyland Services</a></li>
-                    <li><a id="HylandXMLServicesDocumentConnectorLink" href="javascript:openSection('HylandXMLServicesDocumentConnector')">Hyland XML Services - Document Connector</a></li>
+                    <li id="ADFSLink-SettingElement"><a id="ADFSLink" href="javascript:openSection('ADFS')">ADFS</a></li>
+                    <li id="ApplicationServerLink-SettingElement"><a id="ApplicationServerLink" href="javascript:openSection('ApplicationServer')">Application Server</a></li>
+                    <li id="ConnectionStringsLink-SettingElement"><a id="ConnectionStringsLink" href="javascript:openSection('ConnectionStrings')">Connection Strings</a></li>
+                    <li id="ContentComposerLink-SettingElement"><a id="ContentComposerLink" href="javascript:openSection('ContentComposer')">Content Composer</a></li>
+                    <li id="DiagnosticsSettingsLink-SettingElement"><a id="DiagnosticsSettingsLink" href="javascript:openSection('DiagnosticsSettings')">Diagnostics Settings</a></li>
+                    <li id="EISLink-SettingElement-SettingElement"><a id="EISLink" href="javascript:openSection('EIS')">EIS (Enterprise Integration Server)</a></li>
+                    <li id="ExternalAccessClientLink-SettingElement"><a id="ExternalAccessClientLink" href="javascript:openSection('ExternalAccessClient')">External Access Client</a></li>
+                    <li id="FrontOfficeScanningLink-SettingElement"><a id="FrontOfficeScanningLink" href="javascript:openSection('FrontOfficeScanning')">Front Office Scanning</a></li>
+                    <li id="FullTextServiceLink-SettingElement"><a id="FullTextServiceLink" href="javascript:openSection('FullTextService')">Full-Text Service</a></li>
+                    <li id="GlobalCloudServicesLink-SettingElement"><a id="GlobalCloudServicesLink" href="javascript:openSection('GlobalCloudServices')">Global Cloud Services</a></li>
+                    <li id="HealthcareLink-SettingElement"><a id="HealthcareLink" href="javascript:openSection('Healthcare')">Healthcare</a></li>
+                    <li id="HylandIdentityProviderLink-SettingElement"><a id="HylandIdentityProviderLink" href="javascript:openSection('HylandIdentityProvider')">Hyland Identity Provider</a></li>
+                    <li id="HylandServicesLink-SettingElement"><a id="HylandServicesLink" href="javascript:openSection('HylandServices')">Hyland Services</a></li>
+                    <li id="HylandXMLServicesDocumentConnectorLink-SettingElement"><a id="HylandXMLServicesDocumentConnectorLink" href="javascript:openSection('HylandXMLServicesDocumentConnector')">Hyland XML Services - Document Connector</a></li>
                     <li id="IDOLLink-SettingElement"><a id="IDOLLink" href="javascript:openSection('IDOL')">IDOL</a></li>
-                    <li><a id="LOBBrokerAccountsPayableAPILink" href="javascript:openSection('LOBBrokerAccountsPayableAPI')">LOB Broker - Accounts Payable API</a></li>
-                    <li><a id="MediaLink" href="javascript:openSection('Media')">Media</a></li>
-                    <li><a id="MiscellaneousLink" href="javascript:openSection('Miscellaneous')">Miscellaneous</a></li>
-                    <li><a id="OWINLink" href="javascript:openSection('OWIN')">OWIN</a></li>
-                    <li><a id="PlatterManagementLink" href="javascript:openSection('PlatterManagement')">Platter Management</a></li>
-                    <li><a id="PopIntegrationLink" href="javascript:openSection('PopIntegration')">Pop Integration</a></li>
-                    <li><a id="SessionAdministrationLink" href="javascript:openSection('SessionAdministration')">Session Administration</a></li>
+                    <li id="LOBBrokerAccountsPayableAPILink-SettingElement"><a id="LOBBrokerAccountsPayableAPILink" href="javascript:openSection('LOBBrokerAccountsPayableAPI')">LOB Broker - Accounts Payable API</a></li>
+                    <li id="MediaLink-SettingElement"><a id="MediaLink" href="javascript:openSection('Media')">Media</a></li>
+                    <li id="MiscellaneousLink-SettingElement"><a id="MiscellaneousLink" href="javascript:openSection('Miscellaneous')">Miscellaneous</a></li>
+                    <li id="OWINLink-SettingElement"><a id="OWINLink" href="javascript:openSection('OWIN')">OWIN</a></li>
+                    <li id="PlatterManagementLink-SettingElement"><a id="PlatterManagementLink" href="javascript:openSection('PlatterManagement')">Platter Management</a></li>
+                    <li id="PopIntegrationLink-SettingElement"><a id="PopIntegrationLink" href="javascript:openSection('PopIntegration')">Pop Integration</a></li>
+                    <li id="SessionAdministrationLink-SettingElement"><a id="SessionAdministrationLink" href="javascript:openSection('SessionAdministration')">Session Administration</a></li>
                     <li id="ShareBaseLink-SettingElement"><a id="ShareBaseLink" href="javascript:openSection('ShareBase')">ShareBase</a></li>
-                    <li><a id="TrustedCertificatesLink" href="javascript:openSection('TrustedCertificates')">Trusted Certificates</a></li>
-                    <li><a id="UnityClientLink" href="javascript:openSection('UnityClient')">Unity Client</a></li>
-                    <li><a id="UnityImageFormsLink" href="javascript:openSection('UnityImageForms')">Unity/Image Forms</a></li>
-                    <li><a id="ViewerLink" href="javascript:openSection('Viewer')">Viewer</a></li>
+                    <li id="TrustedCertificatesLink-SettingElement"><a id="TrustedCertificatesLink" href="javascript:openSection('TrustedCertificates')">Trusted Certificates</a></li>
+                    <li id="UnityClientLink-SettingElement"><a id="UnityClientLink" href="javascript:openSection('UnityClient')">Unity Client</a></li>
+                    <li id="UnityImageFormsLink-SettingElement"><a id="UnityImageFormsLink" href="javascript:openSection('UnityImageForms')">Unity/Image Forms</a></li>
+                    <li id="ViewerLink-SettingElement"><a id="ViewerLink" href="javascript:openSection('Viewer')">Viewer</a></li>
                     <li id="WOPILink-SettingElement"><a id="WOPILink" href="javascript:openSection('WOPI')">WOPI</a></li>
-                    <li><a id="WorkViewLink" href="javascript:openSection('WorkView')">WorkView</a></li>
+                    <li id="WorkViewLink-SettingElement"><a id="WorkViewLink" href="javascript:openSection('WorkView')">WorkView</a></li>
                 </ul>
             </div>
         </div>

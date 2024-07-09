@@ -43,7 +43,8 @@ const DiagnosticsSettingsProfiles = [];
 //["errorId", "Location", "Title", "Description"];
 const folderingHeightErrorArray = ["folderingHeightPercentage", "Foldering", "Height Percentage", "All 3 height values must equal a sum of 100% exactly."];
 const keywordTypeaheadCharacterCountArray = ["keywordTypeaheadCharacterCount", "Miscellaneous", "Keyword Typeahead", "No duplicate Keyword ID numbers allowed"];
-const agendaOnlineDuplicateFormFieldNamesArray = ["agendaOnlineDuplicateFormFieldNames", "PublicCommentIntegration", "Field Name", "No duplicate Field Names are allowed."];
+const agendaOnlineDuplicateFormFieldNamesArray = ["agendaOnlineDuplicateFormFieldNames", "PublicCommentIntegration", "Field Name", "No duplicate Unity Form Field Names are allowed."];
+const agendaOnlineDuplicateMeetingTypeNamesArray = ["agendaOnlineDuplicateMeetingTypeNames", "PublicCommentIntegration", "Duplicate Meeting Type Name", "Duplicate Meeting Type Names are not allowed."];
 const connectionStringDataSourceNameErrorArray = ["connectionStringDataSourceName", "ConnectionStrings", "Data Source Name", "You have a duplicate Data Source Name or an incomplete Connection String."];
 const diagnosticSettingsRouteNameErrorArray = ["diagnosticSettingsRouteName", "DiagnosticsSettings", "Duplicate Route Name", "You have a duplicate Diagnostics Route Name. All Route Names need to be unique."];
 const applicationPoolMissingCredentialsErrorArray = ["applicationPoolMissingCredentials", "IISApplicationPool", "Missing Username/Password", "The username or password fields are not filled in. Please fill in to allow saving."];
@@ -104,16 +105,24 @@ let diskGroupAliases = [];
 let NavigationPanelContexts = [];
 let NavigationPanelContextsIdNumber = 1;
 
-/* Keyword Drop Down Type Ahead Character Minimums Variabels */
+/* Keyword Drop Down Type Ahead Character Minimums Variables */
 let keywordTypeAheadArray = [];
 let keywordTypeAheadIdNumber = 0;
-
 
 
 /********************************************************
  *                  Page Load SCript
  ********************************************************/
 async function onPageLoadLogic() {
+    console.log(localStorage.getItem("darkModeState"));
+    if (localStorage.getItem("darkModeState") != null) {
+        if (localStorage.getItem("darkModeState") == "true") {
+            document.getElementById("checkbox").checked = true;
+        } else {
+            document.getElementById("checkbox").checked = false;
+        }
+        toggleDarkLightMode(document.getElementById("checkbox"));
+    }
     if (sessionStorage.getItem('WebApplicationChosenArray') != null && sessionStorage.getItem('WebApplicationChosenArray') != undefined) {
         let object = JSON.parse(sessionStorage.getItem('WebApplicationChosenArray'));
         sessionStorage.removeItem('WebApplicationChosenArray');
@@ -124,7 +133,6 @@ async function onPageLoadLogic() {
         loadWebApplicationConfiguration(object[0].webConfigPhysicalPath, object[0].type, object[0].version, object[0].site, object[0].name, object[0].path, object[0].physicalPath, object[0].bitness);
     } else {
         //Need to redirect the user back to the home page.
-
     }
 }
 
@@ -206,7 +214,6 @@ async function parseWebApplicationsResponse(applications) {
 }
 
 async function createAvailableWebApplicationsTable(webApplications) {
-
     let table = document.getElementById("webApplicationTable");
     let tbody = document.createElement("tbody");
     Array.from(webApplications).forEach((element) => {
@@ -331,7 +338,7 @@ async function setBooleanFieldValue(config, elementID, booleanKeyName) {
 async function setOtherFieldValue(config, elementID, otherKeyName) {
     //console.log((config["minimumValue"]) != undefined);
     //console.log((config["maximumValue"]) != undefined);
-    //console.log(otherKeyName);
+    //console.log(config);
     document.getElementById(elementID).value = config[otherKeyName];
     if (config["minimumValue"] != "" && config["minimumValue"] != undefined) {
         if (config["maximumValue"] != "") {
@@ -349,7 +356,7 @@ async function setOtherFieldValue(config, elementID, otherKeyName) {
             });
             await validateNumericValue(document.getElementById(elementID));
         }
-    } else if (config["maximumValue"] != "" && config["maximumValue"] != undefined) {
+    } else if (config["maximumValue"] != "" && config["minimumValue"] != undefined) {
         document.getElementById(elementID).setAttribute("max", config["maximumValue"]);
         document.getElementById(elementID).addEventListener("input", function () {
             validateNumericValue(document.getElementById(elementID));
@@ -599,6 +606,7 @@ function pushWebApplicationConfiguration() {
 function processWebApplicationSaveResponse(data) {
     document.getElementById("ProcessingWebConfigValuesProgress").style.display = "none";
     successfulSave();
+    configurationChanged = false;
 }
 
 function saveIisConfiguration(config) {
@@ -1236,8 +1244,13 @@ async function parseData(config) {
     await parseIisConfiguration(config["IisConfiguration"]);
     await parseHylandLogging(config["hylandLogging"]);
     await parseElementsToHide(config["elementsToHide"]);
+    await parseTooltips(config["tooltips"]);
 
     switch (config["Type"]) {
+        case "Agenda Online":
+            //await parseHylandApplicationsAgendaPubAccessPublicComment(config["hylandApplicationsAgendaPubAccessPublicComment"]);
+            await parseHylandApplicationsAgendaPubAccessPublicCommentIntegrations(config);
+            break;
         case "Application Server":
             await parseADFS(config["hylandAuthenticationADFS"]);
             await parseConnectionStrings(config["connectionStrings"]);
@@ -1245,12 +1258,12 @@ async function parseData(config) {
             await parseHylandPlatterManagement(config["hylandPlatterManagement"]);
             await parseWindowsAuthOptimization(config["WindowsAuthOptimizeFor"]);
             await parseSessionAdministration(config["sessionAdministration"]);
-            break;
-        case "Agenda Online":
-            await parseHylandApplicationsAgendaPubAccessPublicComment(config["hylandApplicationsAgendaPubAccessPublicComment"]);
+            
             break;
         case "Electronic Plan Review":
             await prepareAndSetDefaultTimeZoneOptions();
+            break;
+        case "Gateway Caching Server":
             break;
         case "Healthcare Form Manager":
             await parseHylandIdentityProvider(config["hylandIdentityProviderUrl"]);
@@ -1298,7 +1311,9 @@ async function parseData(config) {
         if (event.target.tagName.toLowerCase() === 'input') {
             //console.log(`Input changed: ${event.target.name}, Value: ${event.target.value}`);
             // Perform your desired operations here
-            configurationChanged = true;
+            if (event.target.id != "checkbox") {
+                configurationChanged = true;
+            }
         }
     });
 
@@ -1321,6 +1336,17 @@ async function parseData(config) {
             return confirmationMessage;
         }
     });
+}
+
+async function parseTooltips(config) {
+    for (let i = 0; i < config.length; i++) {
+        console.log(config[i]);
+        if (config[i]["tooltip"].includes("<br>")) {
+            document.getElementById(config[i]["htmlId"]).innerHTML = config[i]["tooltip"];
+        } else {
+            document.getElementById(config[i]["htmlId"]).innerText = config[i]["tooltip"];
+        }
+    }
 }
 
 async function parseElementsToHide(config) {
@@ -1546,6 +1572,24 @@ async function parseHylandApplicationsAgendaPubAccessPublicComment(config) {
     }
 }
 
+async function parseHylandApplicationsAgendaPubAccessPublicCommentIntegrations(config) {
+    AgendaOnlineIntegrations = config["publicCommentIntegrations"];
+
+    if (AgendaOnlineIntegrations.length > 0) {
+        for (let i = 0; i < AgendaOnlineIntegrations.length; i++) {
+            let opt = document.createElement("option");
+            opt.value = "AgendaOnlineIntegration" + AgendaOnlineIntegrationsIdNumber;
+            opt.innerText = AgendaOnlineIntegrations[i].Name;
+            document.getElementById("PublicCommentIntegrations-SelectList").append(opt);
+            AgendaOnlineIntegrations[i].id = "AgendaOnlineIntegration" + AgendaOnlineIntegrationsIdNumber;
+            AgendaOnlineIntegrationsIdNumber++;
+        }
+    }
+
+    await disableAllAgendaOnlineIntegrationsFields(AgendaOnlineIntegrationsAllFieldIds, true);
+    await setAgendaOnlineIntegrationsButtons(["PublicCommentIntegrations-CopyButton", "PublicCommentIntegrations-DeleteButton"], true);
+}
+
 async function parseHylandLogging(config) {
     if (config != null) {
         document.getElementById("DiagnosticsSettings-TruncateLogValues").value = config["truncateloggingcharacters"];
@@ -1761,6 +1805,7 @@ async function saveData() {
             await saveSessionAdministration();
             break;
         case "Agenda Online":
+            await saveHylandApplicationsAgendaPubAccessPublicComment();
             break;
         case "Electronic Plan Review":
             break;
@@ -1791,6 +1836,10 @@ async function saveData() {
             await saveHealthcareWebViewerSourceOrigins();
             break;
     }
+}
+
+async function saveHylandApplicationsAgendaPubAccessPublicComment() {
+    coreConfigData["publicCommentIntegrations"] = AgendaOnlineIntegrations;
 }
 
 async function saveSessionAdministration() {
@@ -1867,25 +1916,25 @@ async function saveHylandLogging() {
     coreConfigData["hylandLogging"]["windowsEventLogging"]["SourceName"] = document.getElementById("DiagnosticsSettings-WindowsEventLogging-SourceName").value;
 }
 
-async function saveHylandApplicationsAgendaPubAccessPublicComment() {
-    let meetingtypenames = document.getElementById("Meeting-Type-Name").value;
+//async function saveHylandApplicationsAgendaPubAccessPublicComment() {
+//    let meetingtypenames = document.getElementById("Meeting-Type-Name").value;
 
-    if (meetingtypenames.includes(',')) {
-        let resultingArray = meetingtypenames.split(',');
-        coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"] = [];
-        for (let i = 0; i < resultingArray.length; i++) {
-            let obj = {
-                Name: resultingArray[0]
-            };
-            coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"].push(obj);
-        }
-    } else {
-        coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"][0].Name = meetingtypenames;
-    }
+//    if (meetingtypenames.includes(',')) {
+//        let resultingArray = meetingtypenames.split(',');
+//        coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"] = [];
+//        for (let i = 0; i < resultingArray.length; i++) {
+//            let obj = {
+//                Name: resultingArray[0]
+//            };
+//            coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"].push(obj);
+//        }
+//    } else {
+//        coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["meetingTypes"][0].Name = meetingtypenames;
+//    }
 
-    //Save the Agenda Fields elements and values and all.
-    coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["agendaFields"] = AgendaOnlineAgendaFields;
-}
+//    //Save the Agenda Fields elements and values and all.
+//    coreConfigData["hylandApplicationsAgendaPubAccessPublicComment"]["agendaFields"] = AgendaOnlineAgendaFields;
+//}
 
 async function saveAdfs() {
     coreConfigData["hylandAuthenticationADFS"]["systemIdentityModel"]["audienceUris"] = audienceUrisData;
@@ -3147,6 +3196,90 @@ function validateIdentityProviderFields(field) {
     }
 }
 
+
+/********************************************************
+*            Dark/Light Mode Toggle Functions
+********************************************************/
+function toggleDarkLightMode(checkbox) {
+    console.log(checkbox.checked);
+    if (checkbox.checked) {
+        localStorage.setItem("darkModeState", true);
+        //Elements to add "dark_mode" class to:
+        document.body.classList.add('dark_mode');
+        document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.add('dark_mode');
+        document.getElementById("Loading-Web-Applications-Progress-Section").classList.add('dark_mode');
+        document.getElementById("CopyWebApplicationModal-Container").classList.add('dark_mode');
+        document.getElementById("SaveErrors-Content").classList.add('dark_mode');
+        document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.add('dark_mode');
+
+        //Elements to add "dark_mode_titlebar" class to:
+        document.getElementById("h1-container").classList.add('dark_mode_titlebar');
+        document.getElementById("core-action-buttons-div").classList.add('dark_mode_titlebar');
+        document.getElementById("ChooseApplicationTitleBar").classList.add('dark_mode_titlebar');
+        Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
+            element.classList.add('dark_mode_titlebar')
+        });
+        Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
+            element.classList.add('dark_mode_titlebar');
+        });
+
+        //Elements to add "dark_mode_table" class to:
+
+
+        //Elements to add "dark_mode_button" class to:
+        Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
+            element.classList.add('dark_mode_button')
+        });
+
+        //Elements to add "dark_mode_select" class to:
+        Array.from(document.getElementsByTagName("select")).forEach(element => {
+            element.classList.add('dark_mode_select');
+        });
+
+        //Elements to add "dark_mode_links" class to:
+        Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
+            element.classList.add('dark_mode_links');
+        });
+    } else {
+        localStorage.setItem("darkModeState", false);
+        //Elements to remove "dark_mode" class to:
+        document.body.classList.remove('dark_mode');
+        document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.remove('dark_mode');
+        document.getElementById("Loading-Web-Applications-Progress-Section").classList.remove('dark_mode');
+        document.getElementById("CopyWebApplicationModal-Container").classList.remove('dark_mode');
+        document.getElementById("SaveErrors-Content").classList.remove('dark_mode');
+        document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.remove('dark_mode');
+
+        //Elements to add "dark_mode_titlebar" class to:
+        document.getElementById("h1-container").classList.remove('dark_mode_titlebar');
+        document.getElementById("core-action-buttons-div").classList.remove('dark_mode_titlebar');
+        document.getElementById("ChooseApplicationTitleBar").classList.remove('dark_mode_titlebar');
+        Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
+            element.classList.remove('dark_mode_titlebar')
+        });
+        Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
+            element.classList.remove('dark_mode_titlebar');
+        });
+
+        //Elements to add "dark_mode_table" class to:
+
+
+        //Elements to add "dark_mode_button" class to:
+        Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
+            element.classList.remove('dark_mode_button')
+        });
+
+        //Elements to add "dark_mode_select" class to:
+        Array.from(document.getElementsByTagName("select")).forEach(element => {
+            element.classList.remove('dark_mode_select');
+        });
+        Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
+            element.classList.remove('dark_mode_links');
+        });
+    }
+
+    console.log(localStorage.getItem("darkModeState"));
+}
 
 
 /********************************************************
