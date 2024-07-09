@@ -2,16 +2,16 @@
 This is my personal concept of what a web based version of the WAMCON (Web Application Management Console) could look like. However, I have invisioned a slightly different approach to it than Hyland has. I envision this being more of a COMACON (Configuration Management Console). Fetures I want to have in it are as follows:
 
 1. Configuration/Management of web based configuration files (same as WAMCON today, but much cleaner, accurate, and detailed)
-2. Configuration of local configuration files (e.g. obunity.exe.config and more)
-3. Creation of brand new web based applications (Application Server, Web Server, etc.)
-4. Creation of brand new local configuration files (Unity Client, Thick Client, etc.)
+2. Configuration of local configuration files (e.g. obunity.exe.config and more) - To Be Released
+3. Creation of brand new web based applications (Application Server, Web Server, etc.) - To Be Released
+4. Creation of brand new local configuration files (Unity Client, Thick Client, etc.) - To Be Released
 
 ![image](https://github.com/rlwakefield/COMACON-MVC/assets/33588807/cc7c6524-2926-4b2b-bcb9-c2875a62c9ce)
 
 
 # Installation Instructions
 ### PREREQS
-You will need to install the .NET 6.0 Windows Hosting Bundle on the server you are using to test this. You can find it here: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
+You will need to install the .NET 8.0 Windows Hosting Bundle on the server you are using to test this. You can find it here: https://dotnet.microsoft.com/en-us/download/dotnet/8.0
 You will also need to have IIS installed and configured on the server you wish to have hosting the COMACON.
 
 ### Core Installation
@@ -42,14 +42,15 @@ Obviously I am always open to other features, suggestions, etc., but right now m
 
 
 # Upgrade Instructions
-1. Download the latest release [here](https://github.com/rlwakefield/CoMaCon/releases).
-2. Once the file downloads, right-click on it and select properties. Then unblock the file and click OK.
-3. Copy the .zip file to the server that will be hosting the COMACON.
+1. verify you have the appropriate .NET Windows Hosting Bundle installed.
+2. Download the latest release [here](https://github.com/rlwakefield/CoMaCon/releases).
+3. Once the file downloads, right-click on it and select properties. Then unblock the file and click OK.
+4. Copy the .zip file to the server that will be hosting the COMACON.
 **On the server hosting the COMACON**
-4. Unzip the copied .zip file.
-5. Delete all of the files from the current COMACON folder in the "C:\inetpub\wwwroot\COMACON" folder.
-6. Copy all of the files from the unzipped .zip file to the "C:\inetpub\wwwroot\COMACON" folder.
-7. Recycle the COMACON Application Pool and you are good to go.
+5. Unzip the copied .zip file.
+6. Delete all of the files from the current COMACON folder in the "C:\inetpub\wwwroot\COMACON" folder.
+7. Copy all of the files from the unzipped .zip file to the "C:\inetpub\wwwroot\COMACON" folder.
+8. Recycle the COMACON Application Pool and you are good to go.
 
 
 # Issue Reporting/Enhancement Suggestions
