@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="COMACON Helper.exe.manifest" size="12541">
+    <dependentAssembly dependencyType="install" codebase="COMACON Helper.exe.manifest" size="14001">
       <assemblyIdentity name="COMACON Helper.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>PIBhWR6E+Hkg6MFkfNaNQdKBRFbJ/+uCt0+104uvxFY=</dsig:DigestValue>
+        <dsig:DigestValue>irGjATUAjBgD1ofTRMJkNOr6WuEpIiwi7wAuGEMJjSQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
