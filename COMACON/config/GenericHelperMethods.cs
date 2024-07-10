@@ -1135,8 +1135,9 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         {
             //Get the serialized output and store it.
             string serializedObject = ComaconHelperProxy.Get(applicationPath, applicationName, webApplicationType, webApplicationVersion);
+            Console.WriteLine(serializedObject);
 
-            serializedObject = Encoding.UTF8.GetString(ProtectedData.Unprotect(Convert.FromBase64String(serializedObject), null, DataProtectionScope.CurrentUser));
+            serializedObject = Encoding.UTF8.GetString(ProtectedData.Unprotect(Convert.FromBase64String(serializedObject), null, DataProtectionScope.LocalMachine));
 
             try
             {
