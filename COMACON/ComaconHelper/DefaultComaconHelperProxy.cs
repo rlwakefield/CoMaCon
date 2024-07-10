@@ -104,7 +104,7 @@ internal class DefaultComaconHelperProxy : ComaconHelperProxy
         string webApplicationType = type;
         //argument 7
         //string serializedobject = serializedOutput.Replace("\"", "\"\"");
-        string serializedobject = Convert.ToBase64String(ProtectedData.Protect(Encoding.UTF8.GetBytes(serializedOutput), null, DataProtectionScope.CurrentUser));
+        string serializedobject = Convert.ToBase64String(ProtectedData.Protect(Encoding.UTF8.GetBytes(serializedOutput), null, DataProtectionScope.LocalMachine));
         //var encryptedBytes = ProtectedData.Protect(Encoding.UTF8.GetBytes(data), null, DataProtectionScope.CurrentUser);
         //var encryptedString = Convert.ToBase64String(encryptedBytes);
         //string args = $"\"{action}\" \"{subAction}\" \"{appPath}\" \"{sectionsToLoad}\" \"{nothing}\" \"{webApplicationType}\" \"{serializedobject}\"";

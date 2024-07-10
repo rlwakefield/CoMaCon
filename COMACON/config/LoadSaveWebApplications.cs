@@ -85,6 +85,7 @@ internal sealed class DefaultLoadSaveWebApplications : LoadSaveWebApplications
         //XmlNode HylandApplicationsSharepointServices = root.SelectSingleNode("Hyland.Applications.Sharepoint.Services");
         //XmlNode HylandApplicationsSharepointSearchAdapter = root.SelectSingleNode("Hyland.Applications.Sharepoint.SearchAdapter");
 
+        GenericHelperMethods.CheckHylandDllFiles(physicalPath, webApplicationVersion);
         GenericHelperMethods.ParseCoreConfigurationData(webconfigconfig, webApplicationType, webApplicationVersion, applicationName, siteName, physicalPath, applicationPath, bitness);
         GenericHelperMethods.ParseWebApplicationSectionsTranslator(webApplicationDataStructures, webconfigconfig, root, xmlDoc, webApplicationType, webApplicationVersion.Split('.')[0] + webApplicationVersion.Split('.')[1]);
         GenericHelperMethods.processTranslator(ComaconHelperProxy, webApplicationType, webApplicationVersion.Split('.')[0] + webApplicationVersion.Split('.')[1], applicationName, applicationPath, root, webconfigconfig, config, xmlDoc, webApplicationDataStructures);
