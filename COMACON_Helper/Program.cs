@@ -11,6 +11,7 @@ using Oracle.ManagedDataAccess.Client;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
 using System.Text;
+using System.Reflection;
 
 
 namespace COMACON_Helper
@@ -123,6 +124,12 @@ namespace COMACON_Helper
 
                     if (applicationType == "Application Server")
                     {
+                        string dataSourceRegex = "\\s*Data Source\\s*=\\s*[^;]*;*";
+                        string databaseRegex = "\\s*database\\s*=\\s*[^;]*;*";
+                        string userIdRegex = "\\s*User Id\\s*=\\s*[^;]*;*";
+                        string passwordRegex = "\\s*Password\\s*=\\s*[^;]*;*";
+                        string integratedSecurityRegex = "\\s*Integrated Security\\s*=\\s*True;*";
+
                         //Creates the new ConnectionStrings object and assigns it the appropriate values.
                         ConnectionStrings cstrings = new ConnectionStrings();
 
@@ -163,9 +170,9 @@ namespace COMACON_Helper
                                             connectionStringV2.UserId = oracleBuilder.UserID;
                                             connectionStringV2.Password = oracleBuilder.Password;
                                         }
-
+                                        
                                         string pattern = @"(\w+=\w+)(?=\))";
-                                        MatchCollection matches = Regex.Matches(oracleBuilder.ConnectionString, pattern);
+                                        MatchCollection matches = Regex.Matches(oracleBuilder.DataSource, pattern);
 
                                         Dictionary<string, string> connectionStringValues = new Dictionary<string, string>();
                                         foreach (Match match in matches)
@@ -188,17 +195,28 @@ namespace COMACON_Helper
                                             connectionStringV2.oracle.Host = oracleBuilder.DataSource;
                                         }
 
+                                        string oracleAdditionalOptions = Regex.Replace(connString.Attributes["connectionString"].Value, userIdRegex, "", RegexOptions.IgnoreCase);
+                                        oracleAdditionalOptions = Regex.Replace(oracleAdditionalOptions, dataSourceRegex, "", RegexOptions.IgnoreCase);
+                                        oracleAdditionalOptions = Regex.Replace(oracleAdditionalOptions, passwordRegex, "", RegexOptions.IgnoreCase);
+                                        connectionStringV2.AdditionalOptions = oracleAdditionalOptions.Trim();
+
                                         break;
                                     case "System.Data.SqlClient":
                                         connectionStringV2.Provider = "System.Data.SqlClient";
                                         connectionStringV2.Name = connString.Attributes["name"].Value;
+                                        //Console.WriteLine(connString.Attributes["connectionString"].Value);
                                         SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder(connString.Attributes["connectionString"].Value);
                                         connectionStringV2.sql.DataSource = sqlBuilder.DataSource;
                                         connectionStringV2.sql.Database = sqlBuilder.InitialCatalog;
                                         connectionStringV2.IntegratedSecurity = sqlBuilder.IntegratedSecurity.ToString();
                                         connectionStringV2.UserId = sqlBuilder.UserID;
                                         connectionStringV2.Password = sqlBuilder.Password;
-
+                                        string additionalOptions = Regex.Replace(connString.Attributes["connectionString"].Value, dataSourceRegex, "", RegexOptions.IgnoreCase);
+                                        additionalOptions = Regex.Replace(additionalOptions, databaseRegex, "", RegexOptions.IgnoreCase);
+                                        additionalOptions = Regex.Replace(additionalOptions, userIdRegex, "", RegexOptions.IgnoreCase);
+                                        additionalOptions = Regex.Replace(additionalOptions, passwordRegex, "", RegexOptions.IgnoreCase);
+                                        additionalOptions = Regex.Replace(additionalOptions, integratedSecurityRegex, "", RegexOptions.IgnoreCase);
+                                        connectionStringV2.AdditionalOptions = additionalOptions.Trim();
                                         break;
                                 }
                                 cstrings.connectionStrings.Add(connectionStringV2);
@@ -228,6 +246,7 @@ namespace COMACON_Helper
                     //var data = JsonConvert.SerializeObject(translatorToReturn);
                     //var encryptedBytes = Convert.ToBase64String(ProtectedData.Protect(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(translatorToReturn)), null, DataProtectionScope.CurrentUser));
                     //var encryptedString = Convert.ToBase64String(encryptedBytes);
+                    //Console.WriteLine(JsonConvert.SerializeObject(translatorToReturn));
                     Console.WriteLine(Convert.ToBase64String(ProtectedData.Protect(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(translatorToReturn)), null, DataProtectionScope.LocalMachine)));
                     break;
                 case "set":

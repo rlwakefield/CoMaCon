@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="COMACON Helper.exe" size="14288">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="COMACON Helper.exe" size="15312">
       <assemblyIdentity name="COMACON Helper" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>5EopkYk9F3PXqNDcHFA7hl28n+mJ8ukp6Ak0BihVYvA=</dsig:DigestValue>
+        <dsig:DigestValue>ubnXS0LWvk6Yw/TI7ihJNaaiz2OYNHci7Mk6esFv45c=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -61,7 +61,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>N0VnolW7jgzPkR0HrQVSgafVbzIZqguU1y3bSqIwblk=</dsig:DigestValue>
+        <dsig:DigestValue>tiKnRdx/Pb4Mb+rpOnyJBlNijeSlSCw+X5rz8OAnHYg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
