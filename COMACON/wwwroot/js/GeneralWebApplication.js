@@ -1340,7 +1340,7 @@ async function parseData(config) {
 
 async function parseTooltips(config) {
     for (let i = 0; i < config.length; i++) {
-        console.log(config[i]);
+        //console.log(config[i]);
         if (config[i]["tooltip"].includes("<br>")) {
             document.getElementById(config[i]["htmlId"]).innerHTML = config[i]["tooltip"];
         } else {
@@ -2567,6 +2567,7 @@ async function connectionStringSelectedV3() {
         document.getElementById("Protocol").value = result[0]["oracle"]["Protocol"];
         document.getElementById("Oracle-Database").value = result[0]["oracle"]["Database"];
         document.getElementById("Port").value = result[0]["oracle"]["Port"];
+        document.getElementById("Additional-Options").value = result[0]["AdditionalOptions"];
     })();
 
     await dataProviderV3(document.getElementById("Data-Provider"));
@@ -2602,8 +2603,8 @@ async function dataProviderV3(selection) {
             arrayObject[0].sql.DataSource = document.getElementById("Sql-Data-Source").value;
             arrayObject[0].sql.Database = document.getElementById("Sql-Database").value;
             await setRequiredFieldAlertsV3(["sql"]);
-            document.getElementById("Sql-AdditionalOptions").style.display = "block";
-            document.getElementById("Oracle-AdditionalOptions").style.display = "none";
+            //document.getElementById("Sql-AdditionalOptions").style.display = "block";
+            //document.getElementById("Oracle-AdditionalOptions").style.display = "none";
             break;
         case "Oracle.ManagedDataAccess.Client":
             document.getElementById(selection.value + ".Fields").style.display = "block"
@@ -2619,8 +2620,8 @@ async function dataProviderV3(selection) {
             } else {
                 await setRequiredFieldAlertsV3(["oracle2"]);
             }
-            document.getElementById("Sql-AdditionalOptions").style.display = "none";
-            document.getElementById("Oracle-AdditionalOptions").style.display = "block";
+            //document.getElementById("Sql-AdditionalOptions").style.display = "none";
+            //document.getElementById("Oracle-AdditionalOptions").style.display = "block";
             break;
     }
 }
