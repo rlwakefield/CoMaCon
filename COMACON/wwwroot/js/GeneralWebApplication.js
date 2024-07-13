@@ -1787,7 +1787,7 @@ async function saveData() {
     await saveKnownElements(coreConfigData["knownKeys"]);
     await saveKnownElements(coreConfigData["translatorKnownKeys"]);
     await saveIisConfiguration(coreConfigData["IisConfiguration"]);
-    console.log(optimizeForWindowsAuth);
+    //console.log(optimizeForWindowsAuth);
     coreConfigData["WindowsAuthOptimizeFor"] = optimizeForWindowsAuth;
     if (diagnosticsRoutes.length > 0) {
         await saveHylandLogging();
@@ -2586,7 +2586,7 @@ async function connectionStringSelectedV3() {
 }
 
 async function disableConnectionStringFieldsV3(value) {
-    let coreConnectionStringFieldsHtmlIds = ["Data-Source-Name", "Data-Provider", "Integrated-Security", "User-ID", "Password", "Sql-Data-Source", "Sql-Database", "Oracle-Fields-TNS-Connection-String", "Host", "Protocol", "Oracle-Database", "Port" ];
+    let coreConnectionStringFieldsHtmlIds = ["Data-Source-Name", "Data-Provider", "Integrated-Security", "User-ID", "Password", "Sql-Data-Source", "Sql-Database", "Oracle-Fields-TNS-Connection-String", "Host", "Protocol", "Oracle-Database", "Port" , "Additional-Options"];
     
     for (let i = 0; i < coreConnectionStringFieldsHtmlIds.length; i++) {
         document.getElementById(coreConnectionStringFieldsHtmlIds[i]).disabled = (value === 'true');
@@ -2750,7 +2750,7 @@ async function connectionStringTextInputFieldUpdatedV3(field) {
             cstringToUpdate[0].AdditionalOptions = field.value;
             break;
     }
-
+    document.getElementById("TestConnectionString-Alert").innerText = "";
     //await checkSetAppendedTextErrorV3();
 }
 
@@ -2874,6 +2874,7 @@ async function tnsConnectionStringCheckCheckboxV3(field) {
 async function disableConnectionStringButtonsV3(value) {
     document.getElementById("Copy-ConnectionString").disabled = (value === 'true');
     document.getElementById("Delete-ConnectionString").disabled = (value === 'true');
+    document.getElementById("TestConnectionString").disabled = (value === 'true');
 }
 
 async function newConnectionStringV3() {
@@ -2949,6 +2950,7 @@ async function resetConnectionStringFieldsV3() {
     document.getElementById("Oracle-Database").value = "";
     document.getElementById("Port").value = "";
     document.getElementById("DuplicateConnectionString-Alert").style.display = "none";
+    document.getElementById("Additional-Options").value = "";
 }
 
 async function deleteDataSourceOptionV3(idvalue) {
@@ -3102,6 +3104,36 @@ async function checkErroredConnectionStrings() {
     } else {
         await spliceErrorFromArray("connectionStringDataSourceName");
     }
+}
+
+async function testConnectionString() {
+    //Get the selected connection string from the ConnectionStringsArray.
+    let selectedConnectionString = ConnectionStringsArray.filter(cstring => cstring.id === document.getElementById("ConnectionStrings-SelectList").value);
+    console.log(selectedConnectionString);
+    document.getElementById("connectionStringTestModal").style.display = "flex";
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(selectedConnectionString[0])
+    };
+    fetch(apiRootUrl + "/api/Endpoint/TestConnectionString?cstringobject=" + JSON.stringify(selectedConnectionString[0]))
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("connectionStringTestModal").style.display = "none";
+            console.log(data);
+            console.log(data["ResultCode"] == "1");
+            let testconnectionalert = document.getElementById("TestConnectionString-Alert");
+            console.log(testconnectionalert);
+            if (data["ResultCode"] == "0") {
+                testconnectionalert.innerText = data["ResultMessage"];
+                testconnectionalert.style.color = "green";
+            } else if (data["ResultCode"] == "1") {
+                testconnectionalert.innerText = data["ResultMessage"];
+                testconnectionalert.style.color = "red";
+            }
+        });
 }
 
 

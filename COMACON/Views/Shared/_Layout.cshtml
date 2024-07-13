@@ -162,7 +162,7 @@
         </div>
         <!-- Error Load Modal -->
         <div class="errorLoadModal" id="errorLoadModal">
-        <div id="errorLoadModal-content" class="errorLoadModal-content">
+            <div id="errorLoadModal-content" class="errorLoadModal-content">
                 <div>
                     <p>The following error(s) happened when loading your Web Application:</p>
                     <ul id="errorLoadModal-ErrorList">
@@ -172,6 +172,16 @@
                 <div style="display:flex;">
                     <button onclick="closeErrorLoadModal()" style="margin:auto;">OK</button>
                 </div>
+            </div>
+        </div>
+        <!-- Connection String Test Modal -->
+        <div class="connectionStringTestModal" id="connectionStringTestModal">
+            <div id="connectionStringTestModal-content" class="connectionStringTestModal-content" style="">
+                @* <div>
+                    <p style="font:large;font-weight:bold;">Testing your connection string.</p>
+                </div> *@
+                <label style="font-size:xx-large;font-weight:bold;" for="connectionStringTestModal-ProgressBar">Testing your connection string...</label>
+                <progress style="height:2.5rem;width:25rem;" id="connectionStringTestModal-ProgressBar"></progress>
             </div>
         </div>
         <!-- Copy Complete Modal Window -->
