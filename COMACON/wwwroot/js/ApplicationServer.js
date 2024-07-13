@@ -64,7 +64,7 @@ async function trustedClientChanged(selectList) {
 async function checkIncompleteTrustedClientsFields() {
     if (document.getElementById("Find-Value").value == "") {
         document.getElementById("Find-Value-RequiredSvg").style.display = "block";
-        pushErrorToArray(trustedClientsIncompleteFieldsErrorArray);
+        pushErrorToArray(await findErrorArrayToSet("trustedClientsIncompleteFields"));
     } else {
         document.getElementById("Find-Value-RequiredSvg").style.display = "none";
         spliceErrorFromArray("trustedClientsIncompleteFields");
@@ -268,7 +268,7 @@ async function lockDiskGroupAliasesButtons(action) {
 async function checkIncompleteDiskGroupAliasesFields(field) {
     if (field.value == "") {
         document.getElementById(field.id + "-RequiredSvg").style.display = "block";
-        pushErrorToArray(diskGroupAliasesIncompleteFieldsErrorArray);
+        pushErrorToArray(await findErrorArrayToSet("diskGroupAliasesIncompleteFields"));
     } else {
         document.getElementById(field.id + "-RequiredSvg").style.display = "none";
 

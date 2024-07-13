@@ -1189,15 +1189,28 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 }
 
 #chooseWebApplicationModal th {
-	background-color: darkgrey;
 	cursor: pointer;
 	position: sticky;
 	top: 0;
 	border: 1px solid black;
 }
 
-#chooseWebApplicationModal tr:nth-child(even) {
-	background-color: rgb(224, 224, 224);
+#chooseWebApplicationModal:not(.dark_mode) th {
+	background-color: rgb(169, 169, 169);
+}
+
+#chooseWebApplicationModal:has(.dark_mode) th {
+	background-color: rgb(70, 70, 70);
+}
+
+/* This rule applies when #chooseWebApplicationModal does not have the dark_mode class */
+#chooseWebApplicationModal:not(.dark_mode) tr:nth-child(even) {
+	background-color: rgb(224, 224, 224); /* Light mode color */
+}
+
+/* This rule applies when #chooseWebApplicationModal has the dark_mode class */
+#chooseWebApplicationModal:has(.dark_mode) tr:nth-child(even) {
+	background-color: rgb(0, 0, 0); /* Dark mode color */
 }
 
 .ChooseApplicationTitleBar {
@@ -1360,7 +1373,7 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 	border: 1px solid black;
 	max-width: 36rem;
 	min-width: 30rem;
-	background-color: #fefefe;
+	
 	margin: auto;
 	/* Animation CSS */
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
