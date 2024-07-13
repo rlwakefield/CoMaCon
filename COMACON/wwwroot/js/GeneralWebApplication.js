@@ -41,22 +41,88 @@ const DiagnosticsSettingsProfiles = [];
 
 /* Error Arrays */
 //["errorId", "Location", "Title", "Description"];
-const folderingHeightErrorArray = ["folderingHeightPercentage", "Foldering", "Height Percentage", "All 3 height values must equal a sum of 100% exactly."];
-const keywordTypeaheadCharacterCountArray = ["keywordTypeaheadCharacterCount", "Miscellaneous", "Keyword Typeahead", "No duplicate Keyword ID numbers allowed"];
-const agendaOnlineDuplicateFormFieldNamesArray = ["agendaOnlineDuplicateFormFieldNames", "PublicCommentIntegration", "Field Name", "No duplicate Unity Form Field Names are allowed."];
-const agendaOnlineDuplicateMeetingTypeNamesArray = ["agendaOnlineDuplicateMeetingTypeNames", "PublicCommentIntegration", "Duplicate Meeting Type Name", "Duplicate Meeting Type Names are not allowed."];
-const connectionStringDataSourceNameErrorArray = ["connectionStringDataSourceName", "ConnectionStrings", "Data Source Name", "You have a duplicate Data Source Name or an incomplete Connection String."];
-const diagnosticSettingsRouteNameErrorArray = ["diagnosticSettingsRouteName", "DiagnosticsSettings", "Duplicate Route Name", "You have a duplicate Diagnostics Route Name. All Route Names need to be unique."];
-const applicationPoolMissingCredentialsErrorArray = ["applicationPoolMissingCredentials", "IISApplicationPool", "Missing Username/Password", "The username or password fields are not filled in. Please fill in to allow saving."];
-const customValidationApplicationLevelIncompleteFieldsErrorArray = ["customValidationApplicationLevelIncompleteFields", "CustomValidationApplicationLevel", "IncompleteFields", "You have incomplete fields on one or more of your Application Level Custom Validation Keywords configuration."];
-const customValidationPageLevelIncompleteFieldsErrorArray = ["customValidationPageLevelIncompleteFields", "CustomValidationPageLevel", "IncompleteFields", "You have incomplete fields on one or more of your Page Level Custom Validation Keywords configuration."];
-const diskGroupAliasesIncompleteFieldsErrorArray = ["diskGroupAliasesIncompleteFields", "PlatterManagementDiskGroupAlias", "IncompleteFields", "You have incomplete fields on one or more of your Disk Group Aliases configurations."];
-const trustedClientsIncompleteFieldsErrorArray = ["trustedClientsIncompleteFields", "AuthenticationTrustedCertificates", "IncompleteFields", "You have incomplete fields on one or more of your Trusted Clients configurations."];
-const keywordTypeaheadCharacterCountErrorArray = ["keywordTypeaheadCharacterCount", "Miscellaneous", "Keyword Typeahead", "There is a duplicate Keyword ID number entered or a configuration that is incomplete."];
-const webServerIdentityProviderIncompleteFieldsErrorArray = ["webServerIdentityProviderIncompleteFields", "Login", "Incomplete Identity Server", "Please make sure you complete all of the Identity Provider fields."];
-const healthcareFormManagerIdentityProviderIncompleteFieldsErrorArray = ["healthcareFormManagerIdentityProviderIncompleteFields", "Login", "Incomplete Identity Server", "Please make sure you complete all of the Identity Provider fields."];
-const onbasePatientWindowIdentityProviderIncompleteFieldsErrorArray = ["onbasePatientWindowIdentityProviderIncompleteFields", "Login", "Incomplete Identity Server", "Please make sure you complete all of the Identity Provider fields."];
-const reportingViewerIdentityProviderIncompleteFieldsErrorArray = ["reportingViewerIdentityProviderIncompleteFields", "Login", "Incomplete Identity Server", "Please make sure you complete all of the Identity Provider fields."];
+//const folderingHeightErrorArray = ["folderingHeightPercentage", "Foldering", "Height Percentage", "All 3 height values must equal a sum of 100% exactly."];
+//const keywordTypeaheadCharacterCountArray = ["keywordTypeaheadCharacterCount", "Miscellaneous", "Keyword Typeahead", "No duplicate Keyword ID numbers allowed"];
+//const agendaOnlineDuplicateFormFieldNamesArray = ["agendaOnlineDuplicateFormFieldNames", "PublicCommentIntegration", "Field Name", "No duplicate Unity Form Field Names are allowed."];
+//const agendaOnlineDuplicateMeetingTypeNamesArray = ["agendaOnlineDuplicateMeetingTypeNames", "PublicCommentIntegration", "Duplicate Meeting Type Name", "Duplicate Meeting Type Names are not allowed."];
+//const connectionStringDataSourceNameErrorArray = ["connectionStringDataSourceName", "ConnectionStrings", "Data Source Name", "You have a duplicate Data Source Name or an incomplete Connection String."];
+//const diagnosticSettingsRouteNameErrorArray = [diagnosticSettingsRouteName"", "DiagnosticsSettings", "Duplicate Route Name", "You have a duplicate Diagnostics Route Name. All Route Names need to be unique."];
+//const applicationPoolMissingCredentialsErrorArray = ["applicationPoolMissingCredentials", "IISApplicationPool", "Missing Username/Password", "The username or password fields are not filled in. Please fill in to allow saving."];
+//const customValidationApplicationLevelIncompleteFieldsErrorArray = ["customValidationApplicationLevelIncompleteFields", "CustomValidationApplicationLevel", "IncompleteFields", "You have incomplete fields on one or more of your Application Level Custom Validation Keywords configuration."];
+//const customValidationPageLevelIncompleteFieldsErrorArray = ["customValidationPageLevelIncompleteFields", "CustomValidationPageLevel", "IncompleteFields", "You have incomplete fields on one or more of your Page Level Custom Validation Keywords configuration."];
+//const diskGroupAliasesIncompleteFieldsErrorArray = ["diskGroupAliasesIncompleteFields", "PlatterManagementDiskGroupAlias", "IncompleteFields", "You have incomplete fields on one or more of your Disk Group Aliases configurations."];
+//const trustedClientsIncompleteFieldsErrorArray = ["trustedClientsIncompleteFields", "AuthenticationTrustedCertificates", "IncompleteFields", "You have incomplete fields on one or more of your Trusted Clients configurations."];
+//const keywordTypeaheadCharacterCountErrorArray = ["keywordTypeaheadCharacterCount", "Miscellaneous", "Keyword Typeahead", "There is a duplicate Keyword ID number entered or a configuration that is incomplete."];
+//const webServerIdentityProviderIncompleteFieldsErrorArray = ["webServerIdentityProviderIncompleteFields", "Login", "Incomplete Identity Server", "Please make sure you complete all of the Identity Provider fields."];
+//const healthcareFormManagerIdentityProviderIncompleteFieldsErrorArray = ["healthcareFormManagerIdentityProviderIncompleteFields", "Login", "Incomplete Identity Server", "Please make sure you complete all of the Identity Provider fields."];
+//const onbasePatientWindowIdentityProviderIncompleteFieldsErrorArray = ["onbasePatientWindowIdentityProviderIncompleteFields", "Login", "Incomplete Identity Server", "Please make sure you complete all of the Identity Provider fields."];
+//const reportingViewerIdentityProviderIncompleteFieldsErrorArray = ["reportingViewerIdentityProviderIncompleteFields", "Login", "Incomplete Identity Server", "Please make sure you complete all of the Identity Provider fields."];
+let errorArrays = [
+    {
+        "Name": "folderingHeightPercentage",
+        "Array": ["folderingHeightPercentage","Foldering","Height Percentage","All 3 height values must equal a sum of 100% exactly."]
+    },
+    {
+        "Name": "keywordTypeaheadCharacterCount",
+        "Array": ["keywordTypeaheadCharacterCount","Miscellaneous","Keyword Typeahead","No duplicate Keyword ID numbers allowed"]
+    },
+    {
+        "Name": "agendaOnlineDuplicateFormFieldNames",
+        "Array": ["agendaOnlineDuplicateFormFieldNames","PublicCommentIntegration","Field Name","No duplicate Unity Form Field Names are allowed."]
+    },
+    {
+        "Name": "agendaOnlineDuplicateMeetingTypeNames",
+        "Array": ["agendaOnlineDuplicateMeetingTypeNames","PublicCommentIntegration","Duplicate Meeting Type Name","Duplicate Meeting Type Names are not allowed."]
+    },
+    {
+        "Name": "connectionStringDataSourceName",
+        "Array": ["connectionStringDataSourceName","ConnectionStrings","Data Source Name","You have a duplicate Data Source Name or an incomplete Connection String."]
+    },
+    {
+        "Name": "diagnosticSettingsRouteName",
+        "Array": ["diagnosticSettingsRouteName","DiagnosticsSettings","Duplicate Route Name","You have a duplicate Diagnostics Route Name. All Route Names need to be unique."]
+    },
+    {
+        "Name": "applicationPoolMissingCredentials",
+        "Array": ["applicationPoolMissingCredentials","IISApplicationPool","Missing Username/Password","The username or password fields are not filled in. Please fill in to allow saving."]
+    },
+    {
+        "Name": "customValidationApplicationLevelIncompleteFields",
+        "Array": ["customValidationApplicationLevelIncompleteFields","CustomValidationApplicationLevel","IncompleteFields","You have incomplete fields on one or more of your Application Level Custom Validation Keywords configuration."]
+    },
+    {
+        "Name": "customValidationPageLevelIncompleteFields",
+        "Array": ["customValidationPageLevelIncompleteFields","CustomValidationPageLevel","IncompleteFields","You have incomplete fields on one or more of your Page Level Custom Validation Keywords configuration."]
+    },
+    {
+        "Name": "diskGroupAliasesIncompleteFields",
+        "Array": ["diskGroupAliasesIncompleteFields","PlatterManagementDiskGroupAlias","IncompleteFields","You have incomplete fields on one or more of your Disk Group Aliases configurations."]
+    },
+    {
+        "Name": "trustedClientsIncompleteFields",
+        "Array": ["trustedClientsIncompleteFields","AuthenticationTrustedCertificates","IncompleteFields","You have incomplete fields on one or more of your Trusted Clients configurations."]
+    },
+    {
+        "Name": "keywordTypeaheadCharacterCount",
+        "Array": ["keywordTypeaheadCharacterCount","Miscellaneous","Keyword Typeahead","There is a duplicate Keyword ID number entered or a configuration that is incomplete."]
+    },
+    {
+        "Name": "webServerIdentityProviderIncompleteFields",
+        "Array": ["webServerIdentityProviderIncompleteFields","Login","Incomplete Identity Server","Please make sure you complete all of the Identity Provider fields."]
+    },
+    {
+        "Name": "healthcareFormManagerIdentityProviderIncompleteFields",
+        "Array": ["healthcareFormManagerIdentityProviderIncompleteFields","Login","Incomplete Identity Server","Please make sure you complete all of the Identity Provider fields."]
+    },
+    {
+        "Name": "onbasePatientWindowIdentityProviderIncompleteFields",
+        "Array": ["onbasePatientWindowIdentityProviderIncompleteFields","Login","Incomplete Identity Server","Please make sure you complete all of the Identity Provider fields."]
+    },
+    {
+        "Name": "reportingViewerIdentityProviderIncompleteFields",
+        "Array": ["reportingViewerIdentityProviderIncompleteFields","Login","Incomplete Identity Server","Please make sure you complete all of the Identity Provider fields."]
+    }
+]
 
 /* Known Deprecated web.confg keys per version */
 const knownDeprecatedConfigurationKeys = [{}];
@@ -471,7 +537,7 @@ async function validateApplicationPoolCredentialsLength(field) {
 
 async function checkApplicationPoolCredentialsFieldsForErrors() {
     if (document.getElementById("Iis-Configuration-Application-AppPool-Process-Model-Identity-Username-RequiredSvg").style.display == "block" || document.getElementById("Iis-Configuration-Application-AppPool-Process-Model-Identity-Password-RequiredSvg").style.display == "block") {
-        pushErrorToArray(applicationPoolMissingCredentialsErrorArray);
+        pushErrorToArray(await findErrorArrayToSet("applicationPoolMissingCredentials"));
     } else {
         spliceErrorFromArray("applicationPoolMissingCredentials");
     }
@@ -2086,7 +2152,7 @@ async function lockAllDiagnosticsProfileFields(action) {
     }
 }
 
-function diagnosticsSettingRouteNameChanged(inputText, excludeSelf = true) {
+async function diagnosticsSettingRouteNameChanged(inputText, excludeSelf = true) {
     let selectedOption = document.getElementById("DiagnosticsSettingsRoutes-SelectList").options[document.getElementById("DiagnosticsSettingsRoutes-SelectList").selectedIndex];
     let objectToUpdate = diagnosticsRoutes.filter(route => route.id == document.getElementById("DiagnosticsSettingsRoutes-SelectList").value);
     if (excludeSelf) {
@@ -2094,7 +2160,7 @@ function diagnosticsSettingRouteNameChanged(inputText, excludeSelf = true) {
         if (result.length > 0) {
             selectedOption.innerText = inputText.value;
             selectedOption.innerHTML += '<span class="duplicateDiagnosticSettingsRouteName"> (duplicate)</span>';
-            pushErrorToArray(diagnosticSettingsRouteNameErrorArray);
+            pushErrorToArray(await findErrorArrayToSet("diagnosticSettingsRouteName"));
         } else {
             selectedOption.innerText = inputText.value;
             spliceErrorFromArray("diagnosticSettingsRouteName");
@@ -2103,7 +2169,7 @@ function diagnosticsSettingRouteNameChanged(inputText, excludeSelf = true) {
         let result = diagnosticsRoutes.filter(route => route.Name === inputText.value);
         if (result.length > 0) {
             selectedOption.innerHTML += '<span class="duplicateDiagnosticSettingsRouteName"> (duplicate)</span>';
-            pushErrorToArray(diagnosticSettingsRouteNameErrorArray);
+            pushErrorToArray(await findErrorArrayToSet("diagnosticSettingsRouteName"));
         } else {
             selectedOption.innerText = inputText.value;
             spliceErrorFromArray("diagnosticSettingsRouteName");
@@ -3100,7 +3166,7 @@ async function checkErroredConnectionStrings() {
     let duplicateConnectionStrings = document.getElementsByClassName("duplicateConnectionStringName");
 
     if (incompleteConnectionStrings.length > 0 || duplicateConnectionStrings.length > 0) {
-        await pushErrorToArray(connectionStringDataSourceNameErrorArray);
+        await pushErrorToArray(await findErrorArrayToSet("connectionStringDataSourceName"));
     } else {
         await spliceErrorFromArray("connectionStringDataSourceName");
     }
@@ -3164,7 +3230,7 @@ async function showErrorLoadModal() {
 /********************************************************
 *               Identity Provider Functions
 ********************************************************/
-function validateIdentityProviderFields(field) {
+async function validateIdentityProviderFields(field) {
     let idpFields = ["IdP-Server-Location", "IdP-Tenant", "IdP-Client", "IdP-Secret"];
     let allIdpFieldsEmpty = true;
     //Check if any of the fields in the idpFields array are empty or not.
@@ -3199,16 +3265,16 @@ function validateIdentityProviderFields(field) {
     if (visibleElements.length > 0) {
         switch (coreConfigData.Type) {
             case "Web Server":
-                pushErrorToArray(webServerIdentityProviderIncompleteFieldsErrorArray);
+                pushErrorToArray(await findErrorArrayToSet("webServerIdentityProviderIncompleteFields"));
                 break;
             case "Healthcare Form Manager":
-                pushErrorToArray(healthcareFormManagerIdentityProviderIncompleteFieldsErrorArray);
+                pushErrorToArray(await findErrorArrayToSet("healthcareFormManagerIdentityProviderIncompleteFields"));
                 break;
             case "Patient Window":
-                pushErrorToArray(onbasePatientWindowIdentityProviderIncompleteFieldsErrorArray);
+                pushErrorToArray(await findErrorArrayToSet("onbasePatientWindowIdentityProviderIncompleteFields"));
                 break;
             case "Reporting Viewer":
-                pushErrorToArray(reportingViewerIdentityProviderIncompleteFieldsErrorArray);
+                pushErrorToArray(await findErrorArrayToSet("reportingViewerIdentityProviderIncompleteFields"));
                 break;
         }
     } else {
@@ -3244,6 +3310,7 @@ function toggleDarkLightMode(checkbox) {
         document.getElementById("CopyWebApplicationModal-Container").classList.add('dark_mode');
         document.getElementById("SaveErrors-Content").classList.add('dark_mode');
         document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.add('dark_mode');
+        document.getElementById("errorLoadModal-content").classList.add('dark_mode');
 
         //Elements to add "dark_mode_titlebar" class to:
         document.getElementById("h1-container").classList.add('dark_mode_titlebar');
@@ -3255,9 +3322,6 @@ function toggleDarkLightMode(checkbox) {
         Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
             element.classList.add('dark_mode_titlebar');
         });
-
-        //Elements to add "dark_mode_table" class to:
-
 
         //Elements to add "dark_mode_button" class to:
         Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
@@ -3282,6 +3346,7 @@ function toggleDarkLightMode(checkbox) {
         document.getElementById("CopyWebApplicationModal-Container").classList.remove('dark_mode');
         document.getElementById("SaveErrors-Content").classList.remove('dark_mode');
         document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.remove('dark_mode');
+        document.getElementById("errorLoadModal-content").classList.remove('dark_mode');
 
         //Elements to add "dark_mode_titlebar" class to:
         document.getElementById("h1-container").classList.remove('dark_mode_titlebar');
@@ -3293,9 +3358,6 @@ function toggleDarkLightMode(checkbox) {
         Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
             element.classList.remove('dark_mode_titlebar');
         });
-
-        //Elements to add "dark_mode_table" class to:
-
 
         //Elements to add "dark_mode_button" class to:
         Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
@@ -3312,6 +3374,32 @@ function toggleDarkLightMode(checkbox) {
     }
 
     console.log(localStorage.getItem("darkModeState"));
+}
+
+
+
+/********************************************************
+*                 Generic Functions
+********************************************************/
+async function findErrorArrayToSet(name) {
+    return errorArrays.find(errorArray => errorArray.Name == name).Array;
+}
+
+async function groupDuplicateObjectsFromArray(array,groupingKeyName) {
+    return array.reduce((result, currentItem) => {
+        // Extract the 'Name' value
+        const key = groupingKeyName;
+
+        // If the key doesn't exist in the result object, create an array for it
+        if (!result[key]) {
+            result[key] = [];
+        }
+
+        // Push the current item to the array for the key
+        result[key].push(currentItem);
+
+        return result;
+    }, {}); // Initial value is an empty object
 }
 
 

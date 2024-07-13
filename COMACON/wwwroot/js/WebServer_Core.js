@@ -15,13 +15,13 @@ function resetBorderStyling(field) {
     field.currentTarget.classList.remove("invalidUrl","validUrl");
 }
 
-function folderingHeightPercentageCalculations(){
+async function folderingHeightPercentageCalculations(){
     let totalHeightPercentageCombined = parseInt(document.getElementById("Folder-Tree-Height").value) + parseInt(document.getElementById("Document-List-Height").value) + parseInt(document.getElementById("Folder-List-Height").value);
     document.getElementById("Foldering-Total-Percentage-Number-Value").innerText = totalHeightPercentageCombined;
     if(totalHeightPercentageCombined != 100){
         document.getElementById("Foldering-Total-Percentage-Number-Value").classList.add("folderingPercentageTooHigh");
         if(!verifyErrorNotInArrayAlready("folderingHeightPercentage")){
-            pushErrorToArray(folderingHeightErrorArray);
+            pushErrorToArray(await findErrorArrayToSet("folderingHeightPercentage"));
         }
     }else{
         document.getElementById("Foldering-Total-Percentage-Number-Value").classList.remove("folderingPercentageTooHigh");
@@ -251,14 +251,14 @@ async function checkIncompleteFieldValues(level) {
                 document.getElementById("CustomValidation-ApplicationLevel-SelectList").options[document.getElementById("CustomValidation-ApplicationLevel-SelectList").selectedIndex].setAttribute("error-text-to-append", " (incomplete)");
                 document.getElementById("CustomValidation-ApplicationLevel-SelectList").options[document.getElementById("CustomValidation-ApplicationLevel-SelectList").selectedIndex].classList.add("IncompleteCustomValidationApplicationLevelKeywordConfigurationOption");
                 if (document.getElementsByClassName("IncompleteCustomValidationApplicationLevelKeywordConfigurationOption").length > 0) {
-                    pushErrorToArray(customValidationApplicationLevelIncompleteFieldsErrorArray);
+                    pushErrorToArray(await findErrorArrayToSet("customValidationApplicationLevelIncompleteFields"));
                 }
                 if (document.getElementById("Application-Keyword-Validator").value == "") {
                     document.getElementById("Application-Keyword-Validator" + "-RequiredSvg").style.display = "block";
                     document.getElementById("CustomValidation-ApplicationLevel-SelectList").options[document.getElementById("CustomValidation-ApplicationLevel-SelectList").selectedIndex].setAttribute("error-text-to-append", " (incomplete)");
                     document.getElementById("CustomValidation-ApplicationLevel-SelectList").options[document.getElementById("CustomValidation-ApplicationLevel-SelectList").selectedIndex].classList.add("IncompleteCustomValidationApplicationLevelKeywordConfigurationOption");
                     if (document.getElementsByClassName("IncompleteCustomValidationApplicationLevelKeywordConfigurationOption").length > 0) {
-                        pushErrorToArray(customValidationApplicationLevelIncompleteFieldsErrorArray);
+                        pushErrorToArray(await findErrorArrayToSet("customValidationApplicationLevelIncompleteFields"));
                     }
                 } else {
                     document.getElementById("Application-Keyword-Validator" + "-RequiredSvg").style.display = "none";
@@ -270,14 +270,14 @@ async function checkIncompleteFieldValues(level) {
                     document.getElementById("CustomValidation-ApplicationLevel-SelectList").options[document.getElementById("CustomValidation-ApplicationLevel-SelectList").selectedIndex].setAttribute("error-text-to-append", " (incomplete)");
                     document.getElementById("CustomValidation-ApplicationLevel-SelectList").options[document.getElementById("CustomValidation-ApplicationLevel-SelectList").selectedIndex].classList.add("IncompleteCustomValidationApplicationLevelKeywordConfigurationOption");
                     if (document.getElementsByClassName("IncompleteCustomValidationApplicationLevelKeywordConfigurationOption").length > 0) {
-                        pushErrorToArray(customValidationApplicationLevelIncompleteFieldsErrorArray);
+                        pushErrorToArray(await findErrorArrayToSet("customValidationApplicationLevelIncompleteFields"));
                     }
                 } else {
                     document.getElementById("Application-Keyword-Validator" + "-RequiredSvg").style.display = "none";
                     document.getElementById("CustomValidation-ApplicationLevel-SelectList").options[document.getElementById("CustomValidation-ApplicationLevel-SelectList").selectedIndex].setAttribute("error-text-to-append", "");
                     document.getElementById("CustomValidation-ApplicationLevel-SelectList").options[document.getElementById("CustomValidation-ApplicationLevel-SelectList").selectedIndex].classList.remove("IncompleteCustomValidationApplicationLevelKeywordConfigurationOption");
                     if (document.getElementsByClassName("IncompleteCustomValidationApplicationLevelKeywordConfigurationOption").length > 0) {
-                        pushErrorToArray(customValidationApplicationLevelIncompleteFieldsErrorArray);
+                        pushErrorToArray(await findErrorArrayToSet("customValidationApplicationLevelIncompleteFields"));
                     } else {
                         spliceErrorFromArray("customValidationApplicationLevelIncompleteFields");
                     }
@@ -290,14 +290,14 @@ async function checkIncompleteFieldValues(level) {
                 document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").options[document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").selectedIndex].setAttribute("error-text-to-append", " (incomplete)");
                 document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").options[document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").selectedIndex].classList.add("IncompleteCustomValidationPageLevelKeywordConfigurationOption");
                 if (document.getElementsByClassName("IncompleteCustomValidationPageLevelKeywordConfigurationOption").length > 0) {
-                    pushErrorToArray(customValidationPageLevelIncompleteFieldsErrorArray);
+                    pushErrorToArray(await findErrorArrayToSet("customValidationApplicationLevelIncompleteFields"));
                 }
                 if (document.getElementById("Page-Keyword-Validator").value == "") {
                     document.getElementById("Page-Keyword-Validator" + "-RequiredSvg").style.display = "block";
                     document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").options[document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").selectedIndex].setAttribute("error-text-to-append", " (incomplete)");
                     document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").options[document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").selectedIndex].classList.add("IncompleteCustomValidationPageLevelKeywordConfigurationOption");
                     if (document.getElementsByClassName("IncompleteCustomValidationPageLevelKeywordConfigurationOption").length > 0) {
-                        pushErrorToArray(customValidationPageLevelIncompleteFieldsErrorArray);
+                        pushErrorToArray(await findErrorArrayToSet("customValidationApplicationLevelIncompleteFields"));
                     }
                 } else {
                     document.getElementById("Page-Keyword-Validator" + "-RequiredSvg").style.display = "none";
@@ -309,14 +309,14 @@ async function checkIncompleteFieldValues(level) {
                     document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").options[document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").selectedIndex].setAttribute("error-text-to-append", " (incomplete)");
                     document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").options[document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").selectedIndex].classList.add("IncompleteCustomValidationPageLevelKeywordConfigurationOption");
                     if (document.getElementsByClassName("IncompleteCustomValidationPageLevelKeywordConfigurationOption").length > 0) {
-                        pushErrorToArray(customValidationPageLevelIncompleteFieldsErrorArray);
+                        pushErrorToArray(await findErrorArrayToSet("customValidationApplicationLevelIncompleteFields"));
                     }
                 } else {
                     document.getElementById("Page-Keyword-Validator" + "-RequiredSvg").style.display = "none";
                     document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").options[document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").selectedIndex].setAttribute("error-text-to-append", "");
                     document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").options[document.getElementById("CustomValidation-PageLevel-Keywords-SelectList").selectedIndex].classList.remove("IncompleteCustomValidationPageLevelKeywordConfigurationOption");
                     if (document.getElementsByClassName("IncompleteCustomValidationPageLevelKeywordConfigurationOption").length > 0) {
-                        pushErrorToArray(customValidationPageLevelIncompleteFieldsErrorArray);
+                        pushErrorToArray(await findErrorArrayToSet("customValidationApplicationLevelIncompleteFields"));
                     } else {
                         spliceErrorFromArray("customValidationPageLevelIncompleteFields");
                     }
@@ -425,14 +425,14 @@ async function checkIncompleteFieldsFromKeywords(level) {
     switch (level) {
         case "Application":
             if (document.getElementsByClassName("IncompleteCustomValidationApplicationLevelKeywordConfigurationOption").length > 0) {
-                pushErrorToArray(customValidationApplicationLevelIncompleteFieldsErrorArray);
+                pushErrorToArray(await findErrorArrayToSet("customValidationApplicationLevelIncompleteFields"));
             } else {
                 spliceErrorFromArray("customValidationApplicationLevelIncompleteFields");
             }
             break;
         case "Page":
             if (document.getElementsByClassName("IncompleteCustomValidationPageLevelKeywordConfigurationOption").length > 0) {
-                pushErrorToArray(customValidationPageLevelIncompleteFieldsErrorArray);
+                pushErrorToArray(await findErrorArrayToSet("customValidationApplicationLevelIncompleteFields"));
             } else {
                 spliceErrorFromArray("customValidationPageLevelIncompleteFields");
             }
@@ -773,15 +773,15 @@ async function checkIncompleteFieldValuesKeywordTypeAhead() {
     if (document.getElementById("KeywordTypeahead-KeywordIDNumber").value == "" || document.getElementById("KeywordTypeahead-TypeaheadCharacterCount").value == "") {
         if (await checkDuplicateKeywordTypeAhead()) {
             document.getElementById("KeywordTypeahead-SelectList").options[document.getElementById("KeywordTypeahead-SelectList").selectedIndex].setAttribute("error-text-to-append", " (duplicate) (incomplete)");
-            pushErrorToArray(keywordTypeaheadCharacterCountErrorArray);
+            pushErrorToArray(await findErrorArrayToSet("keywordTypeaheadCharacterCount"));
         } else {
             document.getElementById("KeywordTypeahead-SelectList").options[document.getElementById("KeywordTypeahead-SelectList").selectedIndex].setAttribute("error-text-to-append", " (incomplete)");
-            pushErrorToArray(keywordTypeaheadCharacterCountErrorArray);
+            pushErrorToArray(await findErrorArrayToSet("keywordTypeaheadCharacterCount"));
         }
     } else {
         if (await checkDuplicateKeywordTypeAhead()) {
             document.getElementById("KeywordTypeahead-SelectList").options[document.getElementById("KeywordTypeahead-SelectList").selectedIndex].setAttribute("error-text-to-append", " (duplicate)");
-            pushErrorToArray(keywordTypeaheadCharacterCountErrorArray);
+            pushErrorToArray(await findErrorArrayToSet("keywordTypeaheadCharacterCount"));
         } else {
             document.getElementById("KeywordTypeahead-SelectList").options[document.getElementById("KeywordTypeahead-SelectList").selectedIndex].setAttribute("error-text-to-append", "");
             spliceErrorFromArray("keywordTypeaheadCharacterCount");
