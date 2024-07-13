@@ -586,3 +586,13 @@ public class Tooltip
     public string? htmlId { get; set; }
     public string? tooltip { get; set; }
 }
+
+
+/********************************************************
+*              Test Connection String Object
+********************************************************/
+public class TestConnectionStringResult
+{
+    public string? ResultCode { get; set; }
+    public string? ResultMessage { get; set; }
+}

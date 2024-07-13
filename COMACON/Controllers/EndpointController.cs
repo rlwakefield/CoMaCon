@@ -5,6 +5,9 @@ using Oracle.ManagedDataAccess.Client;
 using System.Data.SqlClient;
 using System.Text.Json;
 using Serilog;
+using Newtonsoft.Json;
+using System.Collections;
+using System.Diagnostics;
 
 namespace COMACON.Controllers
 {
@@ -14,12 +17,125 @@ namespace COMACON.Controllers
     {
         private readonly Core Core;
         private readonly LoadSaveWebApplications LoadSaveWebApplications;
+        private static string tnsOracle = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL={0})(HOST={1})(PORT={2}))(CONNECT_DATA=(SERVICE_NAME={3})));";
+        private static string noTnsOracle = "Data Source={0};";
+        private static string userIdAndPassword = "User Id={0};Password={1};";
 
         public EndpointController(Core core,
             LoadSaveWebApplications loadSaveWebApplications)
         {
             Core = core;
             LoadSaveWebApplications = loadSaveWebApplications;
+        }
+
+        // GET: api/Endpoint/TestConnectionString
+        [HttpGet("TestConnectionString")]
+        public string TestConnectionString(string cstringobject)
+        {
+            Log.Logger.Verbose("Testing connection string.");
+
+            ConnectionString cstring = JsonConvert.DeserializeObject<ConnectionString>(cstringobject.ToString());
+            TestConnectionStringResult result = new TestConnectionStringResult();
+
+            if (string.Equals(cstring.Provider, "System.Data.SqlClient"))
+            {
+                string cstringSql = "Data Source=" + cstring.sql.DataSource + ";database=" + cstring.sql.Database + ";";
+                if (string.Equals(cstring.IntegratedSecurity, "True", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    cstringSql += "Integrated Security=True;";
+                }
+                else
+                {
+                    cstringSql += string.Format(userIdAndPassword, cstring.UserId, cstring.Password);
+                }
+                cstringSql += cstring.AdditionalOptions;
+                Console.WriteLine(cstringSql);
+
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(cstringSql))
+                    {
+                        connection.Open();
+                        result.ResultCode = "0";
+                        result.ResultMessage = "Connection successful!";
+                        return JsonConvert.SerializeObject(result);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Logger.Error("Connection failed: {ex}", ex);
+                    result.ResultCode = "1";
+                    result.ResultMessage = "SQL connection failed: " + ex.Message;
+                    return JsonConvert.SerializeObject(result);
+                }
+            }
+            else
+            {
+                string cstringOracle = "";
+                if (string.Equals(cstring.oracle.TNSConnectionString, "True", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    cstringOracle += string.Format(tnsOracle, cstring.oracle.Protocol, cstring.oracle.Host, cstring.oracle.Port, cstring.oracle.Database);
+                    if (string.Equals(cstring.IntegratedSecurity, "True", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        cstringOracle += "User Id=/;";
+                    }
+                    else
+                    {
+                        cstringOracle += string.Format(userIdAndPassword, cstring.UserId, cstring.Password);
+                    }
+                    cstringOracle += cstring.AdditionalOptions;
+
+                    try
+                    {
+                        using (OracleConnection connection = new OracleConnection(cstringOracle))
+                        {
+                            connection.Open();
+                            result.ResultCode = "0";
+                            result.ResultMessage = "Connection successful!";
+                            //return JsonConvert.SerializeObject(@"{""ResultCode"":""0"",""ResultMessage"":""Connection successful!""}");
+                            return JsonConvert.SerializeObject(result);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Logger.Error("Oracle Connection failed: {ex}", ex);
+                        result.ResultCode = "1";
+                        result.ResultMessage = "Oracle connection failed: " + ex.Message;
+                        Console.WriteLine(JsonConvert.SerializeObject(@"{""ResultCode"":""1"",""ResultMessage"":""Oracle connection failed: " + ex.Message.Replace("\n", " ") + @"""}"));
+                        return JsonConvert.SerializeObject(result);
+                    }
+                }
+                else
+                {
+                    cstringOracle = string.Format(noTnsOracle, cstring.oracle.Host);
+                    if (string.Equals(cstring.IntegratedSecurity, "True", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        cstringOracle += "User Id= /";
+                    }
+                    else
+                    {
+                        cstringOracle += string.Format(userIdAndPassword, cstring.UserId, cstring.Password);
+                    }
+                    cstringOracle += cstring.AdditionalOptions;
+
+                    try
+                    {
+                        using (OracleConnection connection = new OracleConnection(cstringOracle))
+                        {
+                            connection.Open();
+                            //return JsonConvert.SerializeObject(@"{""ResultCode"":""0"",""ResultMessage"":""Connection successful!""}");
+                            return JsonConvert.SerializeObject(result);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Logger.Error("Oracle Connection failed: {ex}", ex);
+                        result.ResultCode = "1";
+                        result.ResultMessage = "Oracle connection failed: " + ex.Message;
+                        return JsonConvert.SerializeObject(result);
+                    }
+                }
+            }
         }
 
         // GET: api/Endpoint/UrlValidation
@@ -90,14 +206,12 @@ namespace COMACON.Controllers
         [HttpPost("SaveWebApplication")]
         public string SaveWebApplication([FromBody] JsonElement jsonDataStructure)
         {
-            //Console.WriteLine(jsonDataStructure);
             return LoadSaveWebApplications.SaveWebApplicationConfiguration(jsonDataStructure.ToString());
         }
 
         [HttpPost("TestSqlConnectionString")]
         public string TestSqlConnectionString(string DataSource, string Database, bool IntegratedSecurity, string Username, string Password, string AdditionalParameters)
         {
-            /*Data Source = Test; database = Test; Integrated Security = True*/
             string cstringSql = "Data Source=" + DataSource + ";database=" + Database + ";";
             if (IntegratedSecurity)
             {
