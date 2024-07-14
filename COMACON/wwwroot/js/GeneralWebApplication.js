@@ -121,6 +121,10 @@ let errorArrays = [
     {
         "Name": "reportingViewerIdentityProviderIncompleteFields",
         "Array": ["reportingViewerIdentityProviderIncompleteFields","Login","Incomplete Identity Server","Please make sure you complete all of the Identity Provider fields."]
+    },
+    {
+        "Name": "cachePathCannotBeAUncPath",
+        "Array": ["cachePathCannotBeAUncPath","GatewayCachingServer","Cache Path","The Cache Path cannot be a UNC path. Please enter a local path."]
     }
 ]
 
