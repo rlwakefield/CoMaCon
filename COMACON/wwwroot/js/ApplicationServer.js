@@ -2,6 +2,9 @@ let sessionadministrationusers = [];
 let sessionadministrationusersidnumber = 0;
 let sessionadministrationroles = [];
 let sessionadministrationrolesidnumber = 0;
+let responsiveAppsApps = [];
+let responsiveAppsAppsIdNumber = 0;
+let responsiveAppsAppNewAppDataStructure = { "Name": "[appName]", "IconURL": "[urlToAppIcon]", "URL": "[urlToApp]", "id": "" };
 
 
 /********************************************************
@@ -395,4 +398,68 @@ async function sessionAdministrationRoleSelected(selectList) {
     document.getElementById("SessionAdministration-Role").value = result[0].role;
     document.getElementById("SessionAdministration-Role").disabled = false;
     document.getElementById("SessionAdministration-Role-DeleteButton").disabled = false;
+}
+
+
+/********************************************************
+*            Responsive Apps App Functions
+********************************************************/
+async function responsiveAppsAppChanged(selectList) {
+    let responsiveAppsAppLookupResult = responsiveAppsApps.filter(result => result.id == selectList.value);
+    console.log(responsiveAppsAppLookupResult);
+    if (responsiveAppsAppLookupResult.length > 0) {
+        document.getElementById("App-Name").value = responsiveAppsAppLookupResult[0].Name;
+        document.getElementById("App-Icon-URL").value = responsiveAppsAppLookupResult[0].IconURL;
+        document.getElementById("App-URL").value = responsiveAppsAppLookupResult[0].URL;
+    }
+
+    await setResponsiveAppsAppFieldDisabledStatus(false);
+    await setResponsiveAppsAppButtonDisabledStatus(false);
+}
+
+async function setResponsiveAppsAppFieldDisabledStatus(status) {
+    document.getElementById("App-Name").disabled = status;
+    document.getElementById("App-Icon-URL").disabled = status;
+    document.getElementById("App-URL").disabled = status;
+}
+
+async function setResponsiveAppsAppButtonDisabledStatus(status) {
+    document.getElementById("Delete-ResponsiveApps-App-Button").disabled = status;
+}
+
+async function addResponsiveAppsApp() {
+    let newApp = JSON.parse(JSON.stringify(responsiveAppsAppNewAppDataStructure));
+    newApp.id = "ResponsiveAppsApp" + responsiveAppsAppsIdNumber;
+    responsiveAppsApps.push(newApp);
+    let opt = document.createElement("option");
+    opt.value = newApp.id;
+    opt.innerText = newApp.Name;
+    document.getElementById("ResponsiveAppsApp-SelectList").append(opt);
+    responsiveAppsAppsIdNumber++;
+
+    await setResponsiveAppsAppFieldDisabledStatus(false);
+    await setResponsiveAppsAppButtonDisabledStatus(false);
+    //Set the select list to the new app
+    document.getElementById("ResponsiveAppsApp-SelectList").value = newApp.id;
+    document.getElementById("App-Name").value = newApp.Name;
+    document.getElementById("App-Icon-URL").value = newApp.IconURL;
+    document.getElementById("App-URL").value = newApp.URL;
+    console.log(responsiveAppsApps);
+}
+
+async function deleteResponsiveAppsApp() {
+    let appToDelete = responsiveAppsApps.filter(result => result.id == document.getElementById("ResponsiveAppsApp-SelectList").value);
+    let index = responsiveAppsApps.indexOf(appToDelete[0]);
+    responsiveAppsApps.splice(index, 1);
+    document.getElementById("ResponsiveAppsApp-SelectList").removeChild(document.getElementById("ResponsiveAppsApp-SelectList").options[document.getElementById("ResponsiveAppsApp-SelectList").selectedIndex]);
+    await setResponsiveAppsAppFieldDisabledStatus(true);
+    await setResponsiveAppsAppButtonDisabledStatus(true);
+    await resetResponsiveAppsAppFields();
+    console.log(responsiveAppsApps);
+}
+
+async function resetResponsiveAppsAppFields() {
+    document.getElementById("App-Name").value = "";
+    document.getElementById("App-Icon-URL").value = "";
+    document.getElementById("App-URL").value = "";
 }

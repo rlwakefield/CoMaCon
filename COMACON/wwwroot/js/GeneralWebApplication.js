@@ -1328,7 +1328,7 @@ async function parseData(config) {
             await parseHylandPlatterManagement(config["hylandPlatterManagement"]);
             await parseWindowsAuthOptimization(config["WindowsAuthOptimizeFor"]);
             await parseSessionAdministration(config["sessionAdministration"]);
-            
+            await parseResponsiveAppsApp(config["hylandResponsiveApps"]);
             break;
         case "Electronic Plan Review":
             await prepareAndSetDefaultTimeZoneOptions();
@@ -1406,6 +1406,20 @@ async function parseData(config) {
             return confirmationMessage;
         }
     });
+}
+
+async function parseResponsiveAppsApp(config) {
+    //console.log(config);
+    responsiveAppsApps = config["responsiveApps"];
+    let responsiveAppsAppsSelectList = document.getElementById("ResponsiveAppsApp-SelectList");
+    for (let i = 0; i < responsiveAppsApps.length; i++) {
+        let opt = document.createElement("option");
+        opt.value = "ResponsiveAppsApp" + responsiveAppsAppsIdNumber;
+        opt.innerText = responsiveAppsApps[i].Name;
+        responsiveAppsApps[i].id = "ResponsiveAppsApp" + responsiveAppsAppsIdNumber;
+        responsiveAppsAppsSelectList.append(opt);
+        responsiveAppsAppsIdNumber++;
+    }
 }
 
 async function parseTooltips(config) {
@@ -1873,6 +1887,7 @@ async function saveData() {
                 await saveConnectionStringsV2();
             }
             await saveSessionAdministration();
+            await saveHylandResponsiveAppsAppArray();
             break;
         case "Agenda Online":
             await saveHylandApplicationsAgendaPubAccessPublicComment();
@@ -1906,6 +1921,10 @@ async function saveData() {
             await saveHealthcareWebViewerSourceOrigins();
             break;
     }
+}
+
+async function saveHylandResponsiveAppsAppArray() {
+    coreConfigData["hylandResponsiveApps"]["responsiveApps"] = responsiveAppsApps;
 }
 
 async function saveHylandApplicationsAgendaPubAccessPublicComment() {
