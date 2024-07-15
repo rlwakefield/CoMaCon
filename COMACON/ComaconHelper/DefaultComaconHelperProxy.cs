@@ -20,7 +20,7 @@ internal class DefaultComaconHelperProxy : ComaconHelperProxy
     public string Set(string applicationPath, string applicationName, string applicationType, string serializedOutputObject, string version)
     {
         var args = generateSetArguments(applicationPath, applicationName, applicationType, serializedOutputObject);
-        Console.WriteLine(args);
+        //Console.WriteLine(args);
         using var process = CreateProcess(args, version);
 
         process.Start();
@@ -35,7 +35,7 @@ internal class DefaultComaconHelperProxy : ComaconHelperProxy
     public string Get(string applicationPath, string applicationName, string applicationType, string version)
     {
         var args = generateGetArguments(applicationPath, applicationName, applicationType, webApplicationDataStructures.getWebApplicationDataStructureDictionary(applicationType, version));
-        Console.WriteLine(args);
+        //Console.WriteLine(args);
 
         using var process = CreateProcess(args, version);
 

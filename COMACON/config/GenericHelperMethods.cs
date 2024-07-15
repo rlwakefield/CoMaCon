@@ -1135,7 +1135,7 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         {
             //Get the serialized output and store it.
             string serializedObject = ComaconHelperProxy.Get(applicationPath, applicationName, webApplicationType, webApplicationVersion);
-            Console.WriteLine(serializedObject);
+            //Console.WriteLine(serializedObject);
 
             serializedObject = Encoding.UTF8.GetString(ProtectedData.Unprotect(Convert.FromBase64String(serializedObject), null, DataProtectionScope.LocalMachine));
 
@@ -1571,9 +1571,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                 {
                     foreach (XmlAttribute attr in childNode.Attributes)
                     {
-                        Console.WriteLine();
-                        Console.WriteLine(attr.Name);
-                        Console.WriteLine();
                         Key k = FindKey(ds.knownKeys, section, childNode.Name, attr.Name);
 
                         if (k != null)

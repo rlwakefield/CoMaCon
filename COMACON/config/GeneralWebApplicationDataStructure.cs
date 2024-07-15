@@ -134,6 +134,7 @@ public class ResponsiveApp
     public string? Name = "";
     public string? IconURL = "";
     public string? URL = "";
+    public string? id = "";
 }
 
 public class HylandServicesParameters

@@ -2216,7 +2216,6 @@
 <div id="UnityClientSection" class="tabcontent">
     <div class="row">
         <div class="column">
-            <!-- TODO: Need to make it so that if the user attempts to set this value above the "Documet Query Limit", then it either changes the Document Query Limit value or gives an alert and then reverts the number (maybe). -->
             <div class="settingElement">
                 <div class="labelElement">
                     <label for="Document-Query-Warning-Threshold">Document Query Warning Threshold: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
@@ -2538,13 +2537,20 @@
             </div>
             <div class="row">
                 <div class="column">
+                    <select id="ResponsiveAppsApp-SelectList" name="ResponsiveAppsApp-SelectList" size="8" style="width:100%;" onchange="responsiveAppsAppChanged(this)"></select>
+                    <div style="display:flex;justify-content:space-around;">
+                        <button id="Add-ResponsiveApps-App-Button" onclick="addResponsiveAppsApp()" type="button">Add</button>
+                        <button id="Delete-ResponsiveApps-App-Button" onclick="deleteResponsiveAppsApp()" type="button" disabled>Delete</button>
+                    </div>
+                </div>
+                <div class="column">
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="App-Name">App Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
                             <span id="App-Name-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
-                            <input type="text" name="App-Name" id="App-Name">
+                            <input type="text" name="App-Name" id="App-Name" disabled>
                         </div>
                     </div>
                     <div class="settingElement">
@@ -2553,7 +2559,7 @@
                             <span id="App-Icon-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
-                            <input type="url" name="App-Icon-URL" id="App-Icon-URL">
+                            <input type="url" name="App-Icon-URL" id="App-Icon-URL" disabled>
                         </div>
                     </div>
                     <div class="settingElement">
@@ -2562,11 +2568,10 @@
                             <span id="App-URL-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
-                            <input type="url" name="App-URL" id="App-URL">
+                            <input type="url" name="App-URL" id="App-URL" disabled>
                         </div>
                     </div>
                 </div>
-                <div class="column"></div>
             </div>
         </div>
     </div>
