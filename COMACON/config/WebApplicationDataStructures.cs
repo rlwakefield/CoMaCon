@@ -1641,8 +1641,8 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             "Hyland.WorkView.Core", new string[,]
             {
                 {"Hyland.WorkView.Core","UnityEditableFilterMaxRows","value","2","Unity-Editable-Filter-Max-Rows","250","","","2000"},
-                {"Hyland.WorkView.Core","ERPDateFormat","value","2","ERP-Date-Format-LOB-Broker","yyyyMMdd","","",""},
-                {"Hyland.WorkView.Core","FormattedTextIframeSupportedDomains","value","2","Formatted-Text-Iframe-Supported-Domains","","","",""}
+                {"Hyland.WorkView.Core","ERPDateFormat","value","2","ERP-Date-Format-LOB-Broker","yyyyMMdd","","",""}
+                //{"Hyland.WorkView.Core","FormattedTextIframeSupportedDomains","value","2","Formatted-Text-Iframe-Supported-Domain","","","",""}
             }
         },
         {
@@ -2440,8 +2440,8 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             "Hyland.WorkView.Core", new string[,]
             {
                 {"Hyland.WorkView.Core","UnityEditableFilterMaxRows","value","2","Unity-Editable-Filter-Max-Rows","250","","","2000"},
-                {"Hyland.WorkView.Core","ERPDateFormat","value","2","ERP-Date-Format-LOB-Broker","yyyyMMdd","","",""},
-                {"Hyland.WorkView.Core","FormattedTextIframeSupportedDomains","value","2","Formatted-Text-Iframe-Supported-Domains","","","",""}
+                {"Hyland.WorkView.Core","ERPDateFormat","value","2","ERP-Date-Format-LOB-Broker","yyyyMMdd","","",""}
+                //{"Hyland.WorkView.Core","FormattedTextIframeSupportedDomains","value","2","Formatted-Text-Iframe-Supported-Domain","","","",""}
             }
         },
         {
@@ -3231,8 +3231,8 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             "Hyland.WorkView.Core", new string[,]
             {
                 {"Hyland.WorkView.Core","UnityEditableFilterMaxRows","value","2","Unity-Editable-Filter-Max-Rows","250","","","2000"},
-                {"Hyland.WorkView.Core","ERPDateFormat","value","2","ERP-Date-Format-LOB-Broker","yyyyMMdd","","",""},
-                {"Hyland.WorkView.Core","FormattedTextIframeSupportedDomains","value","2","Formatted-Text-Iframe-Supported-Domains","","","",""}
+                {"Hyland.WorkView.Core","ERPDateFormat","value","2","ERP-Date-Format-LOB-Broker","yyyyMMdd","","",""}
+                //{"Hyland.WorkView.Core","FormattedTextIframeSupportedDomains","value","2","/*Formatted-Text-Iframe-Supported-Domain*/","","","",""}
             }
         },
         {
@@ -3988,8 +3988,8 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
             "Hyland.WorkView.Core", new string[,]
             {
                 {"Hyland.WorkView.Core","UnityEditableFilterMaxRows","value","2","Unity-Editable-Filter-Max-Rows","250","","","2000"},
-                {"Hyland.WorkView.Core","ERPDateFormat","value","2","ERP-Date-Format-LOB-Broker","yyyyMMdd","","",""},
-                {"Hyland.WorkView.Core","FormattedTextIframeSupportedDomains","value","2","Formatted-Text-Iframe-Supported-Domains","","","",""}
+                {"Hyland.WorkView.Core","ERPDateFormat","value","2","ERP-Date-Format-LOB-Broker","yyyyMMdd","","",""}
+                //{"Hyland.WorkView.Core","FormattedTextIframeSupportedDomains","value","2","Formatted-Text-Iframe-Supported-Domain","","","",""}
             }
         },
         {
@@ -5283,7 +5283,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         new List<string> {"Search-Log-Path-Tooltip",""},
         new List<string> {"Unity-Editable-Filter-Max-Rows-Tooltip","Sets Max results for Unity client editable embedded filters (Default: 250, Max: 2000)."},
         new List<string> {"ERP-Date-Format-LOB-Broker-Tooltip","Sets the ERP date format for processing results for LOB Broker classes."},
-        new List<string> {"Formatted-Text-Iframe-Supported-Domains-Tooltip","Adds additional domains that should be supported by iframes in the formatted text attribute control. Adding a domain to this list will add `allow-scripts`, `allow-same-origin`, and `allow-forms` overrides to the sandbox attribute on the iframe. Add domains as a comma separated list.<br><br>Examples:<br>&nbsp;&nbsp;&nbsp;&nbsp;*.mydomain.com<br>&nbsp;&nbsp;&nbsp;&nbsp;sub.myotherdomain.com<br><br>In this example *.mydomain.com will enable all sub-domains for mydomain.com (Ex: www.mydomain.com and test.mydomain.com would be valid), sub.myotherdomain.com would only allow sandbox overrides for that specific domain and sub-domain."},
+        new List<string> {"Formatted-Text-Iframe-Supported-Domain-Tooltip","Adds additional domains that should be supported by iframes in the formatted text attribute control. Adding a domain to this list will add `allow-scripts`, `allow-same-origin`, and `allow-forms` overrides to the sandbox attribute on the iframe. Add domains as a comma separated list.<br><br>Examples:<br>&nbsp;&nbsp;&nbsp;&nbsp;*.mydomain.com<br>&nbsp;&nbsp;&nbsp;&nbsp;sub.myotherdomain.com<br><br>In this example *.mydomain.com will enable all sub-domains for mydomain.com (Ex: www.mydomain.com and test.mydomain.com would be valid), sub.myotherdomain.com would only allow sandbox overrides for that specific domain and sub-domain."},
         new List<string> {"Remote-OCR-Engine-Remote-Server-Tooltip",""},
         new List<string> {"Remote-OCR-Engine-Port-Tooltip",""},
         new List<string> {"Remote-OCR-Engine-Timeout-Tooltip",""},
@@ -5973,7 +5973,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         new List<string> {"Search-Log-Path-Tooltip",""},
         new List<string> {"Unity-Editable-Filter-Max-Rows-Tooltip","Sets Max results for Unity client editable embedded filters (Default: 250, Max: 2000)."},
         new List<string> {"ERP-Date-Format-LOB-Broker-Tooltip","Sets the ERP date format for processing results for LOB Broker classes."},
-        new List<string> {"Formatted-Text-Iframe-Supported-Domains-Tooltip","Adds additional domains that should be supported by iframes in the formatted text attribute control. Adding a domain to this list will add `allow-scripts`, `allow-same-origin`, and `allow-forms` overrides to the sandbox attribute on the iframe. Add domains as a comma separated list.<br><br>Examples:<br>&nbsp;&nbsp;&nbsp;&nbsp;*.mydomain.com<br>&nbsp;&nbsp;&nbsp;&nbsp;sub.myotherdomain.com<br><br>In this example *.mydomain.com will enable all sub-domains for mydomain.com (Ex: www.mydomain.com and test.mydomain.com would be valid), sub.myotherdomain.com would only allow sandbox overrides for that specific domain and sub-domain."},
+        new List<string> {"Formatted-Text-Iframe-Supported-Domain-Tooltip","Adds additional domains that should be supported by iframes in the formatted text attribute control. Adding a domain to this list will add `allow-scripts`, `allow-same-origin`, and `allow-forms` overrides to the sandbox attribute on the iframe. Add domains as a comma separated list.<br><br>Examples:<br>&nbsp;&nbsp;&nbsp;&nbsp;*.mydomain.com<br>&nbsp;&nbsp;&nbsp;&nbsp;sub.myotherdomain.com<br><br>In this example *.mydomain.com will enable all sub-domains for mydomain.com (Ex: www.mydomain.com and test.mydomain.com would be valid), sub.myotherdomain.com would only allow sandbox overrides for that specific domain and sub-domain."},
         new List<string> {"Use-Office-Online-Server-Tooltip","Set to true to use the WOPI viewer. Set to false to continue using the legacy viewer."},
         new List<string> {"Office-Online-Server-URI-Tooltip","Points to the Office Online Server."},
         new List<string> {"Office-Online-Server-Proxy-Base-Tooltip","Points to the WOPI Service. Example: \"https://localhost/AppServer/private\""},
@@ -6614,7 +6614,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         new List<string> {"Search-Log-Path-Tooltip",""},
         new List<string> {"Unity-Editable-Filter-Max-Rows-Tooltip","Sets Max results for Unity client editable embedded filters (Default: 250, Max: 2000)."},
         new List<string> {"ERP-Date-Format-LOB-Broker-Tooltip","Sets the ERP date format for processing results for LOB Broker classes."},
-        new List<string> {"Formatted-Text-Iframe-Supported-Domains-Tooltip","Adds additional domains that should be supported by iframes in the formatted text attribute control. Adding a domain to this list will add `allow-scripts`, `allow-same-origin`, and `allow-forms` overrides to the sandbox attribute on the iframe. Add domains as a comma separated list.<br><br>Examples:<br>&nbsp;&nbsp;&nbsp;&nbsp;*.mydomain.com<br>&nbsp;&nbsp;&nbsp;&nbsp;sub.myotherdomain.com<br><br>In this example *.mydomain.com will enable all sub-domains for mydomain.com (Ex: www.mydomain.com and test.mydomain.com would be valid), sub.myotherdomain.com would only allow sandbox overrides for that specific domain and sub-domain."},
+        new List<string> {"Formatted-Text-Iframe-Supported-Domain-Tooltip","Adds additional domains that should be supported by iframes in the formatted text attribute control. Adding a domain to this list will add `allow-scripts`, `allow-same-origin`, and `allow-forms` overrides to the sandbox attribute on the iframe. Add domains as a comma separated list.<br><br>Examples:<br>&nbsp;&nbsp;&nbsp;&nbsp;*.mydomain.com<br>&nbsp;&nbsp;&nbsp;&nbsp;sub.myotherdomain.com<br><br>In this example *.mydomain.com will enable all sub-domains for mydomain.com (Ex: www.mydomain.com and test.mydomain.com would be valid), sub.myotherdomain.com would only allow sandbox overrides for that specific domain and sub-domain."},
         new List<string> {"Use-Office-Online-Server-Tooltip","Set to true to use the WOPI viewer. Set to false to continue using the legacy viewer."},
         new List<string> {"Office-Online-Server-URI-Tooltip","Points to the Office Online Server."},
         new List<string> {"Office-Online-Server-Proxy-Base-Tooltip","Points to the WOPI Service. Example: \"https://localhost/AppServer/private\""},
@@ -7269,7 +7269,7 @@ internal sealed class  DefaultWebApplicationDataStructures : WebApplicationDataS
         new List<string> {"Search-Log-Path-Tooltip",""},
         new List<string> {"Unity-Editable-Filter-Max-Rows-Tooltip","Sets Max results for Unity client editable embedded filters (Default: 250, Max: 2000)."},
         new List<string> {"ERP-Date-Format-LOB-Broker-Tooltip","Sets the ERP date format for processing results for LOB Broker classes."},
-        new List<string> {"Formatted-Text-Iframe-Supported-Domains-Tooltip","Adds additional domains that should be supported by iframes in the formatted text attribute control. Adding a domain to this list will add `allow-scripts`, `allow-same-origin`, and `allow-forms` overrides to the sandbox attribute on the iframe. Add domains as a comma separated list.<br><br>Examples:<br>&nbsp;&nbsp;&nbsp;&nbsp;*.mydomain.com<br>&nbsp;&nbsp;&nbsp;&nbsp;sub.myotherdomain.com<br><br>In this example *.mydomain.com will enable all sub-domains for mydomain.com (Ex: www.mydomain.com and test.mydomain.com would be valid), sub.myotherdomain.com would only allow sandbox overrides for that specific domain and sub-domain."},
+        new List<string> {"Formatted-Text-Iframe-Supported-Domain-Tooltip","Adds additional domains that should be supported by iframes in the formatted text attribute control. Adding a domain to this list will add `allow-scripts`, `allow-same-origin`, and `allow-forms` overrides to the sandbox attribute on the iframe. Add domains as a comma separated list.<br><br>Examples:<br>&nbsp;&nbsp;&nbsp;&nbsp;*.mydomain.com<br>&nbsp;&nbsp;&nbsp;&nbsp;sub.myotherdomain.com<br><br>In this example *.mydomain.com will enable all sub-domains for mydomain.com (Ex: www.mydomain.com and test.mydomain.com would be valid), sub.myotherdomain.com would only allow sandbox overrides for that specific domain and sub-domain."},
         new List<string> {"Use-Office-Online-Server-Tooltip","Set to true to use the WOPI viewer. Set to false to continue using the legacy viewer."},
         new List<string> {"Office-Online-Server-URI-Tooltip","Points to the Office Online Server."},
         new List<string> {"Office-Online-Server-Proxy-Base-Tooltip","Points to the WOPI Service. Example: \"https://localhost/AppServer/private\""},

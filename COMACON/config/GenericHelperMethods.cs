@@ -1252,10 +1252,36 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                 break;
             case "Hyland.WorkView.Core":
                 ParseSpecificKeys(ds, node, sect);
+                ParseWorkViewCoreFormattedTextIframeSupportedDomains(ds, node);
                 break;
             default:
                 ParseAllElementsAndAttributesV2(ds, node, sect, xmlDocument);
                 break;
+        }
+    }
+
+    private void ParseWorkViewCoreFormattedTextIframeSupportedDomains(webApplicationWebConfigConfiguration ds, XmlNode node)
+    {
+        try
+        {
+            string formattedTextIframeSupportedDomainsValue = node.SelectSingleNode("FormattedTextIframeSupportedDomains").Attributes["value"].Value;
+            string[] formattedTextIframeSupportedDomainsValueArray = formattedTextIframeSupportedDomainsValue.Split(',');
+
+            if(formattedTextIframeSupportedDomainsValue != "" && formattedTextIframeSupportedDomainsValueArray.Length > 1)
+            {
+                foreach (string s in formattedTextIframeSupportedDomainsValueArray)
+                {
+                    FormattedTextIframeSupportedDomain domain = new FormattedTextIframeSupportedDomain();
+                    domain.Domain = s;
+                    ds.formattedTextIframeSupportedDomains.Add(domain);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Logger.Warning(e.Message);
+            Log.Logger.Warning(e.StackTrace);
+            Log.Logger.Warning("Error parsing FormattedTextIframeSupportedDomains.");
         }
     }
 
@@ -4021,7 +4047,45 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                         Log.Logger.Error(e.StackTrace);
                     }
                     break;
+                case "FormattedTextIframeSupportedDomains":
+                    try
+                    {
+                        SaveFormattedTextIframeSupportedDomains(node, webConfigConfiguration.formattedTextIframeSupportedDomains, configDoc);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Logger.Error(e.Message);
+                        Log.Logger.Error(e.StackTrace);
+                    }
+                    break;
             }
+        }
+        catch (Exception e)
+        {
+            Log.Logger.Error(e.Message);
+            Log.Logger.Error(e.StackTrace);
+        }
+    }
+
+    private void SaveFormattedTextIframeSupportedDomains(XmlNode node, List<FormattedTextIframeSupportedDomain> domains, XmlDocument configDoc)
+    {
+        try
+        {
+            //Take the domains List and concatenate them together separated out by a comma
+            string domainList = "";
+            foreach (FormattedTextIframeSupportedDomain domain in domains)
+            {
+                //Check if the current domain is the last one in the list
+                if (domains.IndexOf(domain) == domains.Count - 1)
+                {
+                    domainList += domain.Domain;
+                }
+                else
+                {
+                    domainList += domain.Domain + ",";
+                }
+            }
+            node.Attributes["value"].Value = domainList;
         }
         catch (Exception e)
         {

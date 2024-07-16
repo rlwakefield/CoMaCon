@@ -58,6 +58,7 @@ public class webApplicationWebConfigConfiguration
     public ProcessingErrors processingErrors = new ProcessingErrors();
     public List<HylandApplicationsAgendaPubAccessPublicComment> publicCommentIntegrations = new List<HylandApplicationsAgendaPubAccessPublicComment>();
     public List<Tooltip> tooltips = new List<Tooltip>();
+    public List<FormattedTextIframeSupportedDomain> formattedTextIframeSupportedDomains = new List<FormattedTextIframeSupportedDomain>();
     
     public void AddCriticalError(string message)
     {
@@ -596,4 +597,13 @@ public class TestConnectionStringResult
 {
     public string? ResultCode { get; set; }
     public string? ResultMessage { get; set; }
+}
+
+/********************************************************
+*     Formatted Text Iframe Supported Domain Object
+********************************************************/
+public class FormattedTextIframeSupportedDomain
+{
+    public string? Domain { get; set; }
+    public string? id { get; set; }
 }

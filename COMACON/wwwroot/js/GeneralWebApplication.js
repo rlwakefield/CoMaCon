@@ -1329,6 +1329,7 @@ async function parseData(config) {
             await parseWindowsAuthOptimization(config["WindowsAuthOptimizeFor"]);
             await parseSessionAdministration(config["sessionAdministration"]);
             await parseResponsiveAppsApp(config["hylandResponsiveApps"]);
+            await parseParseWorkViewCoreFormattedTextIframeSupportedDomains(config["formattedTextIframeSupportedDomains"]);
             break;
         case "Electronic Plan Review":
             await prepareAndSetDefaultTimeZoneOptions();
@@ -1406,6 +1407,19 @@ async function parseData(config) {
             return confirmationMessage;
         }
     });
+}
+
+async function parseParseWorkViewCoreFormattedTextIframeSupportedDomains(config) {
+    formattedTextIframeSupportedDomains = config;
+    let formattedTextIframeSupportedDomainsSelectList = document.getElementById("FormattedTextIframeSupportedDomains-SelectList");
+    for (let i = 0; i < formattedTextIframeSupportedDomains.length; i++) {
+        let opt = document.createElement("option");
+        opt.value = "formattedtextiframesupporteddomain" + formattedTextIframeSupportedDomainsIdNumber;
+        opt.innerText = formattedTextIframeSupportedDomains[i]["Domain"];
+        formattedTextIframeSupportedDomains[i].id = "formattedtextiframesupporteddomain" + formattedTextIframeSupportedDomainsIdNumber;
+        formattedTextIframeSupportedDomainsSelectList.append(opt);
+        formattedTextIframeSupportedDomainsIdNumber++;
+    }
 }
 
 async function parseResponsiveAppsApp(config) {
@@ -1888,6 +1902,7 @@ async function saveData() {
             }
             await saveSessionAdministration();
             await saveHylandResponsiveAppsAppArray();
+
             break;
         case "Agenda Online":
             await saveHylandApplicationsAgendaPubAccessPublicComment();
@@ -1921,6 +1936,10 @@ async function saveData() {
             await saveHealthcareWebViewerSourceOrigins();
             break;
     }
+}
+
+async function saveFormattedTextIframeSupportedDomains() {
+    coreConfigData["formattedTextIframeSupportedDomains"] = formattedTextIframeSupportedDomains;
 }
 
 async function saveHylandResponsiveAppsAppArray() {
