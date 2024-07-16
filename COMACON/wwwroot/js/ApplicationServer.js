@@ -5,6 +5,9 @@ let sessionadministrationrolesidnumber = 0;
 let responsiveAppsApps = [];
 let responsiveAppsAppsIdNumber = 0;
 let responsiveAppsAppNewAppDataStructure = { "Name": "[appName]", "IconURL": "[urlToAppIcon]", "URL": "[urlToApp]", "id": "" };
+let formattedTextIframeSupportedDomains = [];
+let formattedTextIframeSupportedDomainsIdNumber = 0;
+let formattedTextIframeSupportedDomainNewDataStructure = { "Domain": "[domain]", "id": "" };
 
 
 /********************************************************
@@ -406,7 +409,6 @@ async function sessionAdministrationRoleSelected(selectList) {
 ********************************************************/
 async function responsiveAppsAppChanged(selectList) {
     let responsiveAppsAppLookupResult = responsiveAppsApps.filter(result => result.id == selectList.value);
-    console.log(responsiveAppsAppLookupResult);
     if (responsiveAppsAppLookupResult.length > 0) {
         document.getElementById("App-Name").value = responsiveAppsAppLookupResult[0].Name;
         document.getElementById("App-Icon-URL").value = responsiveAppsAppLookupResult[0].IconURL;
@@ -444,7 +446,6 @@ async function addResponsiveAppsApp() {
     document.getElementById("App-Name").value = newApp.Name;
     document.getElementById("App-Icon-URL").value = newApp.IconURL;
     document.getElementById("App-URL").value = newApp.URL;
-    console.log(responsiveAppsApps);
 }
 
 async function deleteResponsiveAppsApp() {
@@ -455,11 +456,90 @@ async function deleteResponsiveAppsApp() {
     await setResponsiveAppsAppFieldDisabledStatus(true);
     await setResponsiveAppsAppButtonDisabledStatus(true);
     await resetResponsiveAppsAppFields();
-    console.log(responsiveAppsApps);
 }
 
 async function resetResponsiveAppsAppFields() {
     document.getElementById("App-Name").value = "";
     document.getElementById("App-Icon-URL").value = "";
     document.getElementById("App-URL").value = "";
+}
+
+async function responsiveAppsAppFieldUpdated(field) {
+    let responsiveAppsAppLookupResult = responsiveAppsApps.filter(result => result.id == document.getElementById("ResponsiveAppsApp-SelectList").value);
+    switch (field.id) {
+        case "App-Name":
+            responsiveAppsAppLookupResult[0].Name = field.value;
+            document.getElementById("ResponsiveAppsApp-SelectList").options[document.getElementById("ResponsiveAppsApp-SelectList").selectedIndex].innerText = field.value;
+            break;
+        case "App-Icon-URL":
+            responsiveAppsAppLookupResult[0].IconURL = field.value;
+            break;
+        case "App-URL":
+            responsiveAppsAppLookupResult[0].URL = field.value;
+            break;
+    }
+}
+
+
+
+/********************************************************
+*   Formatted Text Iframe Supported Domains Functions
+********************************************************/
+async function formattedTextIframeSupportedDomainChanged(selectList) {
+    let FormattedTextIframeSupportedDomainLookupResult = formattedTextIframeSupportedDomains.filter(result => result.id == selectList.value);
+    if (FormattedTextIframeSupportedDomainLookupResult.length > 0) {
+        document.getElementById("Formatted-Text-Iframe-Supported-Domain").value = FormattedTextIframeSupportedDomainLookupResult[0].Domain;
+    }
+
+    await setFormattedTextIframeSupportedDomainFieldDisabledStatus(false);
+    await setFormattedTextIframeSupportedDomainButtonDisabledStatus(false);
+}
+
+async function setFormattedTextIframeSupportedDomainFieldDisabledStatus(status) {
+    document.getElementById("Formatted-Text-Iframe-Supported-Domain").disabled = status;
+}
+
+async function setFormattedTextIframeSupportedDomainButtonDisabledStatus(status) {
+    document.getElementById("DeleteFormattedTextIframeSupportedDomain-Button").disabled = status;
+}
+
+async function addFormattedTextIframeSupportedDomain() {
+    let newFormattedTextIframeSupportedDomain = JSON.parse(JSON.stringify(formattedTextIframeSupportedDomainNewDataStructure));
+    newFormattedTextIframeSupportedDomain.id = "FormattedTextIframeSupportedDomain" + formattedTextIframeSupportedDomainsIdNumber;
+    formattedTextIframeSupportedDomains.push(newFormattedTextIframeSupportedDomain);
+    let opt = document.createElement("option");
+    opt.value = newFormattedTextIframeSupportedDomain.id;
+    opt.innerText = newFormattedTextIframeSupportedDomain.Domain;
+    document.getElementById("FormattedTextIframeSupportedDomains-SelectList").append(opt);
+    formattedTextIframeSupportedDomainsIdNumber++;
+
+    await setFormattedTextIframeSupportedDomainFieldDisabledStatus(false);
+    await setFormattedTextIframeSupportedDomainButtonDisabledStatus(false);
+    //Set the select list to the new app
+    document.getElementById("FormattedTextIframeSupportedDomains-SelectList").value = newFormattedTextIframeSupportedDomain.id;
+    document.getElementById("Formatted-Text-Iframe-Supported-Domain").value = newFormattedTextIframeSupportedDomain.Domain;
+}
+
+async function deleteFormattedTextIframeSupportedDomain() {
+    let appToDelete = formattedTextIframeSupportedDomains.filter(result => result.id == document.getElementById("FormattedTextIframeSupportedDomains-SelectList").value);
+    let index = formattedTextIframeSupportedDomains.indexOf(appToDelete[0]);
+    formattedTextIframeSupportedDomains.splice(index, 1);
+    document.getElementById("FormattedTextIframeSupportedDomains-SelectList").removeChild(document.getElementById("FormattedTextIframeSupportedDomains-SelectList").options[document.getElementById("FormattedTextIframeSupportedDomains-SelectList").selectedIndex]);
+    await setFormattedTextIframeSupportedDomainFieldDisabledStatus(true);
+    await setFormattedTextIframeSupportedDomainButtonDisabledStatus(true);
+    await resetFormattedTextIframeSupportedDomainFields();
+}
+
+async function resetFormattedTextIframeSupportedDomainFields() {
+    document.getElementById("Formatted-Text-Iframe-Supported-Domain").value = "";
+}
+
+async function formattedTextIframeSupportedDomainFieldUpdated(field) {
+    let FormattedTextIframeSupportedDomainLookupResult = formattedTextIframeSupportedDomains.filter(result => result.id == document.getElementById("FormattedTextIframeSupportedDomains-SelectList").value);
+    switch (field.id) {
+        case "Formatted-Text-Iframe-Supported-Domain":
+            FormattedTextIframeSupportedDomainLookupResult[0].Domain = field.value;
+            document.getElementById("FormattedTextIframeSupportedDomains-SelectList").options[document.getElementById("FormattedTextIframeSupportedDomains-SelectList").selectedIndex].innerText = field.value;
+            break;
+    }
 }

@@ -2394,6 +2394,8 @@
                             <input type="text" name="Unity-Editable-Filter-Max-Rows" id="Unity-Editable-Filter-Max-Rows">
                         </div>
                     </div>
+                </div>
+                <div class="column">
                     <div class="settingElement">
                         <div class="labelElement">
                             <label for="ERP-Date-Format-LOB-Broker">ERP Date Format LOB Broker: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
@@ -2404,14 +2406,30 @@
                         </div>
                     </div>
                 </div>
-                <div class="column">
-                    <div class="settingElement">
-                        <div class="labelElement">
-                            <label for="Formatted-Text-Iframe-Supported-Domains">Formatted Text Iframe Supported Domains: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span id="Formatted-Text-Iframe-Supported-Domains-Tooltip" class="tooltiptext">This is the help text.</span>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Formatted Text iFrame Supported Domains
+                </div>
+                <div class="coreSection">
+                    <div class="row" style="justify-content: space-around;margin:1rem 0;">
+                        <div class="column" style="width:20%;">
+                            <select id="FormattedTextIframeSupportedDomains-SelectList" name="FormattedTextIframeSupportedDomains-SelectList" size="8" style="width:100%" onchange="formattedTextIframeSupportedDomainChanged(this)"></select>
+                            <div style="display:flex;justify-content:space-around;">
+                                <button id="AddFormattedTextIframeSupportedDomain-Button" onclick="addFormattedTextIframeSupportedDomain()" type="button">Add</button>
+                                <button id="DeleteFormattedTextIframeSupportedDomain-Button" onclick="deleteFormattedTextIframeSupportedDomain()" type="button" disabled>Delete</button>
+                            </div>
                         </div>
-                        <div class="inputElement">
-                            <input type="text" name="Formatted-Text-Iframe-Supported-Domains" id="Formatted-Text-Iframe-Supported-Domains">
+                        <div class="column">
+                            <div class="settingElement">
+                                <div class="labelElement">
+                                    <label for="Formatted-Text-Iframe-Supported-Domain">Formatted Text Iframe Supported Domains: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                    <span id="Formatted-Text-Iframe-Supported-Domain-Tooltip" class="tooltiptext">This is the help text.</span>
+                                </div>
+                                <div class="inputElement">
+                                    <input type="text" name="Formatted-Text-Iframe-Supported-Domain" id="Formatted-Text-Iframe-Supported-Domain" oninput="formattedTextIframeSupportedDomainFieldUpdated(this)" disabled>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2535,40 +2553,47 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="column">
-                    <select id="ResponsiveAppsApp-SelectList" name="ResponsiveAppsApp-SelectList" size="8" style="width:100%;" onchange="responsiveAppsAppChanged(this)"></select>
-                    <div style="display:flex;justify-content:space-around;">
-                        <button id="Add-ResponsiveApps-App-Button" onclick="addResponsiveAppsApp()" type="button">Add</button>
-                        <button id="Delete-ResponsiveApps-App-Button" onclick="deleteResponsiveAppsApp()" type="button" disabled>Delete</button>
-                    </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Apps
                 </div>
-                <div class="column">
-                    <div class="settingElement">
-                        <div class="labelElement">
-                            <label for="App-Name">App Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span id="App-Name-Tooltip" class="tooltiptext">This is the help text.</span>
+                <div class="coreSection">
+                    <div class="row" style="justify-content: space-around;margin:1rem 0;">
+                        <div class="column" style="width:20%;">
+                            <select id="ResponsiveAppsApp-SelectList" name="ResponsiveAppsApp-SelectList" size="8" style="width:100%;" onchange="responsiveAppsAppChanged(this)"></select>
+                            <div style="display:flex;justify-content:space-around;">
+                                <button id="Add-ResponsiveApps-App-Button" onclick="addResponsiveAppsApp()" type="button">Add</button>
+                                <button id="Delete-ResponsiveApps-App-Button" onclick="deleteResponsiveAppsApp()" type="button" disabled>Delete</button>
+                            </div>
                         </div>
-                        <div class="inputElement">
-                            <input type="text" name="App-Name" id="App-Name" disabled>
-                        </div>
-                    </div>
-                    <div class="settingElement">
-                        <div class="labelElement">
-                            <label for="App-Icon-URL">App Icon URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span id="App-Icon-URL-Tooltip" class="tooltiptext">This is the help text.</span>
-                        </div>
-                        <div class="inputElement">
-                            <input type="url" name="App-Icon-URL" id="App-Icon-URL" disabled>
-                        </div>
-                    </div>
-                    <div class="settingElement">
-                        <div class="labelElement">
-                            <label for="App-URL">App URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
-                            <span id="App-URL-Tooltip" class="tooltiptext">This is the help text.</span>
-                        </div>
-                        <div class="inputElement">
-                            <input type="url" name="App-URL" id="App-URL" disabled>
+                        <div class="column">
+                            <div class="settingElement">
+                                <div class="labelElement">
+                                    <label for="App-Name">App Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                    <span id="App-Name-Tooltip" class="tooltiptext">This is the help text.</span>
+                                </div>
+                                <div class="inputElement">
+                                    <input type="text" name="App-Name" id="App-Name" oninput="responsiveAppsAppFieldUpdated(this)" disabled>
+                                </div>
+                            </div>
+                            <div class="settingElement">
+                                <div class="labelElement">
+                                    <label for="App-Icon-URL">App Icon URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                    <span id="App-Icon-URL-Tooltip" class="tooltiptext">This is the help text.</span>
+                                </div>
+                                <div class="inputElement">
+                                    <input type="url" name="App-Icon-URL" id="App-Icon-URL" oninput="responsiveAppsAppFieldUpdated(this)" disabled>
+                                </div>
+                            </div>
+                            <div class="settingElement">
+                                <div class="labelElement">
+                                    <label for="App-URL">App URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                    <span id="App-URL-Tooltip" class="tooltiptext">This is the help text.</span>
+                                </div>
+                                <div class="inputElement">
+                                    <input type="url" name="App-URL" id="App-URL" oninput="responsiveAppsAppFieldUpdated(this)" disabled>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -162,6 +162,7 @@ internal sealed class DefaultLoadSaveWebApplications : LoadSaveWebApplications
                 GenericHelperMethods.SaveArrayItems("ResponsiveAppsApps", root.SelectSingleNode("Hyland.ResponsiveApps"), core, configurationDocument);
                 GenericHelperMethods.SaveArrayItems("DiskGroupAliases", root.SelectSingleNode("Hyland.PlatterManagement"), core, configurationDocument);
                 GenericHelperMethods.SaveArrayItems("Parameters", root.SelectSingleNode("Hyland.Services"), core, configurationDocument);
+                GenericHelperMethods.SaveArrayItems("FormattedTextIframeSupportedDomains",root.SelectSingleNode("Hyland.WorkView.Core/FormattedTextIframeSupportedDomains"), core, configurationDocument);
                 GenericHelperMethods.SaveKnownKeys(core, "Hyland.Core.Wopi", root, configurationDocument);
                 break;
             case "Electronic Plan Review":
