@@ -1,10 +1,14 @@
 # COMACON MVC
-This is my personal concept of what a web based version of the WAMCON (Web Application Management Console) could look like. However, I have invisioned a slightly different approach to it than Hyland has. I envision this being more of a COMACON (Configuration Management Console). Fetures I want to have in it are as follows:
+This is my personal concept of what a web based version of the WAMCON (Web Application Management Console) could look like. However, my vision for this utility is not just a utility that configures web applications on the servers, but also allows for the configuration of client configuration files and more! My vision for this new Configuration Management Console's features are:https://github.com/rlwakefield/CoMaCon/blob/main/README.md
 
-1. Configuration/Management of web based configuration files (same as WAMCON today, but much cleaner, accurate, and detailed)
-2. Configuration of local configuration files (e.g. obunity.exe.config and more) - To Be Released
-3. Creation of brand new web based applications (Application Server, Web Server, etc.) - To Be Released
-4. Creation of brand new local configuration files (Unity Client, Thick Client, etc.) - To Be Released
+1. Configure any of your Web Application and their respective settings in a simple, easy to use, intuitive web based interface.
+2. Centrally configure and manage all of your servers web applications so that all of the servers stay in sync with each other, helping to avoiding rogue configurations.
+3. Centrally managed and maintain all of your client deployments and their respective configurations on all of your end users workstations.
+4. Allow for the efficient handling of upgrades to any clients or server configurations from a central location.
+
+As system administrators, one of the biggest challenges that we tend to face is the deployment of all of our different clients, servers, and their configurations and being able to maintain them easily.
+
+With this utility, that challenge will become a thing of the past. No longer will you have to worry about your upgrades and whether all of your server configurations are the same or not. That will all be handled by this amazing new utility called the COMACON!
 
 ![image](https://github.com/rlwakefield/COMACON-MVC/assets/33588807/cc7c6524-2926-4b2b-bcb9-c2875a62c9ce)
 
