@@ -463,7 +463,7 @@ async function validateNumericValue(field) {
     if(field.attributes["max"]?.value != null || field.attributes["max"]?.value != undefined)
     {
         if (parseFloat(field.value) > field.attributes["max"].value) {
-            field.value = field.attributes["max"].value;
+            //field.value = field.attributes["max"].value;
             document.querySelectorAll("[id$='Section']").forEach((element) => {
                 if (element.contains(field)) {
                     pushErrorToArray([field.id, element.id.replace(/Section$/, ''), "Value above the maximum", "The value input is above the maximum value of " + field.attributes["max"].value + ". Correct to allow saving."]);
@@ -1123,21 +1123,10 @@ function viewButtonClicked() {
     document.getElementById(currentErrorSelected[1].innerText + "Link").click();
     document.getElementById("SaveErrors-Modal").style.display = "none";
     //Will work on implementing this another time.
-    //console.log(errorsArray);
-    //console.log(currentErrorSelected[1].innerText);
-    //console.log(currentErrorSelected[2].innerText);
-    //console.log(currentErrorSelected[3].innerText);
     for (let i = 0; i < errorsArray.length; i++) {
-        //console.log(errorsArray[i][0]);
-        //console.log(errorsArray[i][1] == currentErrorSelected[1].innerText);
-        //console.log(errorsArray[i][1]);
-        //console.log(errorsArray[i][2] == currentErrorSelected[2].innerText);
-        //console.log(errorsArray[i][2]);
-        //console.log(errorsArray[i][3] == currentErrorSelected[3].innerText);
-        //console.log(errorsArray[i][3]);
         if (errorsArray[i][1] == currentErrorSelected[1].innerText && errorsArray[i][2] == currentErrorSelected[2].innerText && errorsArray[i][3] == currentErrorSelected[3].innerText) {
             try {
-                flashBorderForErrorAlert(document.getElementById(errorsArray[i][0]), 5);
+                flashBorderForErrorAlert(document.getElementById(errorsArray[i][0]), 3);
             } catch {
 
             }
@@ -1150,14 +1139,14 @@ function flashBorderForErrorAlert(element, times) {
 
     function changeToRed() {
         element.style.border = '5px solid red';
-        setTimeout(changeToBlack, 500);
+        setTimeout(changeToBlack, 300);
     }
 
     function changeToBlack() {
         element.style.border = '2px solid black';
         count++;
         if (count < times) {
-            setTimeout(changeToRed, 500);
+            setTimeout(changeToRed, 300);
         }
     }
 
@@ -1171,7 +1160,7 @@ function flashBorderForErrorAlert(element, times) {
         } else {
             changeToRed();
         }
-    }, 1000);
+    }, 500);
 }
 
 
