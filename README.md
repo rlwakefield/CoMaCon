@@ -12,6 +12,13 @@ With this utility, that challenge will become a thing of the past. No longer wil
 
 ![image](https://github.com/rlwakefield/COMACON-MVC/assets/33588807/cc7c6524-2926-4b2b-bcb9-c2875a62c9ce)
 
+Current supported versions include:
+[X] 21.1 (EP5)
+[X] 22.1
+[X] 23.1
+[X] 24.1
+[ ] 25.1
+
 
 # Installation Instructions
 ### PREREQS
