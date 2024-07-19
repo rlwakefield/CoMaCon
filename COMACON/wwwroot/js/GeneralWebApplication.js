@@ -2851,62 +2851,62 @@ async function connectionStringTextInputFieldUpdatedV3(field) {
     //await checkSetAppendedTextErrorV3();
 }
 
-async function checkForDuplicateConnectionStringNamesV3() {
-    let duplicate = ConnectionStringsArray.filter(cstring => cstring.Name === document.getElementById("Data-Source-Name").value && cstring.id != document.getElementById("ConnectionStrings-SelectList").value);
+//async function checkForDuplicateConnectionStringNamesV3() {
+//    let duplicate = ConnectionStringsArray.filter(cstring => cstring.Name === document.getElementById("Data-Source-Name").value && cstring.id != document.getElementById("ConnectionStrings-SelectList").value);
 
-    if (duplicate.length > 0) {
-        duplicate.forEach(dup => {
-            //Need to select the option element where the dup.id value is equal to the option value.
-            let options = document.getElementById("ConnectionStrings-SelectList").options;
+//    if (duplicate.length > 0) {
+//        duplicate.forEach(dup => {
+//            //Need to select the option element where the dup.id value is equal to the option value.
+//            let options = document.getElementById("ConnectionStrings-SelectList").options;
 
-            for (let i = 0; i < options.length; i++) {
-                if (options[i].value === dup.id) {
-                    options[i].classList.add("duplicateConnectionStringName");
-                    //Checks to verify that the error text to append does not already contain the word duplicate.
-                    if (!options[i].attributes["error-text-to-append"].value.includes(" (duplicate)")){
-                        options[i].attributes["error-text-to-append"].value += " (duplicate)";
-                    }
-                    //Checks to verify that currently selected option does not already contain the value of the current option[i].value.
-                    if (!document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicates"].value.includes(options[i].value)) {
-                        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicates"].value = options[i].value;
-                    }
-                    //Checks to verify that the related-duplicates attribute does not already contain the the currently selected Connection Strings value.
-                    if (!options[i].attributes["related-duplicates"].value.includes(document.getElementById("ConnectionStrings-SelectList").value)) {
-                        let relatedDuplicatesArray = [];
-                        if (options[i].attributes["related-duplicates"].value == "") {
-                            options[i].attributes["related-duplicates"].value = document.getElementById("ConnectionStrings-SelectList").value;
-                        } else {
-                            relatedDuplicatesArray = options[i].attributes["related-duplicates"].value.split(",");
-                            relatedDuplicatesArray.push(document.getElementById("ConnectionStrings-SelectList").value);
-                            options[i].attributes["related-duplicates"].value = relatedDuplicatesArray.join(",");
-                        }
-                    }
-                }
+//            for (let i = 0; i < options.length; i++) {
+//                if (options[i].value === dup.id) {
+//                    options[i].classList.add("duplicateConnectionStringName");
+//                    //Checks to verify that the error text to append does not already contain the word duplicate.
+//                    if (!options[i].attributes["error-text-to-append"].value.includes(" (duplicate)")){
+//                        options[i].attributes["error-text-to-append"].value += " (duplicate)";
+//                    }
+//                    //Checks to verify that currently selected option does not already contain the value of the current option[i].value.
+//                    if (!document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicates"].value.includes(options[i].value)) {
+//                        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicates"].value = options[i].value;
+//                    }
+//                    //Checks to verify that the related-duplicates attribute does not already contain the the currently selected Connection Strings value.
+//                    if (!options[i].attributes["related-duplicates"].value.includes(document.getElementById("ConnectionStrings-SelectList").value)) {
+//                        let relatedDuplicatesArray = [];
+//                        if (options[i].attributes["related-duplicates"].value == "") {
+//                            options[i].attributes["related-duplicates"].value = document.getElementById("ConnectionStrings-SelectList").value;
+//                        } else {
+//                            relatedDuplicatesArray = options[i].attributes["related-duplicates"].value.split(",");
+//                            relatedDuplicatesArray.push(document.getElementById("ConnectionStrings-SelectList").value);
+//                            options[i].attributes["related-duplicates"].value = relatedDuplicatesArray.join(",");
+//                        }
+//                    }
+//                }
 
-                if (options[i].attributes["related-duplicates"].value == document.getElementById("ConnectionStrings-SelectList").value && options[i].value != dup.id && options[i].innerText == dup.Name) {
-                    options[i].attributes["related-duplicates"].value.replace(document.getElementById("ConnectionStrings-SelectList").value, "");
-                    options[i].classList.remove("duplicateConnectionStringName");
-                    options[i].attributes["error-text-to-append"].value = options[i].attributes["error-text-to-append"].value.replace(" (duplicate)", "");
-                }
-            }
-        });
-        await updateDataSourceOptionsV3();
-        return true;
-    } else {
-        let relatedDuplicates = document.getElementById("ConnectionStrings-SelectList").options;
-        for (let i = 0; i < relatedDuplicates.length; i++) {
-            if (relatedDuplicates[i].attributes["related-duplicates"].value == document.getElementById("ConnectionStrings-SelectList").value) {
-                relatedDuplicates[i].classList.remove("duplicateConnectionStringName");
-                document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicates"].value = "";
-                relatedDuplicates[i].attributes["related-duplicates"].value = relatedDuplicates[i].attributes["related-duplicates"].value.replace(document.getElementById("ConnectionStrings-SelectList").value, "");
-                relatedDuplicates[i].attributes["error-text-to-append"].value = relatedDuplicates[i].attributes["error-text-to-append"].value.replace(" (duplicate)", "");
-            }
-        }
+//                if (options[i].attributes["related-duplicates"].value == document.getElementById("ConnectionStrings-SelectList").value && options[i].value != dup.id && options[i].innerText == dup.Name) {
+//                    options[i].attributes["related-duplicates"].value.replace(document.getElementById("ConnectionStrings-SelectList").value, "");
+//                    options[i].classList.remove("duplicateConnectionStringName");
+//                    options[i].attributes["error-text-to-append"].value = options[i].attributes["error-text-to-append"].value.replace(" (duplicate)", "");
+//                }
+//            }
+//        });
+//        await updateDataSourceOptionsV3();
+//        return true;
+//    } else {
+//        let relatedDuplicates = document.getElementById("ConnectionStrings-SelectList").options;
+//        for (let i = 0; i < relatedDuplicates.length; i++) {
+//            if (relatedDuplicates[i].attributes["related-duplicates"].value == document.getElementById("ConnectionStrings-SelectList").value) {
+//                relatedDuplicates[i].classList.remove("duplicateConnectionStringName");
+//                document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicates"].value = "";
+//                relatedDuplicates[i].attributes["related-duplicates"].value = relatedDuplicates[i].attributes["related-duplicates"].value.replace(document.getElementById("ConnectionStrings-SelectList").value, "");
+//                relatedDuplicates[i].attributes["error-text-to-append"].value = relatedDuplicates[i].attributes["error-text-to-append"].value.replace(" (duplicate)", "");
+//            }
+//        }
 
-        await updateDataSourceOptionsV3();
-        return false;
-    }
-}
+//        await updateDataSourceOptionsV3();
+//        return false;
+//    }
+//}
 
 async function updateDataSourceOptionsV3() {
     let dataSourceElement = document.getElementById("Data-Source");
@@ -2919,37 +2919,90 @@ async function updateDataSourceOptionsV3() {
 
 async function checkSetAppendedTextErrorV3() {
     let incompletefields = await checkIncompleteFieldsV3();
-    let duplicatename = await checkForDuplicateConnectionStringNamesV3();
+    //let duplicatename = await checkForDuplicateConnectionStringNamesV3();
+    let duplicateConnectionStringNames = await groupByNameKey(ConnectionStringsArray, "Name");
+    //console.log(duplicateConnectionStringNames);
 
-    if (incompletefields) {
-        if (duplicatename) {
-            document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("incompleteConnectionString");
-            document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("duplicateConnectionStringName");
-            document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", " (duplicate) (incomplete)");
+    let connectionStringSelectList = document.getElementById("ConnectionStrings-SelectList");
+    Object.keys(duplicateConnectionStringNames).forEach(async key => {
+        if (duplicateConnectionStringNames[key].length > 1) {
+            duplicateConnectionStringNames[key].forEach(item => {
+                for (let i = 0; i < connectionStringSelectList.options.length; i++) {
+                    if (connectionStringSelectList.options[i].value === item.id) {
+                        connectionStringSelectList.options[i].classList.add("duplicateConnectionStringName");
+                        if (!document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["error-text-to-append"].value.includes(" (duplicate)")) {
+                            connectionStringSelectList.options[i].attributes["error-text-to-append"].value += ' (duplicate)';
+                        }
+                    }
+                }
+            });
             document.getElementById("DuplicateConnectionString-Alert").style.display = "block";
-            checkErroredConnectionStrings();
+            await pushErrorToArray(await findErrorArrayToSet("connectionStringDataSourceName"));
         } else {
-            document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("incompleteConnectionString");
-            document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("duplicateConnectionStringName");
-            document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", " (incomplete)");
+            duplicateConnectionStringNames[key].forEach(async item => {
+                for (let i = 0; i < connectionStringSelectList.options.length; i++) {
+                    if (connectionStringSelectList.options[i].value === item.id) {
+                        connectionStringSelectList.options[i].classList.remove("duplicateConnectionStringName");
+                        let conectionStringErrorTextToReplace = connectionStringSelectList.options[i].attributes["error-text-to-append"].value;
+                        connectionStringSelectList.options[i].attributes["error-text-to-append"].value = conectionStringErrorTextToReplace.replace(' (duplicate)', '');
+                    }
+                }
+            });
             document.getElementById("DuplicateConnectionString-Alert").style.display = "none";
-            checkErroredConnectionStrings();
+            await spliceErrorFromArray("connectionStringDataSourceName");
+        }
+    });
+
+    var visibleErrorElements = "";
+
+    switch (document.getElementById("Data-Provider").value) {
+        case "System.Data.SqlClient":
+            visibleErrorElements = document.querySelectorAll('.sqlConnectionStringRequiredAlertSvg:is([style*="display: block"]), .coreConnectionStringRequiredAlertSvg:is([style*="display: block"])');
+            break;
+        case "Oracle.ManagedDataAccess.Client":
+            visibleErrorElements = document.querySelectorAll('.oracleConnectionStringRequiredAlertSvg:is([style*="display: block"]), .coreConnectionStringRequiredAlertSvg:is([style*="display: block"])');
+            break;
+    }
+
+    if (visibleErrorElements.length > 0) {
+        await pushErrorToArray(await findErrorArrayToSet("connectionStringDataSourceName"));
+        if (!document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["error-text-to-append"].value.includes(" (incomplete)")) {
+            document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["error-text-to-append"].value += " (incomplete)";
         }
     } else {
-        if (duplicatename) {
-            document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("incompleteConnectionString");
-            document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("duplicateConnectionStringName");
-            document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", " (duplicate)");
-            document.getElementById("DuplicateConnectionString-Alert").style.display = "block";
-            checkErroredConnectionStrings();
-        } else {
-            document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("incompleteConnectionString");
-            document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("duplicateConnectionStringName");
-            document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", "");
-            document.getElementById("DuplicateConnectionString-Alert").style.display = "none";
-            checkErroredConnectionStrings();
-        }
+        await spliceErrorFromArray("connectionStringDataSourceName");
+        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["error-text-to-append"].value = document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["error-text-to-append"].value.replace(" (incomplete)", "");
     }
+
+    //if (incompletefields) {
+    //    if (duplicatename) {
+    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("incompleteConnectionString");
+    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("duplicateConnectionStringName");
+    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", " (duplicate) (incomplete)");
+    //        document.getElementById("DuplicateConnectionString-Alert").style.display = "block";
+    //        checkErroredConnectionStrings();
+    //    } else {
+    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("incompleteConnectionString");
+    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("duplicateConnectionStringName");
+    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", " (incomplete)");
+    //        document.getElementById("DuplicateConnectionString-Alert").style.display = "none";
+    //        checkErroredConnectionStrings();
+    //    }
+    //} else {
+    //    if (duplicatename) {
+    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("incompleteConnectionString");
+    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("duplicateConnectionStringName");
+    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", " (duplicate)");
+    //        document.getElementById("DuplicateConnectionString-Alert").style.display = "block";
+    //        checkErroredConnectionStrings();
+    //    } else {
+    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("incompleteConnectionString");
+    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("duplicateConnectionStringName");
+    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", "");
+    //        document.getElementById("DuplicateConnectionString-Alert").style.display = "none";
+    //        checkErroredConnectionStrings();
+    //    }
+    //}
 }
 
 async function tnsConnectionStringCheckCheckboxV3(field) {
@@ -3192,16 +3245,16 @@ async function validateConnectionStringFieldLengthV3(field) {
     }
 }
 
-async function checkErroredConnectionStrings() {
-    let incompleteConnectionStrings = document.getElementsByClassName("incompleteConnectionString");
-    let duplicateConnectionStrings = document.getElementsByClassName("duplicateConnectionStringName");
+//async function checkErroredConnectionStrings() {
+//    let incompleteConnectionStrings = document.getElementsByClassName("incompleteConnectionString");
+//    let duplicateConnectionStrings = document.getElementsByClassName("duplicateConnectionStringName");
 
-    if (incompleteConnectionStrings.length > 0 || duplicateConnectionStrings.length > 0) {
-        await pushErrorToArray(await findErrorArrayToSet("connectionStringDataSourceName"));
-    } else {
-        await spliceErrorFromArray("connectionStringDataSourceName");
-    }
-}
+//    if (incompleteConnectionStrings.length > 0 || duplicateConnectionStrings.length > 0) {
+//        await pushErrorToArray(await findErrorArrayToSet("connectionStringDataSourceName"));
+//    } else {
+//        await spliceErrorFromArray("connectionStringDataSourceName");
+//    }
+//}
 
 async function testConnectionString() {
     //Get the selected connection string from the ConnectionStringsArray.
@@ -3404,7 +3457,7 @@ function toggleDarkLightMode(checkbox) {
         });
     }
 
-    console.log(localStorage.getItem("darkModeState"));
+    //console.log(localStorage.getItem("darkModeState"));
 }
 
 
@@ -3416,10 +3469,10 @@ async function findErrorArrayToSet(name) {
     return errorArrays.find(errorArray => errorArray.Name == name).Array;
 }
 
-async function groupDuplicateObjectsFromArray(array,groupingKeyName) {
+async function groupByNameKey(array,groupingKeyName) {
     return array.reduce((result, currentItem) => {
         // Extract the 'Name' value
-        const key = groupingKeyName;
+        const key = currentItem.Name;
 
         // If the key doesn't exist in the result object, create an array for it
         if (!result[key]) {
