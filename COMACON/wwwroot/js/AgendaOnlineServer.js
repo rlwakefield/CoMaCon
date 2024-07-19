@@ -438,8 +438,8 @@ function integrationfieldUpdated(field) {
 }
 
 async function checkForDuplicateMeetingTypes(currentlySelectedIntegration) {
-    let groupedByName = await groupDuplicateObjectsFromArray(currentlySelectedIntegration.meetingTypes,"Name");
-    console.log(groupedByName);
+    let groupedByName = await groupByNameKey(currentlySelectedIntegration.meetingTypes,"Name");
+    //console.log(groupedByName);
 
     let selectList = document.getElementById("Meeting-Type-Name-Select-List");
     Object.keys(groupedByName).forEach(key => {
