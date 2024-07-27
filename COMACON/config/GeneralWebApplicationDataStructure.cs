@@ -607,3 +607,35 @@ public class FormattedTextIframeSupportedDomain
     public string? Domain { get; set; }
     public string? id { get; set; }
 }
+
+
+
+/********************************************************
+*              New Configuration Object
+********************************************************/
+public class NewConfigurationDetails
+{
+    public WebApplicationConfiguration webApplicationConfiguration = new WebApplicationConfiguration();
+}
+
+public class WebApplicationConfiguration
+{
+    public List<VersionGroup> versionGroups = new List<VersionGroup>();
+}
+
+public class  VersionGroup
+{
+    public string? majorVersion { get; set; }
+    public List<Ver> versions = new List<Ver>();
+}
+
+public class Ver
+{
+    public string? specificVersion { get; set; }
+    public List<WebApp> webApplications = new List<WebApp>();
+}
+
+public class WebApp
+{
+    public string? webApplicationName { get; set; }
+}

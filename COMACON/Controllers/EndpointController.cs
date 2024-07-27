@@ -20,12 +20,15 @@ namespace COMACON.Controllers
         private static string tnsOracle = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL={0})(HOST={1})(PORT={2}))(CONNECT_DATA=(SERVICE_NAME={3})));";
         private static string noTnsOracle = "Data Source={0};";
         private static string userIdAndPassword = "User Id={0};Password={1};";
+        private readonly IConfiguration _configuration;
 
         public EndpointController(Core core,
-            LoadSaveWebApplications loadSaveWebApplications)
+            LoadSaveWebApplications loadSaveWebApplications,
+            IConfiguration configuration)
         {
             Core = core;
             LoadSaveWebApplications = loadSaveWebApplications;
+            _configuration = configuration;
         }
 
         // GET: api/Endpoint/TestConnectionString
@@ -270,12 +273,54 @@ namespace COMACON.Controllers
             }
         }
 
-        [HttpPost("GetNewConfigurationDetails")]
+        [HttpGet("GetNewConfigurationDetails")]
         public string GetNewConfigurationDetails()
         {
+            string[] majorVersions = Directory.GetDirectories(_configuration["LooseFilesLocation"]);
+            NewConfigurationDetails newConfigurationDetails = new NewConfigurationDetails();
 
+            foreach (string majorVersionPath in majorVersions)
+            {
+                string majorVersion = Path.GetFileName(majorVersionPath);
 
-            return "";
+                //Create the new VersionGroup object.
+                VersionGroup versionGroup = new VersionGroup();
+                //Set the major version variable.
+                versionGroup.majorVersion = majorVersion;
+                //Add the versionGroup object to the newConfigurationDetails object.
+                newConfigurationDetails.webApplicationConfiguration.versionGroups.Add(versionGroup);
+
+                string majorVersionFolderPath = Path.Combine(_configuration["LooseFilesLocation"], majorVersion);
+                string[] specificVersionPaths = Directory.GetDirectories(majorVersionFolderPath);
+                foreach (string specificVersionPath in specificVersionPaths)
+                {
+                    string specificVersion = Path.GetFileName(specificVersionPath);
+
+                    //Create the new Ver object.
+                    Ver ver = new Ver();
+                    //Set the specific version variable.
+                    ver.specificVersion = specificVersion;
+                    //Add the ver object to the versionGroup object.
+                    versionGroup.versions.Add(ver);
+
+                    string[] webApplicationPaths = Directory.GetDirectories(specificVersionPath);
+                    foreach (string webApplicationPath in webApplicationPaths)
+                    {
+                        string webApplicationName = Path.GetFileName(webApplicationPath);
+
+                        //Create the new WebApp object.
+                        WebApp webApp = new WebApp();
+                        //Set the web application variable.
+                        webApp.webApplicationName = webApplicationName;
+                        //Add the webApp object to the ver object.
+                        ver.webApplications.Add(webApp);
+                    }
+                }
+            }
+            
+            Console.WriteLine(JsonConvert.SerializeObject(newConfigurationDetails));
+
+            return JsonConvert.SerializeObject(newConfigurationDetails);
         }
     }
 }
