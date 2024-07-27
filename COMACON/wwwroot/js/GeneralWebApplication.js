@@ -143,6 +143,7 @@ let optimizeForWindowsAuth = [];
 let tdIdValue = 0;
 let apiRootUrl = "";
 let configurationChanged = false;
+let newConfigurationDetails = [];
 
 /* ADFS Settings Variables */
 let audienceUrisIdNumber = 0;
@@ -605,8 +606,29 @@ function parseIisConfigurationApplicationPool(config) {
 /********************************************************
 *           Create Web Application Functions
 ********************************************************/
-function createWebApplication() {
+async function createNewConfiguration() {
     document.getElementById("NewWebApplicationModal").style.display = "block";
+    await fetch(apiRootUrl + "/api/Endpoint/GetNewConfigurationDetails")
+        .then(response => response.json())
+        .then(data => {
+            newConfigurationDetails = data;
+        });
+    console.log(newConfigurationDetails);
+    let chooseversion = document.getElementById("ChooseVersion");
+    let versiongroups = newConfigurationDetails["webApplicationConfiguration"]["versionGroups"]
+    for (let i = 0; i < versiongroups.length; i++)
+    {
+        let newOptGroup = document.createElement("optgroup");
+        newOptGroup.setAttribute("label", versiongroups[i]["majorVersion"]);
+        let versions = versiongroups[i]["versions"];
+        for (let j = 0; j < versions.length; j++) {
+            let newOpt = document.createElement("option");
+            newOpt.value = versions[j]["specificVersion"];
+            newOpt.innerText = versions[j]["specificVersion"];
+            newOptGroup.appendChild(newOpt);
+        }
+        chooseversion.appendChild(newOptGroup);
+    }
 }
 
 
@@ -3494,35 +3516,47 @@ async function groupByNameKey(array,groupingKeyName) {
 let currentPage = "NewWebApplicationModal-StartPage";
 
 function webApplicationVersionChanged(field) {
-    switch (true) {
-        case field.value.startsWith("21.1"):
-            document.getElementById("ChooseWebApplication").innerHTML = `
-                            <option value="ApplicationServer">Application Server</option>
-                            <option value="GatewayCachingServer">Gateway Caching Server</option>
-                            <option value="WebServer">Web Server</option>
-                        `;
-            break;
-        case field.value.startsWith("22.1"):
-            document.getElementById("ChooseWebApplication").innerHTML = `
-                            <option value="ApplicationServer">Application Server</option>
-                            <option value="GatewayCachingServer">Gateway Caching Server</option>
-                            <option value="WebServer">Web Server</option>
-                        `;
-            break;
-        case field.value.startsWith("23.1"):
-            document.getElementById("ChooseWebApplication").innerHTML = `
-                            <option value="ApplicationServer">Application Server</option>
-                            <option value="GatewayCachingServer">Gateway Caching Server</option>
-                            <option value="WebServer">Web Server</option>
-                        `;
-            break;
-        case field.value.startsWith("24.1"):
-            document.getElementById("ChooseWebApplication").innerHTML = `
-                            <option value="ApplicationServer">Application Server</option>
-                            <option value="WebServer">Web Server</option>
-                        `;
-            break;
-    }
+    //console.log(Array.from(newConfigurationDetails["webApplicationConfiguration"]["versionGroups"]).find(result => result["majorVersion"] == "21.1"));
+    let majorversionarray = Array.from(newConfigurationDetails["webApplicationConfiguration"]["versionGroups"]).find(result => result["majorVersion"] == "21.1");
+    //console.log(Array.from(majorversionarray["versions"]).find(result2 => result2["specificVersion"] == field.value));
+    let specificversionarray = Array.from(majorversionarray["versions"]).find(result2 => result2["specificVersion"] == field.value);
+    Array.from(specificversionarray["webApplications"]).forEach(webApp => {
+        //console.log(webApp["webApplicationName"]);
+        let newWebAppOption = document.createElement("option");
+        newWebAppOption.value = webApp["webApplicationName"];
+        newWebAppOption.innerText = webApp["webApplicationName"];
+        document.getElementById("ChooseWebApplication").appendChild(newWebAppOption);
+    });
+
+    //switch (true) {
+    //    case field.value.startsWith("21.1"):
+    //        //document.getElementById("ChooseWebApplication").innerHTML = `
+    //        //                <option value="ApplicationServer">Application Server</option>
+    //        //                <option value="GatewayCachingServer">Gateway Caching Server</option>
+    //        //                <option value="WebServer">Web Server</option>
+    //        //            `;
+    //        break;
+    //    case field.value.startsWith("22.1"):
+    //        //document.getElementById("ChooseWebApplication").innerHTML = `
+    //        //                <option value="ApplicationServer">Application Server</option>
+    //        //                <option value="GatewayCachingServer">Gateway Caching Server</option>
+    //        //                <option value="WebServer">Web Server</option>
+    //        //            `;
+    //        break;
+    //    case field.value.startsWith("23.1"):
+    //        //document.getElementById("ChooseWebApplication").innerHTML = `
+    //        //                <option value="ApplicationServer">Application Server</option>
+    //        //                <option value="GatewayCachingServer">Gateway Caching Server</option>
+    //        //                <option value="WebServer">Web Server</option>
+    //        //            `;
+    //        break;
+    //    case field.value.startsWith("24.1"):
+    //        //document.getElementById("ChooseWebApplication").innerHTML = `
+    //        //                <option value="ApplicationServer">Application Server</option>
+    //        //                <option value="WebServer">Web Server</option>
+    //        //            `;
+    //        break;
+    //}
     document.getElementById("ChooseWebApplication").value = "";
     document.getElementById("ChooseWebApplication").disabled = false;
 }
