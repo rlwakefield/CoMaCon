@@ -269,5 +269,13 @@ namespace COMACON.Controllers
                 return "Oracle Connection failed: " + ex.ToString();
             }
         }
+
+        [HttpPost("GetNewConfigurationDetails")]
+        public string GetNewConfigurationDetails()
+        {
+
+
+            return "";
+        }
     }
 }
