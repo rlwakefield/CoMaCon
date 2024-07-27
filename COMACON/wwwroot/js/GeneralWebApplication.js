@@ -606,7 +606,7 @@ function parseIisConfigurationApplicationPool(config) {
 *           Create Web Application Functions
 ********************************************************/
 function createWebApplication() {
-    window.alert("This will be released in a future build.");
+    document.getElementById("NewWebApplicationModal").style.display = "block";
 }
 
 
@@ -3484,6 +3484,224 @@ async function groupByNameKey(array,groupingKeyName) {
 
         return result;
     }, {}); // Initial value is an empty object
+}
+
+
+
+/********************************************************
+*              New Web Application Functions
+********************************************************/
+let currentPage = "NewWebApplicationModal-StartPage";
+
+function webApplicationVersionChanged(field) {
+    switch (true) {
+        case field.value.startsWith("21.1"):
+            document.getElementById("ChooseWebApplication").innerHTML = `
+                            <option value="ApplicationServer">Application Server</option>
+                            <option value="GatewayCachingServer">Gateway Caching Server</option>
+                            <option value="WebServer">Web Server</option>
+                        `;
+            break;
+        case field.value.startsWith("22.1"):
+            document.getElementById("ChooseWebApplication").innerHTML = `
+                            <option value="ApplicationServer">Application Server</option>
+                            <option value="GatewayCachingServer">Gateway Caching Server</option>
+                            <option value="WebServer">Web Server</option>
+                        `;
+            break;
+        case field.value.startsWith("23.1"):
+            document.getElementById("ChooseWebApplication").innerHTML = `
+                            <option value="ApplicationServer">Application Server</option>
+                            <option value="GatewayCachingServer">Gateway Caching Server</option>
+                            <option value="WebServer">Web Server</option>
+                        `;
+            break;
+        case field.value.startsWith("24.1"):
+            document.getElementById("ChooseWebApplication").innerHTML = `
+                            <option value="ApplicationServer">Application Server</option>
+                            <option value="WebServer">Web Server</option>
+                        `;
+            break;
+    }
+    document.getElementById("ChooseWebApplication").value = "";
+    document.getElementById("ChooseWebApplication").disabled = false;
+}
+
+function webApplicationTypeChanged(field) {
+    if (field.value != "") {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+    } else {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    }
+}
+
+function backButtonClicked() {
+    switch (currentPage) {
+        case "NewWebApplicationModal-StartPage":
+            break;
+        case "NewWebApplicationModal-VersionClientChoice":
+            document.getElementById("NewWebApplicationModal-StartPage").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.add("slide-out-right");
+            document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-StartPage").classList.add("slide-in-left");
+                document.getElementById("NewWebApplicationModal-StartPage").hidden = false;
+                document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = true;
+                currentPage = "NewWebApplicationModal-StartPage";
+            }, 250);
+            break;
+        case "NewWebApplicationModal-WebSiteChoiceAndNaming":
+            document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.add("slide-out-right");
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.add("slide-in-left");
+                document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = false;
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = true;
+                currentPage = "NewWebApplicationModal-VersionClientChoice";
+            }, 250);
+            document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+            break;
+        case "NewWebApplicationModal-WebApplicationAppPoolNaming":
+            document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.add("slide-out-right");
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.add("slide-in-left");
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = true;
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = false;
+                currentPage = "NewWebApplicationModal-WebSiteChoiceAndNaming";
+            }, 250);
+            document.getElementById("NewWebApplicationModal-NextCreateButton").innerText = "Next >";
+            document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+            break;
+    }
+}
+
+function nextButtonClicked() {
+    switch (currentPage) {
+        case "NewWebApplicationModal-VersionClientChoice":
+            document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.add("slide-out-left");
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.add("slide-in-right");
+                document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = true;
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = false;
+                currentPage = "NewWebApplicationModal-WebSiteChoiceAndNaming";
+            }, 250);
+            document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+            document.getElementById("ChooseWebSite").innerHTML = `<option value="Default Web Site">Default Web Site</option>`;
+            document.getElementById("ChooseWebSite").value = "";
+            document.getElementById("ChoosePath").innerHTML = "";
+            document.getElementById("ChoosePath").disabled = true;
+            document.getElementById("ChoosePath").value = "";
+            break;
+        case "NewWebApplicationModal-WebSiteChoiceAndNaming":
+            document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.add("slide-out-left");
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.add("slide-in-right");
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = true;
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = false;
+                currentPage = "NewWebApplicationModal-WebApplicationAppPoolNaming";
+            }, 250);
+            document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+            document.getElementById("WebApplicationName").value = "";
+            document.getElementById("SameAsWebApplication").checked = true;
+            document.getElementById("WebApplicationPoolName").value = "";
+            document.getElementById("WebApplicationPoolName").disabled = true;
+            document.getElementById("NewWebApplicationModal-NextCreateButton").innerText = "Create";
+            break;
+    }
+}
+
+function webSiteChanged(field) {
+    if (field.value != "") {
+        document.getElementById("ChoosePath").disabled = false;
+        document.getElementById("ChoosePath").innerHTML = `<option value="Root">Root</option>`;
+        document.getElementById("ChoosePath").value = "";
+    } else {
+        document.getElementById("ChoosePath").disabled = true;
+        document.getElementById("ChoosePath").innerHTML = "";
+    }
+}
+
+function webSitePathChanged(field) {
+    if (field.value != "") {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+    } else {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    }
+}
+
+function webSiteApplicationNameChanged(field) {
+    if (field.value != "" && document.getElementById("SameAsWebApplication").checked) {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+        document.getElementById("WebApplicationPoolName").value = field.value;
+    } else if (field.value != "" && !document.getElementById("SameAsWebApplication").checked) {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+    } else {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    }
+}
+
+function webSiteSameAsApplicationChanged(field) {
+    if (field.checked) {
+        document.getElementById("WebApplicationPoolName").value = document.getElementById("WebApplicationName").value;
+        document.getElementById("WebApplicationPoolName").disabled = true;
+    } else {
+        document.getElementById("WebApplicationPoolName").disabled = false;
+    }
+    webSiteApplicationPoolNameChanged(document.getElementById("WebApplicationPoolName"));
+}
+
+function webSiteApplicationPoolNameChanged(field) {
+    if (field.value != "") {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+    } else {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    }
+}
+
+function newWebApplication() {
+    document.getElementById("NewWebApplicationModal-StartPage").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-StartPage').classList.add('slide-out-left');
+    setTimeout(function () {
+        document.getElementById("ChooseVersion").value = "";
+        document.getElementById("ChooseWebApplication").value = "";
+        document.getElementById('NewWebApplicationModal-StartPage').hidden = true;
+        document.getElementById('NewWebApplicationModal-VersionClientChoice').hidden = false;
+        document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+        document.getElementById('NewWebApplicationModal-VersionClientChoice').classList.add('slide-in-right');
+    }, 250);
+    document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
+    currentPage = "NewWebApplicationModal-VersionClientChoice";
+    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+}
+
+function closeNewWebApplicationModal() {
+    document.getElementById("NewWebApplicationModal").style.display = "none";
+    document.getElementById("NewWebApplicationModal-StartPage").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-VersionClientChoice').classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-WebSiteChoiceAndNaming').classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-WebApplicationAppPoolNaming').classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById("NewWebApplicationModal-StartPage").hidden = false;
+    document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = true;
+    document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = true;
+    document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = true;
+    currentPage = "NewWebApplicationModal-StartPage";
+    document.getElementById("NewWebApplicationModal-NextCreateButton").innerText = "Next >";
+    document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
+    document.getElementById("ChooseWebApplication").disabled = true;
+    document.getElementById("ChooseWebApplication").innerHTML = "";
+    document.getElementById("ChoosePath").disabled = true;
+    document.getElementById("ChoosePath").innerHTML = "";
+    document.getElementById("WebApplicationPoolName").disabled = true;
+    document.getElementById("WebApplicationPoolName").value = "";
+    document.getElementById("SameAsWebApplication").checked = true;
 }
 
 
