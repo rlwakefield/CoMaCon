@@ -41,10 +41,10 @@
                     </div>
                 </div>
                 <!-- Loading Web Applications Progress Bar -->
-                <div id="Loading-Web-Applications-Progress-Section" class="loadingWebApplicationsProgressSection">
-                    <label class="loadingWebApplicationsProgressLabel" for="Loading-Web-Applications-Progress-Bar">Getting Web Applications...</label>
-                    <progress class="loadingWebApplicationsProgressBar" id="Loading-Web-Applications-Progress-Bar"></progress>
-                </div>
+            <div id="Loading-Web-Applications-Progress-Section" class="loadingWebApplicationsProgressSection">
+                <label class="loadingWebApplicationsProgressLabel" for="Loading-Web-Applications-Progress-Bar">Getting Web Applications...</label>
+                <progress class="loadingWebApplicationsProgressBar" id="Loading-Web-Applications-Progress-Bar"></progress>
+            </div>
                 <div id="chooseWebApplicationModal-Table-Buttons-Container" class="chooseWebApplicationModalTableButtonsContainer">
                     <!-- Modal body -->
                     <div class="chooseWebApplicationModal-Table-Wrapper">
@@ -324,7 +324,7 @@
                 <!-- Title Bar Container for styling -->
                 <div class="NewWebApplicationModal-TitleBar" style="background-color: rgb(201, 201, 201);padding: 0 1rem;display: flex;align-items: center;justify-content: space-between;">
                     <h1 style="margin: 0.5rem 0;">New Configuration</h1>
-                <span id="NewWebApplicationModal-CloseModal" style="font-size: x-large;" onclick="closeNewWebApplicationModal()">X</span>
+                    <span id="NewWebApplicationModal-CloseModal" style="font-size: x-large;" onclick="closeNewWebApplicationModal()">X</span>
                 </div>
                 <!-- Body Section -->
                 <div id="NewWebApplicationModal-BodySection" style="border-top: 1px solid black;height: 300px;display: flex;align-items: center;flex-direction: column;">
@@ -334,31 +334,46 @@
                             @* <button id="NewClientConfigurationButton" style="font-size: xx-large;border-radius: 10px;min-height: 5rem;" onclick="">Client Configuration</button> *@
                         </div>
                     </div>
+                    <div id="NewWebApplicationModal-FromExistingOrScratch" style="margin: auto;" hidden>
+                        <div id="NewWebApplicationModal-FromExistingOrScratch-Choices" style="display: flex;flex-direction: column;align-items: center;gap: 3rem;padding:1rem;">
+                            @* <button id="NewWebApplicationModal-FromExistingButton" style="font-size: xx-large;border-radius: 10px;min-height: 5rem;" onclick="newWebApplicationFromExisting()">From Existing</button> *@
+                            <button id="NewWebApplicationModal-FromScratchButton" style="font-size: xx-large;border-radius: 10px;min-height: 5rem;" onclick="newWebApplicationFromScratch()">From Scratch</button>
+                        </div>
+                    </div>
+                    <div id="NewWebApplicationModal-FromExisting" style="margin: auto;" hidden>
+                        <div style="display: flex;flex-direction: column;gap: 1rem;">
+                            <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
+                                <label for="FromExisting-ChooseWebApplication" style="font-size: XX-large;text-align: center;"><u>Choose Web Application:</u></label>
+                                <select name="FromExisting-ChooseWebApplication" id="FromExisting-ChooseWebApplication" onchange="fromExistingChanged(this)" style="font-size: large;">
+                                    <option value="Agenda Online">Agenda Online</option>
+                                    <option value="Application Server">Application Server</option>
+                                    <option value="Electronic Plan Review">Electronic Plan Review</option>
+                                    <option value="Gateway Caching Server">Gateway Caching Server</option>
+                                    <option value="Healthcare Form Manager">Healthcare Form Manager</option>
+                                    <option value="Patient Window">Patient Window</option>
+                                    <option value="Public Access - Legacy">Public Access - Legacy</option>
+                                    <option value="Public Access - Next Gen">Public Access - Next Gen</option>
+                                    <option value="Reporting Viewer">Reporting Viewer</option>
+                                    <option value="Web Server">Web Server</option>
+                                </select>
+                            </div>
+                            <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
+                                <label for="SelectWebConfig" style="font-size: XX-large;text-align: center;"><u>Select 'web.config'' file:</u></label>
+                                <input type="file" id="SelectWebConfig" name="SelectWebConfig" onchange="selectWebConfigChanged(this)" disabled/>
+                                <span style="color: red;font-weight:bold;" id="SelectWebConfig-ErrorText" hidden>File has to be a 'web.config'' file.</span>
+                            </div>
+                            <div id="SelectSessionAdminSecurityConfig-Section" style="display: none;flex-direction: column;align-items: center;gap: 0.5rem;">
+                                <label for="SelectSessionAdminSecurityConfig" style="font-size: XX-large;text-align: center;"><u>Select 'sessionAdminSecurity.config'' file:</u></label>
+                                <input type="file" id="SelectSessionAdminSecurityConfig" name="SelectSessionAdminSecurityConfig" onchange="selectSessionAdminSecurityConfigChanged(this)" disabled />
+                                <span style="color: red;font-weight:bold;" id="SelectSessionAdminSecurityConfig-ErrorText" hidden>File has to be a 'sessionAdminSecurity.config'' file.</span>
+                            </div>
+                        </div>
+                    </div>
                     <div id="NewWebApplicationModal-VersionClientChoice" style="margin: auto 1rem;" hidden>
                         <div style="display: flex;flex-direction: column;gap: 1rem;">
                             <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
                                 <label for="ChooseVersion" style="font-size: XX-large;text-align: center;"><u>Version:</u></label>
                                 <select name="ChooseVersion" id="ChooseVersion" onchange="webApplicationVersionChanged(this)" style="font-size: large;">
-                                    @* <optgroup label="21.1">
-                                        <option value="21.1.1.1000">21.1.1.1000</option>
-                                        <option value="21.1.2.1000">21.1.2.1000</option>
-                                        <option value="21.1.3.1000">21.1.3.1000</option>
-                                    </optgroup>
-                                    <optgroup label="22.1">
-                                        <option value="22.1.1.1000">22.1.1.1000</option>
-                                        <option value="22.1.2.1000">22.1.2.1000</option>
-                                        <option value="22.1.3.1000">22.1.3.1000</option>
-                                    </optgroup>
-                                    <optgroup label="23.1">
-                                        <option value="23.1.1.1000">23.1.1.1000</option>
-                                        <option value="23.1.2.1000">23.1.2.1000</option>
-                                        <option value="23.1.3.1000">23.1.3.1000</option>
-                                    </optgroup>
-                                    <optgroup label="24.1">
-                                        <option value="24.1.1.1000">24.1.1.1000</option>
-                                        <option value="24.1.2.1000">24.1.2.1000</option>
-                                        <option value="24.1.3.1000">24.1.3.1000</option>
-                                    </optgroup> *@
                                 </select>
                             </div>
                             <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
@@ -386,8 +401,7 @@
                         <div style="display: flex;flex-direction: column;gap: 1rem;">
                             <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
                             <label for="WebApplicationName" style="font-size: XX-large;text-align: center;"><u>Web Application Name:</u></label>
-                                <input type="text" name="WebApplicationName" id="WebApplicationName" style="font-size: large;" oninput="webSiteApplicationNameChanged(this)">
-                                </input>
+                                <input type="text" name="WebApplicationName" id="WebApplicationName" style="font-size: large;" oninput="webSiteApplicationNameChanged(this)"/>
                             </div>
                             <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
                                 <label for="WebApplicationPoolName" style="font-size: XX-large;text-align: center;"><u>Web Application Name:</u></label>
@@ -395,10 +409,13 @@
                                     <input type="checkbox" id="SameAsWebApplication" name="SameAsWebApplication" onclick="webSiteSameAsApplicationChanged(this)">
                                     <label for="SameAsWebApplication" style="font-size: large;text-align: center;">Same as Web Application</label>
                                 </div>
-                                <input type="text" name="WebApplicationPoolName" id="WebApplicationPoolName" style="font-size: large;" oninput="webSiteApplicationPoolNameChanged(this)" disabled>
-                                </input>
+                                <input type="text" name="WebApplicationPoolName" id="WebApplicationPoolName" style="font-size: large;" oninput="webSiteApplicationPoolNameChanged(this)" disabled />
                             </div>
                         </div>
+                    </div>
+                    <div id="NewWebApplicationModal-CreatingNewWebApplicationProgress" hidden>
+                        <label for="NewWebApplicationModal-CreatingNewWebApplicationProgressBar">Creating your new Web Application...</label>
+                        <progress class="loadingWebApplicationsProgressBar" id="NewWebApplicationModal-CreatingNewWebApplicationProgressBar"></progress>
                     </div>
                 </div>
                 <div id="NewWebApplicationModal-Footer" style="display: none;padding: 0.5rem;border-top: 1px solid black;justify-content: flex-end;">
@@ -409,6 +426,19 @@
                 </div>
             </div>
         </div>
+        <!-- Creating New Web Application Modal -->
+        @* <div id="NewWebApplicationModal" class="NewWebApplicationModal">
+            <div id="NewWebApplicationModal-Container" class="NewWebApplicationModal-Container" style="border: 1px solid black;">
+                <!-- Title Bar Container for styling -->
+                <div class="NewWebApplicationModal-TitleBar" style="background-color: rgb(201, 201, 201);padding: 0 1rem;display: flex;align-items: center;justify-content: space-between;">
+                    <h1 style="margin: 0.5rem 0;">New Configuration</h1>
+                    <span id="NewWebApplicationModal-CloseModal" style="font-size: x-large;" onclick="closeNewWebApplicationModal()">X</span>
+                </div>
+                <!-- Body Section -->
+                <div id="NewWebApplicationModal-BodySection" style="border-top: 1px solid black;height: 300px;display: flex;align-items: center;flex-direction: column;">
+                </div>
+            </div>
+        </div> *@
         <!-- Menu Bar -->
         <header>
             <div id="h1-container" class="h1-container">

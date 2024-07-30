@@ -613,6 +613,7 @@ async function createNewConfiguration() {
         .then(data => {
             newConfigurationDetails = data;
         });
+
     console.log(newConfigurationDetails);
     let chooseversion = document.getElementById("ChooseVersion");
     let versiongroups = newConfigurationDetails["webApplicationConfiguration"]["versionGroups"]
@@ -628,6 +629,15 @@ async function createNewConfiguration() {
             newOptGroup.appendChild(newOpt);
         }
         chooseversion.appendChild(newOptGroup);
+    }
+
+    let websitedetails = newConfigurationDetails["webApplicationConfiguration"]["webSiteDetails"];
+    console.log(websitedetails);
+    for (let j = 0; j < websitedetails.length; j++) {
+        let newOpt = document.createElement("option");
+        newOpt.value = websitedetails[j]["siteName"];
+        newOpt.innerText = websitedetails[j]["siteName"];
+        document.getElementById("ChooseWebSite").appendChild(newOpt);
     }
 }
 
@@ -3516,10 +3526,16 @@ async function groupByNameKey(array,groupingKeyName) {
 let currentPage = "NewWebApplicationModal-StartPage";
 
 function webApplicationVersionChanged(field) {
+    //console.log(field.value);
+    //Clear the current options from the ChooseWebApplication select element.
+    document.getElementById("ChooseWebApplication").innerHTML = "";
+    let majorversion = field.value.split(".")[0] + "." + field.value.split(".")[1];
+    //console.log(majorversion);
     //console.log(Array.from(newConfigurationDetails["webApplicationConfiguration"]["versionGroups"]).find(result => result["majorVersion"] == "21.1"));
-    let majorversionarray = Array.from(newConfigurationDetails["webApplicationConfiguration"]["versionGroups"]).find(result => result["majorVersion"] == "21.1");
-    //console.log(Array.from(majorversionarray["versions"]).find(result2 => result2["specificVersion"] == field.value));
+    let majorversionarray = Array.from(newConfigurationDetails["webApplicationConfiguration"]["versionGroups"]).find(result => result["majorVersion"] == majorversion);
+    //console.log(Array.from(majorversionarray["versions"]));
     let specificversionarray = Array.from(majorversionarray["versions"]).find(result2 => result2["specificVersion"] == field.value);
+    //console.log(specificversionarray);
     Array.from(specificversionarray["webApplications"]).forEach(webApp => {
         //console.log(webApp["webApplicationName"]);
         let newWebAppOption = document.createElement("option");
@@ -3573,16 +3589,40 @@ function backButtonClicked() {
     switch (currentPage) {
         case "NewWebApplicationModal-StartPage":
             break;
-        case "NewWebApplicationModal-VersionClientChoice":
+        case "NewWebApplicationModal-FromExistingOrScratch":
             document.getElementById("NewWebApplicationModal-StartPage").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
-            document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
-            document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.add("slide-out-right");
+            document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.add("slide-out-right");
             document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
             setTimeout(function () {
                 document.getElementById("NewWebApplicationModal-StartPage").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-StartPage").hidden = false;
-                document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = true;
+                document.getElementById("NewWebApplicationModal-FromExistingOrScratch").hidden = true;
                 currentPage = "NewWebApplicationModal-StartPage";
+            }, 250);
+            break;
+        case "NewWebApplicationModal-FromExisting":
+            document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-FromExisting").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-FromExisting").classList.add("slide-out-right");
+            //document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.add("slide-in-left");
+                document.getElementById("NewWebApplicationModal-FromExistingOrScratch").hidden = false;
+                document.getElementById("NewWebApplicationModal-FromExisting").hidden = true;
+                currentPage = "NewWebApplicationModal-FromExistingOrScratch";
+            }, 250);
+            break;
+        case "NewWebApplicationModal-VersionClientChoice":
+            document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.add("slide-out-right");
+            //document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.add("slide-in-left");
+                document.getElementById("NewWebApplicationModal-FromExistingOrScratch").hidden = false;
+                document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = true;
+                currentPage = "NewWebApplicationModal-FromExistingOrScratch";
             }, 250);
             break;
         case "NewWebApplicationModal-WebSiteChoiceAndNaming":
@@ -3626,7 +3666,7 @@ function nextButtonClicked() {
                 currentPage = "NewWebApplicationModal-WebSiteChoiceAndNaming";
             }, 250);
             document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
-            document.getElementById("ChooseWebSite").innerHTML = `<option value="Default Web Site">Default Web Site</option>`;
+            //document.getElementById("ChooseWebSite").innerHTML = `<option value="Default Web Site">Default Web Site</option>`;
             document.getElementById("ChooseWebSite").value = "";
             document.getElementById("ChoosePath").innerHTML = "";
             document.getElementById("ChoosePath").disabled = true;
@@ -3649,13 +3689,25 @@ function nextButtonClicked() {
             document.getElementById("WebApplicationPoolName").disabled = true;
             document.getElementById("NewWebApplicationModal-NextCreateButton").innerText = "Create";
             break;
+        case "NewWebApplicationModal-WebApplicationAppPoolNaming":
+            document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.add("slide-out-left");
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").classList.add("slide-in-right");
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = true;
+                document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").hidden = false;
+                currentPage = "NewWebApplicationModal-CreatingNewWebApplicationProgress";
+            }, 250);
+            document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
+            break;
     }
 }
 
 function webSiteChanged(field) {
     if (field.value != "") {
         document.getElementById("ChoosePath").disabled = false;
-        document.getElementById("ChoosePath").innerHTML = `<option value="Root">Root</option>`;
+        //document.getElementById("ChoosePath").innerHTML = `<option value="Root">Root</option>`;
         document.getElementById("ChoosePath").value = "";
     } else {
         document.getElementById("ChoosePath").disabled = true;
@@ -3700,13 +3752,162 @@ function webSiteApplicationPoolNameChanged(field) {
     }
 }
 
+function fromExistingChanged(field) {
+    if (field.value == "Application Server") {
+        document.getElementById("SelectWebConfig").disabled = false;
+        document.getElementById("SelectSessionAdminSecurityConfig").disabled = false;
+        document.getElementById("SelectSessionAdminSecurityConfig-Section").style.display = "flex";
+    } else {
+        document.getElementById("SelectWebConfig").disabled = false;
+        document.getElementById("SelectSessionAdminSecurityConfig").disabled = true;
+        document.getElementById("SelectSessionAdminSecurityConfig-Section").style.display = "none";
+    }
+}
+
+function selectWebConfigChanged(field) {
+    //console.log(field.files[0]);
+    if (field.files.length != 0) {
+        if (field.files[0].name != "web.config") {
+            //Not a web.config file.
+            document.getElementById("SelectWebConfig").value = "";
+            document.getElementById("SelectWebConfig-ErrorText").hidden = false;
+            document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+        } else {
+            //It is a web.config file.
+            document.getElementById("SelectWebConfig-ErrorText").hidden = true;
+
+            //Checks if the Web Application selected is "Application Server" and if the Session Admin Security Config file is selected.
+            if (document.getElementById("FromExisting-ChooseWebApplication").value == "Application Server") {
+                //It is an Application Server, so we need to check if a file is selected.
+                if (document.getElementById("SelectSessionAdminSecurityConfig").files.length != 0) {
+                    //A file is selected.
+                    //Checks if the file selected is a sessionAdminSecurity.config file.
+                    if (document.getElementById("SelectSessionAdminSecurityConfig").files[0].name != "sessionAdminSecurity.config") {
+                        //Not a sessionAdminSecurity.config file.
+                        document.getElementById("SelectSessionAdminSecurityConfig").value = "";
+                        document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = false;
+                        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+                    } else {
+                        //It is a sessionAdminSecurity.config file.
+                        document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = true;
+                        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+                    }
+                } else {
+                    //A file is NOT selected.
+                    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+                }
+            } else {
+                //It is not an "Application Server" so I need to hide the Session Admin Security Config file section.
+                document.getElementById("SelectSessionAdminSecurityConfig-Section").style.display = "none";
+                document.getElementById("SelectSessionAdminSecurityConfig").disabled = true;
+                document.getElementById("SelectSessionAdminSecurityConfig").value = "";
+                document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = true;
+                document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+            }
+            //document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+        }
+    } else {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    }
+
+    //if (field.files.length != 0 && field.files[0].name != "web.config") {
+    //    //Clear the currently selected file.
+    //    document.getElementById("SelectWebConfig").value = "";
+    //    document.getElementById("SelectWebConfig-ErrorText").hidden = false;
+    //    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    //    //console.log("Not a web.config file!");
+    //} else if (
+    //    (field.files.length != 0 && field.files[0].name == "web.config")
+    //    && (document.getElementById("FromExisting-ChooseWebApplication").value == "Application Server" && document.getElementById("SelectSessionAdminSecurityConfig").files.length != 0)) {
+        
+    //} else {
+    //    document.getElementById("SelectWebConfig-ErrorText").hidden = true;
+    //    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+    //}
+}
+
+function selectSessionAdminSecurityConfigChanged(field) {
+    //Verify if a file has been selected.
+    if (field.files.length != 0) {
+        //File has been selected.
+        //Checks if the file selected is a sessionAdminSecurity.config file.
+        if (field.files[0].name != "sessionAdminSecurity.config") {
+            //Not a sessionAdminSecurity.config file.
+            document.getElementById("SelectSessionAdminSecurityConfig").value = "";
+            document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = false;
+            document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+        } else {
+            //It is a sessionAdminSecurity.config file.
+            document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = true;
+
+            //Check if a web.config file is selected.
+            console.log(document.getElementById("SelectWebConfig").files.length);
+            if (document.getElementById("SelectWebConfig").files.length != 0) {
+                document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+            } else {
+                document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+            }
+        }
+    } else {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    }
+
+    //console.log(field.files[0]);
+    //if (field.files.length != 0 && field.files[0].name != "sessionAdminSecurity.config") {
+    //    //Clear the currently selected file.
+    //    document.getElementById("SelectSessionAdminSecurityConfig").value = "";
+    //    document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = false;
+    //    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    //    console.log("Not a sessionAdminSecurity.config file!");
+    //} else {
+    //    document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = true;
+    //    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+    //}
+}
+
 function newWebApplication() {
     document.getElementById("NewWebApplicationModal-StartPage").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
     document.getElementById('NewWebApplicationModal-StartPage').classList.add('slide-out-left');
     setTimeout(function () {
+        //document.getElementById("ChooseVersion").value = "";
+        //document.getElementById("ChooseWebApplication").value = "";
+        document.getElementById('NewWebApplicationModal-StartPage').hidden = true;
+        document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = false;
+        document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+        document.getElementById('NewWebApplicationModal-FromExistingOrScratch').classList.add('slide-in-right');
+    }, 250);
+    document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
+    currentPage = "NewWebApplicationModal-FromExistingOrScratch";
+    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+}
+
+function newWebApplicationFromExisting() {
+    document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-FromExistingOrScratch').classList.add('slide-out-left');
+    setTimeout(function () {
         document.getElementById("ChooseVersion").value = "";
         document.getElementById("ChooseWebApplication").value = "";
-        document.getElementById('NewWebApplicationModal-StartPage').hidden = true;
+        document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = true;
+        document.getElementById('NewWebApplicationModal-FromExisting').hidden = false;
+        document.getElementById("NewWebApplicationModal-FromExisting").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+        document.getElementById('NewWebApplicationModal-FromExisting').classList.add('slide-in-right');
+    }, 250);
+    document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
+    document.getElementById("FromExisting-ChooseWebApplication").value = "";
+    currentPage = "NewWebApplicationModal-FromExisting";
+    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    document.getElementById("SelectSessionAdminSecurityConfig-Section").style.display = "none";
+    document.getElementById("SelectWebConfig").value = "";
+    document.getElementById("SelectSessionAdminSecurityConfig").value = "";
+}
+
+function newWebApplicationFromScratch() {
+    document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-FromExistingOrScratch').classList.add('slide-out-left');
+    setTimeout(function () {
+        document.getElementById("ChooseVersion").value = "";
+        document.getElementById("ChooseWebApplication").value = "";
+        document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = true;
         document.getElementById('NewWebApplicationModal-VersionClientChoice').hidden = false;
         document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
         document.getElementById('NewWebApplicationModal-VersionClientChoice').classList.add('slide-in-right');
@@ -3722,10 +3923,14 @@ function closeNewWebApplicationModal() {
     document.getElementById('NewWebApplicationModal-VersionClientChoice').classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
     document.getElementById('NewWebApplicationModal-WebSiteChoiceAndNaming').classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
     document.getElementById('NewWebApplicationModal-WebApplicationAppPoolNaming').classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-FromExisting').classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-FromExistingOrScratch').classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
     document.getElementById("NewWebApplicationModal-StartPage").hidden = false;
     document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = true;
     document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = true;
     document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = true;
+    document.getElementById('NewWebApplicationModal-FromExisting').hidden = true;
+    document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = true;
     currentPage = "NewWebApplicationModal-StartPage";
     document.getElementById("NewWebApplicationModal-NextCreateButton").innerText = "Next >";
     document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
@@ -3736,6 +3941,11 @@ function closeNewWebApplicationModal() {
     document.getElementById("WebApplicationPoolName").disabled = true;
     document.getElementById("WebApplicationPoolName").value = "";
     document.getElementById("SameAsWebApplication").checked = true;
+    document.getElementById("FromExisting-ChooseWebApplication").value = "";
+    document.getElementById("SelectWebConfig").value = "";
+    document.getElementById("SelectWebConfig").disabled = true;
+    document.getElementById("SelectSessionAdminSecurityConfig").value = "";
+    document.getElementById("SelectSessionAdminSecurityConfig").disabled = true;
 }
 
 

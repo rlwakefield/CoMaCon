@@ -621,6 +621,7 @@ public class NewConfigurationDetails
 public class WebApplicationConfiguration
 {
     public List<VersionGroup> versionGroups = new List<VersionGroup>();
+    public List<WebSiteDetails> webSiteDetails = new List<WebSiteDetails>();
 }
 
 public class  VersionGroup
@@ -638,4 +639,10 @@ public class Ver
 public class WebApp
 {
     public string? webApplicationName { get; set; }
+}
+
+public class WebSiteDetails
+{
+    public string? siteName { get; set; }
+    //List<string> folders = new List<string>();
 }

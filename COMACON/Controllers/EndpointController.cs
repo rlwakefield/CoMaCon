@@ -8,6 +8,7 @@ using Serilog;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Diagnostics;
+using Microsoft.Web.Administration;
 
 namespace COMACON.Controllers
 {
@@ -316,6 +317,18 @@ namespace COMACON.Controllers
                         ver.webApplications.Add(webApp);
                     }
                 }
+            }
+
+            ServerManager serverManager = new ServerManager();
+            foreach (Site site in serverManager.Sites)
+            {
+                //Create the new WebSiteDetails object.
+                WebSiteDetails siteObject = new WebSiteDetails();
+                //Set the siteName variable.
+                siteObject.siteName = site.Name;
+                //Add the site object to the newConfigurationDetails object.
+                newConfigurationDetails.webApplicationConfiguration.webSiteDetails.Add(siteObject);
+                //string physicalPath = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
             }
             
             Console.WriteLine(JsonConvert.SerializeObject(newConfigurationDetails));
