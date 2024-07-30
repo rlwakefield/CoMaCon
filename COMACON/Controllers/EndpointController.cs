@@ -329,11 +329,31 @@ namespace COMACON.Controllers
                 //Add the site object to the newConfigurationDetails object.
                 newConfigurationDetails.webApplicationConfiguration.webSiteDetails.Add(siteObject);
                 //string physicalPath = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
+                foreach(VirtualDirectory virtualDirectory in site.Applications["/"].VirtualDirectories)
+                {
+                    //Checks if the virtual directory is the root directory.
+                    if (virtualDirectory.Path == "/")
+                    {
+                        //Add the virtual directory path to the site object.
+                        siteObject.virtualDirectories.Add("root");
+                    }
+                    else
+                    {
+                        //Add the virtual directory path to the site object.
+                        siteObject.virtualDirectories.Add(virtualDirectory.Path);
+                    }
+                }
             }
             
             Console.WriteLine(JsonConvert.SerializeObject(newConfigurationDetails));
 
             return JsonConvert.SerializeObject(newConfigurationDetails);
+        }
+
+        [HttpPost("CreateNewWebApplication")]
+        public string CreateNewWebApplication(string action)
+        {
+            return "";
         }
     }
 }

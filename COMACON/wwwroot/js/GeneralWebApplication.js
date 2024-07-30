@@ -615,7 +615,7 @@ async function createNewConfiguration() {
         });
 
     console.log(newConfigurationDetails);
-    let chooseversion = document.getElementById("ChooseVersion");
+    let chooseversion = document.getElementById("ChooseWebApplicationVersion");
     let versiongroups = newConfigurationDetails["webApplicationConfiguration"]["versionGroups"]
     for (let i = 0; i < versiongroups.length; i++)
     {
@@ -633,6 +633,7 @@ async function createNewConfiguration() {
 
     let websitedetails = newConfigurationDetails["webApplicationConfiguration"]["webSiteDetails"];
     console.log(websitedetails);
+    document.getElementById("ChooseWebSite").innerHTML = "";
     for (let j = 0; j < websitedetails.length; j++) {
         let newOpt = document.createElement("option");
         newOpt.value = websitedetails[j]["siteName"];
@@ -3696,10 +3697,23 @@ function nextButtonClicked() {
                 document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
                 document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").classList.add("slide-in-right");
                 document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = true;
-                document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").hidden = false;
+                document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").style.display = "flex";
                 currentPage = "NewWebApplicationModal-CreatingNewWebApplicationProgress";
             }, 250);
             document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
+            document.getElementById("NewWebApplicationModal-CloseModal").style.display = "none";
+            let bitness = (document.getElementById("ChooseWebApplication").value != "Application Server (32-bit)") ? "64-bit" : "32-bit";
+            //Make the call to create the new Web Application
+            let webApplicationToCreate = {
+                siteName: document.getElementById("ChooseWebSite").value,
+                virtualDirectory: document.getElementById("ChoosePath").value,
+                webApplicationName: document.getElementById("WebApplicationName").value,
+                webApplicationType: document.getElementById("ChooseWebApplication").value,
+                webApplicationVersion: document.getElementById("ChooseWebApplicationVersion").value,
+                webApplicationBitness: bitness,
+                webApplicationPoolName: document.getElementById("WebApplicationPoolName").value
+            };
+            console.log(webApplicationToCreate);
             break;
     }
 }
@@ -3708,7 +3722,17 @@ function webSiteChanged(field) {
     if (field.value != "") {
         document.getElementById("ChoosePath").disabled = false;
         //document.getElementById("ChoosePath").innerHTML = `<option value="Root">Root</option>`;
+        document.getElementById("ChoosePath").innerHTML = "";
+        let applicationPaths = Array.from(newConfigurationDetails["webApplicationConfiguration"]["webSiteDetails"]).find(result => result["siteName"] == field.value);
+        console.log(applicationPaths);
+        for (let i = 0; i < applicationPaths["virtualDirectories"].length; i++) {
+            let newPathOption = document.createElement("option");
+            newPathOption.value = applicationPaths["virtualDirectories"][i];
+            newPathOption.innerText = applicationPaths["virtualDirectories"][i];
+            document.getElementById("ChoosePath").appendChild(newPathOption);
+        }
         document.getElementById("ChoosePath").value = "";
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
     } else {
         document.getElementById("ChoosePath").disabled = true;
         document.getElementById("ChoosePath").innerHTML = "";
@@ -3869,7 +3893,7 @@ function newWebApplication() {
     document.getElementById("NewWebApplicationModal-StartPage").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
     document.getElementById('NewWebApplicationModal-StartPage').classList.add('slide-out-left');
     setTimeout(function () {
-        //document.getElementById("ChooseVersion").value = "";
+        //document.getElementById("ChooseWebApplicationVersion").value = "";
         //document.getElementById("ChooseWebApplication").value = "";
         document.getElementById('NewWebApplicationModal-StartPage').hidden = true;
         document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = false;
@@ -3885,7 +3909,7 @@ function newWebApplicationFromExisting() {
     document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
     document.getElementById('NewWebApplicationModal-FromExistingOrScratch').classList.add('slide-out-left');
     setTimeout(function () {
-        document.getElementById("ChooseVersion").value = "";
+        document.getElementById("ChooseWebApplicationVersion").value = "";
         document.getElementById("ChooseWebApplication").value = "";
         document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = true;
         document.getElementById('NewWebApplicationModal-FromExisting').hidden = false;
@@ -3905,7 +3929,7 @@ function newWebApplicationFromScratch() {
     document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
     document.getElementById('NewWebApplicationModal-FromExistingOrScratch').classList.add('slide-out-left');
     setTimeout(function () {
-        document.getElementById("ChooseVersion").value = "";
+        document.getElementById("ChooseWebApplicationVersion").value = "";
         document.getElementById("ChooseWebApplication").value = "";
         document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = true;
         document.getElementById('NewWebApplicationModal-VersionClientChoice').hidden = false;

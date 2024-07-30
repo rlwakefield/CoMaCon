@@ -346,7 +346,8 @@
                                 <label for="FromExisting-ChooseWebApplication" style="font-size: XX-large;text-align: center;"><u>Choose Web Application:</u></label>
                                 <select name="FromExisting-ChooseWebApplication" id="FromExisting-ChooseWebApplication" onchange="fromExistingChanged(this)" style="font-size: large;">
                                     <option value="Agenda Online">Agenda Online</option>
-                                    <option value="Application Server">Application Server</option>
+                                    <option value="Application Server (32-bit)">Application Server (32-bit)</option>
+                                    <option value="Application Server (64-bit)">Application Server (64-bit)</option>
                                     <option value="Electronic Plan Review">Electronic Plan Review</option>
                                     <option value="Gateway Caching Server">Gateway Caching Server</option>
                                     <option value="Healthcare Form Manager">Healthcare Form Manager</option>
@@ -372,8 +373,8 @@
                     <div id="NewWebApplicationModal-VersionClientChoice" style="margin: auto 1rem;" hidden>
                         <div style="display: flex;flex-direction: column;gap: 1rem;">
                             <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
-                                <label for="ChooseVersion" style="font-size: XX-large;text-align: center;"><u>Version:</u></label>
-                                <select name="ChooseVersion" id="ChooseVersion" onchange="webApplicationVersionChanged(this)" style="font-size: large;">
+                                <label for="ChooseWebApplicationVersion" style="font-size: XX-large;text-align: center;"><u>Version:</u></label>
+                            <select name="ChooseWebApplicationVersion" id="ChooseWebApplicationVersion" onchange="webApplicationVersionChanged(this)" style="font-size: large;">
                                 </select>
                             </div>
                             <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
@@ -413,8 +414,8 @@
                             </div>
                         </div>
                     </div>
-                    <div id="NewWebApplicationModal-CreatingNewWebApplicationProgress" hidden>
-                        <label for="NewWebApplicationModal-CreatingNewWebApplicationProgressBar">Creating your new Web Application...</label>
+                    <div id="NewWebApplicationModal-CreatingNewWebApplicationProgress" style="display: none;flex-direction: column;align-items: center;margin: auto;">
+                        <label for="NewWebApplicationModal-CreatingNewWebApplicationProgressBar" style="font-size:xx-large;">Creating your new Web Application...</label>
                         <progress class="loadingWebApplicationsProgressBar" id="NewWebApplicationModal-CreatingNewWebApplicationProgressBar"></progress>
                     </div>
                 </div>

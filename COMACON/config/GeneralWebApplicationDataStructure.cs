@@ -644,5 +644,21 @@ public class WebApp
 public class WebSiteDetails
 {
     public string? siteName { get; set; }
-    //List<string> folders = new List<string>();
+    public List<string> virtualDirectories = new List<string>();
+}
+
+
+
+/********************************************************
+*      New Configuration Object - Web App To Create
+********************************************************/
+public class WebApplicationToCreate
+{
+    public string? siteName { get; set; }
+    public string? virtualDirectory { get; set; }
+    public string? webApplicationName { get; set; }
+    public string? webApplicationType { get; set; }
+    public string? webApplicationVersion { get; set; }
+    public string? webApplicationBitness { get; set; }
+    public string? applicationPoolName { get; set; }
 }
