@@ -1,3 +1,11 @@
+<div align="center">
+
+[![GitHub repo size](https://img.shields.io/github/repo-size/rwakefield/CoMaCon?style=flat-square)](#)
+[![GitHub release (release name instead of tag name)](https://img.shields.io/github/v/release/rwakefield/CoMaCon?style=flat-square)](https://github.com/rwakefield/CoMaCon/releases/latest)
+[![GitHub all releases](https://img.shields.io/github/downloads/rwakefield/CoMaCon/total?style=flat-square)](https://github.com/rwakefield/CoMaCon/releases/)
+
+</div>
+
 # COMACON MVC
 This is my personal concept of what a web based version of the WAMCON (Web Application Management Console) could look like. However, my vision for this utility is not just a utility that configures web applications on the servers, but also allows for the configuration of client configuration files and more! My vision for this new Configuration Management Console's features are:
 
@@ -13,11 +21,11 @@ With this utility, that challenge will become a thing of the past. No longer wil
 ![image](https://github.com/rlwakefield/COMACON-MVC/assets/33588807/cc7c6524-2926-4b2b-bcb9-c2875a62c9ce)
 
 Current supported versions include:
-[X] 21.1 (EP5)
-[X] 22.1
-[X] 23.1
-[X] 24.1
-[ ] 25.1
+- [ X ] 21.1 (EP5)
+- [ X ] 22.1
+- [ X ] 23.1
+- [ X ] 24.1
+- [  ] 25.1
 
 
 # Installation Instructions
