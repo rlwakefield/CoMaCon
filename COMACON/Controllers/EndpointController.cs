@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Diagnostics;
 using Microsoft.Web.Administration;
+using System.IO;
+using Microsoft.AspNetCore.Builder;
 
 namespace COMACON.Controllers
 {
@@ -353,7 +355,6 @@ namespace COMACON.Controllers
         [HttpPut("CheckNewWebApplicationDuplicates")]
         public string CheckNewWebApplicationDuplicates([FromBody] JsonElement webApplicationToCreate)
         {
-            Console.WriteLine(webApplicationToCreate);
             /* Returns the results of the checks.
              * 0 = Success
              * 1 = Folder already exists
@@ -407,7 +408,14 @@ namespace COMACON.Controllers
         [HttpPost("CreateNewWebApplication")]
         public string CreateNewWebApplication(string action, [FromBody] JsonElement webApplicationToCreate)
         {
-            
+            /* Returns the results of the Creation.
+             * 0 = Success
+             * 1 = Failed to create the directory.
+             * 2 = Failed to copy the files.
+             * 3 = Failed to create the Application Pool.
+             * 4 = Failed to create the Application.
+             * 5 = Failed to set the SessionAdmin.asmx authentication settings.
+             */
             switch (action)
             {
                 case "FromFile":
@@ -416,19 +424,126 @@ namespace COMACON.Controllers
                     WebApplicationToCreate webAppToCreate = JsonConvert.DeserializeObject<WebApplicationToCreate>(webApplicationToCreate.ToString());
                     ServerManager manager = new ServerManager();
                     var filesToCopyFromPath = Path.Combine(_configuration["LooseFilesLocation"], webAppToCreate.webApplicationVersion.Split(".")[0]+ webAppToCreate.webApplicationVersion.Split(".")[1], webAppToCreate.webApplicationVersion);
-                    //string siteFolder = manager.Sites[webAppToCreate.siteName].Applications["/"].VirtualDirectories[webAppToCreate.virtualDirectory].Attributes["physicalPath"].Value.ToString();
                     var folderToCopyToPath = Path.Combine(Environment.ExpandEnvironmentVariables(manager.Sites[webAppToCreate.siteName].Applications["/"].VirtualDirectories[webAppToCreate.virtualDirectory].Attributes["physicalPath"].Value.ToString()),webAppToCreate.webApplicationName);
-                    //Verify if the folder already exists.
-                    if (Directory.Exists(folderToCopyToPath))
+
+                    //Create the new folder for the new web application.
+                    try
                     {
+                        Directory.CreateDirectory(folderToCopyToPath);
+                    }
+                    catch(Exception ex)
+                    {
+                        Log.Error("Failed to create the directory.");
+                        Log.Error(ex.Message);
+                        Log.Error(ex.StackTrace);
                         return "1";
                     }
 
-                    //Verify if the Application
+                    //Copy the files from the loose files location to the new folder.
+                    try
+                    {
+                        foreach (string newPath in Directory.GetFiles(filesToCopyFromPath, "*.*", SearchOption.AllDirectories))
+                        {
+                            System.IO.File.Copy(newPath, newPath.Replace(filesToCopyFromPath, folderToCopyToPath), true);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error("Failed to copy the files.");
+                        Log.Error(ex.Message);
+                        Log.Error(ex.StackTrace);
+                        Directory.Delete(folderToCopyToPath, true);
+                        return "2";
+                    }
+
+                    try
+                    {
+                        //Create the new Application Pool.
+                        ApplicationPool newAppPool = manager.ApplicationPools.Add(webAppToCreate.webApplicationPoolName);
+
+                        //Set the new Application Pool properties.
+                        //General Settings
+                        newAppPool.ManagedRuntimeVersion = "v4.0";
+                        newAppPool.Enable32BitAppOnWin64 = false;
+                        newAppPool.ManagedPipelineMode = ManagedPipelineMode.Integrated;
+                        newAppPool.QueueLength = 65535;
+                        newAppPool.StartMode = StartMode.AlwaysRunning;
+
+                        //CPU Settings
+                        TimeSpan timeSpan = TimeSpan.FromMinutes(5);
+                        newAppPool.Cpu.ResetInterval = timeSpan;
+
+                        //Process Model Settings
+                        newAppPool.ProcessModel.IdentityType = ProcessModelIdentityType.ApplicationPoolIdentity;
+                        newAppPool.ProcessModel.IdleTimeout = TimeSpan.FromMinutes(0);
+                        newAppPool.ProcessModel.PingingEnabled = false;
+
+                        //Rapid Fail Protection Settings
+                        newAppPool.Failure.RapidFailProtection = false;
+
+                        //Recycling Settings
+                        newAppPool.Recycling.PeriodicRestart.Time = TimeSpan.FromMinutes(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error("Failed to create the Application Pool.");
+                        Log.Error(ex.Message);
+                        Log.Error(ex.StackTrace);
+                        Directory.Delete(folderToCopyToPath, true);
+                        //Delete the newAppPool if it was created.
+                        manager.ApplicationPools.Remove(manager.ApplicationPools[webAppToCreate.webApplicationPoolName]);
+                        return "3";
+                    }
+
+                    //Create the new Application.
+                    try
+                    {
+                        //Create the new Application.
+                        Application newApplication = manager.Sites[webAppToCreate.siteName].Applications.Add(webAppToCreate.webApplicationName, folderToCopyToPath);
+                        newApplication.ApplicationPoolName = webAppToCreate.webApplicationPoolName;
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error("Failed to create the Application.");
+                        Log.Error(ex.Message);
+                        Log.Error(ex.StackTrace);
+                        Directory.Delete(folderToCopyToPath, true);
+                        //Delete the newAppPool if it was created.
+                        manager.ApplicationPools.Remove(manager.ApplicationPools[webAppToCreate.webApplicationPoolName]);
+                        //Delete the newApplication if it was created.
+                        manager.Sites[webAppToCreate.siteName].Applications.Remove(manager.Sites[webAppToCreate.siteName].Applications[webAppToCreate.webApplicationName]);
+                        return "4";
+                    }
+
+                    //Set the authentication on the SessionAdmin.asmx file if it is an Application Server only though.
+                    if (webAppToCreate.webApplicationType == "Application Server (32-bit)" || webAppToCreate.webApplicationType == "Application Server (64-bit)")
+                    {
+                        try
+                        {
+
+                            Microsoft.Web.Administration.ConfigurationSection sessionAdminAnonymousAuthenticationSection = manager.GetWebConfiguration("Default Web Site", webAppToCreate.webApplicationName + "/Admin/SessionAdmin.asmx").GetSection("system.webServer/security/authentication/anonymousAuthentication");
+                            sessionAdminAnonymousAuthenticationSection["enabled"] = false;
+                            Microsoft.Web.Administration.ConfigurationSection sessionAdminWindowsAuthenticationSection = manager.GetWebConfiguration("Default Web Site", webAppToCreate.webApplicationName + "/Admin/SessionAdmin.asmx").GetSection("system.webServer/security/authentication/windowsAuthentication");
+                            sessionAdminWindowsAuthenticationSection["enabled"] = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error("Failed to create the Application Pool.");
+                            Log.Error(ex.Message);
+                            Log.Error(ex.StackTrace);
+                            Directory.Delete(folderToCopyToPath, true);
+                            //Delete the newAppPool if it was created.
+                            manager.ApplicationPools.Remove(manager.ApplicationPools[webAppToCreate.webApplicationPoolName]);
+                            return "5";
+                        }
+                    }
+
+                    //Commit the changes.
+                    manager.CommitChanges();
                     break;
             }
 
-            return "";
+            return "0";
         }
     }
 }

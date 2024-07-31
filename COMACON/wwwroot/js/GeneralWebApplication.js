@@ -249,7 +249,7 @@ async function checkWhatWebApplicationToParse(config, executionMethod) {
             case "CopyWebApplication":
                 document.getElementById("AlertModal-Text-Paragraph").innerText = "Your " + coreConfigData["ApplicationName"] + " Application is ready. Click OK to start updating the configuration."
                 document.getElementById("ProcessingWebConfigValuesProgress").style.display = "none";
-                document.getElementById("OnBase-Configuration-Main-Button").click();
+                //document.getElementById("OnBase-Configuration-Main-Button").click();
                 document.getElementById("AlertModal").style.display = "block";
                 break;
         }

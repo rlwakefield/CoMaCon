@@ -150,6 +150,7 @@ internal sealed class DefaultCore : Core
 
         //Testing new code.
         targetPath = manager.Sites[newSiteName].Applications["/"].VirtualDirectories["/"].PhysicalPath.Replace("%SystemDrive%", Environment.GetEnvironmentVariable("SystemDrive")) + updatedNewApplicationPathName + newApplicationName + "\\";
+        Console.WriteLine(targetPath);
 
         //Old code.
         /*if (newSiteName == "Default Web Site"){
@@ -235,7 +236,7 @@ internal sealed class DefaultCore : Core
         /*
         * 4. Create the new Application. Make sure that it includes the Site Name and Application Path passed through to the method.
         */
-        Microsoft.Web.Administration.Application newApplication = manager.Sites[newSiteName].Applications.Add(newApplicationPathName + newApplicationName, targetPath);
+        Application newApplication = manager.Sites[newSiteName].Applications.Add(newApplicationPathName + newApplicationName, targetPath);
 
         /*
         * 5. Set the Application Pool to be used to the one that was just created.
