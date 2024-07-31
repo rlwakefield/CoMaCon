@@ -403,16 +403,22 @@
                             <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
                             <label for="WebApplicationName" style="font-size: XX-large;text-align: center;"><u>Web Application Name:</u></label>
                                 <input type="text" name="WebApplicationName" id="WebApplicationName" style="font-size: large;" oninput="webSiteApplicationNameChanged(this)"/>
+                                <span id="WebApplicationName-ErrorText" style="color: red;font-weight:bold;"></span>
                             </div>
                             <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
-                                <label for="WebApplicationPoolName" style="font-size: XX-large;text-align: center;"><u>Web Application Name:</u></label>
+                                <label for="WebApplicationPoolName" style="font-size: XX-large;text-align: center;"><u>Web Application Pool Name:</u></label>
                                 <div>
                                     <input type="checkbox" id="SameAsWebApplication" name="SameAsWebApplication" onclick="webSiteSameAsApplicationChanged(this)">
                                     <label for="SameAsWebApplication" style="font-size: large;text-align: center;">Same as Web Application</label>
                                 </div>
                                 <input type="text" name="WebApplicationPoolName" id="WebApplicationPoolName" style="font-size: large;" oninput="webSiteApplicationPoolNameChanged(this)" disabled />
+                                <span id="WebApplicationPoolName-ErrorText" style="color: red;font-weight:bold;"></span>
                             </div>
                         </div>
+                    </div>
+                    <div id="NewWebApplicationModal-CheckingNewWebApplicationProgress" style="display: none;flex-direction: column;align-items: center;margin: auto;">
+                        <label for="NewWebApplicationModal-CheckingNewWebApplicationProgressBar" style="font-size:xx-large;">Validating New Configuration Details...</label>
+                        <progress class="loadingWebApplicationsProgressBar" id="NewWebApplicationModal-CheckingNewWebApplicationProgressBar"></progress>
                     </div>
                     <div id="NewWebApplicationModal-CreatingNewWebApplicationProgress" style="display: none;flex-direction: column;align-items: center;margin: auto;">
                         <label for="NewWebApplicationModal-CreatingNewWebApplicationProgressBar" style="font-size:xx-large;">Creating your new Web Application...</label>
@@ -427,20 +433,6 @@
                 </div>
             </div>
         </div>
-        <!-- Creating New Web Application Modal -->
-        @* <div id="NewWebApplicationModal" class="NewWebApplicationModal">
-            <div id="NewWebApplicationModal-Container" class="NewWebApplicationModal-Container" style="border: 1px solid black;">
-                <!-- Title Bar Container for styling -->
-                <div class="NewWebApplicationModal-TitleBar" style="background-color: rgb(201, 201, 201);padding: 0 1rem;display: flex;align-items: center;justify-content: space-between;">
-                    <h1 style="margin: 0.5rem 0;">New Configuration</h1>
-                    <span id="NewWebApplicationModal-CloseModal" style="font-size: x-large;" onclick="closeNewWebApplicationModal()">X</span>
-                </div>
-                <!-- Body Section -->
-                <div id="NewWebApplicationModal-BodySection" style="border-top: 1px solid black;height: 300px;display: flex;align-items: center;flex-direction: column;">
-                </div>
-            </div>
-        </div> *@
-        <!-- Menu Bar -->
         <header>
             <div id="h1-container" class="h1-container">
                 <div style="display:flex;justify-content:space-between;padding-left: 0.5%;">

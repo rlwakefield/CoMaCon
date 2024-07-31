@@ -185,7 +185,6 @@ let keywordTypeAheadIdNumber = 0;
  *                  Page Load SCript
  ********************************************************/
 async function onPageLoadLogic() {
-    console.log(localStorage.getItem("darkModeState"));
     if (localStorage.getItem("darkModeState") != null) {
         if (localStorage.getItem("darkModeState") == "true") {
             document.getElementById("checkbox").checked = true;
@@ -447,7 +446,6 @@ async function adfsEnabledCheckbox(checkbox) {
 }
 
 async function validateNumericValue(field) {
-    //console.log(field);
     if (field.attributes["min"]?.value != null || field.attributes["min"]?.value != undefined) {
         if (parseFloat(field.value) < field.attributes["min"].value) {
             document.querySelectorAll("[id$='Section']").forEach((element) => {
@@ -614,7 +612,6 @@ async function createNewConfiguration() {
             newConfigurationDetails = data;
         });
 
-    console.log(newConfigurationDetails);
     let chooseversion = document.getElementById("ChooseWebApplicationVersion");
     let versiongroups = newConfigurationDetails["webApplicationConfiguration"]["versionGroups"]
     for (let i = 0; i < versiongroups.length; i++)
@@ -632,7 +629,6 @@ async function createNewConfiguration() {
     }
 
     let websitedetails = newConfigurationDetails["webApplicationConfiguration"]["webSiteDetails"];
-    console.log(websitedetails);
     document.getElementById("ChooseWebSite").innerHTML = "";
     for (let j = 0; j < websitedetails.length; j++) {
         let newOpt = document.createElement("option");
@@ -1022,13 +1018,11 @@ async function openModal() {
     checkIfOkToIgnoreChangedFields().then((result) => {
         if (result == true) {
             //Yes, the changes can be ignored.
-            console.log("The changes can be ignored.");
             loadWebApplications();
             document.getElementById("chooseWebApplicationModal").style.display = "block";
         } else {
             //No, the changes cannot be ignored.
             //Do Nothing
-            console.log("The changes cannot be ignored.");
         }
     });
 }
@@ -1264,7 +1258,6 @@ async function validateDataSourceFieldSelectionToConnectionStringArrayV2() {
 *               Save Validation Functions
 ********************************************************/
 async function preSaveValidationV2() {
-    console.log(ConnectionStringsArray.length);
     if (ConnectionStringsArray.length > 0) {
         if (await validateDataSourceFieldSelectionToConnectionStringArrayV2()) {
             return true;
@@ -1402,7 +1395,6 @@ async function parseData(config) {
     body.addEventListener('input', function (event) {
         // Check if the event target is an input element
         if (event.target.tagName.toLowerCase() === 'input') {
-            //console.log(`Input changed: ${event.target.name}, Value: ${event.target.value}`);
             // Perform your desired operations here
             if (event.target.id != "checkbox") {
                 configurationChanged = true;
@@ -1413,7 +1405,6 @@ async function parseData(config) {
     body.addEventListener('change', function (event) {
         // Check if the event target is an input element
         if (event.target.tagName.toLowerCase() === 'select') {
-            //console.log(`Input changed: ${event.target.name}, Value: ${event.target.value}`);
             // Perform your desired operations here
             configurationChanged = true;
         }
@@ -1445,7 +1436,6 @@ async function parseParseWorkViewCoreFormattedTextIframeSupportedDomains(config)
 }
 
 async function parseResponsiveAppsApp(config) {
-    //console.log(config);
     responsiveAppsApps = config["responsiveApps"];
     let responsiveAppsAppsSelectList = document.getElementById("ResponsiveAppsApp-SelectList");
     for (let i = 0; i < responsiveAppsApps.length; i++) {
@@ -1460,7 +1450,6 @@ async function parseResponsiveAppsApp(config) {
 
 async function parseTooltips(config) {
     for (let i = 0; i < config.length; i++) {
-        //console.log(config[i]);
         if (config[i]["tooltip"].includes("<br>")) {
             document.getElementById(config[i]["htmlId"]).innerHTML = config[i]["tooltip"];
         } else {
@@ -1907,7 +1896,6 @@ async function saveData() {
     await saveKnownElements(coreConfigData["knownKeys"]);
     await saveKnownElements(coreConfigData["translatorKnownKeys"]);
     await saveIisConfiguration(coreConfigData["IisConfiguration"]);
-    //console.log(optimizeForWindowsAuth);
     coreConfigData["WindowsAuthOptimizeFor"] = optimizeForWindowsAuth;
     if (diagnosticsRoutes.length > 0) {
         await saveHylandLogging();
@@ -2952,9 +2940,7 @@ async function updateDataSourceOptionsV3() {
 
 async function checkSetAppendedTextErrorV3() {
     let incompletefields = await checkIncompleteFieldsV3();
-    //let duplicatename = await checkForDuplicateConnectionStringNamesV3();
     let duplicateConnectionStringNames = await groupByNameKey(ConnectionStringsArray, "Name");
-    //console.log(duplicateConnectionStringNames);
 
     let connectionStringSelectList = document.getElementById("ConnectionStrings-SelectList");
     Object.keys(duplicateConnectionStringNames).forEach(async key => {
@@ -3200,7 +3186,6 @@ async function copyConnectionStringV3() {
 async function deleteConnectionStringV3() {
     if (document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicate"] != "") {
         let relatedDuplicates = document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicates"].value.split(",");
-        //console.log("Related Duplicates: " + relatedDuplicates.length);
         if (relatedDuplicates.length > 0) {
             //This means that it has more than 1 related duplicate.
             //Going to find each of the related items and perform the appropriate logic.
@@ -3278,21 +3263,9 @@ async function validateConnectionStringFieldLengthV3(field) {
     }
 }
 
-//async function checkErroredConnectionStrings() {
-//    let incompleteConnectionStrings = document.getElementsByClassName("incompleteConnectionString");
-//    let duplicateConnectionStrings = document.getElementsByClassName("duplicateConnectionStringName");
-
-//    if (incompleteConnectionStrings.length > 0 || duplicateConnectionStrings.length > 0) {
-//        await pushErrorToArray(await findErrorArrayToSet("connectionStringDataSourceName"));
-//    } else {
-//        await spliceErrorFromArray("connectionStringDataSourceName");
-//    }
-//}
-
 async function testConnectionString() {
     //Get the selected connection string from the ConnectionStringsArray.
     let selectedConnectionString = ConnectionStringsArray.filter(cstring => cstring.id === document.getElementById("ConnectionStrings-SelectList").value);
-    console.log(selectedConnectionString);
     document.getElementById("connectionStringTestModal").style.display = "flex";
     const fetchOptions = {
         method: "POST",
@@ -3305,10 +3278,7 @@ async function testConnectionString() {
         .then(response => response.json())
         .then(data => {
             document.getElementById("connectionStringTestModal").style.display = "none";
-            console.log(data);
-            console.log(data["ResultCode"] == "1");
             let testconnectionalert = document.getElementById("TestConnectionString-Alert");
-            console.log(testconnectionalert);
             if (data["ResultCode"] == "0") {
                 testconnectionalert.innerText = data["ResultMessage"];
                 testconnectionalert.style.color = "green";
@@ -3353,7 +3323,6 @@ async function validateIdentityProviderFields(field) {
     //Check if any of the fields in the idpFields array are empty or not.
     for (let i = 0; i < idpFields.length; i++) {
         if (document.getElementById(idpFields[i]).value.length > 0) {
-            //console.log("Field Length: "+document.getElementById(idpFields[i]).value.length);
             allIdpFieldsEmpty = false;
         }
     }
@@ -3417,7 +3386,6 @@ async function validateIdentityProviderFields(field) {
 *            Dark/Light Mode Toggle Functions
 ********************************************************/
 function toggleDarkLightMode(checkbox) {
-    console.log(checkbox.checked);
     if (checkbox.checked) {
         localStorage.setItem("darkModeState", true);
         //Elements to add "dark_mode" class to:
@@ -3489,8 +3457,6 @@ function toggleDarkLightMode(checkbox) {
             element.classList.remove('dark_mode_links');
         });
     }
-
-    //console.log(localStorage.getItem("darkModeState"));
 }
 
 
@@ -3527,53 +3493,18 @@ async function groupByNameKey(array,groupingKeyName) {
 let currentPage = "NewWebApplicationModal-StartPage";
 
 function webApplicationVersionChanged(field) {
-    //console.log(field.value);
     //Clear the current options from the ChooseWebApplication select element.
     document.getElementById("ChooseWebApplication").innerHTML = "";
     let majorversion = field.value.split(".")[0] + "." + field.value.split(".")[1];
-    //console.log(majorversion);
-    //console.log(Array.from(newConfigurationDetails["webApplicationConfiguration"]["versionGroups"]).find(result => result["majorVersion"] == "21.1"));
     let majorversionarray = Array.from(newConfigurationDetails["webApplicationConfiguration"]["versionGroups"]).find(result => result["majorVersion"] == majorversion);
-    //console.log(Array.from(majorversionarray["versions"]));
     let specificversionarray = Array.from(majorversionarray["versions"]).find(result2 => result2["specificVersion"] == field.value);
-    //console.log(specificversionarray);
     Array.from(specificversionarray["webApplications"]).forEach(webApp => {
-        //console.log(webApp["webApplicationName"]);
         let newWebAppOption = document.createElement("option");
         newWebAppOption.value = webApp["webApplicationName"];
         newWebAppOption.innerText = webApp["webApplicationName"];
         document.getElementById("ChooseWebApplication").appendChild(newWebAppOption);
     });
 
-    //switch (true) {
-    //    case field.value.startsWith("21.1"):
-    //        //document.getElementById("ChooseWebApplication").innerHTML = `
-    //        //                <option value="ApplicationServer">Application Server</option>
-    //        //                <option value="GatewayCachingServer">Gateway Caching Server</option>
-    //        //                <option value="WebServer">Web Server</option>
-    //        //            `;
-    //        break;
-    //    case field.value.startsWith("22.1"):
-    //        //document.getElementById("ChooseWebApplication").innerHTML = `
-    //        //                <option value="ApplicationServer">Application Server</option>
-    //        //                <option value="GatewayCachingServer">Gateway Caching Server</option>
-    //        //                <option value="WebServer">Web Server</option>
-    //        //            `;
-    //        break;
-    //    case field.value.startsWith("23.1"):
-    //        //document.getElementById("ChooseWebApplication").innerHTML = `
-    //        //                <option value="ApplicationServer">Application Server</option>
-    //        //                <option value="GatewayCachingServer">Gateway Caching Server</option>
-    //        //                <option value="WebServer">Web Server</option>
-    //        //            `;
-    //        break;
-    //    case field.value.startsWith("24.1"):
-    //        //document.getElementById("ChooseWebApplication").innerHTML = `
-    //        //                <option value="ApplicationServer">Application Server</option>
-    //        //                <option value="WebServer">Web Server</option>
-    //        //            `;
-    //        break;
-    //}
     document.getElementById("ChooseWebApplication").value = "";
     document.getElementById("ChooseWebApplication").disabled = false;
 }
@@ -3651,10 +3582,24 @@ function backButtonClicked() {
             document.getElementById("NewWebApplicationModal-NextCreateButton").innerText = "Next >";
             document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
             break;
+        case "NewWebApplicationModal-CheckingNewWebApplicationProgress":
+            document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").classList.add("slide-out-right");
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.add("slide-in-left");
+                document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").style.display = "none";
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").style.display = "flex";
+                currentPage = "NewWebApplicationModal-WebApplicationAppPoolNaming";
+            }, 250);
+            document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
+            document.getElementById("NewWebApplicationModal-CloseModal").style.display = "block";
+            document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+            break;
     }
 }
 
-function nextButtonClicked() {
+async function nextButtonClicked() {
     switch (currentPage) {
         case "NewWebApplicationModal-VersionClientChoice":
             document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
@@ -3694,11 +3639,11 @@ function nextButtonClicked() {
             document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
             document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.add("slide-out-left");
             setTimeout(function () {
-                document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
-                document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").classList.add("slide-in-right");
-                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = true;
-                document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").style.display = "flex";
-                currentPage = "NewWebApplicationModal-CreatingNewWebApplicationProgress";
+                document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").classList.add("slide-in-right");
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").style.display = "none";
+                document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").style.display = "flex";
+                currentPage = "NewWebApplicationModal-CheckingNewWebApplicationProgress";
             }, 250);
             document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
             document.getElementById("NewWebApplicationModal-CloseModal").style.display = "none";
@@ -3713,7 +3658,7 @@ function nextButtonClicked() {
                 webApplicationBitness: bitness,
                 webApplicationPoolName: document.getElementById("WebApplicationPoolName").value
             };
-            console.log(webApplicationToCreate);
+            await newWebApplicationValidateNoDuplicate(webApplicationToCreate);
             break;
     }
 }
@@ -3724,7 +3669,6 @@ function webSiteChanged(field) {
         //document.getElementById("ChoosePath").innerHTML = `<option value="Root">Root</option>`;
         document.getElementById("ChoosePath").innerHTML = "";
         let applicationPaths = Array.from(newConfigurationDetails["webApplicationConfiguration"]["webSiteDetails"]).find(result => result["siteName"] == field.value);
-        console.log(applicationPaths);
         for (let i = 0; i < applicationPaths["virtualDirectories"].length; i++) {
             let newPathOption = document.createElement("option");
             newPathOption.value = applicationPaths["virtualDirectories"][i];
@@ -3756,6 +3700,8 @@ function webSiteApplicationNameChanged(field) {
     } else {
         document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
     }
+    document.getElementById(field.id + "-ErrorText").innerText = "";
+    document.getElementById("WebApplicationPoolName-ErrorText").innerText = "";
 }
 
 function webSiteSameAsApplicationChanged(field) {
@@ -3766,6 +3712,7 @@ function webSiteSameAsApplicationChanged(field) {
         document.getElementById("WebApplicationPoolName").disabled = false;
     }
     webSiteApplicationPoolNameChanged(document.getElementById("WebApplicationPoolName"));
+    document.getElementById(field.id + "-ErrorText").innerText = "";
 }
 
 function webSiteApplicationPoolNameChanged(field) {
@@ -3789,7 +3736,6 @@ function fromExistingChanged(field) {
 }
 
 function selectWebConfigChanged(field) {
-    //console.log(field.files[0]);
     if (field.files.length != 0) {
         if (field.files[0].name != "web.config") {
             //Not a web.config file.
@@ -3833,21 +3779,6 @@ function selectWebConfigChanged(field) {
     } else {
         document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
     }
-
-    //if (field.files.length != 0 && field.files[0].name != "web.config") {
-    //    //Clear the currently selected file.
-    //    document.getElementById("SelectWebConfig").value = "";
-    //    document.getElementById("SelectWebConfig-ErrorText").hidden = false;
-    //    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
-    //    //console.log("Not a web.config file!");
-    //} else if (
-    //    (field.files.length != 0 && field.files[0].name == "web.config")
-    //    && (document.getElementById("FromExisting-ChooseWebApplication").value == "Application Server" && document.getElementById("SelectSessionAdminSecurityConfig").files.length != 0)) {
-        
-    //} else {
-    //    document.getElementById("SelectWebConfig-ErrorText").hidden = true;
-    //    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
-    //}
 }
 
 function selectSessionAdminSecurityConfigChanged(field) {
@@ -3865,7 +3796,6 @@ function selectSessionAdminSecurityConfigChanged(field) {
             document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = true;
 
             //Check if a web.config file is selected.
-            console.log(document.getElementById("SelectWebConfig").files.length);
             if (document.getElementById("SelectWebConfig").files.length != 0) {
                 document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
             } else {
@@ -3875,18 +3805,6 @@ function selectSessionAdminSecurityConfigChanged(field) {
     } else {
         document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
     }
-
-    //console.log(field.files[0]);
-    //if (field.files.length != 0 && field.files[0].name != "sessionAdminSecurity.config") {
-    //    //Clear the currently selected file.
-    //    document.getElementById("SelectSessionAdminSecurityConfig").value = "";
-    //    document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = false;
-    //    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
-    //    console.log("Not a sessionAdminSecurity.config file!");
-    //} else {
-    //    document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = true;
-    //    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
-    //}
 }
 
 function newWebApplication() {
@@ -3970,6 +3888,57 @@ function closeNewWebApplicationModal() {
     document.getElementById("SelectWebConfig").disabled = true;
     document.getElementById("SelectSessionAdminSecurityConfig").value = "";
     document.getElementById("SelectSessionAdminSecurityConfig").disabled = true;
+}
+
+function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
+    const fetchOptions = {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(webApplicationToCheck)
+    };
+    fetch(apiRootUrl + "/api/Endpoint/CheckNewWebApplicationDuplicates", fetchOptions)
+        .then(response => response.json())
+        .then(data => {
+            switch (data) {
+                case 0:
+                    setTimeout(function () {
+                        document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                        document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").classList.add("slide-out-left");
+                        setTimeout(function () {
+                            document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                            document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").classList.add("slide-in-right");
+                            document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").style.display = "none";
+                            document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").style.display = "flex";
+                            currentPage = "NewWebApplicationModal-CreatingNewWebApplicationProgress";
+                        }, 250);
+                        document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
+                        document.getElementById("NewWebApplicationModal-CloseModal").style.display = "none";
+                    }, 250);
+                    break;
+                case 1:
+                    setTimeout(function () {
+                        document.getElementById("WebApplicationName-ErrorText").innerText = "Folder already exists for this Web Application name.";
+                        backButtonClicked(document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress"));
+                    }, 250);
+                    break;
+                case 2:
+                    setTimeout(function () {
+                        document.getElementById("WebApplicationName-ErrorText").valinnerTextue = "Application already exists for this Web Application name.";
+                        backButtonClicked(document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress"));
+                    }, 250);
+                    break;
+                case 3:
+                    setTimeout(function () {
+                        document.getElementById("WebApplicationPoolName-ErrorText").innerText = "Application Pool already exists for this Web Application Pool name.";
+                        backButtonClicked(document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress"));
+                    }, 250);
+                    break;
+
+            }
+        });
+
 }
 
 

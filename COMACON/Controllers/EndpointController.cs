@@ -350,9 +350,84 @@ namespace COMACON.Controllers
             return JsonConvert.SerializeObject(newConfigurationDetails);
         }
 
-        [HttpPost("CreateNewWebApplication")]
-        public string CreateNewWebApplication(string action)
+        [HttpPut("CheckNewWebApplicationDuplicates")]
+        public string CheckNewWebApplicationDuplicates([FromBody] JsonElement webApplicationToCreate)
         {
+            Console.WriteLine(webApplicationToCreate);
+            /* Returns the results of the checks.
+             * 0 = Success
+             * 1 = Folder already exists
+             * 2 = Application already exists
+             * 3 = Application Pool already exists
+             */
+            WebApplicationToCreate webAppToCreate = JsonConvert.DeserializeObject<WebApplicationToCreate>(webApplicationToCreate.ToString());
+            if(webAppToCreate.virtualDirectory == "root")
+            {
+                webAppToCreate.virtualDirectory = "/";
+            }
+            ServerManager manager = new ServerManager();
+            var filesToCopyFromPath = Path.Combine(_configuration["LooseFilesLocation"], webAppToCreate.webApplicationVersion.Split(".")[0] + webAppToCreate.webApplicationVersion.Split(".")[1], webAppToCreate.webApplicationVersion);
+            //string siteFolder = manager.Sites[webAppToCreate.siteName].Applications["/"].VirtualDirectories[webAppToCreate.virtualDirectory].Attributes["physicalPath"].Value.ToString();
+            var folderToCopyToPath = Path.Combine(Environment.ExpandEnvironmentVariables(manager.Sites[webAppToCreate.siteName].Applications["/"].VirtualDirectories[webAppToCreate.virtualDirectory].Attributes["physicalPath"].Value.ToString()), webAppToCreate.webApplicationName);
+            //Verify if the folder already exists.
+            if (Directory.Exists(folderToCopyToPath))
+            {
+                return "1";
+            }
+
+            //Verify if the Application already exists.
+            try
+            {
+                if (manager.Sites[webAppToCreate.siteName].Applications[webAppToCreate.webApplicationName] != null)
+                {
+                    return "2";
+                }
+            }
+            catch
+            {
+                
+            }
+
+            //Verify if the Application Pool already exists.
+            try
+            {
+                if (manager.ApplicationPools[webAppToCreate.webApplicationPoolName] != null)
+                {
+                    return "3";
+                }
+            }
+            catch
+            {
+                
+            }
+
+            return "0";
+        }
+
+        [HttpPost("CreateNewWebApplication")]
+        public string CreateNewWebApplication(string action, [FromBody] JsonElement webApplicationToCreate)
+        {
+            
+            switch (action)
+            {
+                case "FromFile":
+                    break;
+                case "FromScratch":
+                    WebApplicationToCreate webAppToCreate = JsonConvert.DeserializeObject<WebApplicationToCreate>(webApplicationToCreate.ToString());
+                    ServerManager manager = new ServerManager();
+                    var filesToCopyFromPath = Path.Combine(_configuration["LooseFilesLocation"], webAppToCreate.webApplicationVersion.Split(".")[0]+ webAppToCreate.webApplicationVersion.Split(".")[1], webAppToCreate.webApplicationVersion);
+                    //string siteFolder = manager.Sites[webAppToCreate.siteName].Applications["/"].VirtualDirectories[webAppToCreate.virtualDirectory].Attributes["physicalPath"].Value.ToString();
+                    var folderToCopyToPath = Path.Combine(Environment.ExpandEnvironmentVariables(manager.Sites[webAppToCreate.siteName].Applications["/"].VirtualDirectories[webAppToCreate.virtualDirectory].Attributes["physicalPath"].Value.ToString()),webAppToCreate.webApplicationName);
+                    //Verify if the folder already exists.
+                    if (Directory.Exists(folderToCopyToPath))
+                    {
+                        return "1";
+                    }
+
+                    //Verify if the Application
+                    break;
+            }
+
             return "";
         }
     }

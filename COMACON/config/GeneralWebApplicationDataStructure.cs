@@ -660,5 +660,5 @@ public class WebApplicationToCreate
     public string? webApplicationType { get; set; }
     public string? webApplicationVersion { get; set; }
     public string? webApplicationBitness { get; set; }
-    public string? applicationPoolName { get; set; }
+    public string? webApplicationPoolName { get; set; }
 }
