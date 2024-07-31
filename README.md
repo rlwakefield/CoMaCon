@@ -53,13 +53,6 @@ You will also need to have IIS installed and configured on the server you wish t
 Please make sure to open any issues whenever you encounter them. I might need to get a copy of the web.config file that you were working with so I can do further testing on my side. Of course, please remove any PII from the files as I would hate to assume that risk. 😄 Thanks!
 
 
-# Future Enhancements
-1. Configuration of local configuration files on servers directly. Examples include Full Text Search, Data Capture Server, etc.
-2. Creation/Configuration of Thick Client Windows Services (instead of needing to do them through the Configuration Client installed on that server directly).
-
-Obviously I am always open to other features, suggestions, etc., but right now my focus is to get this up and working as similar to the WAMCON as I can.
-
-
 # Upgrade Instructions
 1. verify you have the appropriate .NET Windows Hosting Bundle installed.
 2. Download the latest release [here](https://github.com/rlwakefield/CoMaCon/releases).
@@ -70,10 +63,6 @@ Obviously I am always open to other features, suggestions, etc., but right now m
 6. Delete all of the files from the current COMACON folder in the "C:\inetpub\wwwroot\COMACON" folder.
 7. Copy all of the files from the unzipped .zip file to the "C:\inetpub\wwwroot\COMACON" folder.
 8. Recycle the COMACON Application Pool and you are good to go.
-
-
-# Issue Reporting/Enhancement Suggestions
-I am always up for new enhancements, but the ultimate game is that I will be working on bugs at first. Once I get those out of the way for the most part, then I will be working on more of the enhancements.
 
 
 Thanks for all of your support in helping me making this thing a potential reality!
