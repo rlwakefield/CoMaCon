@@ -41,10 +41,10 @@
                     </div>
                 </div>
                 <!-- Loading Web Applications Progress Bar -->
-                <div id="Loading-Web-Applications-Progress-Section" class="loadingWebApplicationsProgressSection">
-                    <label class="loadingWebApplicationsProgressLabel" for="Loading-Web-Applications-Progress-Bar">Getting Web Applications...</label>
-                    <progress class="loadingWebApplicationsProgressBar" id="Loading-Web-Applications-Progress-Bar"></progress>
-                </div>
+            <div id="Loading-Web-Applications-Progress-Section" class="loadingWebApplicationsProgressSection">
+                <label class="loadingWebApplicationsProgressLabel" for="Loading-Web-Applications-Progress-Bar">Getting Web Applications...</label>
+                <progress class="loadingWebApplicationsProgressBar" id="Loading-Web-Applications-Progress-Bar"></progress>
+            </div>
                 <div id="chooseWebApplicationModal-Table-Buttons-Container" class="chooseWebApplicationModalTableButtonsContainer">
                     <!-- Modal body -->
                     <div class="chooseWebApplicationModal-Table-Wrapper">
@@ -318,7 +318,121 @@
                 </div>
             </div>
         </div>
-        <!-- Menu Bar -->
+        <!-- New Application Configuration Modal -->
+        <div id="NewWebApplicationModal" class="NewWebApplicationModal">
+            <div id="NewWebApplicationModal-Container" class="NewWebApplicationModal-Container" style="border: 1px solid black;">
+                <!-- Title Bar Container for styling -->
+                <div id="NewWebApplicationModal-TitleBar" class="NewWebApplicationModal-TitleBar" style="background-color: rgb(201, 201, 201);padding: 0 1rem;display: flex;align-items: center;justify-content: space-between;">
+                    <h1 style="margin: 0.5rem 0;">New Configuration</h1>
+                    <span id="NewWebApplicationModal-CloseModal" style="font-size: x-large;" onclick="closeNewWebApplicationModal()">X</span>
+                </div>
+                <!-- Body Section -->
+                <div id="NewWebApplicationModal-BodySection" style="border-top: 1px solid black;height: 300px;display: flex;align-items: center;flex-direction: column;">
+                    <div id="NewWebApplicationModal-StartPage" style="margin: auto;">
+                        <div id="NewWebApplicationModal-Choices" style="display: flex;flex-direction: column;align-items: center;gap: 3rem;padding:1rem;">
+                            <button id="NewWebApplicationButton" style="font-size: xx-large;border-radius: 10px;min-height: 5rem;" onclick="newWebApplication()">Web Application</button>
+                            @* <button id="NewClientConfigurationButton" style="font-size: xx-large;border-radius: 10px;min-height: 5rem;" onclick="">Client Configuration</button> *@
+                        </div>
+                    </div>
+                    <div id="NewWebApplicationModal-FromExistingOrScratch" style="margin: auto;" hidden>
+                        <div id="NewWebApplicationModal-FromExistingOrScratch-Choices" style="display: flex;flex-direction: column;align-items: center;gap: 3rem;padding:1rem;">
+                            @* <button id="NewWebApplicationModal-FromExistingButton" style="font-size: xx-large;border-radius: 10px;min-height: 5rem;" onclick="newWebApplicationFromExisting()">From Existing</button> *@
+                            <button id="NewWebApplicationModal-FromScratchButton" style="font-size: xx-large;border-radius: 10px;min-height: 5rem;" onclick="newWebApplicationFromScratch()">From Scratch</button>
+                        </div>
+                    </div>
+                    <div id="NewWebApplicationModal-FromExisting" style="margin: auto;" hidden>
+                        <div style="display: flex;flex-direction: column;gap: 1rem;">
+                            <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
+                                <label for="FromExisting-ChooseWebApplication" style="font-size: XX-large;text-align: center;"><u>Choose Web Application:</u></label>
+                                <select name="FromExisting-ChooseWebApplication" id="FromExisting-ChooseWebApplication" onchange="fromExistingChanged(this)" style="font-size: large;">
+                                    <option value="Agenda Online">Agenda Online</option>
+                                    <option value="Application Server (32-bit)">Application Server (32-bit)</option>
+                                    <option value="Application Server (64-bit)">Application Server (64-bit)</option>
+                                    <option value="Electronic Plan Review">Electronic Plan Review</option>
+                                    <option value="Gateway Caching Server">Gateway Caching Server</option>
+                                    <option value="Healthcare Form Manager">Healthcare Form Manager</option>
+                                    <option value="Patient Window">Patient Window</option>
+                                    <option value="Public Access - Legacy">Public Access - Legacy</option>
+                                    <option value="Public Access - Next Gen">Public Access - Next Gen</option>
+                                    <option value="Reporting Viewer">Reporting Viewer</option>
+                                    <option value="Web Server">Web Server</option>
+                                </select>
+                            </div>
+                            <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
+                                <label for="SelectWebConfig" style="font-size: XX-large;text-align: center;"><u>Select 'web.config'' file:</u></label>
+                                <input type="file" id="SelectWebConfig" name="SelectWebConfig" onchange="selectWebConfigChanged(this)" disabled/>
+                                <span style="color: red;font-weight:bold;" id="SelectWebConfig-ErrorText" hidden>File has to be a 'web.config'' file.</span>
+                            </div>
+                            <div id="SelectSessionAdminSecurityConfig-Section" style="display: none;flex-direction: column;align-items: center;gap: 0.5rem;">
+                                <label for="SelectSessionAdminSecurityConfig" style="font-size: XX-large;text-align: center;"><u>Select 'sessionAdminSecurity.config'' file:</u></label>
+                                <input type="file" id="SelectSessionAdminSecurityConfig" name="SelectSessionAdminSecurityConfig" onchange="selectSessionAdminSecurityConfigChanged(this)" disabled />
+                                <span style="color: red;font-weight:bold;" id="SelectSessionAdminSecurityConfig-ErrorText" hidden>File has to be a 'sessionAdminSecurity.config'' file.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="NewWebApplicationModal-VersionClientChoice" style="margin: auto 1rem;" hidden>
+                        <div style="display: flex;flex-direction: column;gap: 1rem;">
+                            <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
+                                <label for="ChooseWebApplicationVersion" style="font-size: XX-large;text-align: center;"><u>Version:</u></label>
+                            <select name="ChooseWebApplicationVersion" id="ChooseWebApplicationVersion" onchange="webApplicationVersionChanged(this)" style="font-size: large;">
+                                </select>
+                            </div>
+                            <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
+                                <label for="ChooseWebApplication" style="font-size: XX-large;text-align: center;"><u>Type:</u></label>
+                                <select name="ChooseWebApplication" id="ChooseWebApplication" style="font-size: large;" onchange="webApplicationTypeChanged(this)" disabled>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="NewWebApplicationModal-WebSiteChoiceAndNaming" style="margin: auto 1rem;" hidden>
+                        <div style="display: flex;flex-direction: column;gap: 1rem;">
+                            <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
+                                <label for="ChooseWebSite" style="font-size: XX-large;text-align: center;"><u>Web Site:</u></label>
+                                <select name="ChooseWebSite" id="ChooseWebSite" onchange="webSiteChanged(this)" style="font-size: large;">
+                                </select>
+                            </div>
+                            <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
+                                <label for="ChoosePath" style="font-size: XX-large;text-align: center;"><u>Path:</u></label>
+                                <select name="ChoosePath" id="ChoosePath" style="font-size: large;" onchange="webSitePathChanged(this)" disabled>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="NewWebApplicationModal-WebApplicationAppPoolNaming" style="margin: auto 1rem;" hidden>
+                        <div style="display: flex;flex-direction: column;gap: 1rem;">
+                            <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
+                            <label for="WebApplicationName" style="font-size: XX-large;text-align: center;"><u>Web Application Name:</u></label>
+                                <input type="text" name="WebApplicationName" id="WebApplicationName" style="font-size: large;" oninput="webSiteApplicationNameChanged(this)"/>
+                                <span id="WebApplicationName-ErrorText" style="color: red;font-weight:bold;"></span>
+                            </div>
+                            <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
+                                <label for="WebApplicationPoolName" style="font-size: XX-large;text-align: center;"><u>Web Application Pool Name:</u></label>
+                                <div>
+                                    <input type="checkbox" id="SameAsWebApplication" name="SameAsWebApplication" onclick="webSiteSameAsApplicationChanged(this)">
+                                    <label for="SameAsWebApplication" style="font-size: large;text-align: center;">Same as Web Application</label>
+                                </div>
+                                <input type="text" name="WebApplicationPoolName" id="WebApplicationPoolName" style="font-size: large;" oninput="webSiteApplicationPoolNameChanged(this)" disabled />
+                                <span id="WebApplicationPoolName-ErrorText" style="color: red;font-weight:bold;"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="NewWebApplicationModal-CheckingNewWebApplicationProgress" style="display: none;flex-direction: column;align-items: center;margin: auto;">
+                        <label for="NewWebApplicationModal-CheckingNewWebApplicationProgressBar" style="font-size:xx-large;">Validating New Configuration Details...</label>
+                        <progress class="loadingWebApplicationsProgressBar" id="NewWebApplicationModal-CheckingNewWebApplicationProgressBar"></progress>
+                    </div>
+                    <div id="NewWebApplicationModal-CreatingNewWebApplicationProgress" style="display: none;flex-direction: column;align-items: center;margin: auto;">
+                        <label for="NewWebApplicationModal-CreatingNewWebApplicationProgressBar" style="font-size:xx-large;">Creating your new Web Application...</label>
+                        <progress class="loadingWebApplicationsProgressBar" id="NewWebApplicationModal-CreatingNewWebApplicationProgressBar"></progress>
+                    </div>
+                </div>
+                <div id="NewWebApplicationModal-Footer" style="display: none;padding: 0.5rem;border-top: 1px solid black;justify-content: flex-end;">
+                    <div id="NewWebApplicationModal-Footer-ButtonsContainer">
+                        <button id="NewWebApplicationModal-BackButton" style="font-size: large;margin: 0 0.5rem;border-radius: 10px;" onclick="backButtonClicked()">&lt; Back</button>
+                        <button id="NewWebApplicationModal-NextCreateButton" style="font-size: large;margin: 0 0.5rem;border-radius: 10px;" onclick="nextButtonClicked()">Next &gt;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <header>
             <div id="h1-container" class="h1-container">
                 <div style="display:flex;justify-content:space-between;padding-left: 0.5%;">
@@ -352,6 +466,7 @@
                 <p id="LoadedApplicationName" style="margin: 0;padding-left: 0.5%;padding-bottom: 0.5%;"></p>
                 <div id="core-action-buttons-div" class="core-action-buttons-div">
                     <div style="display: flex;">
+                    <button id="NewWebApplication-CoreActionButton" class="core-action-buttons" type="button" onclick="createNewConfiguration()"><u>New Configuration</u></button>
                         <button id="Open-Web-Application-Core-Action-Button" class="core-action-buttons" type="button" onclick="openModal()"><u>Open Web Application</u></button>
                         <button id="Copy-Web-Application-Core-Action-Button" class="core-action-buttons Web-Application-Button" type="button" onclick="openCopyWebApplicationModal()"><u>Copy Web Application</u></button>
                         <button id="Save-Web-Application-Core-Action-Button" class="core-action-buttons Web-Application-Button" type="button" onclick="configOkToSave()"><u>Save Web Application</u></button>

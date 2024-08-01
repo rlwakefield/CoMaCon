@@ -143,6 +143,7 @@ let optimizeForWindowsAuth = [];
 let tdIdValue = 0;
 let apiRootUrl = "";
 let configurationChanged = false;
+let newConfigurationDetails = [];
 
 /* ADFS Settings Variables */
 let audienceUrisIdNumber = 0;
@@ -184,7 +185,6 @@ let keywordTypeAheadIdNumber = 0;
  *                  Page Load SCript
  ********************************************************/
 async function onPageLoadLogic() {
-    console.log(localStorage.getItem("darkModeState"));
     if (localStorage.getItem("darkModeState") != null) {
         if (localStorage.getItem("darkModeState") == "true") {
             document.getElementById("checkbox").checked = true;
@@ -193,8 +193,10 @@ async function onPageLoadLogic() {
         }
         toggleDarkLightMode(document.getElementById("checkbox"));
     }
+    
     if (sessionStorage.getItem('WebApplicationChosenArray') != null && sessionStorage.getItem('WebApplicationChosenArray') != undefined) {
         let object = JSON.parse(sessionStorage.getItem('WebApplicationChosenArray'));
+        console.log(object);
         sessionStorage.removeItem('WebApplicationChosenArray');
         apiRootUrl = sessionStorage.getItem('apiRootUrl');
 
@@ -203,6 +205,11 @@ async function onPageLoadLogic() {
         loadWebApplicationConfiguration(object[0].webConfigPhysicalPath, object[0].type, object[0].version, object[0].site, object[0].name, object[0].path, object[0].physicalPath, object[0].bitness);
     } else {
         //Need to redirect the user back to the home page.
+        console.log(window.location.href);
+        console.log(apiRootUrl);
+        //if (window.location.href != apiRootUrl + "/") {
+        //    window.location.href = apiRootUrl;
+        //}
     }
 }
 
@@ -249,7 +256,7 @@ async function checkWhatWebApplicationToParse(config, executionMethod) {
             case "CopyWebApplication":
                 document.getElementById("AlertModal-Text-Paragraph").innerText = "Your " + coreConfigData["ApplicationName"] + " Application is ready. Click OK to start updating the configuration."
                 document.getElementById("ProcessingWebConfigValuesProgress").style.display = "none";
-                document.getElementById("OnBase-Configuration-Main-Button").click();
+                //document.getElementById("OnBase-Configuration-Main-Button").click();
                 document.getElementById("AlertModal").style.display = "block";
                 break;
         }
@@ -340,40 +347,44 @@ function okButtonClicked() {
         if (element.id === "tdName") {
             let object = webApplications.filter(path => path.name === element.innerHTML);
             sessionStorage.setItem('WebApplicationChosenArray', JSON.stringify(object));
-            switch (object[0].type) {
-                case "Application Server":
-                    window.location.href = apiRootUrl + "/Core/ApplicationServer";
-                    break;
-                case "Agenda Online":
-                    window.location.href = apiRootUrl + "/Core/AgendaOnlineServer";
-                    break;
-                case "Electronic Plan Review":
-                    window.location.href = apiRootUrl + "/Core/ElectronicPlanReview";
-                    break;
-                case "Gateway Caching Server":
-                    window.location.href = apiRootUrl + "/Core/GatewayCachingServer";
-                    break;
-                case "Healthcare Form Manager":
-                    window.location.href = apiRootUrl + "/Core/HealthcareFormManager";
-                    break;
-                case "Patient Window":
-                    window.location.href = apiRootUrl + "/Core/OnBasePatientWindow";
-                    break;
-                case "Public Access - Legacy":
-                    window.location.href = apiRootUrl + "/Core/PublicAccessViewerLegacy"
-                    break;
-                case "Public Access - Next Gen":
-                    window.location.href = apiRootUrl + "/Core/PublicAccessViewerNextGen"
-                    break;
-                case "Reporting Viewer":
-                    window.location.href = apiRootUrl + "/Core/ReportingWebViewer";
-                    break;
-                case "Web Server":
-                    window.location.href = apiRootUrl + "/Core/WebServer";
-                    break;
-            }
+            goToWebApplicationConfigurationPage(object);
         }
     });
+}
+
+function goToWebApplicationConfigurationPage(object) {
+    switch (object[0].type) {
+        case "Application Server":
+            window.location.href = apiRootUrl + "/Core/ApplicationServer";
+            break;
+        case "Agenda Online":
+            window.location.href = apiRootUrl + "/Core/AgendaOnlineServer";
+            break;
+        case "Electronic Plan Review":
+            window.location.href = apiRootUrl + "/Core/ElectronicPlanReview";
+            break;
+        case "Gateway Caching Server":
+            window.location.href = apiRootUrl + "/Core/GatewayCachingServer";
+            break;
+        case "Healthcare Form Manager":
+            window.location.href = apiRootUrl + "/Core/HealthcareFormManager";
+            break;
+        case "Patient Window":
+            window.location.href = apiRootUrl + "/Core/OnBasePatientWindow";
+            break;
+        case "Public Access - Legacy":
+            window.location.href = apiRootUrl + "/Core/PublicAccessViewerLegacy"
+            break;
+        case "Public Access - Next Gen":
+            window.location.href = apiRootUrl + "/Core/PublicAccessViewerNextGen"
+            break;
+        case "Reporting Viewer":
+            window.location.href = apiRootUrl + "/Core/ReportingWebViewer";
+            break;
+        case "Web Server":
+            window.location.href = apiRootUrl + "/Core/WebServer";
+            break;
+    }
 }
 
 
@@ -446,7 +457,6 @@ async function adfsEnabledCheckbox(checkbox) {
 }
 
 async function validateNumericValue(field) {
-    //console.log(field);
     if (field.attributes["min"]?.value != null || field.attributes["min"]?.value != undefined) {
         if (parseFloat(field.value) < field.attributes["min"].value) {
             document.querySelectorAll("[id$='Section']").forEach((element) => {
@@ -605,8 +615,38 @@ function parseIisConfigurationApplicationPool(config) {
 /********************************************************
 *           Create Web Application Functions
 ********************************************************/
-function createWebApplication() {
-    window.alert("This will be released in a future build.");
+async function createNewConfiguration() {
+    document.getElementById("NewWebApplicationModal").style.display = "block";
+    await fetch(apiRootUrl + "/api/Endpoint/GetNewConfigurationDetails")
+        .then(response => response.json())
+        .then(data => {
+            newConfigurationDetails = data;
+        });
+
+    let chooseversion = document.getElementById("ChooseWebApplicationVersion");
+    let versiongroups = newConfigurationDetails["webApplicationConfiguration"]["versionGroups"]
+    for (let i = 0; i < versiongroups.length; i++)
+    {
+        let newOptGroup = document.createElement("optgroup");
+        newOptGroup.setAttribute("label", versiongroups[i]["majorVersion"]);
+        let versions = versiongroups[i]["versions"];
+        for (let j = 0; j < versions.length; j++) {
+            let newOpt = document.createElement("option");
+            newOpt.value = versions[j]["specificVersion"];
+            newOpt.innerText = versions[j]["specificVersion"];
+            newOptGroup.appendChild(newOpt);
+        }
+        chooseversion.appendChild(newOptGroup);
+    }
+
+    let websitedetails = newConfigurationDetails["webApplicationConfiguration"]["webSiteDetails"];
+    document.getElementById("ChooseWebSite").innerHTML = "";
+    for (let j = 0; j < websitedetails.length; j++) {
+        let newOpt = document.createElement("option");
+        newOpt.value = websitedetails[j]["siteName"];
+        newOpt.innerText = websitedetails[j]["siteName"];
+        document.getElementById("ChooseWebSite").appendChild(newOpt);
+    }
 }
 
 
@@ -989,13 +1029,11 @@ async function openModal() {
     checkIfOkToIgnoreChangedFields().then((result) => {
         if (result == true) {
             //Yes, the changes can be ignored.
-            console.log("The changes can be ignored.");
             loadWebApplications();
             document.getElementById("chooseWebApplicationModal").style.display = "block";
         } else {
             //No, the changes cannot be ignored.
             //Do Nothing
-            console.log("The changes cannot be ignored.");
         }
     });
 }
@@ -1231,7 +1269,6 @@ async function validateDataSourceFieldSelectionToConnectionStringArrayV2() {
 *               Save Validation Functions
 ********************************************************/
 async function preSaveValidationV2() {
-    console.log(ConnectionStringsArray.length);
     if (ConnectionStringsArray.length > 0) {
         if (await validateDataSourceFieldSelectionToConnectionStringArrayV2()) {
             return true;
@@ -1369,7 +1406,6 @@ async function parseData(config) {
     body.addEventListener('input', function (event) {
         // Check if the event target is an input element
         if (event.target.tagName.toLowerCase() === 'input') {
-            //console.log(`Input changed: ${event.target.name}, Value: ${event.target.value}`);
             // Perform your desired operations here
             if (event.target.id != "checkbox") {
                 configurationChanged = true;
@@ -1380,7 +1416,6 @@ async function parseData(config) {
     body.addEventListener('change', function (event) {
         // Check if the event target is an input element
         if (event.target.tagName.toLowerCase() === 'select') {
-            //console.log(`Input changed: ${event.target.name}, Value: ${event.target.value}`);
             // Perform your desired operations here
             configurationChanged = true;
         }
@@ -1412,7 +1447,6 @@ async function parseParseWorkViewCoreFormattedTextIframeSupportedDomains(config)
 }
 
 async function parseResponsiveAppsApp(config) {
-    //console.log(config);
     responsiveAppsApps = config["responsiveApps"];
     let responsiveAppsAppsSelectList = document.getElementById("ResponsiveAppsApp-SelectList");
     for (let i = 0; i < responsiveAppsApps.length; i++) {
@@ -1427,7 +1461,6 @@ async function parseResponsiveAppsApp(config) {
 
 async function parseTooltips(config) {
     for (let i = 0; i < config.length; i++) {
-        //console.log(config[i]);
         if (config[i]["tooltip"].includes("<br>")) {
             document.getElementById(config[i]["htmlId"]).innerHTML = config[i]["tooltip"];
         } else {
@@ -1874,7 +1907,6 @@ async function saveData() {
     await saveKnownElements(coreConfigData["knownKeys"]);
     await saveKnownElements(coreConfigData["translatorKnownKeys"]);
     await saveIisConfiguration(coreConfigData["IisConfiguration"]);
-    //console.log(optimizeForWindowsAuth);
     coreConfigData["WindowsAuthOptimizeFor"] = optimizeForWindowsAuth;
     if (diagnosticsRoutes.length > 0) {
         await saveHylandLogging();
@@ -2919,9 +2951,7 @@ async function updateDataSourceOptionsV3() {
 
 async function checkSetAppendedTextErrorV3() {
     let incompletefields = await checkIncompleteFieldsV3();
-    //let duplicatename = await checkForDuplicateConnectionStringNamesV3();
     let duplicateConnectionStringNames = await groupByNameKey(ConnectionStringsArray, "Name");
-    //console.log(duplicateConnectionStringNames);
 
     let connectionStringSelectList = document.getElementById("ConnectionStrings-SelectList");
     Object.keys(duplicateConnectionStringNames).forEach(async key => {
@@ -3167,7 +3197,6 @@ async function copyConnectionStringV3() {
 async function deleteConnectionStringV3() {
     if (document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicate"] != "") {
         let relatedDuplicates = document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicates"].value.split(",");
-        //console.log("Related Duplicates: " + relatedDuplicates.length);
         if (relatedDuplicates.length > 0) {
             //This means that it has more than 1 related duplicate.
             //Going to find each of the related items and perform the appropriate logic.
@@ -3245,21 +3274,9 @@ async function validateConnectionStringFieldLengthV3(field) {
     }
 }
 
-//async function checkErroredConnectionStrings() {
-//    let incompleteConnectionStrings = document.getElementsByClassName("incompleteConnectionString");
-//    let duplicateConnectionStrings = document.getElementsByClassName("duplicateConnectionStringName");
-
-//    if (incompleteConnectionStrings.length > 0 || duplicateConnectionStrings.length > 0) {
-//        await pushErrorToArray(await findErrorArrayToSet("connectionStringDataSourceName"));
-//    } else {
-//        await spliceErrorFromArray("connectionStringDataSourceName");
-//    }
-//}
-
 async function testConnectionString() {
     //Get the selected connection string from the ConnectionStringsArray.
     let selectedConnectionString = ConnectionStringsArray.filter(cstring => cstring.id === document.getElementById("ConnectionStrings-SelectList").value);
-    console.log(selectedConnectionString);
     document.getElementById("connectionStringTestModal").style.display = "flex";
     const fetchOptions = {
         method: "POST",
@@ -3272,10 +3289,7 @@ async function testConnectionString() {
         .then(response => response.json())
         .then(data => {
             document.getElementById("connectionStringTestModal").style.display = "none";
-            console.log(data);
-            console.log(data["ResultCode"] == "1");
             let testconnectionalert = document.getElementById("TestConnectionString-Alert");
-            console.log(testconnectionalert);
             if (data["ResultCode"] == "0") {
                 testconnectionalert.innerText = data["ResultMessage"];
                 testconnectionalert.style.color = "green";
@@ -3320,7 +3334,6 @@ async function validateIdentityProviderFields(field) {
     //Check if any of the fields in the idpFields array are empty or not.
     for (let i = 0; i < idpFields.length; i++) {
         if (document.getElementById(idpFields[i]).value.length > 0) {
-            //console.log("Field Length: "+document.getElementById(idpFields[i]).value.length);
             allIdpFieldsEmpty = false;
         }
     }
@@ -3384,7 +3397,6 @@ async function validateIdentityProviderFields(field) {
 *            Dark/Light Mode Toggle Functions
 ********************************************************/
 function toggleDarkLightMode(checkbox) {
-    console.log(checkbox.checked);
     if (checkbox.checked) {
         localStorage.setItem("darkModeState", true);
         //Elements to add "dark_mode" class to:
@@ -3395,11 +3407,15 @@ function toggleDarkLightMode(checkbox) {
         document.getElementById("SaveErrors-Content").classList.add('dark_mode');
         document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.add('dark_mode');
         document.getElementById("errorLoadModal-content").classList.add('dark_mode');
+        document.getElementById("NewWebApplicationModal-Container").classList.add('dark_mode');
+        document.getElementById("NewWebApplicationModal-BodySection").classList.add('dark_mode');
+        document.getElementById("NewWebApplicationModal-Footer").classList.add('dark_mode');
 
         //Elements to add "dark_mode_titlebar" class to:
         document.getElementById("h1-container").classList.add('dark_mode_titlebar');
         document.getElementById("core-action-buttons-div").classList.add('dark_mode_titlebar');
         document.getElementById("ChooseApplicationTitleBar").classList.add('dark_mode_titlebar');
+        document.getElementById("NewWebApplicationModal-TitleBar").classList.add('dark_mode_titlebar');
         Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
             element.classList.add('dark_mode_titlebar')
         });
@@ -3421,6 +3437,10 @@ function toggleDarkLightMode(checkbox) {
         Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
             element.classList.add('dark_mode_links');
         });
+
+        Array.from(document.getElementsByTagName("optgroup")).forEach(element => {
+            element.classList.add('dark_mode_select_optgroup');
+        });
     } else {
         localStorage.setItem("darkModeState", false);
         //Elements to remove "dark_mode" class to:
@@ -3431,11 +3451,15 @@ function toggleDarkLightMode(checkbox) {
         document.getElementById("SaveErrors-Content").classList.remove('dark_mode');
         document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.remove('dark_mode');
         document.getElementById("errorLoadModal-content").classList.remove('dark_mode');
+        document.getElementById("NewWebApplicationModal-Container").classList.remove('dark_mode');
+        document.getElementById("NewWebApplicationModal-BodySection").classList.remove('dark_mode');
+        document.getElementById("NewWebApplicationModal-Footer").classList.remove('dark_mode');
 
         //Elements to add "dark_mode_titlebar" class to:
         document.getElementById("h1-container").classList.remove('dark_mode_titlebar');
         document.getElementById("core-action-buttons-div").classList.remove('dark_mode_titlebar');
         document.getElementById("ChooseApplicationTitleBar").classList.remove('dark_mode_titlebar');
+        document.getElementById("NewWebApplicationModal-TitleBar").classList.remove('dark_mode_titlebar');
         Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
             element.classList.remove('dark_mode_titlebar')
         });
@@ -3455,9 +3479,11 @@ function toggleDarkLightMode(checkbox) {
         Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
             element.classList.remove('dark_mode_links');
         });
-    }
 
-    //console.log(localStorage.getItem("darkModeState"));
+        Array.from(document.getElementsByTagName("optgroup")).forEach(element => {
+            element.classList.remove('dark_mode_select_optgroup');
+        });
+    }
 }
 
 
@@ -3484,6 +3510,555 @@ async function groupByNameKey(array,groupingKeyName) {
 
         return result;
     }, {}); // Initial value is an empty object
+}
+
+
+
+/********************************************************
+*              New Web Application Functions
+********************************************************/
+let currentPage = "NewWebApplicationModal-StartPage";
+
+function webApplicationVersionChanged(field) {
+    //Clear the current options from the ChooseWebApplication select element.
+    document.getElementById("ChooseWebApplication").innerHTML = "";
+    let majorversion = field.value.split(".")[0] + "." + field.value.split(".")[1];
+    let majorversionarray = Array.from(newConfigurationDetails["webApplicationConfiguration"]["versionGroups"]).find(result => result["majorVersion"] == majorversion);
+    let specificversionarray = Array.from(majorversionarray["versions"]).find(result2 => result2["specificVersion"] == field.value);
+    Array.from(specificversionarray["webApplications"]).forEach(webApp => {
+        let newWebAppOption = document.createElement("option");
+        newWebAppOption.value = webApp["webApplicationName"];
+        newWebAppOption.innerText = webApp["webApplicationName"];
+        document.getElementById("ChooseWebApplication").appendChild(newWebAppOption);
+    });
+
+    document.getElementById("ChooseWebApplication").value = "";
+    document.getElementById("ChooseWebApplication").disabled = false;
+}
+
+function webApplicationTypeChanged(field) {
+    if (field.value != "") {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+    } else {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    }
+}
+
+function backButtonClicked() {
+    switch (currentPage) {
+        case "NewWebApplicationModal-StartPage":
+            break;
+        case "NewWebApplicationModal-FromExistingOrScratch":
+            document.getElementById("NewWebApplicationModal-StartPage").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.add("slide-out-right");
+            document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-StartPage").classList.add("slide-in-left");
+                document.getElementById("NewWebApplicationModal-StartPage").hidden = false;
+                document.getElementById("NewWebApplicationModal-FromExistingOrScratch").hidden = true;
+                currentPage = "NewWebApplicationModal-StartPage";
+            }, 250);
+            break;
+        case "NewWebApplicationModal-FromExisting":
+            document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-FromExisting").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-FromExisting").classList.add("slide-out-right");
+            //document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.add("slide-in-left");
+                document.getElementById("NewWebApplicationModal-FromExistingOrScratch").hidden = false;
+                document.getElementById("NewWebApplicationModal-FromExisting").hidden = true;
+                currentPage = "NewWebApplicationModal-FromExistingOrScratch";
+            }, 250);
+            break;
+        case "NewWebApplicationModal-VersionClientChoice":
+            document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.add("slide-out-right");
+            //document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.add("slide-in-left");
+                document.getElementById("NewWebApplicationModal-FromExistingOrScratch").hidden = false;
+                document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = true;
+                currentPage = "NewWebApplicationModal-FromExistingOrScratch";
+            }, 250);
+            break;
+        case "NewWebApplicationModal-WebSiteChoiceAndNaming":
+            document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.add("slide-out-right");
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.add("slide-in-left");
+                document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = false;
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = true;
+                currentPage = "NewWebApplicationModal-VersionClientChoice";
+            }, 250);
+            document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+            break;
+        case "NewWebApplicationModal-WebApplicationAppPoolNaming":
+            document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.add("slide-out-right");
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.add("slide-in-left");
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = true;
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = false;
+                currentPage = "NewWebApplicationModal-WebSiteChoiceAndNaming";
+            }, 250);
+            document.getElementById("NewWebApplicationModal-NextCreateButton").innerText = "Next >";
+            document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+            break;
+        case "NewWebApplicationModal-CheckingNewWebApplicationProgress":
+            document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").classList.add("slide-out-right");
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.add("slide-in-left");
+                document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").style.display = "none";
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").style.display = "flex";
+                currentPage = "NewWebApplicationModal-WebApplicationAppPoolNaming";
+            }, 250);
+            document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
+            document.getElementById("NewWebApplicationModal-CloseModal").style.display = "block";
+            document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+            break;
+    }
+}
+
+async function nextButtonClicked() {
+    switch (currentPage) {
+        case "NewWebApplicationModal-VersionClientChoice":
+            document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.add("slide-out-left");
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.add("slide-in-right");
+                document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = true;
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = false;
+                currentPage = "NewWebApplicationModal-WebSiteChoiceAndNaming";
+            }, 250);
+            document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+            //document.getElementById("ChooseWebSite").innerHTML = `<option value="Default Web Site">Default Web Site</option>`;
+            document.getElementById("ChooseWebSite").value = "";
+            document.getElementById("ChoosePath").innerHTML = "";
+            document.getElementById("ChoosePath").disabled = true;
+            document.getElementById("ChoosePath").value = "";
+            break;
+        case "NewWebApplicationModal-WebSiteChoiceAndNaming":
+            document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.add("slide-out-left");
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.add("slide-in-right");
+                document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = true;
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = false;
+                currentPage = "NewWebApplicationModal-WebApplicationAppPoolNaming";
+            }, 250);
+            document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+            document.getElementById("WebApplicationName").value = "";
+            document.getElementById("SameAsWebApplication").checked = true;
+            document.getElementById("WebApplicationPoolName").value = "";
+            document.getElementById("WebApplicationPoolName").disabled = true;
+            document.getElementById("NewWebApplicationModal-NextCreateButton").innerText = "Create";
+            break;
+        case "NewWebApplicationModal-WebApplicationAppPoolNaming":
+            document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+            document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.add("slide-out-left");
+            setTimeout(function () {
+                document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").classList.add("slide-in-right");
+                document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").style.display = "none";
+                document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").style.display = "flex";
+                currentPage = "NewWebApplicationModal-CheckingNewWebApplicationProgress";
+            }, 250);
+            document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
+            document.getElementById("NewWebApplicationModal-CloseModal").style.display = "none";
+            let bitness = (document.getElementById("ChooseWebApplication").value != "Application Server (32-Bit)") ? "64-Bit" : "32-Bit";
+            //Make the call to create the new Web Application
+            let webApplicationToCreate = {
+                siteName: document.getElementById("ChooseWebSite").value,
+                virtualDirectory: document.getElementById("ChoosePath").value,
+                webApplicationName: document.getElementById("WebApplicationName").value,
+                webApplicationType: document.getElementById("ChooseWebApplication").value,
+                webApplicationVersion: document.getElementById("ChooseWebApplicationVersion").value,
+                webApplicationBitness: bitness,
+                webApplicationPoolName: document.getElementById("WebApplicationPoolName").value
+            };
+            console.log(webApplicationToCreate["virtualDirectory"]);
+            let dupResult = await newWebApplicationValidateNoDuplicate(webApplicationToCreate)
+            if (dupResult) {
+                const fetchOptions = {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(webApplicationToCreate)
+                };
+                fetch(apiRootUrl + "/api/Endpoint/CreateNewWebApplication?action=FromScratch", fetchOptions)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        switch (data) {
+                            case 0:
+                                let virtualDirectoryPath = "";
+                                if (webApplicationToCreate["virtualDirectory"] == "root") {
+                                    virtualDirectoryPath = "/";
+                                } else {
+                                    virtualDirectoryPath = webApplicationToCreate["virtualDirectory"];
+                                }
+                                let webAppType = "";
+                                if (webApplicationToCreate["webApplicationType"] == "Application Server (32-Bit)" || webApplicationToCreate["webApplicationType"] == "Application Server (64-Bit)") {
+                                    webAppType = "Application Server";
+                                } else {
+                                    webAppType = webApplicationToCreate["webApplicationType"];
+                                }
+                                let webApplicationToLoad = [
+                                    {
+                                    name: webApplicationToCreate["webApplicationName"],
+                                    type: webAppType,
+                                    version: webApplicationToCreate["webApplicationVersion"],
+                                    site: webApplicationToCreate["siteName"],
+                                    path: virtualDirectoryPath,
+                                    webConfigPhysicalPath: "",
+                                    physicalPath: "",
+                                    bitness: webApplicationToCreate["webApplicationBitness"]
+                                    }
+                                ];
+                                sessionStorage.setItem('WebApplicationChosenArray', JSON.stringify(webApplicationToLoad));
+                                console.log(sessionStorage.getItem('WebApplicationChosenArray'));
+                                switch (webAppType) {
+                                    case "Application Server":
+                                        window.location.href = apiRootUrl + "/Core/ApplicationServer";
+                                        break;
+                                    case "Agenda Online":
+                                        window.location.href = apiRootUrl + "/Core/AgendaOnlineServer";
+                                        break;
+                                    case "Electronic Plan Review":
+                                        window.location.href = apiRootUrl + "/Core/ElectronicPlanReview";
+                                        break;
+                                    case "Gateway Caching Server":
+                                        window.location.href = apiRootUrl + "/Core/GatewayCachingServer";
+                                        break;
+                                    case "Healthcare Form Manager":
+                                        window.location.href = apiRootUrl + "/Core/HealthcareFormManager";
+                                        break;
+                                    case "Patient Window":
+                                        window.location.href = apiRootUrl + "/Core/OnBasePatientWindow";
+                                        break;
+                                    case "Public Access - Legacy":
+                                        window.location.href = apiRootUrl + "/Core/PublicAccessViewerLegacy"
+                                        break;
+                                    case "Public Access - Next Gen":
+                                        window.location.href = apiRootUrl + "/Core/PublicAccessViewerNextGen"
+                                        break;
+                                    case "Reporting Viewer":
+                                        window.location.href = apiRootUrl + "/Core/ReportingWebViewer";
+                                        break;
+                                    case "Web Server":
+                                        window.location.href = apiRootUrl + "/Core/WebServer";
+                                        break;
+                                }
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                break;
+                            case 4:
+                                break;
+                            case 5:
+                                break;
+                        }
+                    });
+            }
+            break;
+    }
+}
+
+function webSiteChanged(field) {
+    if (field.value != "") {
+        document.getElementById("ChoosePath").disabled = false;
+        //document.getElementById("ChoosePath").innerHTML = `<option value="Root">Root</option>`;
+        document.getElementById("ChoosePath").innerHTML = "";
+        let applicationPaths = Array.from(newConfigurationDetails["webApplicationConfiguration"]["webSiteDetails"]).find(result => result["siteName"] == field.value);
+        for (let i = 0; i < applicationPaths["virtualDirectories"].length; i++) {
+            let newPathOption = document.createElement("option");
+            newPathOption.value = applicationPaths["virtualDirectories"][i];
+            newPathOption.innerText = applicationPaths["virtualDirectories"][i];
+            document.getElementById("ChoosePath").appendChild(newPathOption);
+        }
+        document.getElementById("ChoosePath").value = "";
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    } else {
+        document.getElementById("ChoosePath").disabled = true;
+        document.getElementById("ChoosePath").innerHTML = "";
+    }
+}
+
+function webSitePathChanged(field) {
+    if (field.value != "") {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+    } else {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    }
+}
+
+function webSiteApplicationNameChanged(field) {
+    if (field.value != "" && document.getElementById("SameAsWebApplication").checked) {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+        document.getElementById("WebApplicationPoolName").value = field.value;
+    } else if (field.value != "" && !document.getElementById("SameAsWebApplication").checked) {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+    } else {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    }
+    document.getElementById(field.id + "-ErrorText").innerText = "";
+    document.getElementById("WebApplicationPoolName-ErrorText").innerText = "";
+}
+
+function webSiteSameAsApplicationChanged(field) {
+    if (field.checked) {
+        document.getElementById("WebApplicationPoolName").value = document.getElementById("WebApplicationName").value;
+        document.getElementById("WebApplicationPoolName").disabled = true;
+    } else {
+        document.getElementById("WebApplicationPoolName").disabled = false;
+    }
+    webSiteApplicationPoolNameChanged(document.getElementById("WebApplicationPoolName"));
+    document.getElementById(field.id + "-ErrorText").innerText = "";
+}
+
+function webSiteApplicationPoolNameChanged(field) {
+    if (field.value != "") {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+    } else {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    }
+}
+
+function fromExistingChanged(field) {
+    if (field.value == "Application Server") {
+        document.getElementById("SelectWebConfig").disabled = false;
+        document.getElementById("SelectSessionAdminSecurityConfig").disabled = false;
+        document.getElementById("SelectSessionAdminSecurityConfig-Section").style.display = "flex";
+    } else {
+        document.getElementById("SelectWebConfig").disabled = false;
+        document.getElementById("SelectSessionAdminSecurityConfig").disabled = true;
+        document.getElementById("SelectSessionAdminSecurityConfig-Section").style.display = "none";
+    }
+}
+
+function selectWebConfigChanged(field) {
+    if (field.files.length != 0) {
+        if (field.files[0].name != "web.config") {
+            //Not a web.config file.
+            document.getElementById("SelectWebConfig").value = "";
+            document.getElementById("SelectWebConfig-ErrorText").hidden = false;
+            document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+        } else {
+            //It is a web.config file.
+            document.getElementById("SelectWebConfig-ErrorText").hidden = true;
+
+            //Checks if the Web Application selected is "Application Server" and if the Session Admin Security Config file is selected.
+            if (document.getElementById("FromExisting-ChooseWebApplication").value == "Application Server") {
+                //It is an Application Server, so we need to check if a file is selected.
+                if (document.getElementById("SelectSessionAdminSecurityConfig").files.length != 0) {
+                    //A file is selected.
+                    //Checks if the file selected is a sessionAdminSecurity.config file.
+                    if (document.getElementById("SelectSessionAdminSecurityConfig").files[0].name != "sessionAdminSecurity.config") {
+                        //Not a sessionAdminSecurity.config file.
+                        document.getElementById("SelectSessionAdminSecurityConfig").value = "";
+                        document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = false;
+                        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+                    } else {
+                        //It is a sessionAdminSecurity.config file.
+                        document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = true;
+                        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+                    }
+                } else {
+                    //A file is NOT selected.
+                    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+                }
+            } else {
+                //It is not an "Application Server" so I need to hide the Session Admin Security Config file section.
+                document.getElementById("SelectSessionAdminSecurityConfig-Section").style.display = "none";
+                document.getElementById("SelectSessionAdminSecurityConfig").disabled = true;
+                document.getElementById("SelectSessionAdminSecurityConfig").value = "";
+                document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = true;
+                document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+            }
+            //document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+        }
+    } else {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    }
+}
+
+function selectSessionAdminSecurityConfigChanged(field) {
+    //Verify if a file has been selected.
+    if (field.files.length != 0) {
+        //File has been selected.
+        //Checks if the file selected is a sessionAdminSecurity.config file.
+        if (field.files[0].name != "sessionAdminSecurity.config") {
+            //Not a sessionAdminSecurity.config file.
+            document.getElementById("SelectSessionAdminSecurityConfig").value = "";
+            document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = false;
+            document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+        } else {
+            //It is a sessionAdminSecurity.config file.
+            document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = true;
+
+            //Check if a web.config file is selected.
+            if (document.getElementById("SelectWebConfig").files.length != 0) {
+                document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
+            } else {
+                document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+            }
+        }
+    } else {
+        document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    }
+}
+
+function newWebApplication() {
+    document.getElementById("NewWebApplicationModal-StartPage").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-StartPage').classList.add('slide-out-left');
+    setTimeout(function () {
+        //document.getElementById("ChooseWebApplicationVersion").value = "";
+        //document.getElementById("ChooseWebApplication").value = "";
+        document.getElementById('NewWebApplicationModal-StartPage').hidden = true;
+        document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = false;
+        document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+        document.getElementById('NewWebApplicationModal-FromExistingOrScratch').classList.add('slide-in-right');
+    }, 250);
+    document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
+    currentPage = "NewWebApplicationModal-FromExistingOrScratch";
+    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+}
+
+function newWebApplicationFromExisting() {
+    document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-FromExistingOrScratch').classList.add('slide-out-left');
+    setTimeout(function () {
+        document.getElementById("ChooseWebApplicationVersion").value = "";
+        document.getElementById("ChooseWebApplication").value = "";
+        document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = true;
+        document.getElementById('NewWebApplicationModal-FromExisting').hidden = false;
+        document.getElementById("NewWebApplicationModal-FromExisting").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+        document.getElementById('NewWebApplicationModal-FromExisting').classList.add('slide-in-right');
+    }, 250);
+    document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
+    document.getElementById("FromExisting-ChooseWebApplication").value = "";
+    currentPage = "NewWebApplicationModal-FromExisting";
+    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+    document.getElementById("SelectSessionAdminSecurityConfig-Section").style.display = "none";
+    document.getElementById("SelectWebConfig").value = "";
+    document.getElementById("SelectSessionAdminSecurityConfig").value = "";
+}
+
+function newWebApplicationFromScratch() {
+    document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-FromExistingOrScratch').classList.add('slide-out-left');
+    setTimeout(function () {
+        document.getElementById("ChooseWebApplicationVersion").value = "";
+        document.getElementById("ChooseWebApplication").value = "";
+        document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = true;
+        document.getElementById('NewWebApplicationModal-VersionClientChoice').hidden = false;
+        document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+        document.getElementById('NewWebApplicationModal-VersionClientChoice').classList.add('slide-in-right');
+    }, 250);
+    document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
+    currentPage = "NewWebApplicationModal-VersionClientChoice";
+    document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
+}
+
+function closeNewWebApplicationModal() {
+    document.getElementById("NewWebApplicationModal").style.display = "none";
+    document.getElementById("NewWebApplicationModal-StartPage").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-VersionClientChoice').classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-WebSiteChoiceAndNaming').classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-WebApplicationAppPoolNaming').classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-FromExisting').classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById('NewWebApplicationModal-FromExistingOrScratch').classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+    document.getElementById("NewWebApplicationModal-StartPage").hidden = false;
+    document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = true;
+    document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = true;
+    document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = true;
+    document.getElementById('NewWebApplicationModal-FromExisting').hidden = true;
+    document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = true;
+    currentPage = "NewWebApplicationModal-StartPage";
+    document.getElementById("NewWebApplicationModal-NextCreateButton").innerText = "Next >";
+    document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
+    document.getElementById("ChooseWebApplication").disabled = true;
+    document.getElementById("ChooseWebApplication").innerHTML = "";
+    document.getElementById("ChoosePath").disabled = true;
+    document.getElementById("ChoosePath").innerHTML = "";
+    document.getElementById("WebApplicationPoolName").disabled = true;
+    document.getElementById("WebApplicationPoolName").value = "";
+    document.getElementById("SameAsWebApplication").checked = true;
+    document.getElementById("FromExisting-ChooseWebApplication").value = "";
+    document.getElementById("SelectWebConfig").value = "";
+    document.getElementById("SelectWebConfig").disabled = true;
+    document.getElementById("SelectSessionAdminSecurityConfig").value = "";
+    document.getElementById("SelectSessionAdminSecurityConfig").disabled = true;
+}
+
+async function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
+    const fetchOptions = {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(webApplicationToCheck)
+    };
+    let returnValue = false;
+    if (await fetch(apiRootUrl + "/api/Endpoint/CheckNewWebApplicationDuplicates", fetchOptions)
+        .then(response => response.json())
+        .then(data => {
+            switch (data) {
+                case 0:
+                    setTimeout(function () {
+                        document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                        document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").classList.add("slide-out-left");
+                        setTimeout(function () {
+                            document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
+                            document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").classList.add("slide-in-right");
+                            document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").style.display = "none";
+                            document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").style.display = "flex";
+                            currentPage = "NewWebApplicationModal-CreatingNewWebApplicationProgress";
+                        }, 250);
+                        document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
+                        document.getElementById("NewWebApplicationModal-CloseModal").style.display = "none";
+                    }, 250);
+                    return true;
+                    break;
+                case 1:
+                    setTimeout(function () {
+                        document.getElementById("WebApplicationName-ErrorText").innerText = "Folder already exists for this Web Application name.";
+                        backButtonClicked(document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress"));
+                    }, 250);
+                    break;
+                case 2:
+                    setTimeout(function () {
+                        document.getElementById("WebApplicationName-ErrorText").valinnerTextue = "Application already exists for this Web Application name.";
+                        backButtonClicked(document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress"));
+                    }, 250);
+                    break;
+                case 3:
+                    setTimeout(function () {
+                        document.getElementById("WebApplicationPoolName-ErrorText").innerText = "Application Pool already exists for this Web Application Pool name.";
+                        backButtonClicked(document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress"));
+                    }, 250);
+                    break;
+
+            }
+        }))
+    {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 

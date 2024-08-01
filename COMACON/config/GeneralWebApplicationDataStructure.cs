@@ -607,3 +607,58 @@ public class FormattedTextIframeSupportedDomain
     public string? Domain { get; set; }
     public string? id { get; set; }
 }
+
+
+
+/********************************************************
+*              New Configuration Object
+********************************************************/
+public class NewConfigurationDetails
+{
+    public WebApplicationConfiguration webApplicationConfiguration = new WebApplicationConfiguration();
+}
+
+public class WebApplicationConfiguration
+{
+    public List<VersionGroup> versionGroups = new List<VersionGroup>();
+    public List<WebSiteDetails> webSiteDetails = new List<WebSiteDetails>();
+}
+
+public class  VersionGroup
+{
+    public string? majorVersion { get; set; }
+    public List<Ver> versions = new List<Ver>();
+}
+
+public class Ver
+{
+    public string? specificVersion { get; set; }
+    public List<WebApp> webApplications = new List<WebApp>();
+}
+
+public class WebApp
+{
+    public string? webApplicationName { get; set; }
+}
+
+public class WebSiteDetails
+{
+    public string? siteName { get; set; }
+    public List<string> virtualDirectories = new List<string>();
+}
+
+
+
+/********************************************************
+*      New Configuration Object - Web App To Create
+********************************************************/
+public class WebApplicationToCreate
+{
+    public string? siteName { get; set; }
+    public string? virtualDirectory { get; set; }
+    public string? webApplicationName { get; set; }
+    public string? webApplicationType { get; set; }
+    public string? webApplicationVersion { get; set; }
+    public string? webApplicationBitness { get; set; }
+    public string? webApplicationPoolName { get; set; }
+}
