@@ -1766,7 +1766,10 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 	color: #e6edf3 !important;
 }
 
-
+.dark_mode_select_optgroup {
+	background-color: #292c35;
+	color: inherit;
+}
 
 
 /********************************************************

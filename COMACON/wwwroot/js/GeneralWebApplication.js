@@ -3407,11 +3407,15 @@ function toggleDarkLightMode(checkbox) {
         document.getElementById("SaveErrors-Content").classList.add('dark_mode');
         document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.add('dark_mode');
         document.getElementById("errorLoadModal-content").classList.add('dark_mode');
+        document.getElementById("NewWebApplicationModal-Container").classList.add('dark_mode');
+        document.getElementById("NewWebApplicationModal-BodySection").classList.add('dark_mode');
+        document.getElementById("NewWebApplicationModal-Footer").classList.add('dark_mode');
 
         //Elements to add "dark_mode_titlebar" class to:
         document.getElementById("h1-container").classList.add('dark_mode_titlebar');
         document.getElementById("core-action-buttons-div").classList.add('dark_mode_titlebar');
         document.getElementById("ChooseApplicationTitleBar").classList.add('dark_mode_titlebar');
+        document.getElementById("NewWebApplicationModal-TitleBar").classList.add('dark_mode_titlebar');
         Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
             element.classList.add('dark_mode_titlebar')
         });
@@ -3433,6 +3437,10 @@ function toggleDarkLightMode(checkbox) {
         Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
             element.classList.add('dark_mode_links');
         });
+
+        Array.from(document.getElementsByTagName("optgroup")).forEach(element => {
+            element.classList.add('dark_mode_select_optgroup');
+        });
     } else {
         localStorage.setItem("darkModeState", false);
         //Elements to remove "dark_mode" class to:
@@ -3443,11 +3451,15 @@ function toggleDarkLightMode(checkbox) {
         document.getElementById("SaveErrors-Content").classList.remove('dark_mode');
         document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.remove('dark_mode');
         document.getElementById("errorLoadModal-content").classList.remove('dark_mode');
+        document.getElementById("NewWebApplicationModal-Container").classList.remove('dark_mode');
+        document.getElementById("NewWebApplicationModal-BodySection").classList.remove('dark_mode');
+        document.getElementById("NewWebApplicationModal-Footer").classList.remove('dark_mode');
 
         //Elements to add "dark_mode_titlebar" class to:
         document.getElementById("h1-container").classList.remove('dark_mode_titlebar');
         document.getElementById("core-action-buttons-div").classList.remove('dark_mode_titlebar');
         document.getElementById("ChooseApplicationTitleBar").classList.remove('dark_mode_titlebar');
+        document.getElementById("NewWebApplicationModal-TitleBar").classList.remove('dark_mode_titlebar');
         Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
             element.classList.remove('dark_mode_titlebar')
         });
@@ -3466,6 +3478,10 @@ function toggleDarkLightMode(checkbox) {
         });
         Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
             element.classList.remove('dark_mode_links');
+        });
+
+        Array.from(document.getElementsByTagName("optgroup")).forEach(element => {
+            element.classList.remove('dark_mode_select_optgroup');
         });
     }
 }

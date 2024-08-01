@@ -322,7 +322,7 @@
         <div id="NewWebApplicationModal" class="NewWebApplicationModal">
             <div id="NewWebApplicationModal-Container" class="NewWebApplicationModal-Container" style="border: 1px solid black;">
                 <!-- Title Bar Container for styling -->
-                <div class="NewWebApplicationModal-TitleBar" style="background-color: rgb(201, 201, 201);padding: 0 1rem;display: flex;align-items: center;justify-content: space-between;">
+                <div id="NewWebApplicationModal-TitleBar" class="NewWebApplicationModal-TitleBar" style="background-color: rgb(201, 201, 201);padding: 0 1rem;display: flex;align-items: center;justify-content: space-between;">
                     <h1 style="margin: 0.5rem 0;">New Configuration</h1>
                     <span id="NewWebApplicationModal-CloseModal" style="font-size: x-large;" onclick="closeNewWebApplicationModal()">X</span>
                 </div>
@@ -466,6 +466,7 @@
                 <p id="LoadedApplicationName" style="margin: 0;padding-left: 0.5%;padding-bottom: 0.5%;"></p>
                 <div id="core-action-buttons-div" class="core-action-buttons-div">
                     <div style="display: flex;">
+                    <button id="NewWebApplication-CoreActionButton" class="core-action-buttons" type="button" onclick="createNewConfiguration()"><u>New Configuration</u></button>
                         <button id="Open-Web-Application-Core-Action-Button" class="core-action-buttons" type="button" onclick="openModal()"><u>Open Web Application</u></button>
                         <button id="Copy-Web-Application-Core-Action-Button" class="core-action-buttons Web-Application-Button" type="button" onclick="openCopyWebApplicationModal()"><u>Copy Web Application</u></button>
                         <button id="Save-Web-Application-Core-Action-Button" class="core-action-buttons Web-Application-Button" type="button" onclick="configOkToSave()"><u>Save Web Application</u></button>
