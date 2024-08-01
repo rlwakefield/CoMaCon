@@ -193,8 +193,10 @@ async function onPageLoadLogic() {
         }
         toggleDarkLightMode(document.getElementById("checkbox"));
     }
+    
     if (sessionStorage.getItem('WebApplicationChosenArray') != null && sessionStorage.getItem('WebApplicationChosenArray') != undefined) {
         let object = JSON.parse(sessionStorage.getItem('WebApplicationChosenArray'));
+        console.log(object);
         sessionStorage.removeItem('WebApplicationChosenArray');
         apiRootUrl = sessionStorage.getItem('apiRootUrl');
 
@@ -203,6 +205,11 @@ async function onPageLoadLogic() {
         loadWebApplicationConfiguration(object[0].webConfigPhysicalPath, object[0].type, object[0].version, object[0].site, object[0].name, object[0].path, object[0].physicalPath, object[0].bitness);
     } else {
         //Need to redirect the user back to the home page.
+        console.log(window.location.href);
+        console.log(apiRootUrl);
+        //if (window.location.href != apiRootUrl + "/") {
+        //    window.location.href = apiRootUrl;
+        //}
     }
 }
 
@@ -340,40 +347,44 @@ function okButtonClicked() {
         if (element.id === "tdName") {
             let object = webApplications.filter(path => path.name === element.innerHTML);
             sessionStorage.setItem('WebApplicationChosenArray', JSON.stringify(object));
-            switch (object[0].type) {
-                case "Application Server":
-                    window.location.href = apiRootUrl + "/Core/ApplicationServer";
-                    break;
-                case "Agenda Online":
-                    window.location.href = apiRootUrl + "/Core/AgendaOnlineServer";
-                    break;
-                case "Electronic Plan Review":
-                    window.location.href = apiRootUrl + "/Core/ElectronicPlanReview";
-                    break;
-                case "Gateway Caching Server":
-                    window.location.href = apiRootUrl + "/Core/GatewayCachingServer";
-                    break;
-                case "Healthcare Form Manager":
-                    window.location.href = apiRootUrl + "/Core/HealthcareFormManager";
-                    break;
-                case "Patient Window":
-                    window.location.href = apiRootUrl + "/Core/OnBasePatientWindow";
-                    break;
-                case "Public Access - Legacy":
-                    window.location.href = apiRootUrl + "/Core/PublicAccessViewerLegacy"
-                    break;
-                case "Public Access - Next Gen":
-                    window.location.href = apiRootUrl + "/Core/PublicAccessViewerNextGen"
-                    break;
-                case "Reporting Viewer":
-                    window.location.href = apiRootUrl + "/Core/ReportingWebViewer";
-                    break;
-                case "Web Server":
-                    window.location.href = apiRootUrl + "/Core/WebServer";
-                    break;
-            }
+            goToWebApplicationConfigurationPage(object);
         }
     });
+}
+
+function goToWebApplicationConfigurationPage(object) {
+    switch (object[0].type) {
+        case "Application Server":
+            window.location.href = apiRootUrl + "/Core/ApplicationServer";
+            break;
+        case "Agenda Online":
+            window.location.href = apiRootUrl + "/Core/AgendaOnlineServer";
+            break;
+        case "Electronic Plan Review":
+            window.location.href = apiRootUrl + "/Core/ElectronicPlanReview";
+            break;
+        case "Gateway Caching Server":
+            window.location.href = apiRootUrl + "/Core/GatewayCachingServer";
+            break;
+        case "Healthcare Form Manager":
+            window.location.href = apiRootUrl + "/Core/HealthcareFormManager";
+            break;
+        case "Patient Window":
+            window.location.href = apiRootUrl + "/Core/OnBasePatientWindow";
+            break;
+        case "Public Access - Legacy":
+            window.location.href = apiRootUrl + "/Core/PublicAccessViewerLegacy"
+            break;
+        case "Public Access - Next Gen":
+            window.location.href = apiRootUrl + "/Core/PublicAccessViewerNextGen"
+            break;
+        case "Reporting Viewer":
+            window.location.href = apiRootUrl + "/Core/ReportingWebViewer";
+            break;
+        case "Web Server":
+            window.location.href = apiRootUrl + "/Core/WebServer";
+            break;
+    }
 }
 
 
@@ -3647,7 +3658,7 @@ async function nextButtonClicked() {
             }, 250);
             document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
             document.getElementById("NewWebApplicationModal-CloseModal").style.display = "none";
-            let bitness = (document.getElementById("ChooseWebApplication").value != "Application Server (32-bit)") ? "64-bit" : "32-bit";
+            let bitness = (document.getElementById("ChooseWebApplication").value != "Application Server (32-Bit)") ? "64-Bit" : "32-Bit";
             //Make the call to create the new Web Application
             let webApplicationToCreate = {
                 siteName: document.getElementById("ChooseWebSite").value,
@@ -3658,7 +3669,94 @@ async function nextButtonClicked() {
                 webApplicationBitness: bitness,
                 webApplicationPoolName: document.getElementById("WebApplicationPoolName").value
             };
-            await newWebApplicationValidateNoDuplicate(webApplicationToCreate);
+            console.log(webApplicationToCreate["virtualDirectory"]);
+            let dupResult = await newWebApplicationValidateNoDuplicate(webApplicationToCreate)
+            if (dupResult) {
+                const fetchOptions = {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(webApplicationToCreate)
+                };
+                fetch(apiRootUrl + "/api/Endpoint/CreateNewWebApplication?action=FromScratch", fetchOptions)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        switch (data) {
+                            case 0:
+                                let virtualDirectoryPath = "";
+                                if (webApplicationToCreate["virtualDirectory"] == "root") {
+                                    virtualDirectoryPath = "/";
+                                } else {
+                                    virtualDirectoryPath = webApplicationToCreate["virtualDirectory"];
+                                }
+                                let webAppType = "";
+                                if (webApplicationToCreate["webApplicationType"] == "Application Server (32-Bit)" || webApplicationToCreate["webApplicationType"] == "Application Server (64-Bit)") {
+                                    webAppType = "Application Server";
+                                } else {
+                                    webAppType = webApplicationToCreate["webApplicationType"];
+                                }
+                                let webApplicationToLoad = [
+                                    {
+                                    name: webApplicationToCreate["webApplicationName"],
+                                    type: webAppType,
+                                    version: webApplicationToCreate["webApplicationVersion"],
+                                    site: webApplicationToCreate["siteName"],
+                                    path: virtualDirectoryPath,
+                                    webConfigPhysicalPath: "",
+                                    physicalPath: "",
+                                    bitness: webApplicationToCreate["webApplicationBitness"]
+                                    }
+                                ];
+                                sessionStorage.setItem('WebApplicationChosenArray', JSON.stringify(webApplicationToLoad));
+                                console.log(sessionStorage.getItem('WebApplicationChosenArray'));
+                                switch (webAppType) {
+                                    case "Application Server":
+                                        window.location.href = apiRootUrl + "/Core/ApplicationServer";
+                                        break;
+                                    case "Agenda Online":
+                                        window.location.href = apiRootUrl + "/Core/AgendaOnlineServer";
+                                        break;
+                                    case "Electronic Plan Review":
+                                        window.location.href = apiRootUrl + "/Core/ElectronicPlanReview";
+                                        break;
+                                    case "Gateway Caching Server":
+                                        window.location.href = apiRootUrl + "/Core/GatewayCachingServer";
+                                        break;
+                                    case "Healthcare Form Manager":
+                                        window.location.href = apiRootUrl + "/Core/HealthcareFormManager";
+                                        break;
+                                    case "Patient Window":
+                                        window.location.href = apiRootUrl + "/Core/OnBasePatientWindow";
+                                        break;
+                                    case "Public Access - Legacy":
+                                        window.location.href = apiRootUrl + "/Core/PublicAccessViewerLegacy"
+                                        break;
+                                    case "Public Access - Next Gen":
+                                        window.location.href = apiRootUrl + "/Core/PublicAccessViewerNextGen"
+                                        break;
+                                    case "Reporting Viewer":
+                                        window.location.href = apiRootUrl + "/Core/ReportingWebViewer";
+                                        break;
+                                    case "Web Server":
+                                        window.location.href = apiRootUrl + "/Core/WebServer";
+                                        break;
+                                }
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                break;
+                            case 4:
+                                break;
+                            case 5:
+                                break;
+                        }
+                    });
+            }
             break;
     }
 }
@@ -3890,7 +3988,7 @@ function closeNewWebApplicationModal() {
     document.getElementById("SelectSessionAdminSecurityConfig").disabled = true;
 }
 
-function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
+async function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
     const fetchOptions = {
         method: "PUT",
         headers: {
@@ -3898,7 +3996,8 @@ function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
         },
         body: JSON.stringify(webApplicationToCheck)
     };
-    fetch(apiRootUrl + "/api/Endpoint/CheckNewWebApplicationDuplicates", fetchOptions)
+    let returnValue = false;
+    if (await fetch(apiRootUrl + "/api/Endpoint/CheckNewWebApplicationDuplicates", fetchOptions)
         .then(response => response.json())
         .then(data => {
             switch (data) {
@@ -3916,6 +4015,7 @@ function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
                         document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
                         document.getElementById("NewWebApplicationModal-CloseModal").style.display = "none";
                     }, 250);
+                    return true;
                     break;
                 case 1:
                     setTimeout(function () {
@@ -3937,8 +4037,12 @@ function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
                     break;
 
             }
-        });
-
+        }))
+    {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 

@@ -150,14 +150,6 @@ internal sealed class DefaultCore : Core
 
         //Testing new code.
         targetPath = manager.Sites[newSiteName].Applications["/"].VirtualDirectories["/"].PhysicalPath.Replace("%SystemDrive%", Environment.GetEnvironmentVariable("SystemDrive")) + updatedNewApplicationPathName + newApplicationName + "\\";
-        Console.WriteLine(targetPath);
-
-        //Old code.
-        /*if (newSiteName == "Default Web Site"){
-            targetPath = @"C:\inetpub\wwwroot" + updatedNewApplicationPathName + newApplicationName + "\\";
-        }else{
-            targetPath = @"C:\inetpub" + newSiteName + updatedNewApplicationPathName + newApplicationName + "\\";
-        }*/
 
         // Create all of the directories
         foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
