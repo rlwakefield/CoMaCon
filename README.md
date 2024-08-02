@@ -1,12 +1,31 @@
-# COMACON MVC
-This is my personal concept of what a web based version of the WAMCON (Web Application Management Console) could look like. However, I have invisioned a slightly different approach to it than Hyland has. I envision this being more of a COMACON (Configuration Management Console). Fetures I want to have in it are as follows:
+<div align="center">
 
-1. Configuration/Management of web based configuration files (same as WAMCON today, but much cleaner, accurate, and detailed)
-2. Configuration of local configuration files (e.g. obunity.exe.config and more) - To Be Released
-3. Creation of brand new web based applications (Application Server, Web Server, etc.) - To Be Released
-4. Creation of brand new local configuration files (Unity Client, Thick Client, etc.) - To Be Released
+[![GitHub repo size](https://img.shields.io/github/repo-size/rwakefield/CoMaCon?style=flat-square)](#)
+[![GitHub release (release name instead of tag name)](https://img.shields.io/github/v/release/rwakefield/CoMaCon?style=flat-square)](https://github.com/rwakefield/CoMaCon/releases/latest)
+[![GitHub all releases](https://img.shields.io/github/downloads/rwakefield/CoMaCon/total?style=flat-square)](https://github.com/rwakefield/CoMaCon/releases/)
+
+</div>
+
+# COMACON MVC
+This is my personal concept of what a web based version of the WAMCON (Web Application Management Console) could look like. However, my vision for this utility is not just a utility that configures web applications on the servers, but also allows for the configuration of client configuration files and more! My vision for this new Configuration Management Console's features are:
+
+1. Configure any of your Web Application and their respective settings in a simple, easy to use, intuitive web based interface.
+2. Centrally configure and manage all of your servers web applications so that all of the servers stay in sync with each other, helping to avoiding rogue configurations.
+3. Centrally managed and maintain all of your client deployments and their respective configurations on all of your end users workstations.
+4. Allow for the efficient handling of upgrades to any clients or server configurations from a central location.
+
+As system administrators, one of the biggest challenges that we tend to face is the deployment of all of our different clients, servers, and their configurations and being able to maintain them easily.
+
+With this utility, that challenge will become a thing of the past. No longer will you have to worry about your upgrades and whether all of your server configurations are the same or not. That will all be handled by this amazing new utility called the COMACON!
 
 ![image](https://github.com/rlwakefield/COMACON-MVC/assets/33588807/cc7c6524-2926-4b2b-bcb9-c2875a62c9ce)
+
+Current supported versions include:
+- [ X ] 21.1 (EP5)
+- [ X ] 22.1
+- [ X ] 23.1
+- [ X ] 24.1
+- [  ] 25.1
 
 
 # Installation Instructions
@@ -34,13 +53,6 @@ You will also need to have IIS installed and configured on the server you wish t
 Please make sure to open any issues whenever you encounter them. I might need to get a copy of the web.config file that you were working with so I can do further testing on my side. Of course, please remove any PII from the files as I would hate to assume that risk. 😄 Thanks!
 
 
-# Future Enhancements
-1. Configuration of local configuration files on servers directly. Examples include Full Text Search, Data Capture Server, etc.
-2. Creation/Configuration of Thick Client Windows Services (instead of needing to do them through the Configuration Client installed on that server directly).
-
-Obviously I am always open to other features, suggestions, etc., but right now my focus is to get this up and working as similar to the WAMCON as I can.
-
-
 # Upgrade Instructions
 1. verify you have the appropriate .NET Windows Hosting Bundle installed.
 2. Download the latest release [here](https://github.com/rlwakefield/CoMaCon/releases).
@@ -51,10 +63,6 @@ Obviously I am always open to other features, suggestions, etc., but right now m
 6. Delete all of the files from the current COMACON folder in the "C:\inetpub\wwwroot\COMACON" folder.
 7. Copy all of the files from the unzipped .zip file to the "C:\inetpub\wwwroot\COMACON" folder.
 8. Recycle the COMACON Application Pool and you are good to go.
-
-
-# Issue Reporting/Enhancement Suggestions
-I am always up for new enhancements, but the ultimate game is that I will be working on bugs at first. Once I get those out of the way for the most part, then I will be working on more of the enhancements.
 
 
 Thanks for all of your support in helping me making this thing a potential reality!
