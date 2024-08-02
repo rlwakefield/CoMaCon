@@ -58,6 +58,7 @@ public class webApplicationWebConfigConfiguration
     public ProcessingErrors processingErrors = new ProcessingErrors();
     public List<HylandApplicationsAgendaPubAccessPublicComment> publicCommentIntegrations = new List<HylandApplicationsAgendaPubAccessPublicComment>();
     public List<Tooltip> tooltips = new List<Tooltip>();
+    public List<FormattedTextIframeSupportedDomain> formattedTextIframeSupportedDomains = new List<FormattedTextIframeSupportedDomain>();
     
     public void AddCriticalError(string message)
     {
@@ -134,6 +135,7 @@ public class ResponsiveApp
     public string? Name = "";
     public string? IconURL = "";
     public string? URL = "";
+    public string? id = "";
 }
 
 public class HylandServicesParameters
@@ -585,4 +587,78 @@ public class Tooltip
 {
     public string? htmlId { get; set; }
     public string? tooltip { get; set; }
+}
+
+
+/********************************************************
+*              Test Connection String Object
+********************************************************/
+public class TestConnectionStringResult
+{
+    public string? ResultCode { get; set; }
+    public string? ResultMessage { get; set; }
+}
+
+/********************************************************
+*     Formatted Text Iframe Supported Domain Object
+********************************************************/
+public class FormattedTextIframeSupportedDomain
+{
+    public string? Domain { get; set; }
+    public string? id { get; set; }
+}
+
+
+
+/********************************************************
+*              New Configuration Object
+********************************************************/
+public class NewConfigurationDetails
+{
+    public WebApplicationConfiguration webApplicationConfiguration = new WebApplicationConfiguration();
+}
+
+public class WebApplicationConfiguration
+{
+    public List<VersionGroup> versionGroups = new List<VersionGroup>();
+    public List<WebSiteDetails> webSiteDetails = new List<WebSiteDetails>();
+}
+
+public class  VersionGroup
+{
+    public string? majorVersion { get; set; }
+    public List<Ver> versions = new List<Ver>();
+}
+
+public class Ver
+{
+    public string? specificVersion { get; set; }
+    public List<WebApp> webApplications = new List<WebApp>();
+}
+
+public class WebApp
+{
+    public string? webApplicationName { get; set; }
+}
+
+public class WebSiteDetails
+{
+    public string? siteName { get; set; }
+    public List<string> virtualDirectories = new List<string>();
+}
+
+
+
+/********************************************************
+*      New Configuration Object - Web App To Create
+********************************************************/
+public class WebApplicationToCreate
+{
+    public string? siteName { get; set; }
+    public string? virtualDirectory { get; set; }
+    public string? webApplicationName { get; set; }
+    public string? webApplicationType { get; set; }
+    public string? webApplicationVersion { get; set; }
+    public string? webApplicationBitness { get; set; }
+    public string? webApplicationPoolName { get; set; }
 }

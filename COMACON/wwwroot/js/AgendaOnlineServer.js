@@ -8,7 +8,7 @@ let AgendaOnlineIntegrationsCoreFieldIds = ["Integration-Name", "Integration-URL
 let AgendaOnlineIntegrationsUnityFormsFieldIds = ["Form-Field-Name", "Form-Field-ID"];
 let AgendaOnlineIntegrationsMeetingTypesFieldIds = ["Meeting-Type-Name"];
 let AgendaOnlineIntegrationsRequiredMeetingTypes = ["meeting_name", "meeting_date", "item_id", "item_title"];
-let AgendaOnlineIntegrationsNewIntegrationObject = { "meetingTypes": [], "agendaUnityFormFields": [{ "Name": "meeting_name", "FormFieldID": "" }, { "Name": "meeting_date", "FormFieldID": "" }, { "Name": "item_id", "FormFieldID": "" }, { "Name": "item_title", "FormFieldID": "" }], "Name": "[Integration Name]", "URL": "[URL from Unity forms config]", "Token": "[Token from Unity forms config]", "AvailabilityFromMeetingStart": "0", "id": "" };
+let AgendaOnlineIntegrationsNewIntegrationObject = { "meetingTypes": [], "agendaUnityFormFields": [{ "Name": "meeting_name", "FormFieldID": "", "id": "" }, { "Name": "meeting_date", "FormFieldID": "", "id": "" }, { "Name": "item_id", "FormFieldID": "", "id": "" }, { "Name": "item_title", "FormFieldID": "", "id": "" }], "Name": "[Integration Name]", "URL": "[URL from Unity forms config]", "Token": "[Token from Unity forms config]", "AvailabilityFromMeetingStart": "0", "id": "" };
 let AgendaOnlineIntegrationsNewUnityFormFieldObject = { "Name": "[Name]", "FormFieldID": "[Field ID from Unity Form]", "id": "" };
 let AgendaOnlineIntegrationsNewMeetingTypeObject = { "Name": "[Name]", "id": "" };
 
@@ -106,7 +106,7 @@ function deleteAgendaOnlineFormField() {
     }
 }
 
-function validateNoDuplicateFieldNames() {
+async function validateNoDuplicateFieldNames() {
     let currentFieldNameValue = document.getElementById("Form-Field-Name").value;
     let foundObject = AgendaOnlineAgendaFields.find(item => item.FormFieldName === currentFieldNameValue);
     if (foundObject != undefined) {
@@ -120,12 +120,12 @@ function validateNoDuplicateFieldNames() {
             container.innerHTML = errorOctagonSVG;
             document.getElementById("Form-Field-Name").parentNode.insertBefore(container.firstChild, document.getElementById("Form-Field-Name").parentNode.firstChild);
         }
-        pushErrorToArray(agendaOnlineDuplicateFormFieldNamesArray);
+        pushErrorToArray(await findErrorArrayToSet("agendaOnlineDuplicateFormFieldNames"));
     } else {
         //Check if the error SVG is the first child. If yes, then remove it.
         if (document.getElementById("Form-Field-Name").parentNode.firstElementChild.tagName === "svg") {
-            let firstChild = document.getElementById("Form-Field-Name").parentNode.firstChild;
-            let parentNode = document.getElementById("Form-Field-Name").parentNode;
+            //let firstChild = document.getElementById("Form-Field-Name").parentNode.firstChild;
+            //let parentNode = document.getElementById("Form-Field-Name").parentNode;
             document.getElementById("Form-Field-Name").parentNode.removeChild(document.getElementById("Form-Field-Name").parentNode.firstChild);
         }
         validateRequiredFieldsInputForAdd();
@@ -437,26 +437,9 @@ function integrationfieldUpdated(field) {
     console.log(AgendaOnlineIntegrations);
 }
 
-function checkForDuplicateMeetingTypes(currentlySelectedIntegration) {
-    const groupByName = (array) => {
-        return array.reduce((result, currentItem) => {
-            // Extract the 'Name' value
-            const key = currentItem.Name;
-
-            // If the key doesn't exist in the result object, create an array for it
-            if (!result[key]) {
-                result[key] = [];
-            }
-
-            // Push the current item to the array for the key
-            result[key].push(currentItem);
-
-            return result;
-        }, {}); // Initial value is an empty object
-    };
-
-    let groupedByName = groupByName(currentlySelectedIntegration.meetingTypes);
-    console.log(groupedByName);
+async function checkForDuplicateMeetingTypes(currentlySelectedIntegration) {
+    let groupedByName = await groupByNameKey(currentlySelectedIntegration.meetingTypes,"Name");
+    //console.log(groupedByName);
 
     let selectList = document.getElementById("Meeting-Type-Name-Select-List");
     Object.keys(groupedByName).forEach(key => {
@@ -492,7 +475,7 @@ function checkForDuplicateMeetingTypes(currentlySelectedIntegration) {
     });
 
     if (document.getElementsByClassName("duplicateMeetingTypeName").length > 0) {
-        pushErrorToArray(agendaOnlineDuplicateMeetingTypeNamesArray);
+        pushErrorToArray(await findErrorArrayToSet("agendaOnlineDuplicateMeetingTypeNames"));
     } else {
         spliceErrorFromArray("agendaOnlineDuplicateMeetingTypeNames");
     }
