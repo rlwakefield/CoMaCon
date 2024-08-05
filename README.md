@@ -1,8 +1,8 @@
 <div align="center">
 
-[![GitHub repo size](https://img.shields.io/github/repo-size/rwakefield/CoMaCon?style=flat-square)](#)
-[![GitHub release (release name instead of tag name)](https://img.shields.io/github/v/release/rwakefield/CoMaCon?style=flat-square)](https://github.com/rwakefield/CoMaCon/releases/latest)
-[![GitHub all releases](https://img.shields.io/github/downloads/rwakefield/CoMaCon/total?style=flat-square)](https://github.com/rwakefield/CoMaCon/releases/)
+[![GitHub repo size](https://img.shields.io/github/repo-size/rlwakefield/CoMaCon?style=flat-square)](#)
+[![GitHub release (release name instead of tag name)](https://img.shields.io/github/v/release/rlwakefield/CoMaCon?style=flat-square)](https://github.com/rlwakefield/CoMaCon/releases/latest)
+[![GitHub all releases](https://img.shields.io/github/downloads/rlwakefield/CoMaCon/total?style=flat-square)](https://github.com/rlwakefield/CoMaCon/releases/)
 
 </div>
 
