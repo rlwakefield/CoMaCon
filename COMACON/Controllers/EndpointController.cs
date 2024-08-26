@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 //using System.Collections;
 //using System.Diagnostics;
 using Microsoft.Web.Administration;
+using System.Text.Json.Nodes;
 //using System.IO;
 //using Microsoft.AspNetCore.Builder;
 
@@ -24,19 +25,203 @@ namespace COMACON.Controllers
         private static string noTnsOracle = "Data Source={0};";
         private static string userIdAndPassword = "User Id={0};Password={1};";
         private readonly IConfiguration _configuration;
+        private readonly SqlQueries _SqlQueries;
+        private readonly SessionManagement _sessionManagement;
+        private static string authorizationResponse = "{\"error\":\"@errorNumber\",\"message\":\"@errorMessage\",\"timestamp\":\"\"}";
 
         public EndpointController(Core core,
             LoadSaveWebApplications loadSaveWebApplications,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            SessionManagement sessionManagement,
+            SqlQueries sqlQueries)
         {
             Core = core;
             LoadSaveWebApplications = loadSaveWebApplications;
             _configuration = configuration;
+            _sessionManagement = sessionManagement;
+            _SqlQueries = sqlQueries;
         }
+
+        // GET: api/Endpoint/GetRootUrl
+        [HttpGet("GetRootUrl")]
+        public string GetRootUrl()
+        {
+            var request = HttpContext.Request;
+            var scheme = request.Scheme;
+            var host = request.Host.ToUriComponent();
+
+            var rootUrl = $"{scheme}://{host}";
+
+            return "{\"rooturl\":\""+rootUrl+"\"}";
+        }
+
+        /**************************************
+         *      Authentication Endpoints
+         **************************************/
+        // POST: api/Endpoint/Authentication
+        [HttpPost("Authentication")]
+        public string Authentication([FromBody] JsonElement credentials)
+        {
+            /* Returns the results of the Creation.
+            * 0 = Success
+            * 1 = Username missing.
+            * 2 = Password missing.
+            * 3 = Username or password does not match.
+            * 4 = Multiple users found with the same username and password.
+            */
+            string username = credentials.GetProperty("username").ToString();
+            string password = credentials.GetProperty("password").ToString();
+            string errorReturnText = "{\"error\":\"@errorNumber\",\"message\":\"@errorMessage\",\"timestamp\":}";
+
+            //Checks if the username field is an empty string or not.
+            if (username == "")
+            {
+                Log.Logger.Information("Username is required.");
+                return errorReturnText.Replace("@errorNumber", "1").Replace("@errorMessage", "Username is required.");
+                //return "{\"error\":\"1\",\"message\":\"Username is required.\"}";
+            }
+
+            if (password == "")
+            {
+                Log.Logger.Information("Password is required.");
+                return errorReturnText.Replace("@errorNumber", "2").Replace("@errorMessage", "Username is required.");
+                //return "{\"error\":\"2\",\"message\":\"Password is required.\"}";
+            }
+
+            return _sessionManagement.ValidateUserLoggingIn(username, password);
+        }
+
+        // POST: api/Endpoint/Authentication
+        [HttpPost("AuthenticationV2")]
+        public IActionResult AuthenticationV2([FromBody] JsonElement credentials)
+        {
+            /* Returns the results of the Creation.
+            * 0 = Success
+            * 1 = Username missing.
+            * 2 = Password missing.
+            * 3 = Username or password does not match.
+            * 4 = Multiple users found with the same username and password.
+            */
+            string username = credentials.GetProperty("username").ToString();
+            string password = credentials.GetProperty("password").ToString();
+            //string authorizationResponse = "{\"error\":\"@errorNumber\",\"message\":\"@errorMessage\",\"timestamp\":}";
+            //string successReturnText = "{\"error\":\"@errorNumber\",\"message\":\"@errorMessage\"}";
+
+            //Checks if the username field is an empty string or not.
+            if (username == "")
+            {
+                Log.Logger.Information("Username is required.");
+                return Unauthorized(authorizationResponse.Replace("@errorNumber", "1").Replace("@errorMessage", "Username is required."));
+                //return Unauthorized("{\"error\":\"1\",\"message\":\"Username is required.\"}");
+            }
+
+            if (password == "")
+            {
+                Log.Logger.Information("Password is required.");
+                return Unauthorized(authorizationResponse.Replace("@errorNumber", "2").Replace("@errorMessage", "Password is required."));
+                //return Unauthorized("{\"error\":\"2\",\"message\":\"Password is required.\"}");
+            }
+
+            JsonNode validationResults = JsonNode.Parse(_sessionManagement.ValidateUserLoggingInV2(username, password));
+
+            switch (validationResults["error"].ToString())
+            {
+                case "0":
+                    return Ok(_sessionManagement.generateAccessToken());
+                default:
+                    return Unauthorized(authorizationResponse.Replace("@errorNumber", validationResults["error"].ToString()).Replace("@errorMessage", validationResults["message"].ToString()));
+            }
+        }
+
+        // GET: api/Endpoint/VerifyToken
+        [HttpGet("VerifyToken")]
+        public bool VerifyToken([FromHeader(Name = "Authorization")] string authorizationHeader)
+        {
+            //Console.WriteLine("Bearer Token: " + authorizationHeader.Substring("Bearer ".Length).Trim());
+
+            if(string.IsNullOrEmpty(authorizationHeader))
+            {
+                return false;
+            }
+
+            if (!authorizationHeader.StartsWith("Bearer "))
+            {
+                return false;
+            }
+
+            //Console.WriteLine("This is the token value: " + token);
+            return _sessionManagement.validateAccessTokenStillActive(authorizationHeader.Substring("Bearer ".Length).Trim());
+        }
+
+        // GET: api/Endpoint/VerifyToken
+        [HttpGet("VerifyTokenV2")]
+        public IActionResult VerifyTokenV2([FromHeader(Name = "Authorization")] string authorizationHeader)
+        {
+            if (string.IsNullOrEmpty(authorizationHeader))
+            {
+                return Unauthorized("No authorization token provided.");
+            }
+
+            if (!authorizationHeader.StartsWith("Bearer "))
+            {
+                return Unauthorized("Invalid authorization token type.");
+            }
+
+            JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActiveV2(authorizationHeader.Substring("Bearer ".Length).Trim()));
+
+            switch(validationResults["error"].ToString())
+            {
+                case "0":
+                    return Ok(validationResults);
+                default:
+                    return Unauthorized(authorizationResponse.Replace("@errorNumber", validationResults["error"].ToString()).Replace("@errorMessage", validationResults["message"].ToString()));
+            }
+        }
+
+
+        /**************************************
+         *      User Management Endpoints
+         **************************************/
+        [HttpGet("GetUser")]
+        public IActionResult GetUser([FromHeader(Name = "Authorization")] string authorization, string usernum = "0")
+        {
+            if (string.IsNullOrEmpty(authorization))
+            {
+                return Unauthorized("No authorization token provided.");
+            }
+
+            if (!authorization.StartsWith("Bearer "))
+            {
+                return Unauthorized("Invalid authorization token type.");
+            }
+
+            JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActiveV2(authorization.Substring("Bearer ".Length).Trim()));
+
+            if(validationResults["error"].ToString() != "0")
+            {
+                return Unauthorized("Token is expired. ");
+            }
+
+            int unum = 0;
+            try
+            {
+                unum = int.Parse(usernum);
+            }
+            catch
+            {
+                return BadRequest("Invalid user number.");
+            }
+
+            return Ok(_SqlQueries.GetUsers(unum));
+
+            //return null;
+        }
+
 
         // GET: api/Endpoint/TestConnectionString
         [HttpGet("TestConnectionString")]
-        public string TestConnectionString(string cstringobject)
+        public string TestConnectionString(string cstringobject,
+            [FromHeader(Name = "Authorization")] string authorizationHeader = "")
         {
             Log.Logger.Verbose("Testing connection string.");
 
@@ -146,7 +331,8 @@ namespace COMACON.Controllers
 
         // GET: api/Endpoint/UrlValidation
         [HttpGet("UrlValidation")]
-        public int TestUrl(Uri url)
+        public int TestUrl(Uri url,
+            [FromHeader(Name = "Authorization")] string authorizationHeader = "")
         {
             Log.Logger.Verbose("Validating \"{url}\" URL.", url);
             try
@@ -172,7 +358,15 @@ namespace COMACON.Controllers
         }
 
         [HttpGet("GetConfiguration")]
-        public string GetConfiguration(string type, string version, string siteName, string applicationName, string applicationPath, string bitness, string physicalPath = "", string webconfig = "")
+        public string GetConfiguration(string type,
+            string version,
+            string siteName,
+            string applicationName,
+            string applicationPath,
+            string bitness,
+            [FromHeader(Name = "Authorization")] string authorizationHeader = "",
+            string physicalPath = "",
+            string webconfig = "")
         {
             ServerManager manager = new ServerManager();
             if(webconfig == "")
@@ -188,29 +382,44 @@ namespace COMACON.Controllers
         }
 
         [HttpGet("GetApplications")]
-        public string GetApplications()
+        public string GetApplications([FromHeader(Name = "Authorization")] string authorizationHeader = "")
         {
             return Core.RetrieveWebApplications();
         }
 
         [HttpGet("DuplicateAppPoolCheck")]
-        public Boolean DuplicateAppPoolCheck(string appPoolName)
+        public Boolean DuplicateAppPoolCheck(string appPoolName,
+            [FromHeader(Name = "Authorization")] string authorizationHeader = "")
         {
             return Core.CheckDuplicateWebApplicationPool(appPoolName);
         }
 
         [HttpGet("DuplicateApplicationCheck")]
         public Boolean DuplicateApplicationCheck(string applicationName,
-                string siteName,
-                string applicationPath,
-                string physicalPath,
-                string currentApplicationName)
+            string siteName,
+            string applicationPath,
+            string physicalPath,
+            string currentApplicationName,
+            [FromHeader(Name = "Authorization")] string authorizationHeader = "")
         {
             return Core.CheckDuplicateWebApplication(physicalPath, applicationName, siteName, applicationPath, currentApplicationName);
         }
 
         [HttpGet("CopyWebApplication")]
-        public string? CopyApplication(string webApplicationType, string newApplicationPoolName, string newApplicationName, string newApplicationPathName, string newApplicationSiteName, string newApplicationServerUrl, string currentApplicationPoolName, string currentApplicationName, string currentApplicationPathName, string currentSiteName, string currentPhysicalPath, string webApplicationVersion, string bitness)
+        public string? CopyApplication(string webApplicationType,
+            string newApplicationPoolName,
+            string newApplicationName,
+            string newApplicationPathName,
+            string newApplicationSiteName,
+            string newApplicationServerUrl,
+            string currentApplicationPoolName,
+            string currentApplicationName,
+            string currentApplicationPathName,
+            string currentSiteName,
+            string currentPhysicalPath,
+            string webApplicationVersion,
+            string bitness,
+            [FromHeader(Name = "Authorization")] string authorizationHeader = "")
         {
             string newPhysicalPath = Core.CopyWebApplication(newApplicationPoolName, newApplicationName, newApplicationPathName, newApplicationSiteName, newApplicationServerUrl, currentApplicationPoolName, currentApplicationName, currentApplicationPathName, currentSiteName, currentPhysicalPath);
             var file = new StreamReader(newPhysicalPath + @"\web.config");
@@ -219,13 +428,20 @@ namespace COMACON.Controllers
         }
 
         [HttpPost("SaveWebApplication")]
-        public string SaveWebApplication([FromBody] JsonElement jsonDataStructure)
+        public string SaveWebApplication([FromBody] JsonElement jsonDataStructure,
+            [FromHeader(Name = "Authorization")] string authorizationHeader = "")
         {
             return LoadSaveWebApplications.SaveWebApplicationConfiguration(jsonDataStructure.ToString());
         }
 
         [HttpPost("TestSqlConnectionString")]
-        public string TestSqlConnectionString(string DataSource, string Database, bool IntegratedSecurity, string Username, string Password, string AdditionalParameters)
+        public string TestSqlConnectionString(string DataSource,
+            string Database,
+            bool IntegratedSecurity,
+            string Username,
+            string Password,
+            string AdditionalParameters,
+            [FromHeader(Name = "Authorization")] string authorizationHeader = "")
         {
             string cstringSql = "Data Source=" + DataSource + ";database=" + Database + ";";
             if (IntegratedSecurity)
@@ -253,7 +469,16 @@ namespace COMACON.Controllers
         }
 
         [HttpPost("TestOracleConnectionString")]
-        public string TestOracleConnectionString(bool TnsConnectionString, string Host, string Database, string Protocol, string Port, bool IntegratedSecurity, string Username, string Password, string AdditionalOptions)
+        public string TestOracleConnectionString(bool TnsConnectionString,
+            string Host,
+            string Database,
+            string Protocol,
+            string Port,
+            bool IntegratedSecurity,
+            string Username,
+            string Password,
+            string AdditionalOptions,
+            [FromHeader(Name = "Authorization")] string authorizationHeader = "")
         {
             string cstringOracle = "";
             if (TnsConnectionString)
@@ -286,7 +511,7 @@ namespace COMACON.Controllers
         }
 
         [HttpGet("GetNewConfigurationDetails")]
-        public string GetNewConfigurationDetails()
+        public string GetNewConfigurationDetails([FromHeader(Name = "Authorization")] string authorizationHeader = "")
         {
             string[] majorVersions = Directory.GetDirectories(_configuration["LooseFilesLocation"]);
             NewConfigurationDetails newConfigurationDetails = new NewConfigurationDetails();
@@ -362,7 +587,8 @@ namespace COMACON.Controllers
         }
 
         [HttpPut("CheckNewWebApplicationDuplicates")]
-        public string CheckNewWebApplicationDuplicates([FromBody] JsonElement webApplicationToCreate)
+        public string CheckNewWebApplicationDuplicates([FromBody] JsonElement webApplicationToCreate,
+            [FromHeader(Name = "Authorization")] string authorizationHeader = "")
         {
             /* Returns the results of the checks.
              * 0 = Success
@@ -415,11 +641,13 @@ namespace COMACON.Controllers
         }
 
         [HttpPost("CreateNewWebApplication")]
-        public string CreateNewWebApplication(string action, [FromBody] JsonElement webApplicationToCreate)
+        public string CreateNewWebApplication(string action,
+            [FromBody] JsonElement webApplicationToCreate,
+            [FromHeader(Name = "Authorization")] string authorizationHeader = "")
         {
             Log.Information("Action being performed: {action}", action);
-            Console.WriteLine(action);
-            Console.WriteLine(webApplicationToCreate);
+            //Console.WriteLine(action);
+            //Console.WriteLine(webApplicationToCreate);
             /* Returns the results of the Creation.
              * 0 = Success
              * 1 = Failed to create the directory.

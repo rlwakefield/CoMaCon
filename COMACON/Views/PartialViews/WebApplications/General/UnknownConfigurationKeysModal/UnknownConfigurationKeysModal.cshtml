@@ -1,0 +1,67 @@
+<div id="UnknownConfigurationKeys-Modal" class="sectionWithTitleBar">
+    <div class="UnknownConfigurationKeys-Content">
+        <div class="titleBar" name="Title-Bar">
+            <h2>Unknown Configuration Keys</h2>
+            <p id="UnknownConfigurationKeys-CloseModal" onclick="closeUnknownConfigurationKeysModal()">X</p>
+        </div>
+        <div class="coreSection">
+            <div id="UnknownConfigurationKeys" class="UnknownConfigurationKeys">
+                <div id="UnknownConfigurationKeysElements-Section" class="UnknownConfigurationKeys-Section">
+                    <div class="UnknownConfigurationKeys-Text">
+                        <p>The following web.config key elements are unknown to be parsed. These need to be reported so they can be added.</p>
+                    </div>
+                    <div class="UnknownConfigurationKeys-ElementsTable">
+                        <table id="UnknownConfigurationKeysElementsTable">
+                            <thead>
+                                <tr>
+                                    <th>Section</th>
+                                    <th>Path Name</th>
+                                    <th>Attribute Name</th>
+                                    <th>Type</th>
+                                    <th>HTML ID Name</th>
+                                    <th>Value</th>
+                                    <th>Version</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="UnknownConfigurationKeys-Footer">
+                        <div class="UnknownConfigurationKeys-ButtonContainer">
+                            <button id="UnknownConfigurationKeys-CopyToClipboardButton" class="UnknownConfigurationKeys-CopyToClipboardButton" onclick="copyToClipboardPreparation('Elements')">Copy To Clipboard</button>
+                            <button id="UnknownConfigurationKeys-SendInEmailButton" class="UnknownConfigurationKeys-SendInEmailButton" onclick="">Send In Email</button>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div id="UnknownConfigurationKeysAttributes-Section" class="UnknownConfigurationKeys-Section">
+                    <div class="UnknownConfigurationKeys-Text">
+                        <p>The following web.config key attributes are unknown to be parsed. These need to be reported so they can be added.</p>
+                    </div>
+                    <div class="UnknownConfigurationKeys-AttributesTable">
+                        <table id="UnknownConfigurationKeysAttributesTable">
+                            <thead>
+                                <tr>
+                                    <th>Section</th>
+                                    <th>Path Name</th>
+                                    <th>Attribute Name</th>
+                                    <th>Type</th>
+                                    <th>HTML ID Name</th>
+                                    <th>Value</th>
+                                    <th>Version</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="UnknownConfigurationKeys-Footer">
+                        <div class="UnknownConfigurationKeys-ButtonContainer">
+                            <button id="UnknownConfigurationKeys-CopyToClipboardButton" class="UnknownConfigurationKeys-CopyToClipboardButton" onclick="copyToClipboardPreparation('Attributes')">Copy To Clipboard</button>
+                            <button id="UnknownConfigurationKeys-SendInEmailButton" class="UnknownConfigurationKeys-SendInEmailButton" onclick="">Send In Email</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

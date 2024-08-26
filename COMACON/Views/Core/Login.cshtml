@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div id="login-form-container" class="container">
+    <h2>Login</h2>
+    <form id="login-form">
+        <span id="genericloginerror" class="loginerrortext"></span>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" class="loginfield">
+            <span id="username-errortext" class="loginerrortext"></span>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" class="loginfield">
+            <span id="password-errortext" class="loginerrortext"></span>
+        </div>
+        <div class="form-group">
+            <button onclick="login(event)" type="submit">Login</button>
+        </div>
+    </form>
+</div>
+<script>
+    currentPage = "Login";
+    document.getElementById("SettingsButton").style.display = "none";
+    // document.getElementById("login-form").addEventListener('submit', function (event) {
+    //     event.preventDefault(); // Prevent the default form submission
+
+    //     const username = document.getElementById('username').value;
+    //     const password = document.getElementById('password').value;
+
+    //     fetch(sessionStorage.getItem('apiRootUrl') + '/api/Endpoint/Authentication', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ username, password })
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log(data);
+    //             switch (data.error) {
+    //                 case "0":
+    //                     //Successful authentication
+    //                     sessionStorage.setItem("comaconbearertoken", data.access_token);
+    //                     console.log(sessionStorage.getItem("comaconbearertoken"));
+    //                     window.location.href = '/core/home';
+    //                     break;
+    //                 case "1":
+    //                     //Missing Username
+    //                     document.getElementById("username-errortext").innerText = data.message;
+    //                     break;
+    //                 case "2":
+    //                     //Missing Password
+    //                     document.getElementById("password-errortext").innerText = data.message;
+    //                     break;
+    //                 case "3":
+    //                     //Invalid Username or Password
+    //                     document.getElementById("genericloginerror").innerText = data.message;
+    //                     break;
+    //                 case "4":
+    //                     //Multiple users found with the same username/password.
+    //                     document.getElementById("genericloginerror").innerText = data.message;
+    //                     break;
+    //             }
+
+    //             //if (data.success) {
+    //             //    // Handle successful login
+    //             //    window.location.href = '/dashboard'; // Redirect to dashboard or another page
+    //             //} else {
+    //             //    // Handle login failure
+    //             //    document.getElementById('username-errortext').textContent = data.message;
+    //             //}
+    //         })
+    //         .catch(error => {
+    //             console.error('Error:', error);
+    //         });
+    // });
+
+    Array.from(document.getElementsByClassName("loginfield")).forEach((element) => {
+        element.addEventListener("input", resetLoginErrorTextFields);
+    });
+</script>

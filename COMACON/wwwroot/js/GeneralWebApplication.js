@@ -144,6 +144,7 @@ let tdIdValue = 0;
 let apiRootUrl = "";
 let configurationChanged = false;
 let newConfigurationDetails = [];
+let currentPage = "";
 
 /* ADFS Settings Variables */
 let audienceUrisIdNumber = 0;
@@ -181,10 +182,100 @@ let keywordTypeAheadArray = [];
 let keywordTypeAheadIdNumber = 0;
 
 
+
+setTimeout(() => {
+    //document.getElementById("login-form").addEventListener('submit', function (event) {
+    //    event.preventDefault(); // Prevent the default form submission
+
+    //    const username = document.getElementById('username').value;
+    //    const password = document.getElementById('password').value;
+
+    //    fetch(apiRootUrl + '/api/Endpoint/Authentication', {
+    //        method: 'POST',
+    //        headers: {
+    //            'Content-Type': 'application/json'
+    //        },
+    //        body: JSON.stringify({ username, password })
+    //    })
+    //        .then(response => response.json())
+    //        .then(data => {
+    //            console.log(data);
+    //            switch (data.error) {
+    //                case "0":
+    //                    //Successful authentication
+    //                    localStorage.setItem("comaconbearertoken", data.token);
+    //                    window.location.href = '/core/home';
+    //                    break;
+    //                case "1":
+    //                    //Missing Username
+    //                    document.getElementById("username-errortext").innerText = data.message;
+    //                    break;
+    //                case "2":
+    //                    //Missing Password
+    //                    document.getElementById("password-errortext").innerText = data.message;
+    //                    break;
+    //                case "3":
+    //                    //Invalid Username or Password
+    //                    document.getElementById("genericloginerror").innerText = data.message;
+    //                    break;
+    //                case "4":
+    //                    //Multiple users found with the same username/password.
+    //                    document.getElementById("genericloginerror").innerText = data.message;
+    //                    break;
+    //            }
+                
+    //            //if (data.success) {
+    //            //    // Handle successful login
+    //            //    window.location.href = '/dashboard'; // Redirect to dashboard or another page
+    //            //} else {
+    //            //    // Handle login failure
+    //            //    document.getElementById('username-errortext').textContent = data.message;
+    //            //}
+    //        })
+    //        .catch(error => {
+    //            console.error('Error:', error);
+    //        });
+    //});
+
+    //Array.from(document.getElementsByClassName("loginfield")).forEach((element) => {
+    //    element.addEventListener("input", resetLoginErrorTextFields);
+    //});
+}, 50);
+
+
 /********************************************************
  *                  Page Load SCript
  ********************************************************/
 async function onPageLoadLogic() {
+    // console.log("Home Page Loaded");
+    // console.log(window.location);
+    //if (window.location.href.endsWith("/")) {
+    //    apiRootUrl = window.location.href.slice(0, -1);
+    //    sessionStorage.setItem('apiRootUrl', apiRootUrl);
+    //} else {
+    //    apiRootUrl = window.location;
+    //    sessionStorage.setItem('apiRootUrl', apiRootUrl);
+    //}
+
+    //console.log(sessionStorage.getItem('apiRootUrl'));
+    if (sessionStorage.getItem('apiRootUrl') == null || sessionStorage.getItem('apiRootUrl') == undefined) {
+        fetch(apiRootUrl + '/api/Endpoint/GetRootUrl', {
+            method: 'GET', // or 'POST', 'PUT', 'DELETE', etc.
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.rooturl)
+                sessionStorage.setItem('apiRootUrl', data.rooturl);
+                console.log(sessionStorage.getItem('apiRootUrl'));
+            })
+            .catch(error => console.error('Error:', error));
+    } else {
+        
+    }
+    apiRootUrl = sessionStorage.getItem('apiRootUrl');
+    //console.log(apiRootUrl);
+
+    document.getElementById("core-action-buttons-div").style.display = "none";
     if (localStorage.getItem("darkModeState") != null) {
         if (localStorage.getItem("darkModeState") == "true") {
             document.getElementById("checkbox").checked = true;
@@ -193,10 +284,10 @@ async function onPageLoadLogic() {
         }
         toggleDarkLightMode(document.getElementById("checkbox"));
     }
-    
+
     if (sessionStorage.getItem('WebApplicationChosenArray') != null && sessionStorage.getItem('WebApplicationChosenArray') != undefined) {
         let object = JSON.parse(sessionStorage.getItem('WebApplicationChosenArray'));
-        console.log(object);
+        //console.log(object);
         sessionStorage.removeItem('WebApplicationChosenArray');
         apiRootUrl = sessionStorage.getItem('apiRootUrl');
 
@@ -204,12 +295,13 @@ async function onPageLoadLogic() {
         document.getElementById("ProcessingWebConfigValuesProgress").style.display = "block";
         loadWebApplicationConfiguration(object[0].webConfigPhysicalPath, object[0].type, object[0].version, object[0].site, object[0].name, object[0].path, object[0].physicalPath, object[0].bitness);
     } else {
-        //Need to redirect the user back to the home page.
-        console.log(window.location.href);
-        console.log(apiRootUrl);
-        //if (window.location.href != apiRootUrl + "/") {
-        //    window.location.href = apiRootUrl;
-        //}
+        console.log((sessionStorage.getItem('WebApplicationChosenArray') == null || sessionStorage.getItem('WebApplicationChosenArray') == undefined));
+        console.log((currentPage != "Home" && currentPage != "Login" && currentPage != "Settings"));
+        if ((sessionStorage.getItem('WebApplicationChosenArray') == null || sessionStorage.getItem('WebApplicationChosenArray') == undefined)
+            && (currentPage != "Home" && currentPage != "Login" && currentPage != "Settings")) {
+            console.log("Redirecting to Home.");
+            window.location.href = "/core/home"
+        }
     }
 }
 
@@ -3422,6 +3514,12 @@ function toggleDarkLightMode(checkbox) {
         Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
             element.classList.add('dark_mode_titlebar');
         });
+        try {
+            document.getElementById("login-form-container").classList.add('dark_mode_titlebar');
+        } catch {
+
+        }
+        
 
         //Elements to add "dark_mode_button" class to:
         Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
@@ -3466,6 +3564,11 @@ function toggleDarkLightMode(checkbox) {
         Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
             element.classList.remove('dark_mode_titlebar');
         });
+        try {
+            document.getElementById("login-form-container").classList.remove('dark_mode_titlebar');
+        } catch {
+
+        }
 
         //Elements to add "dark_mode_button" class to:
         Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
@@ -3517,7 +3620,7 @@ async function groupByNameKey(array,groupingKeyName) {
 /********************************************************
 *              New Web Application Functions
 ********************************************************/
-let currentPage = "NewWebApplicationModal-StartPage";
+let currentNewWebApplicationPage = "NewWebApplicationModal-StartPage";
 
 function webApplicationVersionChanged(field) {
     //Clear the current options from the ChooseWebApplication select element.
@@ -3545,7 +3648,7 @@ function webApplicationTypeChanged(field) {
 }
 
 function backButtonClicked() {
-    switch (currentPage) {
+    switch (currentNewWebApplicationPage) {
         case "NewWebApplicationModal-StartPage":
             break;
         case "NewWebApplicationModal-FromExistingOrScratch":
@@ -3557,7 +3660,7 @@ function backButtonClicked() {
                 document.getElementById("NewWebApplicationModal-StartPage").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-StartPage").hidden = false;
                 document.getElementById("NewWebApplicationModal-FromExistingOrScratch").hidden = true;
-                currentPage = "NewWebApplicationModal-StartPage";
+                currentNewWebApplicationPage = "NewWebApplicationModal-StartPage";
             }, 250);
             break;
         case "NewWebApplicationModal-FromExisting":
@@ -3569,7 +3672,7 @@ function backButtonClicked() {
                 document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-FromExistingOrScratch").hidden = false;
                 document.getElementById("NewWebApplicationModal-FromExisting").hidden = true;
-                currentPage = "NewWebApplicationModal-FromExistingOrScratch";
+                currentNewWebApplicationPage = "NewWebApplicationModal-FromExistingOrScratch";
             }, 250);
             break;
         case "NewWebApplicationModal-VersionClientChoice":
@@ -3581,7 +3684,7 @@ function backButtonClicked() {
                 document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-FromExistingOrScratch").hidden = false;
                 document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = true;
-                currentPage = "NewWebApplicationModal-FromExistingOrScratch";
+                currentNewWebApplicationPage = "NewWebApplicationModal-FromExistingOrScratch";
             }, 250);
             break;
         case "NewWebApplicationModal-WebSiteChoiceAndNaming":
@@ -3592,7 +3695,7 @@ function backButtonClicked() {
                 document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = false;
                 document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = true;
-                currentPage = "NewWebApplicationModal-VersionClientChoice";
+                currentNewWebApplicationPage = "NewWebApplicationModal-VersionClientChoice";
             }, 250);
             document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
             break;
@@ -3604,7 +3707,7 @@ function backButtonClicked() {
                 document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = true;
                 document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = false;
-                currentPage = "NewWebApplicationModal-WebSiteChoiceAndNaming";
+                currentNewWebApplicationPage = "NewWebApplicationModal-WebSiteChoiceAndNaming";
             }, 250);
             document.getElementById("NewWebApplicationModal-NextCreateButton").innerText = "Next >";
             document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
@@ -3617,7 +3720,7 @@ function backButtonClicked() {
                 document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").style.display = "none";
                 document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").style.display = "flex";
-                currentPage = "NewWebApplicationModal-WebApplicationAppPoolNaming";
+                currentNewWebApplicationPage = "NewWebApplicationModal-WebApplicationAppPoolNaming";
             }, 250);
             document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
             document.getElementById("NewWebApplicationModal-CloseModal").style.display = "block";
@@ -3627,7 +3730,7 @@ function backButtonClicked() {
 }
 
 async function nextButtonClicked() {
-    switch (currentPage) {
+    switch (currentNewWebApplicationPage) {
         case "NewWebApplicationModal-VersionClientChoice":
             document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
             document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.add("slide-out-left");
@@ -3636,7 +3739,7 @@ async function nextButtonClicked() {
                 document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.add("slide-in-right");
                 document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = true;
                 document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = false;
-                currentPage = "NewWebApplicationModal-WebSiteChoiceAndNaming";
+                currentNewWebApplicationPage = "NewWebApplicationModal-WebSiteChoiceAndNaming";
             }, 250);
             document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
             //document.getElementById("ChooseWebSite").innerHTML = `<option value="Default Web Site">Default Web Site</option>`;
@@ -3653,7 +3756,7 @@ async function nextButtonClicked() {
                 document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.add("slide-in-right");
                 document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = true;
                 document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = false;
-                currentPage = "NewWebApplicationModal-WebApplicationAppPoolNaming";
+                currentNewWebApplicationPage = "NewWebApplicationModal-WebApplicationAppPoolNaming";
             }, 250);
             document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
             document.getElementById("WebApplicationName").value = "";
@@ -3670,7 +3773,7 @@ async function nextButtonClicked() {
                 document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").classList.add("slide-in-right");
                 document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").style.display = "none";
                 document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").style.display = "flex";
-                currentPage = "NewWebApplicationModal-CheckingNewWebApplicationProgress";
+                currentNewWebApplicationPage = "NewWebApplicationModal-CheckingNewWebApplicationProgress";
             }, 250);
             document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
             document.getElementById("NewWebApplicationModal-CloseModal").style.display = "none";
@@ -3933,7 +4036,7 @@ function newWebApplication() {
         document.getElementById('NewWebApplicationModal-FromExistingOrScratch').classList.add('slide-in-right');
     }, 250);
     document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
-    currentPage = "NewWebApplicationModal-FromExistingOrScratch";
+    currentNewWebApplicationPage = "NewWebApplicationModal-FromExistingOrScratch";
     document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
 }
 
@@ -3950,7 +4053,7 @@ function newWebApplicationFromExisting() {
     }, 250);
     document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
     document.getElementById("FromExisting-ChooseWebApplication").value = "";
-    currentPage = "NewWebApplicationModal-FromExisting";
+    currentNewWebApplicationPage = "NewWebApplicationModal-FromExisting";
     document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
     document.getElementById("SelectSessionAdminSecurityConfig-Section").style.display = "none";
     document.getElementById("SelectWebConfig").value = "";
@@ -3969,7 +4072,7 @@ function newWebApplicationFromScratch() {
         document.getElementById('NewWebApplicationModal-VersionClientChoice').classList.add('slide-in-right');
     }, 250);
     document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
-    currentPage = "NewWebApplicationModal-VersionClientChoice";
+    currentNewWebApplicationPage = "NewWebApplicationModal-VersionClientChoice";
     document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
 }
 
@@ -3987,7 +4090,7 @@ function closeNewWebApplicationModal() {
     document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = true;
     document.getElementById('NewWebApplicationModal-FromExisting').hidden = true;
     document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = true;
-    currentPage = "NewWebApplicationModal-StartPage";
+    currentNewWebApplicationPage = "NewWebApplicationModal-StartPage";
     document.getElementById("NewWebApplicationModal-NextCreateButton").innerText = "Next >";
     document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
     document.getElementById("ChooseWebApplication").disabled = true;
@@ -4026,7 +4129,7 @@ async function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
                             document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").classList.add("slide-in-right");
                             document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").style.display = "none";
                             document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").style.display = "flex";
-                            currentPage = "NewWebApplicationModal-CreatingNewWebApplicationProgress";
+                            currentNewWebApplicationPage = "NewWebApplicationModal-CreatingNewWebApplicationProgress";
                         }, 250);
                         document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
                         document.getElementById("NewWebApplicationModal-CloseModal").style.display = "none";
@@ -4051,7 +4154,6 @@ async function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
                         backButtonClicked(document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress"));
                     }, 250);
                     break;
-
             }
         }))
     {
@@ -4059,6 +4161,77 @@ async function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
     } else {
         return false;
     }
+}
+
+
+/********************************************************
+*                Login Page Functions
+********************************************************/
+function resetLoginErrorTextFields() {
+    Array.from(document.getElementsByClassName("loginerrortext")).forEach(element => {
+        element.innerText = "";
+    });
+}
+
+function login(event) {
+    event.preventDefault(); // Prevent the default form submission
+    let loginCredentials = {
+        username: document.getElementById("username").value,
+        password: document.getElementById("password").value
+    };
+
+    fetch(sessionStorage.getItem('apiRootUrl') + '/api/Endpoint/AuthenticationV2', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(loginCredentials)
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                //console.log(response.status);
+                return response.json().then(errorData => {
+                    //console.log(errorData);
+                    switch (errorData.error) {
+                        case "1":
+                            //Missing Username
+                            document.getElementById("username-errortext").innerText = errorData.message;
+                            break;
+                        case "2":
+                            //Missing Password
+                            document.getElementById("password-errortext").innerText = errorData.message;
+                            break;
+                        case "3":
+                            //Invalid Username or Password
+                            document.getElementById("genericloginerror").innerText = errorData.message;
+                            break;
+                        case "4":
+                            //Multiple users found with the same username/password.
+                            document.getElementById("genericloginerror").innerText = errorData.message;
+                            break;
+                        default:
+                            //Unknown error occured.
+                            document.getElementById("genericloginerror").innerText = errorData.message;
+                            break;
+                    }
+                    throw errorData;
+                });
+                //throw new Error(response.json());
+            }
+        })
+        .then(data => {
+            console.log(data);
+            //console.log(response.status);
+            sessionStorage.setItem("comaconbearertoken", data.access_token);
+            //console.log(sessionStorage.getItem("comaconbearertoken"));
+            window.location.href = '/core/home';
+        })
+        .catch(error => {
+            console.log(error);
+            console.error('Error:', error.message);
+        });
 }
 
 

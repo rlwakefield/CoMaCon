@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Settings";
+}
+
+<div class="settings-container">
+    <div class="settings-categories">
+        <!-- <button id="General" class="settings-category" onclick="activateSettingsButton(this)">General</button> -->
+        <button id="Users" class="settings-category" onclick="activateSettingsButton(this)">Users</button>
+        <!-- <button id="Roles" class="settings-category">Roles</button> -->
+        <!-- <button id="Permissions" class="settings-category">Permissions</button> -->
+    </div>
+    <div class="settings-content">
+        <partial name="~/Views/PartialViews/General/Settings/Users/SettingsUsers.cshtml" />
+    </div>
+</div>
+<script>
+    currentPage = "Settings";
+</script>

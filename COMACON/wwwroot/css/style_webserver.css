@@ -1909,5 +1909,201 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 
 
 /********************************************************
+ *                  Login Page Styling
+ ********************************************************/
+/*body {
+	font-family: Arial, sans-serif;
+	background-color: #f2f2f2;
+}
+*/
+.container {
+	max-width: 400px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 50%;
+	border: 1px solid lightgray;
+}
+
+.container p, h1, h2 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.container h1 {
+	font-size: 36px;
+	margin-bottom: 0;
+}
+
+.container p {
+	margin: 0;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+.form-group label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.form-group input {
+	width: 90%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 0.25rem;
+}
+
+.form-group button {
+	width: 100%;
+	padding: 10px;
+	background-color: #4CAF50;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.loginerrortext {
+	color: red;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+
+
+/********************************************************
+ *                  Settings Styling
+ ********************************************************/
+.settings-container {
+	width: 100%;
+	border: 1px solid black;
+	border-radius: 1rem;
+	display: flex;
+}
+
+.settings-innercontainer {
+	border: 1px solid red;
+	margin: 1rem;
+}
+
+.settings-categories {
+	width: 20%;
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+	padding: 1rem;
+	border-right: 1px solid #00000093;
+	justify-content: center;
+	height: 25rem;
+}
+
+.settings-category {
+	width: 100%;
+	padding: 1rem;
+	border: none;
+	border-radius: 1rem;
+	background-color: #f1f1f1;
+	cursor: pointer;
+	font-size: initial;
+}
+
+.settings-category:hover {
+	background-color: #e1e1e1;
+}
+
+.settings-category.active {
+	background-color: #d1d1d19d;
+}
+
+.settings-content {
+	width: 80%;
+	padding: 1rem;
+}
+
+.settings-content-users {
+	display: none;
+	max-height: 20rem;
+	overflow-y: auto;
+}
+
+.settings-content-users-TableContainer {
+}
+
+#UsersTable {
+	width: 100%;
+	border-collapse: collapse;
+	margin: auto;
+}
+
+#UsersTable {
+	overflow-y: auto;
+}
+
+#UsersTable th {
+	background-color: #8e8e8e;
+	position: sticky;
+}
+
+#UsersTable td, th {
+	border: 1px solid black;
+	text-align: center;
+	padding: 0.125rem 0.25rem;
+}
+
+#UsersTable tbody tr:nth-child(even) {
+	background-color: rgb(224, 224, 224);
+}
+
+.actionscell button {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0.25rem 0.5rem;
+}
+
+.UserDetailsParagraphs {
+	margin: 0 0 0 1rem;
+}
+
+.UserDetails-InputField {
+	margin: 1rem;
+}
+
+.UserDetails-ActionButtons {
+	margin: 1rem;
+	display: flex;
+	gap: 1rem;
+}
+
+#NewUserButton {
+	margin: 0 0 1rem 0;
+	height: 2rem;
+	width: 6rem;
+	border-radius: 1rem;
+	float: right;
+}
+
+#NewUserButton:hover {
+    background-color: #d1d1d1;
+}
+
+#NewAndEditingUserModal {
+	display: none;
+}
+
+
+
+
+/********************************************************
  *                  Name
  ********************************************************/

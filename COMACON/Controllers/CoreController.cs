@@ -9,6 +9,11 @@ namespace COMACON.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+           return View();
+        }
+
         public IActionResult WebServer()
         {
             return View();
@@ -57,6 +62,11 @@ namespace COMACON.Controllers
         public IActionResult OnBasePatientWindow()
         {
             return View();
+        }
+
+        public IActionResult Settings()
+        {
+           return View();
         }
     }
 }

@@ -33,6 +33,8 @@ builder.Services.AddSingleton(proxyOptions);
 builder.Services.AddTransient<ComaconHelperProxy, DefaultComaconHelperProxy>();
 builder.Services.AddTransient<GenericHelperMethods, DefaultGenericHelperMethods>();
 builder.Services.AddTransient<WebApplicationDataStructures, DefaultWebApplicationDataStructures>();
+builder.Services.AddTransient<SessionManagement, DefaultSessionManagement>();
+builder.Services.AddTransient<SqlQueries, DefaultSqlQueries>();
 
 builder.Services.AddTransient<Core, DefaultCore>();
 builder.Services.AddTransient<LoadSaveWebApplications, DefaultLoadSaveWebApplications>();
@@ -58,7 +60,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Core}/{action=Home}");
+    pattern: "{controller=Core}/{action=Login}");
 
 app.MapControllers();
 

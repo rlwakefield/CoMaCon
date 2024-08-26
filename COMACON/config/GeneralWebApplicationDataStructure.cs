@@ -662,3 +662,31 @@ public class WebApplicationToCreate
     public string? webApplicationBitness { get; set; }
     public string? webApplicationPoolName { get; set; }
 }
+
+
+/********************************************************
+*              Get Users Data Structure
+********************************************************/
+public class UsersDataStructure
+{
+    public List<User> users = new List<User>();
+}
+
+public class User
+{
+    public int? usernum { get; set; }
+    public string? username { get; set; }
+    public string? firstname { get; set; }
+    public string? lastname { get; set; }
+    public string? password { get; set; } = "";
+    public string? emailaddress { get; set; }
+    public int? enabled { get; set; }
+    public int? passwordresetnextlogin { get; set; }
+    public DateTime? passwordlastchanged { get; set; }
+    public string? authmethod { get; set; }
+    public DateTime? creationdate { get; set; }
+    public int? createdby { get; set; }
+    public DateTime? lastediteddate { get; set; }
+    public int? lasteditedby { get; set; }
+    public int? roleid { get; set; }
+}
