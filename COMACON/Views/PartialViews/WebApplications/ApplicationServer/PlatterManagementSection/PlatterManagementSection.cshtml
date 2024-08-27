@@ -1,0 +1,157 @@
+<div id="PlatterManagementSection" class="tabcontent">
+    <div class="sectionWithTitleBar">
+        <div class="titleBar" name="Title-Bar">
+            Disk Group Aliases
+        </div>
+        <div class="coreSection">
+            <div class="row">
+                <p class="BlockDescription">The alias must map to a mount location which is equal to the contents of physicalplatter.lastuseddrive. The Type attribute can be "unc" or "unix".  Default is "unc".</p>
+            </div>
+            <div class="row">
+                <div class="column" style="width: 20%;">
+                    <select id="DiskGroupAliases-SelectList" name="DiskGroupAliases-SelectList" size="10" style="width:100%;" onchange="diskGroupAliasesChanged(this)">
+                    </select>
+                    <div style="display:flex;justify-content:space-around;">
+                        <button id="Add-DiskGroup-Alias-Button" onclick="addDiskGroupAlias()" type="button" style="margin-left: 5px;">Add</button>
+                        <button id="Delete-DiskGroup-Alias-Button" onclick="deleteDiskGroupAlias()" type="button" style="margin-left: 5px;">Delete</button>
+                    </div>
+                </div>
+                <div class="column">
+                    <div style="margin-top: 16px;margin-bottom: 16px;">
+                        <div class="labelElement">
+                            <label for="Alias-Old-Name">Old Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Alias-Old-Name-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Alias-Old-Name" id="Alias-Old-Name" oninput="diskGroupAliasesFieldUpdated(this)">
+                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Alias-Old-Name-RequiredSvg" class="requiredAlertSvg">
+                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div style="margin-top: 16px;margin-bottom: 16px;">
+                        <div class="labelElement">
+                            <label for="Alias-New-Name">New Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Alias-New-Name-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Alias-New-Name" id="Alias-New-Name" oninput="diskGroupAliasesFieldUpdated(this)">
+                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Alias-New-Name-RequiredSvg" class="requiredAlertSvg">
+                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div style="margin-top: 16px;margin-bottom: 16px;">
+                        <div class="labelElement">
+                            <label for="Alias-Type">Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Alias-Type-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select name="Alias-Type" id="Alias-Type" onchange="diskGroupAliasesFieldUpdated(this)">
+                                <option value="unc">unc</option>
+                                <option value="unix">unix</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sectionWithTitleBar">
+        <div class="titleBar" name="Title-Bar">
+            Foreign Storage Devices
+        </div>
+        <div class="coreSection">
+            <div class="row">
+                <p class="BlockDescription">Settings for platter management caching of files at the data source machine(for PCL, AFP files, etc.) for Centera storage.</p>
+                <div class="column">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Foreign-Storage-EMC-Threshold">EMC Threshold(KB): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Foreign-Storage-EMC-Threshold-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" name="Foreign-Storage-EMC-Threshold" id="Foreign-Storage-EMC-Threshold">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Foreign-Storage-PM-Cache-Location">Platter Management Cache Location: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Foreign-Storage-PM-Cache-Location-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Foreign-Storage-PM-Cache-Location" id="Foreign-Storage-PM-Cache-Location">
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Foreign-Storage-PM-Cache-Timeout">Platter Management Cache Timeout(Minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Foreign-Storage-PM-Cache-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" name="Foreign-Storage-PM-Cache-Timeout" id="Foreign-Storage-PM-Cache-Timeout">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Foreign-Storage-PM-Cache-Size">PM Cache Size(MB): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Foreign-Storage-PM-Cache-Size-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" name="Foreign-Storage-PM-Cache-Size" id="Foreign-Storage-PM-Cache-Size">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sectionWithTitleBar">
+        <div class="titleBar" name="Title-Bar">
+            Other
+        </div>
+        <div class="coreSection">
+            <div class="row">
+                <div class="column">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>File IO Detail: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="File-IO-Detail-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="File-IO-Detail" class="switch">
+                                <input id="File-IO-Detail" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Temp-File-Expiration-Threshold-Time">Temp File Expiration Threshold Time(Minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Temp-File-Expiration-Threshold-Time-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Temp-File-Expiration-Threshold-Time" id="Temp-File-Expiration-Threshold-Time">
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="PM-File-Access-Level">Platter Management File Access Level: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="PM-File-Access-Level-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select name="PM-File-Access-Level" id="PM-File-Access-Level">
+                                <option value="0">0 - Default</option>
+                                <option value="1">1 - Always use UNC</option>
+                                <option value="2">2 - Never to UNC</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

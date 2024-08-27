@@ -1,0 +1,274 @@
+<div id="RetrievalSection" class="tabcontent">
+    <div class="row">
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Row Coloring: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Row-Coloring-Tooltip" class="tooltiptext">Make every other row have a shaded background in the document select list.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Row-Coloring" class="switch">
+                        <input id="Row-Coloring" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Keyword-Panel-View-Type">Keyword Panel View Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Keyword-Panel-View-Type-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <select name="Keyword-Panel-View-Type" id="Keyword-Panel-View-Type">
+                        <option value="flat" selected>flat</option>
+                        <option value="button">button</option>
+                    </select>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Admin Security Keywords: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Admin-Security-Keywords-Tooltip" class="tooltiptext">This will globally toggle whether an Admin can assign security keywords or not.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Admin-Security-Keywords" class="switch">
+                        <input id="Admin-Security-Keywords" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Prompt User Queries: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Prompt-User-Queries-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Prompt-User-Queries" class="switch">
+                        <input id="Prompt-User-Queries" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Display Single Document: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Display-Single-Document-Tooltip" class="tooltiptext">Automatically open document if only one document is returned in the hitlist.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Display-Single-Document" class="switch">
+                        <input id="Display-Single-Document" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Open Rich Text Format Documents with Microsoft Word: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Open-Rich-Text-Format-Documents-With-Microsoft-Word-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Open-Rich-Text-Format-Documents-With-Microsoft-Word" class="switch">
+                        <input id="Open-Rich-Text-Format-Documents-With-Microsoft-Word" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Number-of-Docuemnt-Types-to-Display">Number of Docuemnt Types to Display: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Number-of-Docuemnt-Types-to-Display-Tooltip" class="tooltiptext">Number of Document Types to display in the Document Type Select Lists without scrolling.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Number-of-Docuemnt-Types-to-Display" id="Number-of-Docuemnt-Types-to-Display" value="6">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Enable Keyword Operators: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Enable-Keyword-Operators-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Enable-Keyword-Operators" class="switch">
+                        <input id="Enable-Keyword-Operators" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Remember Hitlist Height: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Remember-Hitlist-Height-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Remember-Hitlist-Height" class="switch">
+                        <input id="Remember-Hitlist-Height" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Text Search Auto View: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Text-Search-Auto-View-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Text-Search-Auto-View" class="switch">
+                        <input id="Text-Search-Auto-View" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement" id="EDM-Briefcase-SettingElement">
+                <div class="labelElement">
+                    <span>EDM Briefcase: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="EDM-Briefcase-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="EDM-Briefcase" class="switch">
+                        <input id="EDM-Briefcase" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement" id="Open-Microsoft-Office-Documents-in-Separate-Window-SettingElement">
+                <div class="labelElement">
+                    <span>Open Microsoft Office Documents in Separate Window: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Open-Microsoft-Office-Documents-in-Separate-Window-Tooltip" class="tooltiptext">Indicates if Microsoft Office documents (Word, Excel, PowerPoint etc.) should be opened in separate window..</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Open-Microsoft-Office-Documents-in-Separate-Window" class="switch">
+                        <input id="Open-Microsoft-Office-Documents-in-Separate-Window" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Retrieve Transactions
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enable Retrieve Transactions: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Enable-Retrieve-Transactions-Tooltip" class="tooltiptext">Retrieve Transactions for a selected Document.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Enable-Retrieve-Transactions" class="switch">
+                                <input id="Enable-Retrieve-Transactions" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Sort by Document ID: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Sort-by-Document-ID-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Sort-by-Document-ID" class="switch">
+                                <input id="Sort-by-Document-ID" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Thumbnail Hitlist Viewer
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Allow Caching: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Allow-Caching-Tooltip" class="tooltiptext">Whether to allow web server caching of images.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Allow-Caching" class="switch">
+                                <input id="Allow-Caching" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Show Previews: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Show-Previews-Tooltip" class="tooltiptext">Whether to display only thumbnails, or larger previews as well.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Show-Previews" class="switch">
+                                <input id="Show-Previews" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>User Configurable: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="User-Configurable-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="User-Configurable" class="switch">
+                                <input id="User-Configurable" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Number-of-Columns">Number of Columns: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Number-of-Columns-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Number-of-Columns" id="Number-of-Columns" value="3">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Maximum-Width">Maximum Width: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Maximum-Width-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Maximum-Width" id="Maximum-Width" value="50">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Maximum-Height">Maximum Height: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Maximum-Height-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Maximum-Height" id="Maximum-Height" value="50">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Preview-Maxiumum-Width">Preview Maxiumum Width: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Preview-Maxiumum-Width-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Preview-Maxiumum-Width" id="Preview-Maxiumum-Width" value="400">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Preview-Maxiumum-Height">Preview Maxiumum Height: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Preview-Maxiumum-Height-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Preview-Maxiumum-Height" id="Preview-Maxiumum-Height" value="400">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

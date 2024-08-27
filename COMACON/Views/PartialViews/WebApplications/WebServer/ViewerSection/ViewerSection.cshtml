@@ -1,0 +1,226 @@
+<div id="ViewerSection" class="tabcontent">
+    <div class="row">
+        <p class="BlockDescription">The following settings control what the user sees in the Web Client.</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Zoom Controls
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Zoom-Level">Zoom Level: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Zoom-Level-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select name="Zoom-Level" id="Zoom-Level">
+                                <option value="" selected></option>
+                                <option value="fittowindow">Fit To Window</option>
+                                <option value="fittowidth">Fit To Width</option>
+                                <option value="zoomrect">Zoom Rect</option>
+                                <option value="actualsize">Actual Size</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sectionWithTitleBar">
+                        <div class="titleBar" name="Title-Bar">
+                            Zoom Rect Settings
+                        </div>
+                        <div class="coreSection">
+                            <div class="settingElement">
+                                <div class="labelElement">
+                                    <label for="Left-Border">Left Border: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                    <span id="Left-Border-Tooltip" class="tooltiptext">This is the help text.</span>
+                                </div>
+                                <div class="inputElement">
+                                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Left-Border" id="Left-Border" value="0">
+                                </div>
+                            </div>
+                            <div class="settingElement">
+                                <div class="labelElement">
+                                    <label for="Right-Border">Right Border: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                    <span id="Right-Border-Tooltip" class="tooltiptext">This is the help text.</span>
+                                </div>
+                                <div class="inputElement">
+                                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Right-Border" id="Right-Border" value="0">
+                                </div>
+                            </div>
+                            <div class="settingElement">
+                                <div class="labelElement">
+                                    <label for="Top-Border">Top Border: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                    <span id="Top-Border-Tooltip" class="tooltiptext">This is the help text.</span>
+                                </div>
+                                <div class="inputElement">
+                                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Top-Border" id="Top-Border" value="0">
+                                </div>
+                            </div>
+                            <div class="settingElement">
+                                <div class="labelElement">
+                                    <label for="Bottom-Border">Bottom Border: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                    <span id="Bottom-Border-Tooltip" class="tooltiptext">This is the help text.</span>
+                                </div>
+                                <div class="inputElement">
+                                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Bottom-Border" id="Bottom-Border" value="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Toolbars
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Annotation Toolbar: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Annotation-Toolbar-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Annotation-Toolbar" class="switch">
+                                <input id="Annotation-Toolbar" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Viewer Control Toolbar: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Viewer-Control-Toolbar-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Viewer-Control-Toolbar" class="switch">
+                                <input id="Viewer-Control-Toolbar" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Notes Toolbar: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Notes-Toolbar-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Notes-Toolbar" class="switch">
+                                <input id="Notes-Toolbar" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Miscellaneous
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Thumbnail Pages: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Thumbnail-Pages-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Thumbnail-Pages" class="switch">
+                                <input id="Thumbnail-Pages" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Disable Context Menu: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Disable-Context-Menu-Tooltip" class="tooltiptext">This key will disable the context menu for the viewer in both HTML and ActiveX modes.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Disable-Context-Menu" class="switch">
+                                <input id="Disable-Context-Menu" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Overlay">Overlay: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Overlay-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select name="Overlay" id="Overlay">
+                                <option value=""></option>
+                                <option value="null">null</option>
+                                <option value="true">true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Go-To-Page">Go To Page: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Go-To-Page-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Go-To-Page" id="Go-To-Page" value="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar" id="ActiveXOnlySection">
+                <div class="titleBar" name="Title-Bar">
+                    ActiveX Only
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement" id="Auto-Orient-Printing-SettingElement">
+                        <div class="labelElement">
+                            <span>Auto Orient Printing: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Auto-Orient-Printing-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Auto-Orient-Printing" class="switch">
+                                <input id="Auto-Orient-Printing" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement" id="Default-Print-Range-SettingElement">
+                        <div class="labelElement">
+                            <label for="Default-Print-Range">Default Print Range: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Default-Print-Range-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Default-Print-Range" id="Default-Print-Range">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    HTML Only
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Prevent Viewer Client Caching: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Prevent-Viewer-Client-Caching-Tooltip" class="tooltiptext">Preventing caching will impact Viewer performance.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Prevent-Viewer-Client-Caching" class="switch">
+                                <input id="Prevent-Viewer-Client-Caching" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<div id="DataMiningSection" class="tabcontent">
+    <div class="row">
+        <p class="BlockDescription">Allows Report Mining Integration for Datawatch Report Mining Server options to display in the right-click menu options of the document search results list and document viewer window.</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Data Mining: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Data-Mining-Tooltip" class="tooltiptext">Enable/disable Monarch data mining integration.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Data-Mining" class="switch">
+                        <input id="Data-Mining" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Data Mining Settings
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Data-Mining-Report-Server-Name">Data Mining Report Server Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Data-Mining-Report-Server-Name-Tooltip" class="tooltiptext">Enter the server name (host name) for the location of the data mining temp folder.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="Data-Mining-Input-Fields" type="text" name="Data-Mining-Report-Server-Name" id="Data-Mining-Report-Server-Name">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Additional-Models">Additional Models: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Additional-Models-Tooltip" class="tooltiptext">Enter a semicolon-delimited list of fully qualified pathnames to external Monarch models.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="Data-Mining-Input-Fields" type="text" name="Additional-Models" id="Additional-Models">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Data-Mining-Temp-Directory">Data Mining Temp Directory: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Data-Mining-Temp-Directory-Tooltip" class="tooltiptext">Enter a fully qualified pathname for the data mining temp folder.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="Data-Mining-Input-Fields" type="text" name="Data-Mining-Temp-Directory" id="Data-Mining-Temp-Directory">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Data-Mining-URL">Data Mining URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Data-Mining-URL-Tooltip" class="tooltiptext">Enter the URL for Rms.aspx.</span>
+                        </div>
+                        <div class="inputElement">
+                            <div id="Data-Mining-URL-Loader" class="loader"></div>
+                            <input class="Data-Mining-Input-Fields" type="url" name="Data-Mining-URL" id="Data-Mining-URL" oninput="resetBorderStyling(event)" onfocusout="testUrl(event)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+        </div>
+    </div>
+</div>

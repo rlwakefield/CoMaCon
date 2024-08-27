@@ -104,7 +104,7 @@
                         <div style="display: flex; flex-direction: row;margin: 5px 0;overflow-y: auto;width: max-content;">
                             <div style="max-height: 100vh;max-width:33vh">
                                 @RenderSection("CoreButtons", required: false)
-                                @RenderSection("IisLinks", required: false)
+                                <partial name="~/Views/PartialViews/WebApplications/General/IisLinks/IisLinks.cshtml" />
                             </div>
                             @RenderSection("AuthenticationOptimizationOptions", required: false)
                         </div>

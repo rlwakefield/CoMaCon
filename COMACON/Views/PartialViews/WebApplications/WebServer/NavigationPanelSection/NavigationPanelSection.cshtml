@@ -1,0 +1,122 @@
+<div id="NavigationPanelSection" class="tabcontent">
+    <div>
+        <div class="sectionWithTitleBar">
+            <div class="titleBar" name="Title-Bar">
+                Default Context Info
+            </div>
+            <div class="coreSection">
+                <div class="row">
+                    <div class="column" style="width:60%;">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Default-Context">Default-Context: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Default-Context-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <select name="Default-Context" id="Default-Context" onchange="defaultContextChanged()">
+                                    <option value="NavigationPanel0" selected></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Default-Control-Bar">Default Control Bar: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Default-Control-Bar-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <select name="Default-Control-Bar" id="Default-Control-Bar">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Default-Context-ID">Default Context ID: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Default-Context-ID-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <input type="text" name="Default-Context-ID" id="Default-Context-ID">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column" style="width:max-content;">
+            <select id="NavigationPanel-SelectList" size="20" style="max-width:100%;min-width:50%" onchange="navigationPanelSelectionChanged()">
+            </select>
+        </div>
+        <div class="column" style="width:72%;">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Context
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="NavPanel-Name">Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="NavPanel-Name-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="NavPanel-Name" id="NavPanel-Name" disabled>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="NavPanel-DisplayName">Display Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="NavPanel-DisplayName-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="NavPanel-DisplayName" id="NavPanel-DisplayName" disabled>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="NavPanel-DisplayOrder">Display Order: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="NavPanel-DisplayOrder-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" name="NavPanel-DisplayOrder" id="NavPanel-DisplayOrder" disabled>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="NavPanel-Icon">Icon: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="NavPanel-Icon-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="NavPanel-Icon" id="NavPanel-Icon" disabled>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enabled: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="NavPanel-ContextEnabled-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="NavPanel-ContextEnabled" class="switch">
+                                <input id="NavPanel-ContextEnabled" type="checkbox" onclick="navPanelContextFieldUpdated(this)" disabled>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Control Bars
+                </div>
+                <div id="NavPanel-ControlsBarsSection" class="coreSection">
+                    <div class="row">
+                        <div id="NavPanel-ControlsBarsSection-Col0" class="column">
+                        </div>
+                        <div id="NavPanel-ControlsBarsSection-Col1" class="column">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

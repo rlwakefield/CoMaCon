@@ -1,0 +1,217 @@
+<div id="ADFSSettingsSection" class="tabcontent">
+    <div class="row">
+        <p class="BlockDescription">The following keys are the settings for enabling ADFS. In order to properly configure ADFS, you must run the "Configure For ADFS" menu item in the Tools menu.</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Authentication-Mode">Authentication Mode: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Authentication-Mode-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <select name="Authentication-Mode" id="Authentication-Mode">
+                        <option value="Windows">Windows</option>
+                        <option value="None">None</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>ADFS Enabled: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="ADFS-Enabled-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="ADFS-Enabled" class="switch">
+                        <input onclick="adfsEnabledCheckbox(this)" id="ADFS-Enabled" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Request-Validation-Mode">Request Validation Mode: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Request-Validation-Mode-Tooltip" class="tooltiptext">The certificate identified by the thumbprint in the trustedIssuers element is the token-signing certificate found on the ADFS server.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="text" name="Request-Validation-Mode" id="Request-Validation-Mode" disabled>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Synchronize User Attributes: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Synchronize-User-Attributes-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Synchronize-User-Attributes" class="switch">
+                        <input name="Synchronize-User-Attributes" id="Synchronize-User-Attributes" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Authentication Only: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Authentication-Only-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Authentication-Only" class="switch">
+                        <input name="Authentication-Only" id="Authentication-Only" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Cookie Handler - Require SSL: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Cookie-Handler-Require-SSL-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Cookie-Handler-Require-SSL" class="switch">
+                        <input name="Cookie-Handler-Require-SSL" id="Cookie-Handler-Require-SSL" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Audience URI's
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Audience-URI">Audience URI: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Audience-URI-Tooltip" class="tooltiptext">The Audience URI identifies the relying party (RP - this application).  This much exactly (case, trailing slash, etc.) match the Relying Party Trust Identifier on the ADFS sever.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-Fields" type="url" name="Audience-URI" id="Audience-URI" oninput="updateAudienceUri(this)" disabled>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <div style="display: flex; width: 40%; justify-content: space-around;">
+                            <button id="AudienceURI-AddButton" onclick="addAudienceUri()">Add</button>
+                            <button id="AudienceURI-DeleteButton" onclick="deleteAudienceUri()" disabled>Delete</button>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;margin: 1rem 0 1rem 0;">
+                        <select class="" name="AudienceURI-SelectList" id="AudienceURI-SelectList" size="8" style="max-width:90%;min-width:50%" onchange="audienceUriChanged(this)">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Trusted Issuers
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Trusted-Issuer-Thumbprint">Trusted Issuer Thumbprint: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Trusted-Issuer-Thumbprint-Tooltip" class="tooltiptext">The certificate identified by the thumbprint in the trustedIssuers element is the token-signing certificate found on the ADFS server.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-Fields" type="text" name="Trusted-Issuer-Thumbprint" id="Trusted-Issuer-Thumbprint" oninput="updateTrustedIssuerThumbprint(this)" disabled>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Trusted-Issuer-Name">Trusted Issuer Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Trusted-Issuer-Name-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-Fields" type="text" name="Trusted-Issuer-Name" id="Trusted-Issuer-Name" oninput="updateTrustedIssuerName(this)" disabled>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <div style="display: flex; width: 40%; justify-content: space-around;">
+                            <button id="TrustedIssuer-AddButton" onclick="addTrustedIssuer()">Add</button>
+                            <button id="TrustedIssuer-DeleteButton" onclick="deleteTrustedIssuer()" disabled>Delete</button>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;margin: 1rem 0 1rem 0;">
+                        <select class="" name="TrustedIssuers-SelectList" id="TrustedIssuers-SelectList" size="8" style="max-width:90%;min-width:50%" onchange="trustedIssuerChanged(this)">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    system.identitymodel.services
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="wsFederation-Issuer">wsFederation Issuer: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="wsFederation-Issuer-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-services-Fields" type="text" name="wsFederation-Issuer" id="wsFederation-Issuer">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="wsFederation-Realm">wsFederation Realm: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="wsFederation-Realm-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-services-Fields" type="text" name="wsFederation-Realm" id="wsFederation-Realm">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Certificate-X509-Find-Type">Certificate X509 Find Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Certificate-X509-Find-Type-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-services-Fields" type="text" name="Certificate-X509-Find-Type" id="Certificate-X509-Find-Type">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Certificate-Find-Value">Certificate Find Value: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Certificate-Find-Value-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-services-Fields" type="text" name="Certificate-Find-Value" id="Certificate-Find-Value">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Certificate-Store-Location">Certificate Store Location: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Certificate-Store-Location-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="adfs-system-identityModel-services-Fields" type="text" name="Certificate-Store-Location" id="Certificate-Store-Location">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Certificate-Store-Name">Certificate Store Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Certificate-Store-Name-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select class="adfs-system-identityModel-services-Fields" name="Certificate-Store-Name" id="Certificate-Store-Name">
+                                <option value="AddressBook">AddressBook</option>
+                                <option value="AuthRoot">AuthRoot</option>
+                                <option value="CertificateAuthority">CertificateAuthority</option>
+                                <option value="Disallowed">Disallowed</option>
+                                <option value="My" selected>My</option>
+                                <option value="Root">Root</option>
+                                <option value="TrustedPeople">TrustedPeople</option>
+                                <option value="TrustedPublisher">TrustedPublisher</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

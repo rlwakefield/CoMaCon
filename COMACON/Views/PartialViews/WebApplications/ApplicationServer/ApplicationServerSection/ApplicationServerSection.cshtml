@@ -1,0 +1,147 @@
+<div id="ApplicationServerSection" class="tabcontent">
+    <div class="row">
+        <p class="BlockDescription">The following settings are the basic settings for the App Server.</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Core
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Data-Source">Data Source: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Data-Source-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select name="Data-Source" id="Data-Source">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Server-Designation">Server Designation: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Server-Designation-Tooltip" class="tooltiptext">The name for this application server.<br>This is useful to see what server a user is conencted to in a load-balanced environment.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Server-Designation" id="Server-Designation">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Session
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Session Enable Timeout: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Session-Enable-Timeout-Tooltip" class="tooltiptext">Controls the timeout behavior for unused sessions. If enableTimeout is set to true the AppServer will timeout unused sessions and disconnect them. The timeout period is based on the ASP.NET session timeout found in the system.web\session section with a minimum of 10 minutes.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Session-Enable-Timeout" class="switch">
+                                <input id="Session-Enable-Timeout" type="checkbox" onchange="sessionTimeoutChecked(this,'Session-Timeout-Length')">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Session-Timeout-Length">Session Timeout Length: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Session-Timeout-Length-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" name="Session-Timeout-Length" id="Session-Timeout-Length">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Security & Authentication
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Allow Insecure Connections: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Allow-Insecure-Connections-Tooltip" class="tooltiptext">This setting controls if the server will accept only https connections or not. If you set this to false all incoming requests have to be made over https. If you set this to true then both http and https connections are accepted. The recommended setting is false.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Allow-Insecure-Connections" class="switch">
+                                <input id="Allow-Insecure-Connections" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Use OS Authentication: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Use-OS-Authentication-Tooltip" class="tooltiptext">This is used to determine if the connection to the database should be made with OS authentication or SQL Authentication. If enabled, the OS/domain user that is configured for this application needs to have to have the same database permissions as the "hsi" user would have.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Use-OS-Authentication" class="switch">
+                                <input id="Use-OS-Authentication" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ExtraRowSection">
+        <div class="sectionWithTitleBar">
+            <div class="titleBar" name="Title-Bar">
+                Miscellaneous
+            </div>
+            <div class="coreSection">
+                <div class="row">
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Http-Runtime-Maximum-Request-Length">HTTP Runtime Maximum Request Length: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Http-Runtime-Maximum-Request-Length-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <input type="number" name="Http-Runtime-Maximum-Request-Length" id="Http-Runtime-Maximum-Request-Length">
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Http-Runtime-Execution-Timeout">HTTP Runtime Execution Timeout: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Http-Runtime-Execution-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <input type="number" name="Http-Runtime-Execution-Timeout" id="Http-Runtime-Execution-Timeout">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Max-Allowed-Content-Length">Max Allowed Content Length: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Max-Allowed-Content-Length-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <input type="text" name="Max-Allowed-Content-Length" id="Max-Allowed-Content-Length">
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Item-Cache-Timeout">Item Cache Timeout: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Item-Cache-Timeout-Tooltip" class="tooltiptext">The number of seconds an item will exist within the item cache before it will be expired.</span>
+                            </div>
+                            <div class="inputElement">
+                                <input type="text" name="Item-Cache-Timeout" id="Item-Cache-Timeout">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

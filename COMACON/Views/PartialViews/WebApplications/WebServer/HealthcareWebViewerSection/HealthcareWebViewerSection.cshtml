@@ -1,0 +1,210 @@
+<div id="HealthcareWebViewerSection" class="tabcontent">
+    <div class="row">
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Enable Healthcare Web Viewer: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Enable-Healthcare-Web-Viewer-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Enable-Healthcare-Web-Viewer" class="switch">
+                        <input id="Enable-Healthcare-Web-Viewer" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="settingElement" id="Healthcare-Web-Viewer-Session-Timeout-SettingElement">
+                <div class="labelElement">
+                    <label for="Healthcare-Web-Viewer-Session-Timeout">Session Timeout (Minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Healthcare-Web-Viewer-Session-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Healthcare-Web-Viewer-Session-Timeout" id="Healthcare-Web-Viewer-Session-Timeout" value="30">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Healthcare-Web-Viewer-Data-Source">Data Source: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Healthcare-Web-Viewer-Data-Source-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="text" name="Healthcare-Web-Viewer-Data-Source" id="Healthcare-Web-Viewer-Data-Source">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>HTTP Data Source: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Healthcare-Web-Viewer-Enable-HTTP-Data-Source-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Healthcare-Web-Viewer-Enable-HTTP-Data-Source" class="switch">
+                        <input id="Healthcare-Web-Viewer-Enable-HTTP-Data-Source" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Healthcare-Web-Viewer-Read-Only-HTML-Forms">Read-Only HTML Forms: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Healthcare-Web-Viewer-Read-Only-HTML-Forms-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <select name="Healthcare-Web-Viewer-Read-Only-HTML-Forms" id="Healthcare-Web-Viewer-Read-Only-HTML-Forms">
+                        <option value="all" selected>All</option>
+                        <option value="medical">medical</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Healthcare-Web-Viewer-Read-Only-Unity-Forms">Read-Only Unity Forms: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Healthcare-Web-Viewer-Read-Only-Unity-Forms-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <select name="Healthcare-Web-Viewer-Read-Only-Unity-Forms" id="Healthcare-Web-Viewer-Read-Only-Unity-Forms">
+                        <option value="all" selected>All</option>
+                        <option value="medical">medical</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Features
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enable Document Correction: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Healthcare-Web-Viewer-Enable-Document-Correction-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Healthcare-Web-Viewer-Enable-Document-Correction" class="switch">
+                                <input id="Healthcare-Web-Viewer-Enable-Document-Correction" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enable Epic Web Viewer API: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API" class="switch">
+                                <input id="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enable Physician Acknowledgement: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Healthcare-Web-Viewer-Enable-Physician-Acknowledgement-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Healthcare-Web-Viewer-Enable-Physician-Acknowledgement" class="switch">
+                                <input id="Healthcare-Web-Viewer-Enable-Physician-Acknowledgement" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enable Deficiency Viewing: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Healthcare-Web-Viewer-Enable-Deficiency-Viewing-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Healthcare-Web-Viewer-Enable-Deficiency-Viewing" class="switch">
+                                <input id="Healthcare-Web-Viewer-Enable-Deficiency-Viewing" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Epic Scan Viewer API
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enabled: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Interoperability-Enabled-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Interoperability-Enabled" class="switch">
+                                <input onclick="epicScanViewerApiEnabledCheckbox(this)" id="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Interoperability-Enabled" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Display-Document-Failed-Timeout">Display Document Failed Timeout (in seconds): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Display-Document-Failed-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Input-Fields" type="number" pattern="[0-9]*" inputmode="numeric" name="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Display-Document-Failed-Timeout" id="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Display-Document-Failed-Timeout" value="10">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Display-Document-Message-Interval">Display Document Message Interval (in seconds): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Display-Document-Message-Interval-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input class="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Input-Fields" type="number" pattern="[0-9]*" inputmode="numeric" name="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Display-Document-Message-Interval" id="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Display-Document-Message-Interval" value="1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Source Origin Whitelist
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Source-Origin-Whitelist">Source Origin Whitelist: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Source-Origin-Whitelist-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="url" style="min-width: 40%;max-width: 100%;" class="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Input-Fields" name="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Source-Origin-Whitelist" id="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Source-Origin-Whitelist" oninput="sourceOriginUrlFieldUpdated()" disabled>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: right;">
+                        <div style="display: flex; width: 40%; justify-content: space-around;">
+                            <button id="HealthcareWebViewer-SourceOrigin-NewButton" onclick="newSourceOrigin()">New</button>
+                            <button id="HealthcareWebViewer-SourceOrigin-DeleteButton" onclick="deleteSourceOrigin()" disabled>Delete</button>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;margin: 1rem 0 1rem 0;">
+                        <select class="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Input-Fields" name="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Source-Origin-Whitelist-SelectList" id="Healthcare-Web-Viewer-Enable-Epic-Web-Viewer-API-Source-Origin-Whitelist-SelectList" size="8" style="max-width:90%;min-width:50%" onchange="sourceOriginSelected()">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,147 @@
+<div id="CustomValidationSection" class="tabcontent">
+    <div class="row">
+        <p style="border: 1px solid black;padding: 5px;">The Custom Validation section defines custom validation to be performed on specific keyword types. Custom validation can be defined to occur across the entire application and for individual pages. If a keyword type is defined at both the application and page level, the page level definition will take precedence on that page only. Page and script file locations are all relative to the virtual root and are case-insensitive. However, validator names are case-sensitive.</p>
+    </div>
+    <div class="sectionWithTitleBar">
+        <div class="titleBar" name="Title-Bar">
+            Application Level
+        </div>
+        <div class="coreSection">
+            <div class="row">
+                <div class="settingElement" style="justify-content: left;">
+                    <div class="labelElement">
+                        <label for="Application-Script-Location">Script Location: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                        <span id="Application-Script-Location-Tooltip" class="tooltiptext">This is the help text.</span>
+                    </div>
+                    <div class="inputElement">
+                        <input type="text" name="Application-Script-Location" id="Application-Script-Location" class="longTextInputBox">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="sectionWithTitleBar">
+                    <div class="titleBar" name="Title-Bar">
+                        Keywords
+                    </div>
+                    <div class="coreSection">
+                        <div class="row">
+                            <div class="column" style="width: 30%;">
+                                <p>Keywords</p>
+                                <select id="CustomValidation-ApplicationLevel-SelectList" style="width:100%;" size="15" onchange="customValidationSelectionChanged('Application')">
+                                </select>
+                                <div name="actionbuttons" class="CustomValidationApplicationListKeywordsButtons">
+                                    <button id="Custom-Validation-Application-Add-Button" onclick="addCustomValidationKeywordConfiguration('Application')">Add</button>
+                                    <button id="Custom-Validation-Application-Delete-Button" onclick="deleteCustomValidationKeywordConfiguration('Application')">Delete</button>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="settingElement" style="margin-top: 15%;">
+                                    <div class="labelElement">
+                                        <label for="Application-Keyword-ID">Keyword ID: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                        <span id="Application-Keyword-ID-Tooltip" class="tooltiptext">This is the help text.</span>
+                                    </div>
+                                    <div class="inputElement">
+                                        <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Application-Keyword-ID-RequiredSvg" class="requiredAlertSvg">
+                                            <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                                        </svg>
+                                        <input type="number" pattern="[0-9]*" inputmode="numeric" name="Application-Keyword-ID" id="Application-Keyword-ID" oninput="customValidationKeywordConfigurationFieldUpdated('Application')">
+                                    </div>
+                                </div>
+                                <div class="settingElement">
+                                    <div class="labelElement">
+                                        <label for="Application-Keyword-Validator">Keyword Validator Function: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                        <span id="Application-Keyword-Validator-Tooltip" class="tooltiptext">This is the help text.</span>
+                                    </div>
+                                    <div class="inputElement">
+                                        <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Application-Keyword-Validator-RequiredSvg" class="requiredAlertSvg">
+                                            <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                                        </svg>
+                                        <input type="text" name="Application-Keyword-Validator" id="Application-Keyword-Validator" oninput="customValidationKeywordConfigurationFieldUpdated('Application')">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sectionWithTitleBar">
+        <div class="titleBar" name="Title-Bar">
+            Page Level
+        </div>
+        <div class="coreSection">
+            <div class="row" style="margin-top:1rem;">
+                <div class="column" style="width: 30%;">
+                    <p style="margin: 0%;">Pages</p>
+                    <select id="CustomValidation-PageLevel-SelectList" style="width:100%;" size="25" onchange="customValidationSelectionChanged('Page')">
+                    </select>
+                </div>
+                <div class="column" style="width: 70%;">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Page-Location">Page Location: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Page-Location-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Page-Location" id="Page-Location" class="longTextInputBox" disabled>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Page-Script-Location">Page Script Location: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Page-Script-Location-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Page-Script-Location" id="Page-Script-Location" class="longTextInputBox">
+                        </div>
+                    </div>
+                    <div class="sectionWithTitleBar">
+                        <div class="titleBar" name="Title-Bar">
+                            Keywords
+                        </div>
+                        <div class="coreSection">
+                            <div class="row">
+                                <div class="column">
+                                    <p>Keywords</p>
+                                    <select id="CustomValidation-PageLevel-Keywords-SelectList" size="25" style="width:100%;" onchange="customValidationPageLevelKeywordSelectionChanged()">
+                                    </select>
+                                    <div name="actionbuttons" class="CustomValidationPagesListKeywordsButtons">
+                                        <button id="customValidationPagesAddKeywordButton" onclick="addCustomValidationKeywordConfiguration('Page')" type="button">Add</button>
+                                        <button id="customValidationPagesDeleteKeywordButton" onclick="deleteCustomValidationKeywordConfiguration('Page')" type="button">Delete</button>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="settingElement" style="margin-top: 5rem;">
+                                        <div class="labelElement">
+                                            <label for="Page-Keyword-ID">Keyword ID: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                            <span id="Page-Keyword-ID-Tooltip" class="tooltiptext">This is the help text.</span>
+                                        </div>
+                                        <div class="inputElement">
+                                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Page-Keyword-ID-RequiredSvg" class="requiredAlertSvg">
+                                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                                            </svg>
+                                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Page-Keyword-ID" id="Page-Keyword-ID" oninput="customValidationKeywordConfigurationFieldUpdated('Page')">
+                                        </div>
+                                    </div>
+                                    <div class="settingElement">
+                                        <div class="labelElement">
+                                            <label for="Page-Keyword-Validator">Keyword Validator Function: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                            <span id="Page-Keyword-Validator-Tooltip" class="tooltiptext">This is the help text.</span>
+                                        </div>
+                                        <div class="inputElement">
+                                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Page-Keyword-Validator-RequiredSvg" class="requiredAlertSvg">
+                                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                                            </svg>
+                                            <input type="text" name="Page-Keyword-Validator" id="Page-Keyword-Validator" oninput="customValidationKeywordConfigurationFieldUpdated('Page')">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

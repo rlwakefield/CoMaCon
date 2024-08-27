@@ -1,0 +1,61 @@
+<div id="SessionAdministrationSection" class="tabcontent">
+    <p class="BlockDescription"></p>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Users
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="SessionAdministration-User">User: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="SessionAdministration-User-Tooltip" class="tooltiptext">This is the helper text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="SessionAdministration-User" id="SessionAdministration-User" oninput="sessionAdministrationUserFieldUpdated(this)" disabled>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <div style="display: flex; width: 40%; justify-content: space-around;">
+                            <button id="SessionAdministration-User-NewButton" onclick="newSessionAdministrationUser()">New</button>
+                            <button id="SessionAdministration-User-DeleteButton" onclick="deleteSessionAdministrationUser()" disabled>Delete</button>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;margin: 1rem 0 1rem 0;">
+                        <select class="" name="SessionAdministration-User-SelectList" id="SessionAdministration-User-SelectList" size="8" style="max-width:90%;min-width:50%" onchange="sessionAdministrationUserSelected(this)">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar" name="Title-Bar">
+                    Roles
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="SessionAdministration-Role">Role: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="SessionAdministration-Role-Tooltip" class="tooltiptext">This is the helper text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="SessionAdministration-Role" id="SessionAdministration-Role" oninput="sessionAdministrationRoleFieldUpdated(this)" disabled>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <div style="display: flex; width: 40%; justify-content: space-around;">
+                            <button id="SessionAdministration-Role-NewButton" onclick="newSessionAdministrationRole()">New</button>
+                            <button id="SessionAdministration-Role-DeleteButton" onclick="deleteSessionAdministrationRole()" disabled>Delete</button>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;margin: 1rem 0 1rem 0;">
+                        <select class="" name="SessionAdministration-Role-SelectList" id="SessionAdministration-Role-SelectList" size="8" style="max-width:90%;min-width:50%" onchange="sessionAdministrationRoleSelected(this)">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

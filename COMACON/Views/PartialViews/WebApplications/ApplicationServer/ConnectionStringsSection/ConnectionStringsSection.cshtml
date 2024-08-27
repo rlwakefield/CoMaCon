@@ -1,0 +1,183 @@
+<div id="ConnectionStringsSection" class="tabcontent">
+    <div class="row">
+        <div class="column" style="width: 25%;">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Encrypt Connection Strings:</span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Encrypt-Connection-Strings-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Encrypt-Connection-Strings" class="switch">
+                        <input id="Encrypt-Connection-Strings" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column" style="min-width: 25%;max-width:max-content;">
+            <p style="margin: 0%;">Data Sources</p>
+            <select id="ConnectionStrings-SelectList" size="10" onchange="connectionStringSelectedV3()" style="width: 100%;">
+            </select>
+            <div style="display: flex;justify-content: space-evenly;margin: 10px 0;">
+                <button id="New-ConnectionString" onclick="newConnectionStringV3()" type="button" style="font-size:medium;">New</button>
+                <button id="Copy-ConnectionString" onclick="copyConnectionStringV3()" type="button" style="font-size:medium;" disabled>Copy</button>
+                <button id="Delete-ConnectionString" onclick="deleteConnectionStringV3()" type="button" style="font-size:medium;" disabled>Delete</button>
+            </div>
+        </div>
+        <div class="column" style="width: 60%;display: flex;flex-direction:column;">
+            <div name="CoreFields" style="display: flex;margin: 0.5rem 0;">
+                <div style="padding: 0 0 0 10px;">
+                    <div class="labelElement">
+                        <label for="Data-Source-Name">Data Source Name</label>
+                        <span class="tooltiptext">This is the help text.</span>
+                    </div>
+                    <div class="inputElement">
+                        <input type="text" id="Data-Source-Name" name="Data-Source-Name" oninput="connectionStringTextInputFieldUpdatedV3(this)">
+                        <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Data-Source-Name-RequiredSvg" class="coreConnectionStringRequiredAlertSvg">
+                            <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                        </svg>
+                    </div>
+                    <div id="DuplicateConnectionString-Alert" style="color:red;font-weight:bolder;display:none;">Duplicate Name</div>
+                </div>
+                <div style="padding: 0 0 0 10px;">
+                    <div class="labelElement">
+                        <label for="Data-Provider">Data Provider</label>
+                        <span class="tooltiptext">This is the help text.</span>
+                    </div>
+                    <div class="inputElement">
+                        <select name="Data-Provider" id="Data-Provider" onchange="dataProviderV3(this)">
+                            <option value="System.Data.SqlClient" selected>System.Data.SqlClient</option>
+                            <option value="Oracle.ManagedDataAccess.Client">Oracle.ManagedDataAccess.Client</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div name="SqlServerFields" style="margin: 5px 0;">
+                <div id="System.Data.SqlClient.Fields" style="display: flex;margin: 0.5rem 0;">
+                    <div style="padding: 0 0 0 10px;">
+                        <div class="labelElement">
+                            <label for="Sql-Data-Source">Data Source</label>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" id="Sql-Data-Source" name="Sql-Data-Source" oninput="connectionStringTextInputFieldUpdatedV3(this)">
+                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Sql-Data-Source-RequiredSvg" class="sqlConnectionStringRequiredAlertSvg">
+                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div style="padding: 0 0 0 10px;">
+                        <div class="labelElement">
+                            <label for="Sql-Database">Database</label>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" id="Sql-Database" name="Sql-Database" oninput="connectionStringTextInputFieldUpdatedV3(this)">
+                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Sql-Database-RequiredSvg" class="sqlConnectionStringRequiredAlertSvg">
+                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="Oracle.ManagedDataAccess.Client.Fields" class="column" style="display: none; width: 100%;margin: 5px 0;">
+                <div>
+                    <input type="checkbox" name="Oracle-Fields-TNS-Connection-String" id="Oracle-Fields-TNS-Connection-String" checked onclick="tnsConnectionStringCheckCheckboxV3(this)">
+                    <label for="Oracle-Fields-TNS-Connection-String">TNS Connection String</label>
+                </div>
+                <div style="display: flex;">
+                    <div class="column" style="padding: 0 0 0 10px;">
+                        <div style="padding: 5px 0">
+                            <div class="labelElement">
+                                <label for="Host">Host</label>
+                            </div>
+                            <div class="inputElement">
+                                <input type="text" id="Host" name="Host" oninput="connectionStringTextInputFieldUpdatedV3(this)">
+                                <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Host-RequiredSvg" class="oracleConnectionStringRequiredAlertSvg">
+                                    <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div style="padding: 5px 0">
+                            <div class="labelElement">
+                                <label for="Protocol">Protocol</label>
+                            </div>
+                            <div class="inputElement">
+                                <select name="Protocol" id="Protocol" onchange="connectionStringTextInputFieldUpdatedV3(this)">
+                                    <option value="TCP" selected>TCP</option>
+                                    <option value="TCPS">TCPS</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column" style="padding: 0 0 0 10px;">
+                        <div style="padding: 5px 0">
+                            <div class="labelElement">
+                                <label for="Oracle-Database">Database</label>
+                            </div>
+                            <div class="inputElement">
+                                <input type="text" id="Oracle-Database" name="Oracle-Database" oninput="connectionStringTextInputFieldUpdatedV3(this)">
+                                <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Oracle-Database-RequiredSvg" class="oracleConnectionStringRequiredAlertSvg">
+                                    <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div style="padding: 5px 0">
+                            <div class="labelElement">
+                                <label for="Port">Port</label>
+                            </div>
+                            <div class="inputElement">
+                                <input type="number" name="Port" id="Port" oninput="connectionStringTextInputFieldUpdatedV3(this)">
+                                <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Port-RequiredSvg" class="oracleConnectionStringRequiredAlertSvg">
+                                    <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column" style="width: 80%; padding: 0px 10px;margin: 5px 0;">
+                <input type="checkbox" name="Integrated-Security" id="Integrated-Security" checked onclick="integratedSecurityCheckboxV3(this)">
+                <label for="Integrated-Security">Integrated Security</label>
+            </div>
+            <div class="column" style="width: 100%;display: flex;margin: 5px 0;">
+                <div style="padding: 0px 10px;">
+                    <div class="labelElement">
+                        <label for="User-ID">User ID</label>
+                    </div>
+                    <div class="inputElement">
+                        <input type="text" name="User-ID" id="User-ID" oninput="connectionStringTextInputFieldUpdatedV3(this)">
+                        <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="User-ID-RequiredSvg" class="coreConnectionStringRequiredAlertSvg">
+                            <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div style="padding: 0px 10px;">
+                    <div class="labelElement">
+                        <label for="Password">Password</label>
+                    </div>
+                    <div class="inputElement">
+                        <input type="text" name="Password" id="Password" oninput="connectionStringTextInputFieldUpdatedV3(this)">
+                        <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Password-RequiredSvg" class="coreConnectionStringRequiredAlertSvg">
+                            <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 60%;margin: 5px 0;padding: 0 0 0 10px;">
+                <div class="labelElement">
+                    <label for="Additional-Options">Additional Options</label>
+                </div>
+                <div class="inputElement">
+                    <input type="text" name="Additional-Options" id="Additional-Options" style="width: 25rem;" oninput="connectionStringTextInputFieldUpdatedV3(this)">
+                </div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;">
+                <button id="TestConnectionString" onclick="testConnectionString()" style="font-size:medium;margin: 5px;" disabled>Test Connection</button>
+            </div>
+            <div>
+                <div id="TestConnectionString-Alert" style="color:red;font-weight:bolder;"></div>
+            </div>
+        </div>
+    </div>
+</div>

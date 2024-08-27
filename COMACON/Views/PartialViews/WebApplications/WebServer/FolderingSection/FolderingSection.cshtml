@@ -1,0 +1,51 @@
+<div id="FolderingSection" class="tabcontent">
+    <div class="row">
+        <p class="BlockDescription">The following settings control the size of the folder tree, folder list, and document list.</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Folder-Tree-Width">Folder Tree Width (%): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Folder-Tree-Width-Tooltip" class="tooltiptext">Set the width of Folder Tree pane..</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Folder-Tree-Width" id="Folder-Tree-Width" oninput="validateNumericValue(this)">
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Folder-Tree-Height">Folder Tree Height (%): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Folder-Tree-Height-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Folder-Tree-Height" id="Folder-Tree-Height" oninput="folderingHeightPercentageCalculations();validateNumericValue(this)">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Document-List-Height">Document List Height (%): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Document-List-Height-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Document-List-Height" id="Document-List-Height" oninput="folderingHeightPercentageCalculations();validateNumericValue(this)">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Folder-List-Height">Folder List Height (%): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Folder-List-Height-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Folder-List-Height" id="Folder-List-Height" oninput="folderingHeightPercentageCalculations();validateNumericValue(this)">
+                </div>
+            </div>
+            <div>
+                <span id="Foldering-Total-Percentage-Text">Total Height Percentage: <span id="Foldering-Total-Percentage-Number-Value">100</span><span>%</span></span><img id="foldering-tooltip-image" class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                <span class="tooltiptext">The sum of Folder Tree Height, Document List Height, and Folder List Height must equal 100%.</span>
+            </div>
+        </div>
+    </div>
+</div>
