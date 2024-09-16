@@ -34,8 +34,42 @@
  ********************************************************@
 @section CoreButtons {
     <partial name="~/Views/PartialViews/WebApplications/WebServer/CoreButtons.cshtml" />
+    <partial name="~/Views/PartialViews/WebApplications/General/IisLinks/IisLinks.cshtml" />
 }
 
 @section AuthenticationOptimizationOptions {
     <partial name="~/Views/PartialViews/WebApplications/WebServer/AuthenticationOptimizationOptions.cshtml" />
+}
+
+@section LoadedWebApplicationFields {
+    <p id="LoadedWebApplicationType" style="margin: 0;padding-left: 0.5%;padding-bottom: 0.5%;"></p>
+    <p id="LoadedWebApplicationName" style="margin: 0;padding-left: 0.5%;padding-bottom: 0.5%;"></p>
+}
+
+@section CoreActionButtons {
+    <div id="core-action-buttons-div" class="core-action-buttons-div dark_mode_titlebar">
+        <div style="display: flex;">
+            <button id="WebApplication-CoreActionButton" class="core-action-buttons dark_mode_button" type="button" onclick="createNewConfiguration()"><u>New Configuration</u></button>
+            <partial name="~/Views/PartialViews/WebApplications/General/CoreWebApplicationActionButtons/CoreWebApplicationActionButtons.cshtml" />
+        </div>
+        <div id="container">
+            <a id="Unknown-Configuration-Keys-Link" href="javascript:openUnknownConfigurationKeysModal()" style="text-decoration: none;display:none;">Unknown Configuration Keys</a>
+            <button onclick="showErrorModal()">
+                <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.066 15.86a11.443 11.443 0 0 1-.575-3.57V9.291a7.673 7.673 0 0 0-1.902-5.169 7.707 7.707 0 0 0-4.863-2.583c-1.041-.108-2.1 0-3.105.34A7.142 7.142 0 0 0 6.93 3.46a7.384 7.384 0 0 0-1.812 2.513 7.6 7.6 0 0 0-.647 3.033v3.3a11.414 11.414 0 0 1-.574 3.555L3 18.514l.719.987h5.257c0 .79.322 1.56.879 2.118a3.02 3.02 0 0 0 2.118.88c.789 0 1.56-.323 2.116-.88a3.02 3.02 0 0 0 .881-2.118h5.257l.718-.987-.88-2.655Zm-7.035 4.72a1.496 1.496 0 0 1-1.058.448 1.495 1.495 0 0 1-1.059-.45 1.495 1.495 0 0 1-.45-1.057h2.998a1.407 1.407 0 0 1-.43 1.059h-.002Zm-8.273-2.565.556-1.671c.434-1.302.659-2.665.665-4.037V9.006c0-.845.18-1.67.52-2.424a5.78 5.78 0 0 1 1.454-2.01 5.831 5.831 0 0 1 2.154-1.256 5.81 5.81 0 0 1 2.475-.27 6.22 6.22 0 0 1 3.895 2.1 6.2 6.2 0 0 1 1.506 4.164v3.015c0 1.364.216 2.727.665 4.037l.556 1.67H4.76v-.019l-.001.002Z"></path>
+                </svg>
+                <div id="notification-count" class="" style="display: none;">
+                    <span id="notification-span"></span>
+                </div>
+            </button>
+        </div>
+    </div>
+}
+
+@section LogoutButton {
+    <partial name="~/Views/PartialViews/General/LogoutButton/LogoutButton.cshtml" />
+}
+
+@section SettingsButton {
+    <partial name="~/Views/PartialViews/General/SettingsButton/SettingsButton.cshtml" />
 }

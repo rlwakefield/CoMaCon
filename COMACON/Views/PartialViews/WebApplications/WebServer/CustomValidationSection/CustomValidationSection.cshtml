@@ -3,12 +3,12 @@
         <p style="border: 1px solid black;padding: 5px;">The Custom Validation section defines custom validation to be performed on specific keyword types. Custom validation can be defined to occur across the entire application and for individual pages. If a keyword type is defined at both the application and page level, the page level definition will take precedence on that page only. Page and script file locations are all relative to the virtual root and are case-insensitive. However, validator names are case-sensitive.</p>
     </div>
     <div class="sectionWithTitleBar">
-        <div class="titleBar" name="Title-Bar">
+        <div class="titleBar dark_mode_titlebar" name="Title-Bar">
             Application Level
         </div>
         <div class="coreSection">
             <div class="row">
-                <div class="settingElement" style="justify-content: left;">
+                <div class="settingElement" style="justify-content: left;gap: 1rem;">
                     <div class="labelElement">
                         <label for="Application-Script-Location">Script Location: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
                         <span id="Application-Script-Location-Tooltip" class="tooltiptext">This is the help text.</span>
@@ -19,15 +19,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="sectionWithTitleBar">
-                    <div class="titleBar" name="Title-Bar">
+                <div class="sectionWithTitleBar" style="width: 90%;">
+                    <div class="titleBar dark_mode_titlebar" name="Title-Bar">
                         Keywords
                     </div>
                     <div class="coreSection">
                         <div class="row">
                             <div class="column" style="width: 30%;">
                                 <p>Keywords</p>
-                                <select id="CustomValidation-ApplicationLevel-SelectList" style="width:100%;" size="15" onchange="customValidationSelectionChanged('Application')">
+                                <select id="CustomValidation-ApplicationLevel-SelectList" style="width:100%;" size="15" onchange="customValidationSelectionChanged('Application')" class="dark_mode_select">
                                 </select>
                                 <div name="actionbuttons" class="CustomValidationApplicationListKeywordsButtons">
                                     <button id="Custom-Validation-Application-Add-Button" onclick="addCustomValidationKeywordConfiguration('Application')">Add</button>
@@ -67,14 +67,14 @@
         </div>
     </div>
     <div class="sectionWithTitleBar">
-        <div class="titleBar" name="Title-Bar">
+        <div class="titleBar dark_mode_titlebar" name="Title-Bar">
             Page Level
         </div>
         <div class="coreSection">
             <div class="row" style="margin-top:1rem;">
                 <div class="column" style="width: 30%;">
                     <p style="margin: 0%;">Pages</p>
-                    <select id="CustomValidation-PageLevel-SelectList" style="width:100%;" size="25" onchange="customValidationSelectionChanged('Page')">
+                    <select id="CustomValidation-PageLevel-SelectList" style="width:100%;" size="25" onchange="customValidationSelectionChanged('Page')" class="dark_mode_select">
                     </select>
                 </div>
                 <div class="column" style="width: 70%;">
@@ -97,14 +97,14 @@
                         </div>
                     </div>
                     <div class="sectionWithTitleBar">
-                        <div class="titleBar" name="Title-Bar">
+                        <div class="titleBar dark_mode_titlebar" name="Title-Bar">
                             Keywords
                         </div>
                         <div class="coreSection">
                             <div class="row">
                                 <div class="column">
                                     <p>Keywords</p>
-                                    <select id="CustomValidation-PageLevel-Keywords-SelectList" size="25" style="width:100%;" onchange="customValidationPageLevelKeywordSelectionChanged()">
+                                    <select id="CustomValidation-PageLevel-Keywords-SelectList" size="25" style="width:100%;" onchange="customValidationPageLevelKeywordSelectionChanged()" class="dark_mode_select">
                                     </select>
                                     <div name="actionbuttons" class="CustomValidationPagesListKeywordsButtons">
                                         <button id="customValidationPagesAddKeywordButton" onclick="addCustomValidationKeywordConfiguration('Page')" type="button">Add</button>

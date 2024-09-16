@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject IJSRuntime JS
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -38,11 +39,11 @@
         <!-- New Application Configuration Modal -->
         <partial name="~/Views/PartialViews/WebApplications/General/NewApplicationConfigurationModal/NewApplicationConfigurationModal.cshtml" />
         <header>
-            <div id="h1-container" class="h1-container">
+            <div id="h1-container" class="h1-container dark_mode_titlebar">
                 <div style="display:flex;justify-content:space-between;padding-left: 0.5%;">
                 <a style="color:inherit;text-decoration: none;" href="/core/home"><h1 b-8gj57b4bak="">COMACON</h1></a>
                     <div style="margin: 0.5% 10px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
-                        <input type="checkbox" class="checkbox" id="checkbox" onclick="toggleDarkLightMode(this)">
+                        <input type="checkbox" class="checkbox" id="checkbox" onclick="toggleDarkLightMode(this)" style="top: -100px;">
                         <label for="checkbox" class="checkbox-label">
                             <i class="fas fa-moon">
                                 <svg width="18" height="18" fill="none" stroke="#f39c12" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -64,35 +65,18 @@
                             </i>
                             <span class="ball"></span>
                         </label>
-                        <a id="SettingsButton" style="color:inherit;text-decoration:none;margin-top:5px;" href="/Core/Settings">
+                        @RenderSection("SettingsButton", false)
+                        @* <a id="SettingsButton" style="color:inherit;text-decoration:none;margin-top:5px;" href="/Core/Settings">
                             <svg width="30" height="30" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14 3.269C14 2.568 13.432 2 12.731 2H11.27C10.568 2 10 2.568 10 3.269v0c0 .578-.396 1.074-.935 1.286-.085.034-.17.07-.253.106-.531.23-1.162.16-1.572-.249v0a1.269 1.269 0 0 0-1.794 0L4.412 5.446a1.269 1.269 0 0 0 0 1.794v0c.41.41.48 1.04.248 1.572a7.946 7.946 0 0 0-.105.253c-.212.539-.708.935-1.286.935v0C2.568 10 2 10.568 2 11.269v1.462C2 13.432 2.568 14 3.269 14v0c.578 0 1.074.396 1.286.935.034.085.07.17.105.253.231.531.161 1.162-.248 1.572v0a1.269 1.269 0 0 0 0 1.794l1.034 1.034a1.269 1.269 0 0 0 1.794 0v0c.41-.41 1.04-.48 1.572-.249.083.037.168.072.253.106.539.212.935.708.935 1.286v0c0 .701.568 1.269 1.269 1.269h1.462c.701 0 1.269-.568 1.269-1.269v0c0-.578.396-1.074.935-1.287.085-.033.17-.068.253-.104.531-.232 1.162-.161 1.571.248v0a1.269 1.269 0 0 0 1.795 0l1.034-1.034a1.269 1.269 0 0 0 0-1.794v0c-.41-.41-.48-1.04-.249-1.572.037-.083.072-.168.106-.253.212-.539.708-.935 1.286-.935v0c.701 0 1.269-.568 1.269-1.269V11.27c0-.701-.568-1.269-1.269-1.269v0c-.578 0-1.074-.396-1.287-.935a7.755 7.755 0 0 0-.105-.253c-.23-.531-.16-1.162.249-1.572v0a1.269 1.269 0 0 0 0-1.794l-1.034-1.034a1.269 1.269 0 0 0-1.794 0v0c-.41.41-1.04.48-1.572.249a7.913 7.913 0 0 0-.253-.106C14.396 4.343 14 3.847 14 3.27v0z"></path>
                                 <path d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"></path>
                             </svg>
-                        </a>
+                        </a> *@
+                        @RenderSection("LogoutButton", false)
                     </div>
                 </div>
-                <p id="LoadedApplicationType" style="margin: 0;padding-left: 0.5%;padding-bottom: 0.5%;"></p>
-                <p id="LoadedApplicationName" style="margin: 0;padding-left: 0.5%;padding-bottom: 0.5%;"></p>
-                <div id="core-action-buttons-div" class="core-action-buttons-div">
-                    <div style="display: flex;">
-                    <button id="NewWebApplication-CoreActionButton" class="core-action-buttons" type="button" onclick="createNewConfiguration()"><u>New Configuration</u></button>
-                        <button id="Open-Web-Application-Core-Action-Button" class="core-action-buttons" type="button" onclick="openModal()"><u>Open Web Application</u></button>
-                        <button id="Copy-Web-Application-Core-Action-Button" class="core-action-buttons Web-Application-Button" type="button" onclick="openCopyWebApplicationModal()"><u>Copy Web Application</u></button>
-                        <button id="Save-Web-Application-Core-Action-Button" class="core-action-buttons Web-Application-Button" type="button" onclick="configOkToSave()"><u>Save Web Application</u></button>
-                    </div>
-                    <div id="container">
-                        <a id="Unknown-Configuration-Keys-Link" href="javascript:openUnknownConfigurationKeysModal()" style="text-decoration: none;">Unknown Configuration Keys</a>
-                        <button onclick="showErrorModal()">
-                            <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20.066 15.86a11.443 11.443 0 0 1-.575-3.57V9.291a7.673 7.673 0 0 0-1.902-5.169 7.707 7.707 0 0 0-4.863-2.583c-1.041-.108-2.1 0-3.105.34A7.142 7.142 0 0 0 6.93 3.46a7.384 7.384 0 0 0-1.812 2.513 7.6 7.6 0 0 0-.647 3.033v3.3a11.414 11.414 0 0 1-.574 3.555L3 18.514l.719.987h5.257c0 .79.322 1.56.879 2.118a3.02 3.02 0 0 0 2.118.88c.789 0 1.56-.323 2.116-.88a3.02 3.02 0 0 0 .881-2.118h5.257l.718-.987-.88-2.655Zm-7.035 4.72a1.496 1.496 0 0 1-1.058.448 1.495 1.495 0 0 1-1.059-.45 1.495 1.495 0 0 1-.45-1.057h2.998a1.407 1.407 0 0 1-.43 1.059h-.002Zm-8.273-2.565.556-1.671c.434-1.302.659-2.665.665-4.037V9.006c0-.845.18-1.67.52-2.424a5.78 5.78 0 0 1 1.454-2.01 5.831 5.831 0 0 1 2.154-1.256 5.81 5.81 0 0 1 2.475-.27 6.22 6.22 0 0 1 3.895 2.1 6.2 6.2 0 0 1 1.506 4.164v3.015c0 1.364.216 2.727.665 4.037l.556 1.67H4.76v-.019l-.001.002Z"></path>
-                            </svg>
-                            <div id="notification-count" class="" style="display: none;">
-                                <span id="notification-span"></span>
-                            </div>
-                        </button>
-                    </div>
-                </div>
+                @RenderSection("LoadedWebApplicationFields", false)
+                @RenderSection("CoreActionButtons", false)
             </div>
         </header>
         <!-- Main Container -->
@@ -104,7 +88,7 @@
                         <div style="display: flex; flex-direction: row;margin: 5px 0;overflow-y: auto;width: max-content;">
                             <div style="max-height: 100vh;max-width:33vh">
                                 @RenderSection("CoreButtons", required: false)
-                                <partial name="~/Views/PartialViews/WebApplications/General/IisLinks/IisLinks.cshtml" />
+                                @* @RenderSection("IisLinks", required: false) *@
                             </div>
                             @RenderSection("AuthenticationOptimizationOptions", required: false)
                         </div>
@@ -138,8 +122,9 @@
                             console.log("Redirecting to Home page.");
                             window.location.href = "/core/home";
                             // return response.json()
-                        }else if(response.status === 401 & currentPage != "Login"){
-                            window.location.href = "/core/login";
+                        // }else if((response.status === 401 || response.status === 400) & currentPage != "Login"){
+                        } else if (response.redirected) {
+                            window.location.href = response.url;
                         }
                         // else{
                         //     if (currentPage != "Login") {
@@ -165,7 +150,7 @@
 
             window.onload = function () {
                 onPageLoadLogic();
-                console.log(sessionStorage.getItem('comaconbearertoken'));
+                // console.log(sessionStorage.getItem('comaconbearertoken'));
             };
         </script>
     </body>

@@ -19,6 +19,10 @@ body {
     justify-content: space-between;
 }
 
+input[type=radio] {
+	margin: 0;
+}
+
 /* Create two equal columns that floats next to each other */
 .column {
 	/*float: left;*/
@@ -29,11 +33,12 @@ body {
 }
 
 .setting-element {
-	/* display: inline-flex; */
+	display: flex; 
 	margin-top: 16px;
 	margin-bottom: 16px;
-	align-items: baseline;
-	justify-content: space-between;
+	align-items: center;
+	/*justify-content: space-between;*/
+	gap: 0.5rem;
 }
 
 /* Clear floats after the columns */
@@ -183,6 +188,16 @@ header h1 {
 .core-action-buttons-div button:hover {
 	cursor: pointer;
 	background-color: #a9a9a9;
+}
+
+.logoutbutton {
+	border: none;
+	background: none;
+	font-size: large;
+}
+
+.logoutbutton:hover {
+	cursor: pointer;
 }
 
 .longTextInputBox {
@@ -1195,22 +1210,38 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 	border: 1px solid black;
 }
 
-#chooseWebApplicationModal:not(.dark_mode) th {
-	background-color: rgb(169, 169, 169);
+/*#chooseWebApplicationModal:not(.dark_mode) th {
+	background-color: rgb(169, 169, 169);*/ /* Light mode color */
+/*}*/
+
+.chooseWebApplicationModal th {
+    background-color: rgb(169, 169, 169); /* Light mode color */
 }
 
-#chooseWebApplicationModal:has(.dark_mode) th {
-	background-color: rgb(70, 70, 70);
+.dark_mode_body .chooseWebApplicationModal th {
+	background-color: rgb(70, 70, 70); /* Dark mode color */
 }
+
+/*#chooseWebApplicationModal:has(.dark_mode) th {
+	background-color: rgb(70, 70, 70);*/ /* Dark mode color */
+/*}*/
 
 /* This rule applies when #chooseWebApplicationModal does not have the dark_mode class */
-#chooseWebApplicationModal:not(.dark_mode) tr:nth-child(even) {
+/*#chooseWebApplicationModal:not(.dark_mode) tr:nth-child(even) {
+	background-color: rgb(224, 224, 224);*/ /* Light mode color */
+/*}*/
+
+/* This rule applies when #chooseWebApplicationModal has the dark_mode class */
+/*#chooseWebApplicationModal:has(.dark_mode) tr:nth-child(even) {
+	background-color: rgb(0, 0, 0);*/ /* Dark mode color */
+/*}*/
+
+.chooseWebApplicationModal tr:nth-child(even) {
 	background-color: rgb(224, 224, 224); /* Light mode color */
 }
 
-/* This rule applies when #chooseWebApplicationModal has the dark_mode class */
-#chooseWebApplicationModal:has(.dark_mode) tr:nth-child(even) {
-	background-color: rgb(0, 0, 0); /* Dark mode color */
+.dark_mode_body .chooseWebApplicationModal tr:nth-child(even) {
+    background-color: rgb(0, 0, 0); /* Dark mode color */
 }
 
 .ChooseApplicationTitleBar {
@@ -1480,6 +1511,14 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
  * Public Access Viewer - Next Gen -- Required Keywords Styling
  ********************************************************/
 /* Table Styling */
+.dark_mode_body #Required-Keywords-Table th {
+	background-color: rgb(70, 70, 70) !important /* Dark mode color */
+}
+
+.dark_mode_body #Required-Keywords-Table tr:nth-child(even) {
+	background-color: rgb(0, 0, 0) !important /* Dark mode color */
+}
+
 .RequiredKeywordsTable table {
 	border: 0.5px solid black;
 	margin-bottom: 1rem;
@@ -1711,7 +1750,7 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 }
 
 .ProfilesPanel div {
-	width: 50%;
+	width: 80%;
 }
 
 .profile-element {
@@ -1732,7 +1771,59 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 /********************************************************
  *                  Dark Mode Styling
  ********************************************************/
-.dark_mode {
+.dark_mode_body {
+	color: #e6edf3;
+    background-color: #292c35;
+}
+
+.dark_mode_body .dark_mode {
+	color: #e6edf3;
+	background-color: #292c35;
+}
+
+.dark_mode_body .dark_mode_titlebar {
+	color: #e6edf3;
+	background-color: #161b22 !important;
+}
+
+.dark_mode_body .dark_mode_table {
+	color: #e6edf3;
+	background-color: #161b22;
+	border: 1px solid #e6edf3;
+}
+
+.dark_mode_body .dark_mode_button {
+	color: #e6edf3;
+}
+
+.dark_mode_body .dark_mode_select {
+	background-color: inherit;
+	color: inherit;
+}
+
+.dark_mode_body .dark_mode_select option {
+	background-color: #292c35;
+    color: #e6edf3;
+}
+
+.dark_mode_body .dark_mode_links {
+	color: #e6edf3 !important;
+}
+
+.dark_mode_body .dark_mode_select_optgroup {
+	background-color: #292c35;
+	color: inherit;
+}
+
+.dark_mode_body .dark_mode_svg {
+	stroke: #e6edf3;
+}
+
+
+
+
+
+/*.dark_mode {
 	color: #e6edf3;
 	background-color: #292c35;
 }
@@ -1770,6 +1861,24 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 	background-color: #292c35;
 	color: inherit;
 }
+
+#chooseWebApplicationModal:not(.dark_mode) th {
+	background-color: rgb(169, 169, 169);*/ /* Light mode color */
+/*}
+
+#chooseWebApplicationModal:has(.dark_mode) th {
+	background-color: rgb(70, 70, 70);*/ /* Dark mode color */
+/*}*/
+
+/* This rule applies when #chooseWebApplicationModal does not have the dark_mode class */
+/*#chooseWebApplicationModal:not(.dark_mode) tr:nth-child(even) {
+	background-color: rgb(224, 224, 224);*/ /* Light mode color */
+/*}*/
+
+/* This rule applies when #chooseWebApplicationModal has the dark_mode class */
+/*#chooseWebApplicationModal:has(.dark_mode) tr:nth-child(even) {
+	background-color: rgb(0, 0, 0);*/ /* Dark mode color */
+/*}*/
 
 
 /********************************************************
@@ -1984,6 +2093,14 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 /********************************************************
  *                  Settings Styling
  ********************************************************/
+.dark_mode_body .settings-content-users-TableContainer th {
+	background-color: rgb(70, 70, 70) !important /* Dark mode color */
+}
+
+.dark_mode_body .settings-content-users-TableContainer tr:nth-child(even) {
+	background-color: rgb(0, 0, 0) !important /* Dark mode color */
+}
+
 .settings-container {
 	width: 100%;
 	border: 1px solid black;
@@ -2023,6 +2140,8 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 
 .settings-category.active {
 	background-color: #d1d1d19d;
+	font-weight: bold;
+	font-size: large;
 }
 
 .settings-content {
@@ -2033,10 +2152,12 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 .settings-content-users {
 	display: none;
 	max-height: 20rem;
-	overflow-y: auto;
+	/*overflow-y: auto;*/
+	flex-direction: column;
 }
 
 .settings-content-users-TableContainer {
+	overflow-y: auto;
 }
 
 #UsersTable {
@@ -2094,13 +2215,339 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 }
 
 #NewUserButton:hover {
-    background-color: #d1d1d1;
+	background-color: #e1e1e1;
 }
 
 #NewAndEditingUserModal {
 	display: none;
+	z-index: 1; /* Sit on top */
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0,0.4);
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	left: 0;
+	top: 0;
+	position: fixed;
+	overflow: auto;
 }
 
+#NewAndEditingUserModal-Outer {
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 1rem;
+	width: 50%;
+	margin: 10% auto; /* 10% from the top and centered */
+}
+
+#NewAndEditingUserModal-Inner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 0.5rem;
+}
+
+.UserDetails-ActionButtons button {
+	padding: 0.5rem 1rem;
+	border-radius: 1rem;
+	cursor: pointer;
+}
+
+.UserDetails-ActionButtons button:hover {
+	background-color: #e1e1e1;
+}
+
+#DeleteUserConfirmationModal {
+	display: none;
+	z-index: 1; /* Sit on top */
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0,0.4);
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	left: 0;
+	top: 0;
+	position: fixed;
+	overflow: auto;
+}
+
+#DeleteUserConfirmationModal-Outer {
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 1rem;
+	width: 50%;
+	margin: 10% auto; /* 15% from the top and centered */
+	padding: 1rem;
+}
+
+#DeleteUserConfirmationModal-ActionButtons button {
+	padding: 0.5rem 1rem;
+	border-radius: 1rem;
+	cursor: pointer;
+}
+
+#DeleteUserConfirmationModal-ActionButtons button:hover {
+	background-color: #e1e1e1;
+}
+
+#DeleteUserConfirmationModal-ConfirmationCheckbox {
+	margin: 1rem;
+}
+
+#DeleteUserConfirmationModal-ActionButtons {
+	margin: 1rem;
+	display: flex;
+	gap: 1rem;
+}
+
+
+
+/********************************************************
+ *      Saving/Updating User Loader/Spinner styling
+ ********************************************************/
+.neweditinguserloader {
+	margin: auto;
+	border: 5px solid #EAF0F6;
+	border-radius: 50%;
+	border-top: 5px solid #0061b0;
+	width: 11px;
+	height: 11px;
+	animation: neweditinguserspinner 0.75s linear infinite;
+	/*display: none;*/
+}
+
+@keyframes neweditinguserspinner {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+
+
+/********************************************************
+ *            Password Reset Modal Styling
+ ********************************************************/
+#titlecontainer {
+	text-align: center;
+}
+
+#resetpasswordbutton {
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 40%;
+}
+
+#resetpasswordbutton:disabled {
+	background-color: #cccccc;
+	color: black;
+	cursor: not-allowed;
+}
+
+#resetpasswordbutton:hover {
+	opacity: 0.8;
+}
+
+#cancelresetpasswordbutton {
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 40%;
+}
+
+#cancelresetpasswordbutton:disabled {
+	background-color: #cccccc;
+	color: black;
+	cursor: not-allowed;
+}
+
+#cancelresetpasswordbutton:hover {
+	opacity: 0.8;
+}
+
+.passwordresetformcontainer-outer {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1;
+}
+
+.passwordresetformcontainer-inner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	width: 50%;
+	border-radius: 1rem;
+	padding: 1rem;
+}
+
+#resetpasswordbuttoncontainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
+
+.passwordresetcontainer {
+	/* padding: 16px; */
+	/*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/ 
+}
+
+.passwordresetfield {
+	/* width: 50%; */
+	padding: 5px;
+	margin: 8px 0;
+	/* display: inline-block; */
+	/* border: 1px solid #ccc; */
+	box-sizing: border-box;
+}
+
+.passwordresetfieldcontainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#newpassword:valid {
+	border: 5px solid green;
+}
+
+#newpassword:user-invalid {
+	border: 5px solid red;
+}
+
+#passwordMatchMessage {
+	margin-top: 0;
+}
+
+#passwordMatchMessage:empty {
+	display: none;
+}
+
+
+/********************************************************
+ *               Forgot Password Styling
+ ********************************************************/
+#forgotpasswordtitlecontainer {
+	text-align: center;
+}
+
+#forgotpasswordbutton {
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 40%;
+}
+
+#forgotpasswordbutton:disabled {
+	background-color: #cccccc;
+	color: black;
+	cursor: not-allowed;
+}
+
+#forgotpasswordbutton:hover {
+	opacity: 0.8;
+}
+
+#cancelforgotpasswordbutton {
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 40%;
+}
+
+#cancelforgotpasswordbutton:disabled {
+	background-color: #cccccc;
+	color: black;
+	cursor: not-allowed;
+}
+
+#cancelforgotpasswordbutton:hover {
+	opacity: 0.8;
+}
+
+.forgotpasswordformcontainer-outer {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1;
+}
+
+.forgotpasswordformcontainer-inner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	width: 50%;
+	border-radius: 1rem;
+	padding: 1rem;
+}
+
+#forgotpasswordbuttoncontainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
+
+.forgotpasswordcontainer {
+	/* padding: 16px; */
+	/*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/ 
+}
+
+.forgotpasswordcontainer label {
+	text-decoration: underline;
+	font-size: 1.25rem;
+}
+
+.forgotpasswordfield {
+	/* width: 50%; */
+	padding: 5px;
+	margin: 8px 0 16px 0;
+	/* display: inline-block; */
+	/* border: 1px solid #ccc; */
+	box-sizing: border-box;
+	width: 50%;
+}
+
+.forgotpasswordfieldcontainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 
 
 

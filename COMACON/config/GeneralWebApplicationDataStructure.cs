@@ -209,7 +209,7 @@ public class HylandLogging
     public string? truncateloggingcharacters { get; set; }
     public WindowsEventLogging windowsEventLogging = new WindowsEventLogging();
     public List<Route> Routes = new List<Route>();
-    public string[] profilesForHTML { get; set; }
+    public string[]? profilesForHTML { get; set; }  
 }
 
 public class Route
@@ -674,19 +674,32 @@ public class UsersDataStructure
 
 public class User
 {
-    public int? usernum { get; set; }
+    public int usernum { get; set; }
     public string? username { get; set; }
     public string? firstname { get; set; }
     public string? lastname { get; set; }
-    public string? password { get; set; } = "";
+    public string password { get; set; } = "";
     public string? emailaddress { get; set; }
     public int? enabled { get; set; }
-    public int? passwordresetnextlogin { get; set; }
+    public int? passwordresetonnextlogin { get; set; }
     public DateTime? passwordlastchanged { get; set; }
     public string? authmethod { get; set; }
     public DateTime? creationdate { get; set; }
     public int? createdby { get; set; }
     public DateTime? lastediteddate { get; set; }
+    // Might look at getting this value from the audit history table whenever it is setup.
     public int? lasteditedby { get; set; }
     public int? roleid { get; set; }
+}
+
+public class Roles
+{
+        public List<role> roles = new List<role>();
+}
+
+public class role
+{
+    public int roleid { get; set; }
+    public string rolename { get; set; }
+    public string roledescription { get; set; }
 }

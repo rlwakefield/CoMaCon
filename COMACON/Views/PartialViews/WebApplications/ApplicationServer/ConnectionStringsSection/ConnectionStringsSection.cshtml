@@ -18,7 +18,7 @@
     <div class="row">
         <div class="column" style="min-width: 25%;max-width:max-content;">
             <p style="margin: 0%;">Data Sources</p>
-            <select id="ConnectionStrings-SelectList" size="10" onchange="connectionStringSelectedV3()" style="width: 100%;">
+            <select id="ConnectionStrings-SelectList" size="10" onchange="connectionStringSelectedV3()" style="width: 100%;" class="dark_mode_select">
             </select>
             <div style="display: flex;justify-content: space-evenly;margin: 10px 0;">
                 <button id="New-ConnectionString" onclick="newConnectionStringV3()" type="button" style="font-size:medium;">New</button>
@@ -47,7 +47,7 @@
                         <span class="tooltiptext">This is the help text.</span>
                     </div>
                     <div class="inputElement">
-                        <select name="Data-Provider" id="Data-Provider" onchange="dataProviderV3(this)">
+                        <select name="Data-Provider" id="Data-Provider" onchange="dataProviderV3(this)" class="dark_mode_select">
                             <option value="System.Data.SqlClient" selected>System.Data.SqlClient</option>
                             <option value="Oracle.ManagedDataAccess.Client">Oracle.ManagedDataAccess.Client</option>
                         </select>
@@ -103,7 +103,7 @@
                                 <label for="Protocol">Protocol</label>
                             </div>
                             <div class="inputElement">
-                                <select name="Protocol" id="Protocol" onchange="connectionStringTextInputFieldUpdatedV3(this)">
+                                <select name="Protocol" id="Protocol" onchange="connectionStringTextInputFieldUpdatedV3(this)" class="dark_mode_select">
                                     <option value="TCP" selected>TCP</option>
                                     <option value="TCPS">TCPS</option>
                                 </select>

@@ -1,12 +1,12 @@
 <div id="NewWebApplicationModal" class="NewWebApplicationModal">
-    <div id="NewWebApplicationModal-Container" class="NewWebApplicationModal-Container" style="border: 1px solid black;">
+    <div id="NewWebApplicationModal-Container" class="NewWebApplicationModal-Container dark_mode" style="border: 1px solid black;">
         <!-- Title Bar Container for styling -->
-        <div id="NewWebApplicationModal-TitleBar" class="NewWebApplicationModal-TitleBar" style="background-color: rgb(201, 201, 201);padding: 0 1rem;display: flex;align-items: center;justify-content: space-between;">
+        <div id="NewWebApplicationModal-TitleBar" class="NewWebApplicationModal-TitleBar dark_mode_titlebar" style="background-color: rgb(201, 201, 201);padding: 0 1rem;display: flex;align-items: center;justify-content: space-between;">
             <h1 style="margin: 0.5rem 0;">New Configuration</h1>
             <span id="NewWebApplicationModal-CloseModal" style="font-size: x-large;" onclick="closeNewWebApplicationModal()">X</span>
         </div>
         <!-- Body Section -->
-        <div id="NewWebApplicationModal-BodySection" style="border-top: 1px solid black;height: 300px;display: flex;align-items: center;flex-direction: column;">
+        <div id="NewWebApplicationModal-BodySection" class="dark_mode" style="border-top: 1px solid black;height: 300px;display: flex;align-items: center;flex-direction: column;">
             <div id="NewWebApplicationModal-StartPage" style="margin: auto;">
                 <div id="NewWebApplicationModal-Choices" style="display: flex;flex-direction: column;align-items: center;gap: 3rem;padding:1rem;">
                     <button id="NewWebApplicationButton" style="font-size: xx-large;border-radius: 10px;min-height: 5rem;" onclick="newWebApplication()">Web Application</button>
@@ -23,7 +23,7 @@
                 <div style="display: flex;flex-direction: column;gap: 1rem;">
                     <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
                         <label for="FromExisting-ChooseWebApplication" style="font-size: XX-large;text-align: center;"><u>Choose Web Application:</u></label>
-                        <select name="FromExisting-ChooseWebApplication" id="FromExisting-ChooseWebApplication" onchange="fromExistingChanged(this)" style="font-size: large;">
+                        <select name="FromExisting-ChooseWebApplication" id="FromExisting-ChooseWebApplication" onchange="fromExistingChanged(this)" style="font-size: large;" class="dark_mode_select">
                             <option value="Agenda Online">Agenda Online</option>
                             <option value="Application Server (32-bit)">Application Server (32-bit)</option>
                             <option value="Application Server (64-bit)">Application Server (64-bit)</option>
@@ -53,12 +53,12 @@
                 <div style="display: flex;flex-direction: column;gap: 1rem;">
                     <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
                         <label for="ChooseWebApplicationVersion" style="font-size: XX-large;text-align: center;"><u>Version:</u></label>
-                        <select name="ChooseWebApplicationVersion" id="ChooseWebApplicationVersion" onchange="webApplicationVersionChanged(this)" style="font-size: large;">
+                        <select name="ChooseWebApplicationVersion" id="ChooseWebApplicationVersion" onchange="webApplicationVersionChanged(this)" style="font-size: large;" class="dark_mode_select">
                         </select>
                     </div>
                     <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
                         <label for="ChooseWebApplication" style="font-size: XX-large;text-align: center;"><u>Type:</u></label>
-                        <select name="ChooseWebApplication" id="ChooseWebApplication" style="font-size: large;" onchange="webApplicationTypeChanged(this)" disabled>
+                        <select name="ChooseWebApplication" id="ChooseWebApplication" style="font-size: large;" onchange="webApplicationTypeChanged(this)" disabled class="dark_mode_select">
                         </select>
                     </div>
                 </div>
@@ -67,12 +67,12 @@
                 <div style="display: flex;flex-direction: column;gap: 1rem;">
                     <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
                         <label for="ChooseWebSite" style="font-size: XX-large;text-align: center;"><u>Web Site:</u></label>
-                        <select name="ChooseWebSite" id="ChooseWebSite" onchange="webSiteChanged(this)" style="font-size: large;">
+                        <select name="ChooseWebSite" id="ChooseWebSite" onchange="webSiteChanged(this)" style="font-size: large;" class="dark_mode_select">
                         </select>
                     </div>
                     <div style="display: flex;flex-direction: column;align-items: center;gap: 0.5rem;">
                         <label for="ChoosePath" style="font-size: XX-large;text-align: center;"><u>Path:</u></label>
-                        <select name="ChoosePath" id="ChoosePath" style="font-size: large;" onchange="webSitePathChanged(this)" disabled>
+                        <select name="ChoosePath" id="ChoosePath" style="font-size: large;" onchange="webSitePathChanged(this)" disabled class="dark_mode_select">
                         </select>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                 <progress class="loadingWebApplicationsProgressBar" id="NewWebApplicationModal-CreatingNewWebApplicationProgressBar"></progress>
             </div>
         </div>
-        <div id="NewWebApplicationModal-Footer" style="display: none;padding: 0.5rem;border-top: 1px solid black;justify-content: flex-end;">
+        <div id="NewWebApplicationModal-Footer" class="dark_mode" style="display: none;padding: 0.5rem;border-top: 1px solid black;justify-content: flex-end;">
             <div id="NewWebApplicationModal-Footer-ButtonsContainer">
                 <button id="NewWebApplicationModal-BackButton" style="font-size: large;margin: 0 0.5rem;border-radius: 10px;" onclick="backButtonClicked()">&lt; Back</button>
                 <button id="NewWebApplicationModal-NextCreateButton" style="font-size: large;margin: 0 0.5rem;border-radius: 10px;" onclick="nextButtonClicked()">Next &gt;</button>

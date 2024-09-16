@@ -2,6 +2,8 @@
     ViewData["Title"] = "Settings";
 }
 
+<partial name="~/Views/PartialViews/General/Settings/Users/DeleteUserConfirmationModal.cshtml" />
+<partial name="~/Views/PartialViews/General/Settings/Users/NewAndEditingUserModal.cshtml" />
 <div class="settings-container">
     <div class="settings-categories">
         <!-- <button id="General" class="settings-category" onclick="activateSettingsButton(this)">General</button> -->
@@ -16,3 +18,12 @@
 <script>
     currentPage = "Settings";
 </script>
+
+
+@section LogoutButton {
+    <partial name="~/Views/PartialViews/General/LogoutButton/LogoutButton.cshtml" />
+}
+
+@section SettingsButton {
+    <partial name="~/Views/PartialViews/General/SettingsButton/SettingsButton.cshtml" />
+}

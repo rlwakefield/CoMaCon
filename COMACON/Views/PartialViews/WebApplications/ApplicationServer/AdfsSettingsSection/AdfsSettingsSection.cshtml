@@ -10,7 +10,7 @@
                     <span id="Authentication-Mode-Tooltip" class="tooltiptext">This is the help text.</span>
                 </div>
                 <div class="inputElement">
-                    <select name="Authentication-Mode" id="Authentication-Mode">
+                    <select name="Authentication-Mode" id="Authentication-Mode" class="dark_mode_select">
                         <option value="Windows">Windows</option>
                         <option value="None">None</option>
                     </select>
@@ -80,7 +80,7 @@
     <div class="row">
         <div class="column">
             <div class="sectionWithTitleBar">
-                <div class="titleBar" name="Title-Bar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
                     Audience URI's
                 </div>
                 <div class="coreSection">
@@ -100,13 +100,13 @@
                         </div>
                     </div>
                     <div style="display: flex; justify-content: center;margin: 1rem 0 1rem 0;">
-                        <select class="" name="AudienceURI-SelectList" id="AudienceURI-SelectList" size="8" style="max-width:90%;min-width:50%" onchange="audienceUriChanged(this)">
+                        <select class="" name="AudienceURI-SelectList" id="AudienceURI-SelectList" size="8" style="max-width:90%;min-width:50%" onchange="audienceUriChanged(this)" class="dark_mode_select">
                         </select>
                     </div>
                 </div>
             </div>
             <div class="sectionWithTitleBar">
-                <div class="titleBar" name="Title-Bar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
                     Trusted Issuers
                 </div>
                 <div class="coreSection">
@@ -135,7 +135,7 @@
                         </div>
                     </div>
                     <div style="display: flex; justify-content: center;margin: 1rem 0 1rem 0;">
-                        <select class="" name="TrustedIssuers-SelectList" id="TrustedIssuers-SelectList" size="8" style="max-width:90%;min-width:50%" onchange="trustedIssuerChanged(this)">
+                        <select class="" name="TrustedIssuers-SelectList" id="TrustedIssuers-SelectList" size="8" style="max-width:90%;min-width:50%" onchange="trustedIssuerChanged(this)" class="dark_mode_select">
                         </select>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
         </div>
         <div class="column">
             <div class="sectionWithTitleBar">
-                <div class="titleBar" name="Title-Bar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
                     system.identitymodel.services
                 </div>
                 <div class="coreSection">
@@ -198,7 +198,7 @@
                             <span id="Certificate-Store-Name-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
-                            <select class="adfs-system-identityModel-services-Fields" name="Certificate-Store-Name" id="Certificate-Store-Name">
+                            <select class="adfs-system-identityModel-services-Fields" name="Certificate-Store-Name" id="Certificate-Store-Name" class="dark_mode_select">
                                 <option value="AddressBook">AddressBook</option>
                                 <option value="AuthRoot">AuthRoot</option>
                                 <option value="CertificateAuthority">CertificateAuthority</option>

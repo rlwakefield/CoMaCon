@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 //using System.Diagnostics;
 using Microsoft.Web.Administration;
 using System.Text.Json.Nodes;
+using System.ComponentModel.DataAnnotations;
 //using System.IO;
 //using Microsoft.AspNetCore.Builder;
 
@@ -68,6 +69,7 @@ namespace COMACON.Controllers
             * 2 = Password missing.
             * 3 = Username or password does not match.
             * 4 = Multiple users found with the same username and password.
+            * 5 = User is disabled.
             */
             string username = credentials.GetProperty("username").ToString();
             string password = credentials.GetProperty("password").ToString();
@@ -110,14 +112,14 @@ namespace COMACON.Controllers
             //Checks if the username field is an empty string or not.
             if (username == "")
             {
-                Log.Logger.Information("Username is required.");
+                Log.Logger.Warning("Username is required.");
                 return Unauthorized(authorizationResponse.Replace("@errorNumber", "1").Replace("@errorMessage", "Username is required."));
                 //return Unauthorized("{\"error\":\"1\",\"message\":\"Username is required.\"}");
             }
 
             if (password == "")
             {
-                Log.Logger.Information("Password is required.");
+                Log.Logger.Warning("Password is required.");
                 return Unauthorized(authorizationResponse.Replace("@errorNumber", "2").Replace("@errorMessage", "Password is required."));
                 //return Unauthorized("{\"error\":\"2\",\"message\":\"Password is required.\"}");
             }
@@ -127,8 +129,12 @@ namespace COMACON.Controllers
             switch (validationResults["error"].ToString())
             {
                 case "0":
-                    return Ok(_sessionManagement.generateAccessToken());
+                    Log.Logger.Information("User is authenticated.");
+                    return Ok(_sessionManagement.generateAccessToken(validationResults["message"].ToString()));
                 default:
+                    Log.Logger.Warning("User is not authenticated.");
+                    Log.Logger.Warning("Error: {error}", validationResults["error"].ToString());
+                    Log.Logger.Warning("Message: {message}", validationResults["message"].ToString());
                     return Unauthorized(authorizationResponse.Replace("@errorNumber", validationResults["error"].ToString()).Replace("@errorMessage", validationResults["message"].ToString()));
             }
         }
@@ -159,12 +165,16 @@ namespace COMACON.Controllers
         {
             if (string.IsNullOrEmpty(authorizationHeader))
             {
-                return Unauthorized("No authorization token provided.");
+                Log.Logger.Warning("No authorization token provided.");
+                //return Unauthorized("No authorization token provided.");
+                return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
             }
 
             if (!authorizationHeader.StartsWith("Bearer "))
             {
-                return Unauthorized("Invalid authorization token type.");
+                Log.Logger.Warning("Invalid authorization token type.");
+                //return Unauthorized("Invalid authorization token type.");
+                return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
             }
 
             JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActiveV2(authorizationHeader.Substring("Bearer ".Length).Trim()));
@@ -172,9 +182,127 @@ namespace COMACON.Controllers
             switch(validationResults["error"].ToString())
             {
                 case "0":
+                    Log.Logger.Information("Token is still active.");
                     return Ok(validationResults);
                 default:
+                    Log.Logger.Warning("Token is expired.");
                     return Unauthorized(authorizationResponse.Replace("@errorNumber", validationResults["error"].ToString()).Replace("@errorMessage", validationResults["message"].ToString()));
+            }
+        }
+
+        // GET: api/Endpoint/Logout
+        [HttpGet("Logout")]
+        public IActionResult Logout([FromHeader(Name = "Authorization")] string authorizationHeader)
+        {
+            if (string.IsNullOrEmpty(authorizationHeader))
+            {
+                Log.Logger.Warning("No authorization token provided.");
+                return Unauthorized("No authorization token provided.");
+            }
+
+            if (!authorizationHeader.StartsWith("Bearer "))
+            {
+                Log.Logger.Warning("Invalid authorization token type.");
+                return Unauthorized("Invalid authorization token type.");
+            }
+
+            JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActiveV2(authorizationHeader.Substring("Bearer ".Length).Trim()));
+
+            switch (validationResults["error"].ToString())
+            {
+                case "0":
+                    Log.Logger.Information("Logging out user.");
+                    //var request = HttpContext.Request;
+
+                    _sessionManagement.logoutUser(authorizationHeader.Substring("Bearer ".Length).Trim());
+                    return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
+                    //return Ok(_sessionManagement.logoutUser(authorizationHeader.Substring("Bearer ".Length).Trim()));
+                default:
+                    Log.Logger.Warning("Token is expired.");
+                    return Unauthorized(authorizationResponse.Replace("@errorNumber", validationResults["error"].ToString()).Replace("@errorMessage", validationResults["message"].ToString()));
+            }
+        }
+
+        // POST: api/Endpoint/ResetPassword
+        [HttpPost("ResetPassword")]
+        public IActionResult ResetPassword([FromBody] JsonElement credentials)
+        {
+            string username = credentials.GetProperty("username").ToString();
+            string currentpassword = credentials.GetProperty("currentpassword").ToString();
+            string newPassword = credentials.GetProperty("newpassword").ToString();
+            string errorReturnText = "{\"error\":\"@errorNumber\",\"message\":\"@errorMessage\"}";
+
+            if (string.Equals(currentpassword, newPassword))
+            {
+                Log.Logger.Warning("New password cannot be the same as the current password.");
+                return BadRequest(errorReturnText.Replace("@errorNumber", "4").Replace("@errorMessage", "New password cannot be the same as the current password."));
+            }
+
+            //Checks if the username field is an empty string or not.
+            if (username == "")
+            {
+                Log.Logger.Warning("Username is required.");
+                return BadRequest(errorReturnText.Replace("@errorNumber", "1").Replace("@errorMessage", "Username is required."));
+            }
+
+            if (currentpassword == "")
+            {
+                Log.Logger.Warning("Password is required.");
+                return BadRequest(errorReturnText.Replace("@errorNumber", "2").Replace("@errorMessage", "Password is required."));
+            }
+
+            if (newPassword == "")
+            {
+                Log.Logger.Warning("New Password is required.");
+                return BadRequest(errorReturnText.Replace("@errorNumber", "3").Replace("@errorMessage", "New Password is required."));
+            }
+
+            JsonNode passwordresetresults = JsonNode.Parse(_sessionManagement.ResetPassword(username, currentpassword, newPassword));
+
+            if(passwordresetresults["error"].ToString() == "0")
+            {
+                Log.Logger.Information("Password reset successful.");
+                return Ok();
+            }
+            else
+            {
+                Log.Logger.Warning("Password reset failed.");
+                return BadRequest(passwordresetresults);
+            }
+        }
+
+        //POST: api/Endpoint/ForgotPassword
+        [HttpPost("ForgotPassword")]
+        public IActionResult ForgotPassword([FromBody] JsonElement credentials)
+        {
+            string username = credentials.GetProperty("username").ToString();
+            string emailaddress = credentials.GetProperty("emailaddress").ToString();
+            string errorReturnText = "{\"error\":\"@errorNumber\",\"message\":\"@errorMessage\",\"timestamp\":}";
+
+            //Checks if the username field is an empty string or not.
+            if (username == "")
+            {
+                Log.Logger.Warning("Username is required.");
+                return BadRequest(errorReturnText.Replace("@errorNumber", "1").Replace("@errorMessage", "Username is required."));
+            }
+
+            if (emailaddress == "")
+            {
+                Log.Logger.Warning("Email Address is required.");
+                return BadRequest(errorReturnText.Replace("@errorNumber", "2").Replace("@errorMessage", "Email Address is required."));
+            }
+
+            JsonNode passwordresetresults = JsonNode.Parse(_sessionManagement.ForgotPasswordRequest(username, emailaddress, _configuration));
+
+            if (passwordresetresults["error"].ToString() == "0")
+            {
+                Log.Logger.Information("Password reset successful.");
+                return Ok(passwordresetresults);
+            }
+            else
+            {
+                Log.Logger.Warning("Password reset failed.");
+                return BadRequest(passwordresetresults);
             }
         }
 
@@ -182,40 +310,207 @@ namespace COMACON.Controllers
         /**************************************
          *      User Management Endpoints
          **************************************/
+        // GET: api/Endpoint/GetUser
         [HttpGet("GetUser")]
-        public IActionResult GetUser([FromHeader(Name = "Authorization")] string authorization, string usernum = "0")
+        public IActionResult GetUser([FromHeader(Name = "Authorization")] string authorization, [Required] string version, string usernum = "0")
         {
-            if (string.IsNullOrEmpty(authorization))
+            if(version == "v1")
             {
-                return Unauthorized("No authorization token provided.");
-            }
+                if (string.IsNullOrEmpty(authorization))
+                {
+                    Log.Logger.Warning("No authorization token provided.");
+                    return Unauthorized("No authorization token provided.");
+                }
 
-            if (!authorization.StartsWith("Bearer "))
+                if (!authorization.StartsWith("Bearer "))
+                {
+                    Log.Logger.Warning("Invalid authorization token type.");
+                    return Unauthorized("Invalid authorization token type.");
+                }
+
+                JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActiveV2(authorization.Substring("Bearer ".Length).Trim()));
+
+                if (validationResults["error"].ToString() != "0")
+                {
+                    Log.Logger.Warning("Token is expired. ");
+                    return Unauthorized("Token is expired. ");
+                }
+
+                int unum = 0;
+                try
+                {
+                    unum = int.Parse(usernum);
+                }
+                catch
+                {
+                    Log.Logger.Warning("Invalid user number.");
+                    return BadRequest("Invalid user number.");
+                }
+
+                Log.Logger.Information("Getting user with user number: {unum}", unum);
+                return Ok(_SqlQueries.GetUser(unum));
+            }
+            else
             {
-                return Unauthorized("Invalid authorization token type.");
+                Log.Logger.Error("Invalid version number.");
+                return BadRequest("Invalid version number.");
             }
-
-            JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActiveV2(authorization.Substring("Bearer ".Length).Trim()));
-
-            if(validationResults["error"].ToString() != "0")
-            {
-                return Unauthorized("Token is expired. ");
-            }
-
-            int unum = 0;
-            try
-            {
-                unum = int.Parse(usernum);
-            }
-            catch
-            {
-                return BadRequest("Invalid user number.");
-            }
-
-            return Ok(_SqlQueries.GetUsers(unum));
+            
 
             //return null;
         }
+
+        // GET: api/Endpoint/GetAllUsers
+        [HttpGet("GetAllUsers")]
+        public IActionResult GetAllUsers([FromHeader(Name = "Authorization")] string authorization, [Required] string version)
+        {
+            if (version == "v1")
+            {
+                if (string.IsNullOrEmpty(authorization))
+                {
+                    Log.Logger.Warning("No authorization token provided.");
+                    return Unauthorized("No authorization token provided.");
+                }
+
+                if (!authorization.StartsWith("Bearer "))
+                {
+                    Log.Logger.Warning("Invalid authorization token type.");
+                    return Unauthorized("Invalid authorization token type.");
+                }
+
+                JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActiveV2(authorization.Substring("Bearer ".Length).Trim()));
+
+                if (validationResults["error"].ToString() != "0")
+                {
+                    Log.Logger.Warning("Token is expired.");
+                    return Unauthorized("Token is expired. ");
+                }
+
+                try
+                {
+                    Log.Logger.Information("Getting all users.");
+                    return Ok(_SqlQueries.GetAllUsers());
+                }
+                catch (Exception ex)
+                {
+                    Log.Logger.Error("Bad Request: " + ex.Message);
+                    return BadRequest(ex.Message);
+                }
+            }
+            else
+            {
+                return BadRequest("Invalid version number.");
+            }
+        }
+
+        // GET: api/Endpoint/UpdateUser
+        [HttpPut("UpdateUser")]
+        public IActionResult UpdateUser([FromHeader(Name = "Authorization")] string authorization, [Required] string version, [FromBody] JsonElement user)
+        {
+            if (version == "v1")
+            {
+                if (string.IsNullOrEmpty(authorization))
+                {
+                    return Unauthorized("No authorization token provided.");
+                }
+
+                if (!authorization.StartsWith("Bearer "))
+                {
+                    return Unauthorized("Invalid authorization token type.");
+                }
+
+                JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActiveV2(authorization.Substring("Bearer ".Length).Trim()));
+
+                if (validationResults["error"].ToString() != "0")
+                {
+                    return Unauthorized("Token is expired.");
+                }
+
+                try
+                {
+                    User userObject = JsonConvert.DeserializeObject<User>(user.ToString());
+                    return Ok(_SqlQueries.UpdateUser(userObject, _sessionManagement.getUserSessionUserNum(authorization.Substring("Bearer ".Length).Trim())));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                    Log.Logger.Error(ex.Message);
+                    Log.Logger.Error(ex.StackTrace);
+                    return BadRequest(ex.Message);
+                }
+            }
+            else
+            {
+                Log.Logger.Error("Invalid version number.");
+                return BadRequest("Invalid version number.");
+            }
+        }
+
+        // GET: api/Endpoint/GetRoles
+        [HttpGet("GetRoles")]
+        public IActionResult GetRoles([FromHeader(Name = "Authorization")] string authorization, [Required] string version)
+        {
+            switch (version)
+            {
+                case "v1":
+                    return Ok(_SqlQueries.GetRoles());
+                default:
+                    Log.Logger.Error("Invalid version number.");
+                    return BadRequest("Invalid version number.");
+            }
+        }
+
+        // POST: api/Endpoint/CreateUser
+        [HttpPost("CreateUser")]
+        public IActionResult CreateUser([FromHeader(Name = "Authorization")] string authorization, [Required] string version, [FromBody] JsonElement user)
+        {
+            if (version == "v1")
+            {
+                if (string.IsNullOrEmpty(authorization))
+                {
+                    Log.Logger.Warning("No authorization token provided.");
+                    return Unauthorized("No authorization token provided.");
+                }
+
+                if (!authorization.StartsWith("Bearer "))
+                {
+                    Log.Logger.Warning("Invalid authorization token type.");
+                    return Unauthorized("Invalid authorization token type.");
+                }
+
+                JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActiveV2(authorization.Substring("Bearer ".Length).Trim()));
+
+                if (validationResults["error"].ToString() != "0")
+                {
+                    Log.Logger.Warning("Token is expired.");
+                    return Unauthorized("Token is expired.");
+                }
+
+                try
+                {
+                    User userObject = JsonConvert.DeserializeObject<User>(user.ToString());
+                    return Ok(_SqlQueries.CreateUser(userObject, _sessionManagement.getUserSessionUserNum(authorization.Substring("Bearer ".Length).Trim())));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                    Log.Logger.Error(ex.Message);
+                    Log.Logger.Error(ex.StackTrace);
+                    return BadRequest(ex.Message);
+                }
+            }
+            else
+            {
+                Log.Logger.Error("Invalid version number.");
+                return BadRequest("Invalid version number.");
+            }
+        }
+
+
+
+
 
 
         // GET: api/Endpoint/TestConnectionString
@@ -240,7 +535,7 @@ namespace COMACON.Controllers
                     cstringSql += string.Format(userIdAndPassword, cstring.UserId, cstring.Password);
                 }
                 cstringSql += cstring.AdditionalOptions;
-                Console.WriteLine(cstringSql);
+                //Console.WriteLine(cstringSql);
 
                 try
                 {
@@ -292,7 +587,7 @@ namespace COMACON.Controllers
                         Log.Logger.Error("Oracle Connection failed: {ex}", ex);
                         result.ResultCode = "1";
                         result.ResultMessage = "Oracle connection failed: " + ex.Message;
-                        Console.WriteLine(JsonConvert.SerializeObject(@"{""ResultCode"":""1"",""ResultMessage"":""Oracle connection failed: " + ex.Message.Replace("\n", " ") + @"""}"));
+                        //Console.WriteLine(JsonConvert.SerializeObject(@"{""ResultCode"":""1"",""ResultMessage"":""Oracle connection failed: " + ex.Message.Replace("\n", " ") + @"""}"));
                         return JsonConvert.SerializeObject(result);
                     }
                 }
@@ -372,9 +667,9 @@ namespace COMACON.Controllers
             if(webconfig == "")
             {
                 webconfig = Path.Combine(Environment.ExpandEnvironmentVariables(manager.Sites[siteName].Applications["/"].VirtualDirectories[applicationPath].Attributes["physicalPath"].Value.ToString()), applicationName,"web.config");
-                Console.WriteLine(webconfig);
+                //Console.WriteLine(webconfig);
                 physicalPath = Environment.ExpandEnvironmentVariables(manager.Sites[siteName].Applications[applicationPath+applicationName].VirtualDirectories["/"].PhysicalPath);
-                Console.WriteLine(physicalPath);
+                //Console.WriteLine(physicalPath);
             }
             //return "";
             using var file = new System.IO.StreamReader(webconfig);
@@ -581,7 +876,7 @@ namespace COMACON.Controllers
                 }
             }
             
-            Console.WriteLine(JsonConvert.SerializeObject(newConfigurationDetails));
+            //Console.WriteLine(JsonConvert.SerializeObject(newConfigurationDetails));
 
             return JsonConvert.SerializeObject(newConfigurationDetails);
         }

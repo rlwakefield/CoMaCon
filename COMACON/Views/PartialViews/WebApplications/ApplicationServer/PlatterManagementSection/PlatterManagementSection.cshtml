@@ -1,6 +1,6 @@
 <div id="PlatterManagementSection" class="tabcontent">
     <div class="sectionWithTitleBar">
-        <div class="titleBar" name="Title-Bar">
+        <div class="titleBar dark_mode_titlebar" name="Title-Bar">
             Disk Group Aliases
         </div>
         <div class="coreSection">
@@ -9,7 +9,7 @@
             </div>
             <div class="row">
                 <div class="column" style="width: 20%;">
-                    <select id="DiskGroupAliases-SelectList" name="DiskGroupAliases-SelectList" size="10" style="width:100%;" onchange="diskGroupAliasesChanged(this)">
+                    <select id="DiskGroupAliases-SelectList" name="DiskGroupAliases-SelectList" size="10" style="width:100%;" onchange="diskGroupAliasesChanged(this)" class="dark_mode_select">
                     </select>
                     <div style="display:flex;justify-content:space-around;">
                         <button id="Add-DiskGroup-Alias-Button" onclick="addDiskGroupAlias()" type="button" style="margin-left: 5px;">Add</button>
@@ -47,7 +47,7 @@
                             <span id="Alias-Type-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
-                            <select name="Alias-Type" id="Alias-Type" onchange="diskGroupAliasesFieldUpdated(this)">
+                            <select name="Alias-Type" id="Alias-Type" onchange="diskGroupAliasesFieldUpdated(this)" class="dark_mode_select">
                                 <option value="unc">unc</option>
                                 <option value="unix">unix</option>
                             </select>
@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="sectionWithTitleBar">
-        <div class="titleBar" name="Title-Bar">
+        <div class="titleBar dark_mode_titlebar" name="Title-Bar">
             Foreign Storage Devices
         </div>
         <div class="coreSection">
@@ -108,7 +108,7 @@
         </div>
     </div>
     <div class="sectionWithTitleBar">
-        <div class="titleBar" name="Title-Bar">
+        <div class="titleBar dark_mode_titlebar" name="Title-Bar">
             Other
         </div>
         <div class="coreSection">
@@ -143,7 +143,7 @@
                             <span id="PM-File-Access-Level-Tooltip" class="tooltiptext">This is the help text.</span>
                         </div>
                         <div class="inputElement">
-                            <select name="PM-File-Access-Level" id="PM-File-Access-Level">
+                            <select name="PM-File-Access-Level" id="PM-File-Access-Level" class="dark_mode_select">
                                 <option value="0">0 - Default</option>
                                 <option value="1">1 - Always use UNC</option>
                                 <option value="2">2 - Never to UNC</option>

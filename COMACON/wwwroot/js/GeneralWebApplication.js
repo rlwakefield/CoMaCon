@@ -264,9 +264,9 @@ async function onPageLoadLogic() {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data.rooturl)
+                //console.log(data.rooturl)
                 sessionStorage.setItem('apiRootUrl', data.rooturl);
-                console.log(sessionStorage.getItem('apiRootUrl'));
+                //console.log(sessionStorage.getItem('apiRootUrl'));
             })
             .catch(error => console.error('Error:', error));
     } else {
@@ -275,7 +275,14 @@ async function onPageLoadLogic() {
     apiRootUrl = sessionStorage.getItem('apiRootUrl');
     //console.log(apiRootUrl);
 
-    document.getElementById("core-action-buttons-div").style.display = "none";
+    //if (currentPage == "Login" || currentPage == "Settings" || currentPage == "Home") {
+    //    document.getElementById("core-action-buttons-div").style.display = "none";
+    //}
+
+    //if (currentPage == "Login") {
+    //    document.getElementById("logoutbutton").style.display = "none";
+    //}
+
     if (localStorage.getItem("darkModeState") != null) {
         if (localStorage.getItem("darkModeState") == "true") {
             document.getElementById("checkbox").checked = true;
@@ -338,8 +345,8 @@ async function checkWhatWebApplicationToParse(config, executionMethod) {
 
         coreConfigData = config;
         await parseData(config);
-        document.getElementById("LoadedApplicationName").innerText = coreConfigData["ApplicationName"] + " (" + coreConfigData["Version"] + ")";
-        document.getElementById("LoadedApplicationType").innerText = coreConfigData["Type"];
+        document.getElementById("LoadedWebApplicationName").innerText = coreConfigData["ApplicationName"] + " (" + coreConfigData["Version"] + ")";
+        document.getElementById("LoadedWebApplicationType").innerText = coreConfigData["Type"];
 
         switch (executionMethod) {
             case "LoadWebApplication":
@@ -721,6 +728,7 @@ async function createNewConfiguration() {
     {
         let newOptGroup = document.createElement("optgroup");
         newOptGroup.setAttribute("label", versiongroups[i]["majorVersion"]);
+        newOptGroup.classList.add("dark_mode_select_optgroup");
         let versions = versiongroups[i]["versions"];
         for (let j = 0; j < versions.length; j++) {
             let newOpt = document.createElement("option");
@@ -1482,8 +1490,8 @@ async function parseData(config) {
             break;
     }
 
-    if (config["unknownElementKeys"].length == 0 && config["unknownAttributeKeys"].length == 0) {
-        document.getElementById("Unknown-Configuration-Keys-Link").style.display = "none";
+    if (config["unknownElementKeys"].length > 0 && config["unknownAttributeKeys"].length > 0) {
+        document.getElementById("Unknown-Configuration-Keys-Link").style.display = "block";
     } else if (config["unknownElementKeys"].length == 0 && config["unknownAttributeKeys"].length > 0) {
         document.getElementById("UnknownConfigurationKeysElements-Section").style.display = "none";
         document.getElementById("UnknownConfigurationKeysAttributes-Section").style.display = "block";
@@ -3492,100 +3500,102 @@ function toggleDarkLightMode(checkbox) {
     if (checkbox.checked) {
         localStorage.setItem("darkModeState", true);
         //Elements to add "dark_mode" class to:
-        document.body.classList.add('dark_mode');
-        document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.add('dark_mode');
-        document.getElementById("Loading-Web-Applications-Progress-Section").classList.add('dark_mode');
-        document.getElementById("CopyWebApplicationModal-Container").classList.add('dark_mode');
-        document.getElementById("SaveErrors-Content").classList.add('dark_mode');
-        document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.add('dark_mode');
-        document.getElementById("errorLoadModal-content").classList.add('dark_mode');
-        document.getElementById("NewWebApplicationModal-Container").classList.add('dark_mode');
-        document.getElementById("NewWebApplicationModal-BodySection").classList.add('dark_mode');
-        document.getElementById("NewWebApplicationModal-Footer").classList.add('dark_mode');
+        document.body.classList.add('dark_mode_body');
+        //document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.add('dark_mode');
+        //document.getElementById("Loading-Web-Applications-Progress-Section").classList.add('dark_mode');
+        //document.getElementById("CopyWebApplicationModal-Container").classList.add('dark_mode');
+        //document.getElementById("SaveErrors-Content").classList.add('dark_mode');
+        //document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.add('dark_mode');
+        //document.getElementById("errorLoadModal-content").classList.add('dark_mode');
+        //document.getElementById("NewWebApplicationModal-Container").classList.add('dark_mode');
+        //document.getElementById("NewWebApplicationModal-BodySection").classList.add('dark_mode');
+        //document.getElementById("NewWebApplicationModal-Footer").classList.add('dark_mode');
 
         //Elements to add "dark_mode_titlebar" class to:
-        document.getElementById("h1-container").classList.add('dark_mode_titlebar');
-        document.getElementById("core-action-buttons-div").classList.add('dark_mode_titlebar');
-        document.getElementById("ChooseApplicationTitleBar").classList.add('dark_mode_titlebar');
-        document.getElementById("NewWebApplicationModal-TitleBar").classList.add('dark_mode_titlebar');
-        Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
-            element.classList.add('dark_mode_titlebar')
-        });
-        Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
-            element.classList.add('dark_mode_titlebar');
-        });
-        try {
-            document.getElementById("login-form-container").classList.add('dark_mode_titlebar');
-        } catch {
+        //document.getElementById("h1-container").classList.add('dark_mode_titlebar');
+        //document.getElementById("core-action-buttons-div").classList.add('dark_mode_titlebar');
+        //document.getElementById("ChooseApplicationTitleBar").classList.add('dark_mode_titlebar');
+        //document.getElementById("NewWebApplicationModal-TitleBar").classList.add('dark_mode_titlebar');
+        //Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
+        //    element.classList.add('dark_mode_titlebar')
+        //});
+        //Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
+        //    element.classList.add('dark_mode_titlebar');
+        //});
+        //try {
+        //    document.getElementById("login-form-container").classList.add('dark_mode_titlebar');
+        //} catch {
 
-        }
+        //}
         
 
         //Elements to add "dark_mode_button" class to:
-        Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
-            element.classList.add('dark_mode_button')
-        });
+        //Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
+        //    element.classList.add('dark_mode_button')
+        //});
 
         //Elements to add "dark_mode_select" class to:
-        Array.from(document.getElementsByTagName("select")).forEach(element => {
-            element.classList.add('dark_mode_select');
-        });
+        //Array.from(document.getElementsByTagName("select")).forEach(element => {
+        //    element.classList.add('dark_mode_select');
+        //});
 
         //Elements to add "dark_mode_links" class to:
-        Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
-            element.classList.add('dark_mode_links');
-        });
+        //Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
+        //    element.classList.add('dark_mode_links');
+        //});
 
-        Array.from(document.getElementsByTagName("optgroup")).forEach(element => {
-            element.classList.add('dark_mode_select_optgroup');
-        });
+        //Array.from(document.getElementsByTagName("optgroup")).forEach(element => {
+        //    element.classList.add('dark_mode_select_optgroup');
+        //});
     } else {
         localStorage.setItem("darkModeState", false);
-        //Elements to remove "dark_mode" class to:
-        document.body.classList.remove('dark_mode');
-        document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.remove('dark_mode');
-        document.getElementById("Loading-Web-Applications-Progress-Section").classList.remove('dark_mode');
-        document.getElementById("CopyWebApplicationModal-Container").classList.remove('dark_mode');
-        document.getElementById("SaveErrors-Content").classList.remove('dark_mode');
-        document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.remove('dark_mode');
-        document.getElementById("errorLoadModal-content").classList.remove('dark_mode');
-        document.getElementById("NewWebApplicationModal-Container").classList.remove('dark_mode');
-        document.getElementById("NewWebApplicationModal-BodySection").classList.remove('dark_mode');
-        document.getElementById("NewWebApplicationModal-Footer").classList.remove('dark_mode');
+        //Elements to remove "dark_mode" class from:
+        document.body.classList.remove('dark_mode_body');
+        //document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.remove('dark_mode');
+        //document.getElementById("Loading-Web-Applications-Progress-Section").classList.remove('dark_mode');
+        //document.getElementById("CopyWebApplicationModal-Container").classList.remove('dark_mode');
+        //document.getElementById("SaveErrors-Content").classList.remove('dark_mode');
+        //document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.remove('dark_mode');
+        //document.getElementById("errorLoadModal-content").classList.remove('dark_mode');
+        //document.getElementById("NewWebApplicationModal-Container").classList.remove('dark_mode');
+        //document.getElementById("NewWebApplicationModal-BodySection").classList.remove('dark_mode');
+        //document.getElementById("NewWebApplicationModal-Footer").classList.remove('dark_mode');
 
-        //Elements to add "dark_mode_titlebar" class to:
-        document.getElementById("h1-container").classList.remove('dark_mode_titlebar');
-        document.getElementById("core-action-buttons-div").classList.remove('dark_mode_titlebar');
-        document.getElementById("ChooseApplicationTitleBar").classList.remove('dark_mode_titlebar');
-        document.getElementById("NewWebApplicationModal-TitleBar").classList.remove('dark_mode_titlebar');
-        Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
-            element.classList.remove('dark_mode_titlebar')
-        });
-        Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
-            element.classList.remove('dark_mode_titlebar');
-        });
-        try {
-            document.getElementById("login-form-container").classList.remove('dark_mode_titlebar');
-        } catch {
+        //Elements to remove "dark_mode_titlebar" class to:
+        //document.getElementById("h1-container").classList.remove('dark_mode_titlebar');
+        //document.getElementById("core-action-buttons-div").classList.remove('dark_mode_titlebar');
+        //document.getElementById("ChooseApplicationTitleBar").classList.remove('dark_mode_titlebar');
+        //document.getElementById("NewWebApplicationModal-TitleBar").classList.remove('dark_mode_titlebar');
+        //Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
+        //    element.classList.remove('dark_mode_titlebar')
+        //});
+        //Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
+        //    element.classList.remove('dark_mode_titlebar');
+        //});
+        //try {
+        //    document.getElementById("login-form-container").classList.remove('dark_mode_titlebar');
+        //} catch {
 
-        }
+        //}
 
-        //Elements to add "dark_mode_button" class to:
-        Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
-            element.classList.remove('dark_mode_button')
-        });
+        //Elements to remove "dark_mode_button" class from:
+        //Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
+        //    element.classList.remove('dark_mode_button')
+        //});
 
-        //Elements to add "dark_mode_select" class to:
-        Array.from(document.getElementsByTagName("select")).forEach(element => {
-            element.classList.remove('dark_mode_select');
-        });
-        Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
-            element.classList.remove('dark_mode_links');
-        });
+        //Elements to remove "dark_mode_select" class from:
+        //Array.from(document.getElementsByTagName("select")).forEach(element => {
+        //    element.classList.remove('dark_mode_select');
+        //});
 
-        Array.from(document.getElementsByTagName("optgroup")).forEach(element => {
-            element.classList.remove('dark_mode_select_optgroup');
-        });
+        //Elements to remove "dark_mode_links" class from:
+        //Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
+        //    element.classList.remove('dark_mode_links');
+        //});
+
+        //Array.from(document.getElementsByTagName("optgroup")).forEach(element => {
+        //    element.classList.remove('dark_mode_select_optgroup');
+        //});
     }
 }
 
@@ -4161,77 +4171,6 @@ async function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
     } else {
         return false;
     }
-}
-
-
-/********************************************************
-*                Login Page Functions
-********************************************************/
-function resetLoginErrorTextFields() {
-    Array.from(document.getElementsByClassName("loginerrortext")).forEach(element => {
-        element.innerText = "";
-    });
-}
-
-function login(event) {
-    event.preventDefault(); // Prevent the default form submission
-    let loginCredentials = {
-        username: document.getElementById("username").value,
-        password: document.getElementById("password").value
-    };
-
-    fetch(sessionStorage.getItem('apiRootUrl') + '/api/Endpoint/AuthenticationV2', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(loginCredentials)
-    })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                //console.log(response.status);
-                return response.json().then(errorData => {
-                    //console.log(errorData);
-                    switch (errorData.error) {
-                        case "1":
-                            //Missing Username
-                            document.getElementById("username-errortext").innerText = errorData.message;
-                            break;
-                        case "2":
-                            //Missing Password
-                            document.getElementById("password-errortext").innerText = errorData.message;
-                            break;
-                        case "3":
-                            //Invalid Username or Password
-                            document.getElementById("genericloginerror").innerText = errorData.message;
-                            break;
-                        case "4":
-                            //Multiple users found with the same username/password.
-                            document.getElementById("genericloginerror").innerText = errorData.message;
-                            break;
-                        default:
-                            //Unknown error occured.
-                            document.getElementById("genericloginerror").innerText = errorData.message;
-                            break;
-                    }
-                    throw errorData;
-                });
-                //throw new Error(response.json());
-            }
-        })
-        .then(data => {
-            console.log(data);
-            //console.log(response.status);
-            sessionStorage.setItem("comaconbearertoken", data.access_token);
-            //console.log(sessionStorage.getItem("comaconbearertoken"));
-            window.location.href = '/core/home';
-        })
-        .catch(error => {
-            console.log(error);
-            console.error('Error:', error.message);
-        });
 }
 
 

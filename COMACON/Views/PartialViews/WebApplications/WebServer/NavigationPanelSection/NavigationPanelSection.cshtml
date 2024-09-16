@@ -1,7 +1,7 @@
 <div id="NavigationPanelSection" class="tabcontent">
     <div>
         <div class="sectionWithTitleBar">
-            <div class="titleBar" name="Title-Bar">
+            <div class="titleBar dark_mode_titlebar" name="Title-Bar">
                 Default Context Info
             </div>
             <div class="coreSection">
@@ -13,7 +13,7 @@
                                 <span id="Default-Context-Tooltip" class="tooltiptext">This is the help text.</span>
                             </div>
                             <div class="inputElement">
-                                <select name="Default-Context" id="Default-Context" onchange="defaultContextChanged()">
+                                <select name="Default-Context" id="Default-Context" onchange="defaultContextChanged()" class="dark_mode_select">
                                     <option value="NavigationPanel0" selected></option>
                                 </select>
                             </div>
@@ -24,7 +24,7 @@
                                 <span id="Default-Control-Bar-Tooltip" class="tooltiptext">This is the help text.</span>
                             </div>
                             <div class="inputElement">
-                                <select name="Default-Control-Bar" id="Default-Control-Bar">
+                                <select name="Default-Control-Bar" id="Default-Control-Bar" class="dark_mode_select">
                                     <option value=""></option>
                                 </select>
                             </div>
@@ -45,12 +45,12 @@
     </div>
     <div class="row">
         <div class="column" style="width:max-content;">
-            <select id="NavigationPanel-SelectList" size="20" style="max-width:100%;min-width:50%" onchange="navigationPanelSelectionChanged()">
+            <select id="NavigationPanel-SelectList" size="20" style="max-width:100%;min-width:50%" onchange="navigationPanelSelectionChanged()" class="dark_mode_select">
             </select>
         </div>
         <div class="column" style="width:72%;">
             <div class="sectionWithTitleBar">
-                <div class="titleBar" name="Title-Bar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
                     Context
                 </div>
                 <div class="coreSection">
@@ -105,7 +105,7 @@
                 </div>
             </div>
             <div class="sectionWithTitleBar">
-                <div class="titleBar" name="Title-Bar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
                     Control Bars
                 </div>
                 <div id="NavPanel-ControlsBarsSection" class="coreSection">
