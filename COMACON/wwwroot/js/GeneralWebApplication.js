@@ -988,11 +988,31 @@ function parseValidateNoDuplicateApplicationPoolName(data) {
 
 function validateApplicationServerURL(field) {
     if (field.value != "") {
-        fetch(apiRootUrl + "/api/Endpoint/UrlValidation?url=" + encodeURIComponent(field.value), {
+        const applicationServerUrlValidationOptions = {
             method: "GET",
-        })
-            .then(response => response.json())
-            .then(data => parseValidateApplicationServerURL(data));
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        }
+        fetch(apiRootUrl + "/api/Endpoint/UrlValidation?url=" + encodeURIComponent(field.value), applicationServerUrlValidationOptions)
+            .then(response => {
+                //console.log(response.json());
+                let section = document.getElementById("ApplicationServerUrl-ResultContainer");
+                if (response.ok) {
+                    section.replaceChildren();
+                    section.insertAdjacentHTML("beforeend", greenCheckMark);
+                } else if (!response.ok) {
+                    section.replaceChildren();
+                    section.insertAdjacentHTML("beforeend", blackQuestionMark);
+                }
+
+                return response.json().then(data => {
+                    console.log(data);
+                })
+            })
+            //.then(response => response.json())
+            //.then(data => parseValidateApplicationServerURL(data));
     } else {
         checkValidFieldValuesToEnableCopyButton();
     }
@@ -1001,8 +1021,7 @@ function validateApplicationServerURL(field) {
 function parseValidateApplicationServerURL(data) {
     let section = document.getElementById("ApplicationServerUrl-ResultContainer");
     if (data != '200') {
-        section.replaceChildren();
-        section.insertAdjacentHTML("beforeend", blackQuestionMark);
+        
     } else {
         section.replaceChildren();
         section.insertAdjacentHTML("beforeend", greenCheckMark);
@@ -1181,9 +1200,28 @@ function testUrl(field) {
         let id = field.currentTarget.id;
         field.currentTarget.disabled = true;
         document.getElementById(id + "-Loader").style.display = "block";
-        fetch(apiRootUrl + "/api/Endpoint/UrlValidation?url=" + encodeURIComponent(field.currentTarget.value))
-            .then(response => response.json())
-            .then(data => parseTestUrlResponse(data, id));
+        const urlValidationOptions = {
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        }
+        fetch(apiRootUrl + "/api/Endpoint/UrlValidation?url=" + encodeURIComponent(field.currentTarget.value), urlValidationOptions)
+            .then(response => {
+                //console.log(response.json());
+                let section = document.getElementById("ApplicationServerUrl-ResultContainer");
+                if (response.ok) {
+                    document.getElementById(id).classList.add("validUrl");
+                } else if (!response.ok) {
+                    document.getElementById(id).classList.add("invalidUrl");
+                }
+
+                document.getElementById(id + "-Loader").style.display = "none";
+                document.getElementById(id).disabled = false;
+            })
+            //.then(response => response.json())
+            //.then(data => parseTestUrlResponse(data, id));
     }
 }
 
@@ -3378,26 +3416,43 @@ async function testConnectionString() {
     //Get the selected connection string from the ConnectionStringsArray.
     let selectedConnectionString = ConnectionStringsArray.filter(cstring => cstring.id === document.getElementById("ConnectionStrings-SelectList").value);
     document.getElementById("connectionStringTestModal").style.display = "flex";
-    const fetchOptions = {
-        method: "POST",
+    const testConnectionStringOptions = {
+        method: "GET",
         headers: {
+            'Authorization': 'Bearer ' + sessionStorage.getItem('comaconbearertoken'),
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(selectedConnectionString[0])
+        }
     };
-    fetch(apiRootUrl + "/api/Endpoint/TestConnectionString?cstringobject=" + JSON.stringify(selectedConnectionString[0]))
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("connectionStringTestModal").style.display = "none";
-            let testconnectionalert = document.getElementById("TestConnectionString-Alert");
-            if (data["ResultCode"] == "0") {
-                testconnectionalert.innerText = data["ResultMessage"];
-                testconnectionalert.style.color = "green";
-            } else if (data["ResultCode"] == "1") {
-                testconnectionalert.innerText = data["ResultMessage"];
-                testconnectionalert.style.color = "red";
+    fetch(apiRootUrl + "/api/Endpoint/TestConnectionString?cstringobject=" + JSON.stringify(selectedConnectionString[0]), testConnectionStringOptions)
+        .then(response => {
+            if (response.ok) {
+                return response.json().then(data => {
+                    document.getElementById("connectionStringTestModal").style.display = "none";
+                    let testconnectionalert = document.getElementById("TestConnectionString-Alert");
+                    if (data["ResultCode"] == "0") {
+                        testconnectionalert.innerText = data["ResultMessage"];
+                        testconnectionalert.style.color = "green";
+                    } else if (data["ResultCode"] == "1") {
+                        testconnectionalert.innerText = data["ResultMessage"];
+                        testconnectionalert.style.color = "red";
+                    }
+                })
+            } else if(response.redirected){
+                window.location.href = response.url;
             }
+            //response.json();
         });
+        //.then(data => {
+        //    document.getElementById("connectionStringTestModal").style.display = "none";
+        //    let testconnectionalert = document.getElementById("TestConnectionString-Alert");
+        //    if (data["ResultCode"] == "0") {
+        //        testconnectionalert.innerText = data["ResultMessage"];
+        //        testconnectionalert.style.color = "green";
+        //    } else if (data["ResultCode"] == "1") {
+        //        testconnectionalert.innerText = data["ResultMessage"];
+        //        testconnectionalert.style.color = "red";
+        //    }
+        //});
 }
 
 

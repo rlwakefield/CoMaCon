@@ -5,6 +5,9 @@ using System.Text;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mail;
+using Microsoft.AspNetCore.Identity;
+using Azure.Core;
+using Newtonsoft.Json.Linq;
 
 namespace COMACON.config;
 
@@ -18,8 +21,8 @@ public interface SessionManagement
     /// <returns>
     /// 
     /// </returns>
-    public string ValidateUserLoggingIn(string username,
-        string password);
+    //public string ValidateUserLoggingIn(string username,
+    //    string password);
     /// <summary>
     /// 
     /// </summary>
@@ -28,7 +31,7 @@ public interface SessionManagement
     /// <returns>
     /// 
     /// </returns>
-    public string ValidateUserLoggingInV2(string username,
+    public string ValidateUserLoggingIn(string username,
         string password);
     /// <summary>
     /// 
@@ -37,12 +40,12 @@ public interface SessionManagement
     /// <returns>
     /// 
     /// </returns>
-    public void StoreSessionInformation(string access_Token,
-        string token_type,
-        DateTime issued,
-        DateTime expires,
-        SqlConnection connection,
-        int usernumloggingin);
+    //public void StoreSessionInformation(string access_Token,
+    //    string token_type,
+    //    DateTime issued,
+    //    DateTime expires,
+    //    SqlConnection connection,
+    //    int usernumloggingin);
     /// <summary>
     /// 
     /// </summary>
@@ -50,7 +53,7 @@ public interface SessionManagement
     /// <returns>
     /// 
     /// </returns>
-    public bool validateAccessTokenStillActive(string access_token);
+    //public bool validateAccessTokenStillActive(string access_token);
     /// <summary>
     /// 
     /// </summary>
@@ -58,7 +61,7 @@ public interface SessionManagement
     /// <returns>
     /// 
     /// </returns>
-    public string validateAccessTokenStillActiveV2(string access_token);
+    public string validateAccessTokenStillActive(string access_token);
     /// <summary>
     /// 
     /// </summary>
@@ -115,6 +118,12 @@ internal sealed class DefaultSessionManagement : SessionManagement
     private readonly string _token_type = "Bearer";
     private readonly string _errorReturnText = "{\"error\":\"@errorNumber\",\"message\":\"@errorMessage\"}";
     private readonly string _successReturnText = "{\"error\":\"@errorNumber\",\"access_token\":\"@access_token\",\"token_type\":\"@token_type\",\"expires_in\":\"@expires_in\"}";
+    private string _validateuserlogginginquery = "SELECT * FROM [COMACON].[dbo].[useraccounts] WHERE [username] = @username and [password] = @passwordHash";
+    private string _validateaccesstokenstillactivesqlquery = "SELECT [access_token] FROM [COMACON].[dbo].[sessions] WHERE [access_token] = '@access_token'";
+    private string _validateaccesstokenquery = "SELECT [access_token] FROM [COMACON].[dbo].[sessions] WHERE [access_token] = '@access_token'";
+    private string _updatesessioninformationquery = "UPDATE [COMACON].[dbo].[sessions] SET [expirationdate] = @newSessionExpiration WHERE [access_token] = @access_token";
+    private string _getusersessionusernumquery = "SELECT [usernum] FROM [COMACON].[dbo].[sessions] WHERE [access_token] = @access_token";
+    private string _resetpasswordquery = "SELECT [usernum] FROM [COMACON].[dbo].[useraccounts] WHERE [username] = '@username' and [password] = '@currentpasswordHash'";
     /* This Dictionary will be used to store the standardized security log messages and their corresponding eventid numbers
      * Different ranges of numbers will represent different types of events.
      * Those ranges are as follows:
@@ -129,6 +138,91 @@ internal sealed class DefaultSessionManagement : SessionManagement
         _connectionString = configuration.GetConnectionString("DefaultConnection");
         _sqlQueries = sqlQueries;
     }
+
+    //public string ValidateUserLoggingIn(string username, string password)
+    //{
+    //    /* Returns the results of the Creation.
+    //    * 0 = Success
+    //    * 1 = Username missing.
+    //    * 2 = Password missing.
+    //    * 3 = Username or password does not match.
+    //    * 4 = Multiple users found with the same username and password.
+    //    */
+    //    Log.Logger.Information("Authenticating user \"{username}\".", username);
+    //    string passwordHash = "";
+    //    using (SqlConnection connection = new SqlConnection(_connectionString))
+    //    {
+    //        // Create a SHA256 instance
+    //        using (SHA256 sha256Hash = SHA256.Create())
+    //        {
+    //            // Compute the hash - returns byte array
+    //            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+    //            // Convert byte array to a string
+    //            StringBuilder builder = new StringBuilder();
+    //            foreach (byte b in bytes)
+    //            {
+    //                builder.Append(b.ToString("x2"));
+    //            }
+
+    //            passwordHash = builder.ToString();
+    //        }
+
+    //        connection.Open();
+    //        string query = "SELECT [usernum] FROM [COMACON].[dbo].[useraccounts] WHERE [username] = '" + username + "' and [password] = '" + passwordHash + "'";
+    //        using (SqlCommand command = new SqlCommand(query, connection))
+    //        {
+    //            using (SqlDataReader reader = command.ExecuteReader())
+    //            {
+    //                //Checks if the reader has any rows.
+    //                if (!reader.HasRows)
+    //                {
+    //                    connection.Close();
+    //                    return _errorReturnText.Replace("@errorNumber", "3").Replace("@errorMessage", "Invalid Username or Password.");
+    //                }
+
+    //                //Checks if there are multiple rows.
+    //                int rowCount = 0;
+    //                int usernumloggingin = 0;
+    //                while (reader.Read())
+    //                {
+    //                    rowCount++;
+    //                    if (rowCount > 1)
+    //                    {
+    //                        connection.Close();
+    //                        return _errorReturnText.Replace("@errorNumber", "4").Replace("@errorMessage", "Multiple users found with the same username and password.");
+    //                    }
+    //                    usernumloggingin = (int)reader["usernum"];
+    //                }
+
+    //                reader.Close();
+
+    //                //Generate a Bearer access token value.
+    //                DateTime issued = DateTime.Now;
+
+    //                bool validAccessToken = false;
+    //                string access_token = "";
+    //                do
+    //                {
+    //                    access_token = Guid.NewGuid().ToString();
+    //                    validAccessToken = validateAccessToken(access_token, connection);
+    //                } while (!validAccessToken);
+
+    //                DateTime expires = DateTime.Now.AddSeconds(_expiresIn);
+    //                Log.Logger.Information("User \"{username}\" successfully authenticated.", username);
+    //                Log.Logger.Information("Storing session information.");
+
+    //                StoreSessionInformation(access_token, _token_type, issued, expires, connection, usernumloggingin);
+
+    //                connection.Close();
+
+    //                _sqlQueries.writeToSecurityLogTable(1, usernumloggingin);
+
+    //                return _successReturnText.Replace("@errorNumber", "0").Replace("@access_token", access_token).Replace("@token_type", _token_type).Replace("@expires_in", _expiresIn.ToString());
+    //            }
+    //        }
+    //    }
+    //}
 
     public string ValidateUserLoggingIn(string username, string password)
     {
@@ -160,94 +254,12 @@ internal sealed class DefaultSessionManagement : SessionManagement
             }
 
             connection.Open();
-            string query = "SELECT [usernum] FROM [COMACON].[dbo].[useraccounts] WHERE [username] = '" + username + "' and [password] = '" + passwordHash + "'";
-            using (SqlCommand command = new SqlCommand(query, connection))
+            //string validateuserlogginginquery = "SELECT * FROM [COMACON].[dbo].[useraccounts] WHERE [username] = '" + username + "' and [password] = '" + passwordHash + "'";
+            using (SqlCommand command = new SqlCommand(_validateuserlogginginquery, connection))
             {
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    //Checks if the reader has any rows.
-                    if (!reader.HasRows)
-                    {
-                        connection.Close();
-                        return _errorReturnText.Replace("@errorNumber", "3").Replace("@errorMessage", "Invalid Username or Password.");
-                    }
+                command.Parameters.AddWithValue("@username", username);
+                command.Parameters.AddWithValue("@passwordHash", passwordHash);
 
-                    //Checks if there are multiple rows.
-                    int rowCount = 0;
-                    int usernumloggingin = 0;
-                    while (reader.Read())
-                    {
-                        rowCount++;
-                        if (rowCount > 1)
-                        {
-                            connection.Close();
-                            return _errorReturnText.Replace("@errorNumber", "4").Replace("@errorMessage", "Multiple users found with the same username and password.");
-                        }
-                        usernumloggingin = (int)reader["usernum"];
-                    }
-
-                    reader.Close();
-
-                    //Generate a Bearer access token value.
-                    DateTime issued = DateTime.Now;
-
-                    bool validAccessToken = false;
-                    string access_token = "";
-                    do
-                    {
-                        access_token = Guid.NewGuid().ToString();
-                        validAccessToken = validateAccessToken(access_token, connection);
-                    } while (!validAccessToken);
-
-                    DateTime expires = DateTime.Now.AddSeconds(_expiresIn);
-                    Log.Logger.Information("User \"{username}\" successfully authenticated.", username);
-                    Log.Logger.Information("Storing session information.");
-
-                    StoreSessionInformation(access_token, _token_type, issued, expires, connection, usernumloggingin);
-
-                    connection.Close();
-
-                    _sqlQueries.writeToSecurityLogTable(1, usernumloggingin);
-
-                    return _successReturnText.Replace("@errorNumber", "0").Replace("@access_token", access_token).Replace("@token_type", _token_type).Replace("@expires_in", _expiresIn.ToString());
-                }
-            }
-        }
-    }
-
-    public string ValidateUserLoggingInV2(string username, string password)
-    {
-        /* Returns the results of the Creation.
-        * 0 = Success
-        * 1 = Username missing.
-        * 2 = Password missing.
-        * 3 = Username or password does not match.
-        * 4 = Multiple users found with the same username and password.
-        */
-        Log.Logger.Information("Authenticating user \"{username}\".", username);
-        string passwordHash = "";
-        using (SqlConnection connection = new SqlConnection(_connectionString))
-        {
-            // Create a SHA256 instance
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                // Compute the hash - returns byte array
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-                // Convert byte array to a string
-                StringBuilder builder = new StringBuilder();
-                foreach (byte b in bytes)
-                {
-                    builder.Append(b.ToString("x2"));
-                }
-
-                passwordHash = builder.ToString();
-            }
-
-            connection.Open();
-            string query = "SELECT [usernum],[password],[passwordresetonnextlogin],[status] FROM [COMACON].[dbo].[useraccounts] WHERE [username] = '" + username + "' and [password] = '" + passwordHash + "'";
-            using (SqlCommand command = new SqlCommand(query, connection))
-            {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     //Checks if the reader has any rows.
@@ -266,6 +278,7 @@ internal sealed class DefaultSessionManagement : SessionManagement
                         Console.WriteLine(reader["status"]);
                         if (!bool.Parse(reader["status"].ToString()))
                         {
+                            _sqlQueries.writeToSecurityLogTable(16, (int)reader["usernum"]);
                             connection.Close();
                             return _errorReturnText.Replace("@errorNumber", "5").Replace("@errorMessage", "Your account has been disabled.");
                         }
@@ -288,21 +301,22 @@ internal sealed class DefaultSessionManagement : SessionManagement
 
                     reader.Close();
                     Log.Logger.Information("User \"{username}\" successfully authenticated.", username);
+                    _sqlQueries.writeToSecurityLogTable(1, usernumloggingin);
                     return _errorReturnText.Replace("@errorNumber", "0").Replace("@errorMessage", usernumloggingin.ToString());
                 }
             }
         }
     }
 
-    public string validateAccessTokenStillActiveV2(string access_token)
+    public string validateAccessTokenStillActive(string access_token)
     {
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
             connection.Open();
 
-            string accessTokenSqlQuery = "SELECT [access_token] FROM [COMACON].[dbo].[sessions] WHERE [access_token] = '@access_token'";
+            //string validateaccesstokenstillactivesqlquery = "SELECT [access_token] FROM [COMACON].[dbo].[sessions] WHERE [access_token] = '@access_token'";
 
-            using (SqlCommand command = new SqlCommand(accessTokenSqlQuery, connection))
+            using (SqlCommand command = new SqlCommand(_validateaccesstokenstillactivesqlquery, connection))
             {
                 command.Parameters.AddWithValue("@access_token", access_token);
 
@@ -332,7 +346,7 @@ internal sealed class DefaultSessionManagement : SessionManagement
             DateTime expires = DateTime.Now.AddSeconds(_expiresIn);
             Log.Logger.Information("Storing session information.");
 
-            StoreSessionInformation(access_token, _token_type, issued, expires, connection, int.Parse(userloggingin));
+            _sqlQueries.StoreSessionInformation(access_token, _token_type, issued, expires, connection, int.Parse(userloggingin));
 
             connection.Close();
 
@@ -340,34 +354,12 @@ internal sealed class DefaultSessionManagement : SessionManagement
         }
     }
 
-    public void StoreSessionInformation(string access_Token, string token_type, DateTime issued, DateTime expires, SqlConnection connection, int usernumloggingin)
-    {
-        string query = "INSERT INTO [COMACON].[dbo].[sessions] ([access_token], [token_type], [creationdate], [expirationdate], [usernum]) VALUES ('" + access_Token + "', '" + token_type + "', '" + issued + "', '" + expires + "', " + usernumloggingin + ")";
-        int numRowsAffected = 0;
-
-        using (SqlCommand command = new SqlCommand(query, connection))
-        {
-            do
-            {
-                numRowsAffected = command.ExecuteNonQuery();
-
-                if (numRowsAffected == 0)
-                {
-                    Log.Logger.Error("Failed to store session information.");
-                }
-                else
-                {
-                    Log.Logger.Information("Successfully stored session information.");
-                }
-            } while (numRowsAffected == 0);
-        }
-    }
-
     private bool validateAccessToken(string access_token, SqlConnection connection)
     {
         Log.Logger.Information("Validating access token.");
-        string guidSqlQuery = "SELECT [access_token] FROM [COMACON].[dbo].[sessions] WHERE [access_token] = '" + access_token + "'";
-        SqlCommand command2 = new SqlCommand(guidSqlQuery, connection);
+        //string validateaccesstokenquery = "SELECT [access_token] FROM [COMACON].[dbo].[sessions] WHERE [access_token] = '@access_token'";
+        SqlCommand command2 = new SqlCommand(_validateaccesstokenquery, connection);
+        command2.Parameters.AddWithValue("@access_token", access_token);
         SqlDataReader reader = command2.ExecuteReader();
 
         if (reader.HasRows)
@@ -382,62 +374,62 @@ internal sealed class DefaultSessionManagement : SessionManagement
         }
     }
 
-    public bool validateAccessTokenStillActive(string access_token)
-    {
-        string tokenQuery = "SELECT * FROM [COMACON].[dbo].[sessions] WHERE [access_token] = @access_token";
-        using (SqlConnection connection = new SqlConnection(_connectionString))
-        {
-            connection.Open();
-            using (SqlCommand command = new SqlCommand(tokenQuery, connection))
-            {
-                // Add the parameter to the command
-                command.Parameters.AddWithValue("@access_token", access_token);
+    //public bool validateAccessTokenStillActive(string access_token)
+    //{
+    //    string tokenQuery = "SELECT * FROM [COMACON].[dbo].[sessions] WHERE [access_token] = @access_token";
+    //    using (SqlConnection connection = new SqlConnection(_connectionString))
+    //    {
+    //        connection.Open();
+    //        using (SqlCommand command = new SqlCommand(tokenQuery, connection))
+    //        {
+    //            // Add the parameter to the command
+    //            command.Parameters.AddWithValue("@access_token", access_token);
 
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    Console.WriteLine(reader.HasRows);
-                    //Checks if the reader has any rows.
-                    if (!reader.HasRows)
-                    {
-                        return false;
-                    }
+    //            using (SqlDataReader reader = command.ExecuteReader())
+    //            {
+    //                Console.WriteLine(reader.HasRows);
+    //                //Checks if the reader has any rows.
+    //                if (!reader.HasRows)
+    //                {
+    //                    return false;
+    //                }
 
-                    //Checks if there are multiple rows.
-                    int rowCount = 0;
-                    DateTime expirationDate = DateTime.MinValue;
+    //                //Checks if there are multiple rows.
+    //                int rowCount = 0;
+    //                DateTime expirationDate = DateTime.MinValue;
 
-                    while (reader.Read())
-                    {
-                        rowCount++;
-                        if (rowCount > 1)
-                        {
-                            return false;
-                        }
+    //                while (reader.Read())
+    //                {
+    //                    rowCount++;
+    //                    if (rowCount > 1)
+    //                    {
+    //                        return false;
+    //                    }
 
-                        expirationDate = (DateTime)reader["expirationdate"];
-                    }
+    //                    expirationDate = (DateTime)reader["expirationdate"];
+    //                }
 
-                    if (expirationDate < DateTime.Now)
-                    {
-                        DeleteSessionInformation(access_token, connection);
-                        return false;
-                    }
+    //                if (expirationDate < DateTime.Now)
+    //                {
+    //                    DeleteSessionInformation(access_token, connection);
+    //                    return false;
+    //                }
 
-                    //If the token is still active, update the expiration date.
-                    DateTime newSessionExpiration = DateTime.Now.AddSeconds(_expiresIn);
-                    reader.Close();
-                    UpdateSessionInformation(access_token, connection, newSessionExpiration);
-                    connection.Close();
-                    return true;
-                }
-            }
-        }
-    }
+    //                //If the token is still active, update the expiration date.
+    //                DateTime newSessionExpiration = DateTime.Now.AddSeconds(_expiresIn);
+    //                reader.Close();
+    //                UpdateSessionInformation(access_token, connection, newSessionExpiration);
+    //                connection.Close();
+    //                return true;
+    //            }
+    //        }
+    //    }
+    //}
 
     private void UpdateSessionInformation(string access_token, SqlConnection connection, DateTime newSessionExpiration)
     {
-        string updateQuery = "UPDATE [COMACON].[dbo].[sessions] SET [expirationdate] = @newSessionExpiration WHERE [access_token] = @access_token";
-        using (SqlCommand command = new SqlCommand(updateQuery, connection))
+        //string updatesessioninformationquery = "UPDATE [COMACON].[dbo].[sessions] SET [expirationdate] = @newSessionExpiration WHERE [access_token] = @access_token";
+        using (SqlCommand command = new SqlCommand(_updatesessioninformationquery, connection))
         {
             command.Parameters.AddWithValue("@access_token", access_token);
             command.Parameters.AddWithValue("@newSessionExpiration", newSessionExpiration);
@@ -446,25 +438,14 @@ internal sealed class DefaultSessionManagement : SessionManagement
         }
     }
 
-    private void DeleteSessionInformation(string access_token, SqlConnection connection)
-    {
-        string deleteQuery = "DELETE from [COMACON].[dbo].[sessions] WHERE [access_token] = @access_token";
-        using (SqlCommand command = new SqlCommand(deleteQuery, connection))
-        {
-            command.Parameters.AddWithValue("@access_token", access_token);
-
-            command.ExecuteNonQuery();
-        }
-    }
-
     public int getUserSessionUserNum(string access_token)
     {
-        string query = "SELECT [usernum] FROM [COMACON].[dbo].[sessions] WHERE [access_token] = @access_token";
+        //string getusersessionusernumquery = "SELECT [usernum] FROM [COMACON].[dbo].[sessions] WHERE [access_token] = @access_token";
 
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
             connection.Open();
-            using (SqlCommand command = new SqlCommand(query, connection))
+            using (SqlCommand command = new SqlCommand(_getusersessionusernumquery, connection))
             {
                 command.Parameters.AddWithValue("@access_token", access_token);
 
@@ -485,12 +466,13 @@ internal sealed class DefaultSessionManagement : SessionManagement
     public void logoutUser(string access_token)
     {
         Log.Logger.Information("Logging out user and deleting session information.");
+        _sqlQueries.writeToSecurityLogTable(2, getUserSessionUserNum(access_token));
 
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
             connection.Open();
 
-            DeleteSessionInformation(access_token, connection);
+            _sqlQueries.DeleteSessionInformation(access_token, connection);
         }
     }
 
@@ -534,9 +516,11 @@ internal sealed class DefaultSessionManagement : SessionManagement
             }
 
             connection.Open();
-            string query = "SELECT [usernum] FROM [COMACON].[dbo].[useraccounts] WHERE [username] = '" + username + "' and [password] = '" + currentpasswordHash + "'";
-            using (SqlCommand command = new SqlCommand(query, connection))
+            //string resetpasswordquery = "SELECT [usernum] FROM [COMACON].[dbo].[useraccounts] WHERE [username] = '@username' and [password] = '@currentpasswordHash'";
+            using (SqlCommand command = new SqlCommand(_resetpasswordquery, connection))
             {
+                command.Parameters.AddWithValue("@username", username);
+                command.Parameters.AddWithValue("@currentpasswordHash", currentpasswordHash);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     //Checks if the reader has any rows.
@@ -594,6 +578,7 @@ internal sealed class DefaultSessionManagement : SessionManagement
                     }
                     else
                     {
+                        _sqlQueries.writeToSecurityLogTable(4, usernumloggingin);
                         return _successReturnText.Replace("@errorNumber", "0").Replace("@access_token", "").Replace("@token_type", "").Replace("@expires_in", "");
                     }
                 }

@@ -2149,6 +2149,12 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 	padding: 1rem;
 }
 
+/* General Settings Section Styling */
+.settings-content-general {
+	display: none;
+}
+
+/* Users Settings Section Styling */
 .settings-content-users {
 	display: none;
 	max-height: 20rem;
@@ -2158,6 +2164,7 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 
 .settings-content-users-TableContainer {
 	overflow-y: auto;
+	border: 1px solid black;
 }
 
 #UsersTable {

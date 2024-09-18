@@ -1,0 +1,46 @@
+﻿<div id="settings-content-general" class="settings-content-general">
+    <div id="settings-content-general-loader" class="loader"></div>
+    <div id="settings-content-general-section" class="sectionWithTitleBar" style="display: none;">
+        <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+            Password Policies
+        </div>
+        <div class="coreSection" style="padding: 1rem;">
+            <form>
+                <fieldset>
+                    <legend>Global Password Policy</legend>
+                    <div style="display: flex;gap: 0.25rem;width: 100%;flex-wrap: wrap;margin: 0.5rem 0;">
+                        <div>
+                            <input fieldtoenable="passwordexpirationafterndays" id="passwordexpirationafterndays-enable" type="checkbox" onclick="unlockPasswordPolicyFields(this)">
+                            <label for="passwordexpirationafterndays">Password expires after &lt;n&gt; days.</label>
+                        </div>
+                        <div style="display: flex;align-items: center;gap: 0.5rem;flex-wrap: wrap;">
+                            <input type="number" name="passwordexpirationafterndays" id="passwordexpirationafterndays" value="30" disabled>
+                        </div>
+                    </div>
+                    <div style="display: flex;gap: 0.25rem;width: 100%;flex-wrap: wrap;margin: 0.5rem 0;">
+                        <div>
+                            <input fieldtoenable="accountlockoutafternfailedlogins" id="accountlockoutafternfailedlogins-enable" type="checkbox" onclick="unlockPasswordPolicyFields(this)">
+                            <label for="accountlockoutafternfailedlogins">Account locked out after &lt;n&gt; failed logins.</label>
+                        </div>
+                        <div style="display: flex;align-items: center;gap: 0.5rem;flex-wrap: wrap;">
+                            <input type="number" name="accountlockoutafternfailedlogins" id="accountlockoutafternfailedlogins" value="5" disabled>
+                        </div>
+                    </div>
+                    @* <div style="display: flex;gap: 0.25rem;width: 100%;flex-wrap: wrap;margin: 0.5rem 0;">
+                        <div>
+                            <input fieldtoenable="preventreusingpasswordwithinnchanges" id="preventreusingpasswordwithinnchanges-enable" type="checkbox" onclick="unlockPasswordPolicyFields(this)">
+                            <label for="preventreusingpasswordwithinnchanges">Prevent re-using of a password within &lt;n&gt; changes.</label>
+                        </div>
+                        <div style="display: flex;align-items: center;gap: 0.5rem;flex-wrap: wrap;">
+                            <input type="number" name="preventreusingpasswordwithinnchanges" id="preventreusingpasswordwithinnchanges" value="10" disabled>
+                        </div>
+                    </div> *@
+                </fieldset>
+                <div style="display: flex;gap: 0.5rem;flex-direction: row-reverse;margin-top: 5px;">
+                    <button id="resetglobalpasswordpolicy" type="reset" onclick="resetpasswordpolicyfields()">Cancel</button>
+                    <button id="saveglobalpasswordpolicy" type="submit" onclick="savePasswordPolicy(event)" disabled>Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

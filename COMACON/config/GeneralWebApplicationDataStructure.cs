@@ -703,3 +703,28 @@ public class role
     public string rolename { get; set; }
     public string roledescription { get; set; }
 }
+
+
+/********************************************************
+*         General Settings - Password Policies
+********************************************************/
+public class PasswordPolicies
+{
+    public List<PasswordPolicy> passwordpolicies = new List<PasswordPolicy>();
+}
+public class PasswordPolicy
+{
+    public int passwordpolicyid { get; set; }
+    public int passwordpolicytype { get; set; }
+    public string? passwordpolicyname { get; set; }
+    public string? passwordpolicydescription { get; set; }
+    public int passwordpolicyenabled { get; set; }
+    public List<PasswordPolicyRule> rules = new List<PasswordPolicyRule>();
+}
+
+public class PasswordPolicyRule
+{
+    public int ruletype { get; set; }
+    public int rulevalue { get; set; }
+    public int ruleenabled { get; set; }
+}

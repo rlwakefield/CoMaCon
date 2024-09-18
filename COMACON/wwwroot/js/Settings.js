@@ -1,5 +1,6 @@
 ﻿let allusers = [];
 let rolesdata = [];
+let passwordpolicydata = [];
 
 let actionscellhtml = `<td class="actionscell">
                                     <button id="ViewUser" onclick="displayNewAndEditUserModal('view',event)">
@@ -31,9 +32,51 @@ let actionscellhtml = `<td class="actionscell">
 function activateSettingsButton(button) {
     switch (button.id) {
         case 'General':
-            document.getElementById("settings-content-users").style.display = "none";
+            (async () => {
+                document.getElementById("settings-content-users").style.display = "none";
+                document.getElementById("settings-content-general").style.display = "block";
+                document.getElementById("resetglobalpasswordpolicy").click();
+            })();
+            const getallpasswordpoliciesFetchOptions = {
+                method: "GET",
+                headers: {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('comaconbearertoken'),
+                    'Content-Type': 'application/json'
+                }
+            }
+            fetch(apiRootUrl + "/api/Endpoint/GetPasswordPolicies?version=v1", getallpasswordpoliciesFetchOptions)
+            .then(response => {
+                //console.log(response.json());
+                if (!response.ok) {
+                    //Need to add in error handling here.
+                } else {
+                    return response.json().then(data => {
+                        console.log(data);
+                        passwordpolicydata = data["passwordpolicies"];
+                        console.log(passwordpolicydata[0].rules);
+                        (async () => {
+                            await Array.from(passwordpolicydata[0].rules).forEach(rule => {
+                                console.log(rule.ruletype);
+                                switch (rule.ruletype) {
+                                    case 1:
+                                        rule.ruleenabled == 1 ? document.getElementById("passwordexpirationafterndays-enable").click() : "";
+                                        document.getElementById("passwordexpirationafterndays").value = rule.rulevalue;
+                                        break;
+                                    case 2:
+                                        rule.ruleenabled == 1 ? document.getElementById("accountlockoutafternfailedlogins-enable").click() : "";
+                                        document.getElementById("accountlockoutafternfailedlogins").value = rule.rulevalue;
+                                        break;
+                                }
+                            });
+                        })();
+                        document.getElementById("settings-content-general-loader").style.display = "none";
+                        document.getElementById("settings-content-general-section").style.display = "block";
+                    });
+                }
+            });
             break;
         case "Users":
+            document.getElementById("settings-content-general").style.display = "none";
             document.getElementById("settings-content-users").style.display = "flex";
             document.getElementById("all").checked = true;
             break;
@@ -523,4 +566,34 @@ function filterUsers(filterValue) {
                 actionscell.innerHTML = actionscellhtml;
             });
     }
+}
+
+
+/* General Settings Functions */
+function unlockPasswordPolicyFields(checkboxchecked) {
+    if (checkboxchecked.checked) {
+        document.getElementById(checkboxchecked.getAttribute("fieldtoenable")).disabled = false;
+    } else {
+        document.getElementById(checkboxchecked.getAttribute("fieldtoenable")).disabled = true;
+    }
+    document.getElementById("saveglobalpasswordpolicy").disabled = false;
+}
+
+function savePasswordPolicy(event) {
+    event.preventDefault();
+    //Still need to add in the API call to save the password policy to the database.
+    let passwordpolicytosave = {
+        passwordpolicyid: 1,
+        1: document.getElementById("passwordexpirationafterndays").value,
+        2: document.getElementById("accountlockoutafternfailedlogins").value,
+        //3: document.getElementById("preventreusingpasswordwithinnchanges").value
+    }
+    console.log(passwordpolicytosave);
+    document.getElementById("saveglobalpasswordpolicy").disabled = true;
+}
+
+function resetpasswordpolicyfields() {
+    document.getElementById("passwordexpirationafterndays").disabled = true;
+    document.getElementById("accountlockoutafternfailedlogins").disabled = true;
+    document.getElementById("saveglobalpasswordpolicy").disabled = true;
 }

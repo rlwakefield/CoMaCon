@@ -14,7 +14,7 @@ function login(event) {
         password: document.getElementById("password").value
     };
 
-    fetch(sessionStorage.getItem('apiRootUrl') + '/api/Endpoint/AuthenticationV2', {
+    fetch(sessionStorage.getItem('apiRootUrl') + '/api/Endpoint/Authentication', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
