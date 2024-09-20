@@ -103,10 +103,10 @@
             </main>
         </div>
         <script>
-            console.log(sessionStorage.getItem('comaconbearertoken'));
+            // console.log(sessionStorage.getItem('comaconbearertoken'));
             if (sessionStorage.getItem("comaconbearertoken") != null && sessionStorage.getItem('comaconbearertoken') != undefined) {
                 var token = sessionStorage.getItem('comaconbearertoken');
-                console.log("Verifying token is still valid.");
+                // console.log("Verifying token is still valid.");
                 fetch(apiRootUrl + '/api/Endpoint/VerifyTokenV2', {
                     method: 'GET', // or 'POST', 'PUT', 'DELETE', etc.
                     headers: {
@@ -119,7 +119,7 @@
                 .then(response => {
                     setTimeout(() => {
                         if(response.ok && currentPage == "Login"){
-                            console.log("Redirecting to Home page.");
+                            // console.log("Redirecting to Home page.");
                             window.location.href = "/core/home";
                             // return response.json()
                         // }else if((response.status === 401 || response.status === 400) & currentPage != "Login"){

@@ -302,11 +302,11 @@ async function onPageLoadLogic() {
         document.getElementById("ProcessingWebConfigValuesProgress").style.display = "block";
         loadWebApplicationConfiguration(object[0].webConfigPhysicalPath, object[0].type, object[0].version, object[0].site, object[0].name, object[0].path, object[0].physicalPath, object[0].bitness);
     } else {
-        console.log((sessionStorage.getItem('WebApplicationChosenArray') == null || sessionStorage.getItem('WebApplicationChosenArray') == undefined));
-        console.log((currentPage != "Home" && currentPage != "Login" && currentPage != "Settings"));
+        //console.log((sessionStorage.getItem('WebApplicationChosenArray') == null || sessionStorage.getItem('WebApplicationChosenArray') == undefined));
+        //console.log((currentPage != "Home" && currentPage != "Login" && currentPage != "Settings"));
         if ((sessionStorage.getItem('WebApplicationChosenArray') == null || sessionStorage.getItem('WebApplicationChosenArray') == undefined)
             && (currentPage != "Home" && currentPage != "Login" && currentPage != "Settings")) {
-            console.log("Redirecting to Home.");
+            //console.log("Redirecting to Home.");
             window.location.href = "/core/home"
         }
     }
@@ -799,7 +799,7 @@ async function checkIfOkToIgnoreChangedFields() {
 }
 
 function pushWebApplicationConfiguration() {
-    console.log(JSON.stringify(coreConfigData));
+    //console.log(JSON.stringify(coreConfigData));
     const fetchOptions = {
         method: "POST",
         headers: {
@@ -1007,9 +1007,9 @@ function validateApplicationServerURL(field) {
                     section.insertAdjacentHTML("beforeend", blackQuestionMark);
                 }
 
-                return response.json().then(data => {
-                    console.log(data);
-                })
+                //return response.json().then(data => {
+                //    console.log(data);
+                //})
             })
             //.then(response => response.json())
             //.then(data => parseValidateApplicationServerURL(data));
