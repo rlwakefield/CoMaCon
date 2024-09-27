@@ -2305,6 +2305,10 @@ div.CopyWebApplicationModal-Body-FieldContainer-Label {
 	gap: 1rem;
 }
 
+.CreateUserRequiredFields .invalidnewuserfield {
+	border: 5px solid red;
+}
+
 
 
 /********************************************************

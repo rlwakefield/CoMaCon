@@ -682,11 +682,11 @@ public class User
     public string? emailaddress { get; set; }
     public int? enabled { get; set; }
     public int? passwordresetonnextlogin { get; set; }
-    public DateTime? passwordlastchanged { get; set; }
-    public string? authmethod { get; set; }
-    public DateTime? creationdate { get; set; }
+    public DateTimeOffset? passwordlastchanged { get; set; }
+    public int? authmethod { get; set; }
+    public DateTimeOffset? creationdate { get; set; }
     public int? createdby { get; set; }
-    public DateTime? lastediteddate { get; set; }
+    public DateTimeOffset? lastediteddate { get; set; }
     // Might look at getting this value from the audit history table whenever it is setup.
     public int? lasteditedby { get; set; }
     public int? roleid { get; set; }

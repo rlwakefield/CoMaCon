@@ -46,17 +46,13 @@ function activateSettingsButton(button) {
             }
             fetch(apiRootUrl + "/api/Endpoint/GetPasswordPolicies?version=v1", getallpasswordpoliciesFetchOptions)
             .then(response => {
-                //console.log(response.json());
                 if (!response.ok) {
                     //Need to add in error handling here.
                 } else {
                     return response.json().then(data => {
-                        console.log(data);
                         passwordpolicydata = data["passwordpolicies"];
-                        console.log(passwordpolicydata[0].rules);
                         (async () => {
                             await Array.from(passwordpolicydata[0].rules).forEach(rule => {
-                                console.log(rule.ruletype);
                                 switch (rule.ruletype) {
                                     case 1:
                                         rule.ruleenabled == 1 ? document.getElementById("passwordexpirationafterndays-enable").click() : "";
@@ -76,7 +72,6 @@ function activateSettingsButton(button) {
             });
             break;
         case "Users":
-            document.getElementById("settings-content-general").style.display = "none";
             document.getElementById("settings-content-users").style.display = "flex";
             document.getElementById("all").checked = true;
             break;
@@ -97,7 +92,6 @@ function activateSettingsButton(button) {
     fetch(apiRootUrl + "/api/Endpoint/GetAllUsers?version=v1", getAllusersFetchOptions)
         .then(response => response.json())
         .then(data => {
-            //console.log(data["users"]);
             allusers = data["users"];
             //Clear the table.
             let table = document.getElementById("UsersTable");
@@ -169,14 +163,16 @@ function displayNewAndEditUserModal(action, event) {
     switch (action) {
         case "new":
             document.getElementById("NewAndEditingUserModal").style.display = "block";
-            Array.from(document.getElementsByClassName("UserDetails-InputField")).forEach((inputField) => {
-                inputField.required = true;
+            Array.from(document.getElementsByClassName("CreateUserRequiredFields")).forEach((inputField) => {
+                inputField.querySelector("input").required = true;
+                inputField.querySelector("input").classList.add('invalidnewuserfield');
             });
             document.getElementById("NewAndEditingUserModal-Action").innerText = "Create New User";
             document.getElementById("Usernum-Paragraph").style.display = "none";
             document.getElementById("CreationDateCreatedBy-Paragraph").style.display = "none";
             document.getElementById("LastEditedOnLastEditedBy-Paragraph").style.display = "none";
             document.getElementById("SaveViewAndEditUserModal").innerText = "Create";
+            document.getElementById("SaveViewAndEditUserModal").disabled = true;
             break;
         case "view":
             // Find the closest table row (tr) from the clicked button
@@ -280,6 +276,9 @@ async function closeNewAndEditUserModal() {
             inputelement.disabled = false;
         }
     });
+    Array.from(document.getElementsByClassName("CreateUserRequiredFields")).forEach(field => {
+        field.querySelector("input").classList.remove('invalidnewuserfield');
+    });
     document.getElementById("Usernum-Paragraph").style.display = "none";
     document.getElementById("CreationDateCreatedBy-Paragraph").style.display = "none";
     document.getElementById("LastEditedOnLastEditedBy-Paragraph").style.display = "none";
@@ -292,6 +291,7 @@ async function closeNewAndEditUserModal() {
     document.getElementById("SaveViewAndEditUserModal").innerHTML = "";
     document.getElementById("SaveViewAndEditUserModal").innerText = "Save";
     document.getElementById("SaveViewAndEditUserModal").style.display = "block";
+    document.getElementById("SaveViewAndEditUserModal").disabled = false;
 }
 
 async function saveUser(event) {
@@ -318,8 +318,7 @@ async function saveUser(event) {
                 lasteditedby: "",
                 roleid: document.getElementById("Role").value
             };
-            //console.log(JSON.stringify(newuser));
-            //console.log(sessionStorage.getItem('comaconbearertoken'));
+
             const createUserFetchOptions = {
                 method: "POST",
                 headers: {
@@ -333,7 +332,6 @@ async function saveUser(event) {
                     if (response.ok) {
                         return response.json().then(data => {
                             newuserdatareturned = data["users"][0];
-                            console.log(data);
                             newuser.usernum = newuserdatareturned.usernum;
                             newuser.username = newuserdatareturned.username;
                             newuser.firstname = newuserdatareturned.firstname;
@@ -375,8 +373,6 @@ async function saveUser(event) {
                 authmethod: editUserfound.authmethod == document.getElementById("AuthMethod").value ? null : document.getElementById("AuthMethod").value,
                 roleid: editUserfound.roleid == document.getElementById("Role").value ? null : document.getElementById("Role").value
             }
-            console.log("User to update: ");
-            console.log(usertoupdate);
 
             const updateUserFetchOptions = {
                 method: "PUT",
@@ -386,12 +382,10 @@ async function saveUser(event) {
                 },
                 body: JSON.stringify(usertoupdate)
             };
-            console.log(apiRootUrl + "/api/Endpoint/UpdateUser?version=v1");
-            fetch(apiRootUrl + "/api/Endpoint/UpdateUser?version=v1", updateUserFetchOptions)
+            await fetch(apiRootUrl + "/api/Endpoint/UpdateUser?version=v1", updateUserFetchOptions)
                 .then(response => {
                     if (response.ok) {
                         return response.json().then(data => {
-                            console.log(data["users"]);
                             //Update the user's details in the allusers array.
                             datatoupdatefrom = data["users"][0];
                             (async () => {
@@ -407,6 +401,14 @@ async function saveUser(event) {
                     }
                 })
                 .catch(error => console.error('Error:', error));
+
+            const radios = document.querySelectorAll('input[name="status"]');
+
+            radios.forEach((radio) => {
+                if (radio.checked) {
+                    filterUsers(radio.value);
+                }
+            });
     }
 }
 
@@ -588,7 +590,7 @@ function savePasswordPolicy(event) {
         2: document.getElementById("accountlockoutafternfailedlogins").value,
         //3: document.getElementById("preventreusingpasswordwithinnchanges").value
     }
-    console.log(passwordpolicytosave);
+    //console.log(passwordpolicytosave);
     document.getElementById("saveglobalpasswordpolicy").disabled = true;
 }
 

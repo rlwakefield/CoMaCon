@@ -5,35 +5,32 @@
             <div class="dark_mode" id="NewAndEditingUserModal-Inner" style="">
                 <div id="UserEditingModal-Container" style="padding: 0 1rem;">
                     <h1 id="NewAndEditingUserModal-Header" style="margin: 1rem;"><span id="NewAndEditingUserModal-Action"></span> <span id="Usernum-Paragraph">#<span id="Usernum">1</span></span></h1>
-                    <!-- <p id="Usernum-Paragraph" class="UserDetailsParagraphs">#<span id="Usernum">1</span></p> -->
                     <p id="CreationDateCreatedBy-Paragraph" class="UserDetailsParagraphs">(Created by <span id="CreatedBy"></span> on <span id="CreationDate"></span>)</p>
                     <p id="LastEditedOnLastEditedBy-Paragraph" class="UserDetailsParagraphs">(Last edited by <span id="LastEditedBy"></span> on <span id="LastEditedDate"></span>)</p>
-                    <div class="UserDetails-InputField">
+                    <div class="UserDetails-InputField CreateUserRequiredFields">
                         <label for="Username">Username: </label>
                         <input id="Username" type="text" value="" oninput="validateNotADuplicateUsername(this)">
                     </div>
                     <span id="UsernameError" style="color: red;font-weight: bold;"></span>
-                    <div class="UserDetails-InputField">
+                    <div class="UserDetails-InputField CreateUserRequiredFields">
                         <label for="FirstName">First Name: </label>
                         <input id="FirstName" type="text" value="">
                     </div>
-                    <div class="UserDetails-InputField">
+                    <div class="UserDetails-InputField CreateUserRequiredFields">
                         <label for="LastName">Last Name: </label>
                         <input id="LastName" type="text" value="">
                     </div>
-                    <div class="UserDetails-InputField">
+                    <div class="UserDetails-InputField CreateUserRequiredFields">
                         <label for="Email">Email: </label>
                         <input id="Email" type="email" value="">
                     </div>
-                    <div class="UserDetails-InputField">
+                    <div class="UserDetails-InputField CreateUserRequiredFields">
                         <label for="Password">Password: </label>
                         <input id="Password" type="password" value="">
                     </div>
                     <div class="UserDetails-InputField">
                         <label for="Enabled">Enabled: </label>
                         <input type="checkbox" name="Enabled" id="Enabled" checked>
-                        <!-- <input type="radio" name="Enabled" value="Yes"> Yes
-                        <input type="radio" name="Enabled" value="No"> No -->
                     </div>
                     <div class="UserDetails-InputField">
                         <label for="ResetPasswordonNextLogin">Reset Password on Next Login: </label>
@@ -43,14 +40,12 @@
                         <label for="AuthMethod">Authentication Method: </label>
                         <select id="AuthMethod" class="dark_mode_select">
                             <option value="1" selected>Local</option>
-                            @* <option value="LDAP">LDAP</option> *@
+                            @* <option value="2">LDAP</option> *@
                         </select>
                     </div>
                     <div class="UserDetails-InputField">
                         <label for="Role">Role: </label>
                         <select id="Role" required class="dark_mode_select">
-                            @* <option value="1" selected>Admin</option> *@
-                            @* <option value="User">User</option> *@
                         </select>
                     </div>
                     <div class="UserDetails-ActionButtons">

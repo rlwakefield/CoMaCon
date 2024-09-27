@@ -13,6 +13,8 @@ using System.Text.Json.Nodes;
 using System.ComponentModel.DataAnnotations;
 //using System.IO;
 //using Microsoft.AspNetCore.Builder;
+using System.Web;
+using COMACON.DatabaseContexts.SQLite;
 
 namespace COMACON.Controllers
 {
@@ -30,18 +32,20 @@ namespace COMACON.Controllers
         private readonly SessionManagement _sessionManagement;
         private static string authorizationResponse = "{\"error\":\"@errorNumber\",\"message\":\"@errorMessage\",\"timestamp\":\"\"}";
         private static string genericResponse = "{\"result\":\"@result\",\"message\":\"@message\"}";
+        private readonly COMACONSqliteDbContext _context;
 
         public EndpointController(Core core,
             LoadSaveWebApplications loadSaveWebApplications,
             IConfiguration configuration,
             SessionManagement sessionManagement,
-            SqlQueries sqlQueries)
+            SqlQueries sqlQueries, COMACONSqliteDbContext context)
         {
             Core = core;
             LoadSaveWebApplications = loadSaveWebApplications;
             _configuration = configuration;
             _sessionManagement = sessionManagement;
             _SqlQueries = sqlQueries;
+            _context = context;
         }
 
         // GET: api/Endpoint/GetRootUrl
@@ -50,50 +54,20 @@ namespace COMACON.Controllers
         {
             var request = HttpContext.Request;
             var scheme = request.Scheme;
+            Console.WriteLine(request.Host);
+            Console.WriteLine(request.PathBase);
+            Console.WriteLine(request.Path);
             var host = request.Host.ToUriComponent();
+            var pathbase = request.PathBase.ToUriComponent();
 
-            var rootUrl = $"{scheme}://{host}";
+            var rootUrl = $"{scheme}://{host}{pathbase}";
 
             return "{\"rooturl\":\""+rootUrl+"\"}";
         }
 
         /**************************************
-         *      Authentication Endpoints
-         **************************************/
-        // POST: api/Endpoint/Authentication
-        //[HttpPost("Authentication")]
-        //public string Authentication([FromBody] JsonElement credentials)
-        //{
-        //    /* Returns the results of the Creation.
-        //    * 0 = Success
-        //    * 1 = Username missing.
-        //    * 2 = Password missing.
-        //    * 3 = Username or password does not match.
-        //    * 4 = Multiple users found with the same username and password.
-        //    * 5 = User is disabled.
-        //    */
-        //    string username = credentials.GetProperty("username").ToString();
-        //    string password = credentials.GetProperty("password").ToString();
-        //    string errorReturnText = "{\"error\":\"@errorNumber\",\"message\":\"@errorMessage\",\"timestamp\":}";
-
-        //    //Checks if the username field is an empty string or not.
-        //    if (username == "")
-        //    {
-        //        Log.Logger.Information("Username is required.");
-        //        return errorReturnText.Replace("@errorNumber", "1").Replace("@errorMessage", "Username is required.");
-        //        //return "{\"error\":\"1\",\"message\":\"Username is required.\"}";
-        //    }
-
-        //    if (password == "")
-        //    {
-        //        Log.Logger.Information("Password is required.");
-        //        return errorReturnText.Replace("@errorNumber", "2").Replace("@errorMessage", "Username is required.");
-        //        //return "{\"error\":\"2\",\"message\":\"Password is required.\"}";
-        //    }
-
-        //    return _sessionManagement.ValidateUserLoggingIn(username, password);
-        //}
-
+        *      Authentication Endpoints
+        **************************************/
         // POST: api/Endpoint/Authentication
         [HttpPost("Authentication")]
         public IActionResult Authentication([FromBody] JsonElement credentials)
@@ -107,22 +81,18 @@ namespace COMACON.Controllers
             */
             string username = credentials.GetProperty("username").ToString();
             string password = credentials.GetProperty("password").ToString();
-            //string authorizationResponse = "{\"error\":\"@errorNumber\",\"message\":\"@errorMessage\",\"timestamp\":}";
-            //string successReturnText = "{\"error\":\"@errorNumber\",\"message\":\"@errorMessage\"}";
 
             //Checks if the username field is an empty string or not.
             if (username == "")
             {
                 Log.Logger.Warning("Username is required.");
                 return Unauthorized(authorizationResponse.Replace("@errorNumber", "1").Replace("@errorMessage", "Username is required."));
-                //return Unauthorized("{\"error\":\"1\",\"message\":\"Username is required.\"}");
             }
 
             if (password == "")
             {
                 Log.Logger.Warning("Password is required.");
                 return Unauthorized(authorizationResponse.Replace("@errorNumber", "2").Replace("@errorMessage", "Password is required."));
-                //return Unauthorized("{\"error\":\"2\",\"message\":\"Password is required.\"}");
             }
 
             JsonNode validationResults = JsonNode.Parse(_sessionManagement.ValidateUserLoggingIn(username, password));
@@ -141,41 +111,19 @@ namespace COMACON.Controllers
         }
 
         // GET: api/Endpoint/VerifyToken
-        //[HttpGet("VerifyToken")]
-        //public bool VerifyToken([FromHeader(Name = "Authorization")] string authorizationHeader)
-        //{
-        //    //Console.WriteLine("Bearer Token: " + authorizationHeader.Substring("Bearer ".Length).Trim());
-
-        //    if(string.IsNullOrEmpty(authorizationHeader))
-        //    {
-        //        return false;
-        //    }
-
-        //    if (!authorizationHeader.StartsWith("Bearer "))
-        //    {
-        //        return false;
-        //    }
-
-        //    //Console.WriteLine("This is the token value: " + token);
-        //    return _sessionManagement.validateAccessTokenStillActive(authorizationHeader.Substring("Bearer ".Length).Trim());
-        //}
-
-        // GET: api/Endpoint/VerifyToken
-        [HttpGet("VerifyTokenV2")]
-        public IActionResult VerifyTokenV2([FromHeader(Name = "Authorization")] string authorizationHeader)
+        [HttpGet("VerifyToken")]
+        public IActionResult VerifyToken([FromHeader(Name = "Authorization")] string authorizationHeader)
         {
             if (string.IsNullOrEmpty(authorizationHeader))
             {
                 Log.Logger.Warning("No authorization token provided.");
-                //return Unauthorized("No authorization token provided.");
-                return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
+                return Redirect("/core/login");
             }
 
             if (!authorizationHeader.StartsWith("Bearer "))
             {
                 Log.Logger.Warning("Invalid authorization token type.");
-                //return Unauthorized("Invalid authorization token type.");
-                return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
+                return Redirect("/core/login");
             }
 
             JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActive(authorizationHeader.Substring("Bearer ".Length).Trim()));
@@ -213,11 +161,9 @@ namespace COMACON.Controllers
             {
                 case "0":
                     Log.Logger.Information("Logging out user.");
-                    //var request = HttpContext.Request;
 
                     _sessionManagement.logoutUser(authorizationHeader.Substring("Bearer ".Length).Trim());
-                    return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
-                    //return Ok(_sessionManagement.logoutUser(authorizationHeader.Substring("Bearer ".Length).Trim()));
+                    return Redirect("/core/login");
                 default:
                     Log.Logger.Warning("Token is expired.");
                     return Unauthorized(authorizationResponse.Replace("@errorNumber", validationResults["error"].ToString()).Replace("@errorMessage", validationResults["message"].ToString()));
@@ -356,9 +302,6 @@ namespace COMACON.Controllers
                 Log.Logger.Error("Invalid version number.");
                 return BadRequest("Invalid version number.");
             }
-            
-
-            //return null;
         }
 
         // GET: api/Endpoint/GetAllUsers
@@ -497,8 +440,6 @@ namespace COMACON.Controllers
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
                     Log.Logger.Error(ex.Message);
                     Log.Logger.Error(ex.StackTrace);
                     return BadRequest(ex.Message);
@@ -523,13 +464,13 @@ namespace COMACON.Controllers
             if (string.IsNullOrEmpty(authorization))
             {
                 Log.Logger.Warning("No authorization token provided.");
-                return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
+                return Redirect("/core/login");
             }
 
             if (!authorization.StartsWith("Bearer "))
             {
                 Log.Logger.Warning("Invalid authorization token type.");
-                return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
+                return Redirect("/core/login");
             }
 
             JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActive(authorization.Substring("Bearer ".Length).Trim()));
@@ -537,7 +478,7 @@ namespace COMACON.Controllers
             if (validationResults["error"].ToString() != "0")
             {
                 Log.Logger.Warning("Token is expired.");
-                return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
+                return Redirect("/core/login");
             }
 
             switch (version)
@@ -559,46 +500,6 @@ namespace COMACON.Controllers
             }
         }
 
-        // PUT: api/Endpoint/UpdatePasswordPolicy
-        //[HttpPut("UpdatePasswordPolicy")]
-        //public IActionResult UpdatePasswordPolicy(string version,
-        //    [FromHeader(Name = "Authorization")] string authorization,
-        //    [FromBody] JsonElement jsonDataStructure)
-        //{
-        //    if (string.IsNullOrEmpty(authorization))
-        //    {
-        //        Log.Logger.Warning("No authorization token provided.");
-        //        return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
-        //    }
-
-        //    if (!authorization.StartsWith("Bearer "))
-        //    {
-        //        Log.Logger.Warning("Invalid authorization token type.");
-        //        return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
-        //    }
-
-        //    JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActive(authorization.Substring("Bearer ".Length).Trim()));
-
-        //    if (validationResults["error"].ToString() != "0")
-        //    {
-        //        Log.Logger.Warning("Token is expired.");
-        //        return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
-        //    }
-        //    switch (version)
-        //    {
-        //        case "v1":
-        //            PasswordPolicy pwpolicy = JsonConvert.DeserializeObject<PasswordPolicy>(jsonDataStructure.ToString());
-
-        //            return Ok(_SqlQueries.UpdatePasswordPolicy(pwpolicy, _sessionManagement.getUserSessionUserNum(authorization.Substring("Bearer ".Length).Trim())));
-        //    }
-
-        //    return Ok();
-        //}
-
-
-
-
-
         // GET: api/Endpoint/TestConnectionString
         [HttpGet("TestConnectionString")]
         public IActionResult TestConnectionString(string cstringobject,
@@ -607,13 +508,13 @@ namespace COMACON.Controllers
             if(string.IsNullOrEmpty(authorization))
             {
                 Log.Logger.Warning("No authorization token provided.");
-                return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
+                return Redirect("/core/login");
             }
 
             if(!authorization.StartsWith("Bearer "))
             {
                 Log.Logger.Warning("Invalid authorization token type.");
-                return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
+                return Redirect("/core/login");
             }
 
             JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActive(authorization.Substring("Bearer ".Length).Trim()));
@@ -621,7 +522,7 @@ namespace COMACON.Controllers
             if(validationResults["error"].ToString() != "0")
             {
                 Log.Logger.Warning("Token is expired.");
-                return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
+                return Redirect("/core/login");
             }
 
             Log.Logger.Verbose("Testing connection string.");
@@ -641,7 +542,6 @@ namespace COMACON.Controllers
                     cstringSql += string.Format(userIdAndPassword, cstring.UserId, cstring.Password);
                 }
                 cstringSql += cstring.AdditionalOptions;
-                //Console.WriteLine(cstringSql);
 
                 try
                 {
@@ -684,7 +584,6 @@ namespace COMACON.Controllers
                             connection.Open();
                             result.ResultCode = "0";
                             result.ResultMessage = "Connection successful!";
-                            //return JsonConvert.SerializeObject(@"{""ResultCode"":""0"",""ResultMessage"":""Connection successful!""}");
                             return Ok(JsonConvert.SerializeObject(result));
                         }
                     }
@@ -693,7 +592,6 @@ namespace COMACON.Controllers
                         Log.Logger.Error("Oracle Connection failed: {ex}", ex);
                         result.ResultCode = "1";
                         result.ResultMessage = "Oracle connection failed: " + ex.Message;
-                        //Console.WriteLine(JsonConvert.SerializeObject(@"{""ResultCode"":""1"",""ResultMessage"":""Oracle connection failed: " + ex.Message.Replace("\n", " ") + @"""}"));
                         return Ok(JsonConvert.SerializeObject(result));
                     }
                 }
@@ -715,7 +613,6 @@ namespace COMACON.Controllers
                         using (OracleConnection connection = new OracleConnection(cstringOracle))
                         {
                             connection.Open();
-                            //return JsonConvert.SerializeObject(@"{""ResultCode"":""0"",""ResultMessage"":""Connection successful!""}");
                             return Ok(JsonConvert.SerializeObject(result));
                         }
                     }
@@ -738,13 +635,13 @@ namespace COMACON.Controllers
             if (string.IsNullOrEmpty(authorization))
             {
                 Log.Logger.Warning("No authorization token provided.");
-                return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
+                return Redirect("/core/login");
             }
 
             if (!authorization.StartsWith("Bearer "))
             {
                 Log.Logger.Warning("Invalid authorization token type.");
-                return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
+                return Redirect("/core/login");
             }
 
             JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActive(authorization.Substring("Bearer ".Length).Trim()));
@@ -752,7 +649,7 @@ namespace COMACON.Controllers
             if (validationResults["error"].ToString() != "0")
             {
                 Log.Logger.Warning("Token is expired.");
-                return Redirect($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}");
+                return Redirect("/core/login");
             }
 
             Log.Logger.Verbose("Validating \"{url}\" URL.", url.ToString());
@@ -764,17 +661,6 @@ namespace COMACON.Controllers
             try
             {
                 var response = await client.GetAsync(url);
-                //Waits for the response to be completed.
-                //while (!response.IsCompleted)
-                //{
-                //    Log.Logger.Information("Waiting for response from {url}...", url.ToString());
-                //    Thread.Sleep(1000);
-                //}
-
-                //if (response.IsFaulted)
-                //{
-                //    throw new HttpRequestException("Request failed.");
-                //}
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -782,31 +668,15 @@ namespace COMACON.Controllers
                 }
 
                 Log.Logger.Verbose("Received a success response from {url}.", url);
-                //return (int)response.Result.StatusCode;
                 return Ok(genericResponse.Replace("@result","0").Replace("@message", ""));
             }
             catch (HttpRequestException ex)
             {
-                //Console.WriteLine("Request error: " + ex.Message);
                 // You can also log the error or return a specific error message
                 string errorResponse = genericResponse.Replace("@result", "-1")
                                                        .Replace("@message", ex.Message);
-                //Console.WriteLine("Error Response: " + errorResponse);
                 return BadRequest(errorResponse);
             }
-            //catch (TaskCanceledException ex)
-            //{
-            //    Log.Logger.Error("The endpoint didn't respond after 5 seconds. {0}", ex);
-            //    return BadRequest(genericResponse.Replace("@result", "-1").Replace("@message", "The endpoint didn't respond after 5 seconds."));
-            //    //return -1;
-            //}
-            //catch
-            //{
-            //    //Any exception will returns 0.
-            //    Log.Logger.Error("Received an error of some sort with the URL.");
-            //    return BadRequest(genericResponse.Replace("@result", "1").Replace("@message", "Received an error of some sort with the URL."));
-            //    //return 0;
-            //}
         }
 
         [HttpGet("GetConfiguration")]
@@ -824,11 +694,8 @@ namespace COMACON.Controllers
             if(webconfig == "")
             {
                 webconfig = Path.Combine(Environment.ExpandEnvironmentVariables(manager.Sites[siteName].Applications["/"].VirtualDirectories[applicationPath].Attributes["physicalPath"].Value.ToString()), applicationName,"web.config");
-                //Console.WriteLine(webconfig);
                 physicalPath = Environment.ExpandEnvironmentVariables(manager.Sites[siteName].Applications[applicationPath+applicationName].VirtualDirectories["/"].PhysicalPath);
-                //Console.WriteLine(physicalPath);
             }
-            //return "";
             using var file = new System.IO.StreamReader(webconfig);
             return LoadSaveWebApplications.LoadWebApplicationConfiguration(file, type, version, siteName, applicationName, applicationPath, physicalPath, bitness);
         }
@@ -1033,8 +900,6 @@ namespace COMACON.Controllers
                 }
             }
             
-            //Console.WriteLine(JsonConvert.SerializeObject(newConfigurationDetails));
-
             return JsonConvert.SerializeObject(newConfigurationDetails);
         }
 
@@ -1055,7 +920,6 @@ namespace COMACON.Controllers
             }
             ServerManager manager = new ServerManager();
             var filesToCopyFromPath = Path.Combine(_configuration["LooseFilesLocation"], webAppToCreate.webApplicationVersion.Split(".")[0] + webAppToCreate.webApplicationVersion.Split(".")[1], webAppToCreate.webApplicationVersion);
-            //string siteFolder = manager.Sites[webAppToCreate.siteName].Applications["/"].VirtualDirectories[webAppToCreate.virtualDirectory].Attributes["physicalPath"].Value.ToString();
             var folderToCopyToPath = Path.Combine(Environment.ExpandEnvironmentVariables(manager.Sites[webAppToCreate.siteName].Applications["/"].VirtualDirectories[webAppToCreate.virtualDirectory].Attributes["physicalPath"].Value.ToString()), webAppToCreate.webApplicationName);
             //Verify if the folder already exists.
             if (Directory.Exists(folderToCopyToPath))
@@ -1098,8 +962,6 @@ namespace COMACON.Controllers
             [FromHeader(Name = "Authorization")] string authorizationHeader = "")
         {
             Log.Information("Action being performed: {action}", action);
-            //Console.WriteLine(action);
-            //Console.WriteLine(webApplicationToCreate);
             /* Returns the results of the Creation.
              * 0 = Success
              * 1 = Failed to create the directory.
@@ -1227,9 +1089,6 @@ namespace COMACON.Controllers
                         Log.Error(ex.StackTrace);
                         Directory.Delete(folderToCopyToPath, true);
                         //Delete the newAppPool if it was created.
-                        //manager.ApplicationPools.Remove(manager.ApplicationPools[webAppToCreate.webApplicationPoolName]);
-                        //Delete the newApplication if it was created.
-                        //manager.Sites[webAppToCreate.siteName].Applications.Remove(manager.Sites[webAppToCreate.siteName].Applications[webAppToCreate.webApplicationName]);
                         return "4";
                     }
 

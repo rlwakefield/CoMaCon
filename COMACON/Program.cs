@@ -1,8 +1,14 @@
 using COMACON.ComaconHelper;
 using COMACON.config;
+using COMACON.DatabaseContexts.SQLite;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Data.Common;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<COMACONSqliteDbContext>(options =>
+        options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -41,13 +47,11 @@ builder.Services.AddTransient<LoadSaveWebApplications, DefaultLoadSaveWebApplica
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//if (!app.Environment.IsDevelopment())
-//{
-//    app.UseExceptionHandler("/Home/Error");
-//    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-//    app.UseHsts();
-//}
+using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetService<COMACONSqliteDbContext>();
+    context.Database.EnsureCreated();
+}
 
 app.UseSerilogRequestLogging();
 

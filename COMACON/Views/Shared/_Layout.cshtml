@@ -41,7 +41,7 @@
         <header>
             <div id="h1-container" class="h1-container dark_mode_titlebar">
                 <div style="display:flex;justify-content:space-between;padding-left: 0.5%;">
-                <a style="color:inherit;text-decoration: none;" href="/core/home"><h1 b-8gj57b4bak="">COMACON</h1></a>
+                    <a id="COMACON-HeaderHomeLink" style="color:inherit;text-decoration: none;" href=""><h1 b-8gj57b4bak="">COMACON</h1></a>
                     <div style="margin: 0.5% 10px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
                         <input type="checkbox" class="checkbox" id="checkbox" onclick="toggleDarkLightMode(this)" style="top: -100px;">
                         <label for="checkbox" class="checkbox-label">
@@ -66,12 +66,6 @@
                             <span class="ball"></span>
                         </label>
                         @RenderSection("SettingsButton", false)
-                        @* <a id="SettingsButton" style="color:inherit;text-decoration:none;margin-top:5px;" href="/Core/Settings">
-                            <svg width="30" height="30" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14 3.269C14 2.568 13.432 2 12.731 2H11.27C10.568 2 10 2.568 10 3.269v0c0 .578-.396 1.074-.935 1.286-.085.034-.17.07-.253.106-.531.23-1.162.16-1.572-.249v0a1.269 1.269 0 0 0-1.794 0L4.412 5.446a1.269 1.269 0 0 0 0 1.794v0c.41.41.48 1.04.248 1.572a7.946 7.946 0 0 0-.105.253c-.212.539-.708.935-1.286.935v0C2.568 10 2 10.568 2 11.269v1.462C2 13.432 2.568 14 3.269 14v0c.578 0 1.074.396 1.286.935.034.085.07.17.105.253.231.531.161 1.162-.248 1.572v0a1.269 1.269 0 0 0 0 1.794l1.034 1.034a1.269 1.269 0 0 0 1.794 0v0c.41-.41 1.04-.48 1.572-.249.083.037.168.072.253.106.539.212.935.708.935 1.286v0c0 .701.568 1.269 1.269 1.269h1.462c.701 0 1.269-.568 1.269-1.269v0c0-.578.396-1.074.935-1.287.085-.033.17-.068.253-.104.531-.232 1.162-.161 1.571.248v0a1.269 1.269 0 0 0 1.795 0l1.034-1.034a1.269 1.269 0 0 0 0-1.794v0c-.41-.41-.48-1.04-.249-1.572.037-.083.072-.168.106-.253.212-.539.708-.935 1.286-.935v0c.701 0 1.269-.568 1.269-1.269V11.27c0-.701-.568-1.269-1.269-1.269v0c-.578 0-1.074-.396-1.287-.935a7.755 7.755 0 0 0-.105-.253c-.23-.531-.16-1.162.249-1.572v0a1.269 1.269 0 0 0 0-1.794l-1.034-1.034a1.269 1.269 0 0 0-1.794 0v0c-.41.41-1.04.48-1.572.249a7.913 7.913 0 0 0-.253-.106C14.396 4.343 14 3.847 14 3.27v0z"></path>
-                                <path d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"></path>
-                            </svg>
-                        </a> *@
                         @RenderSection("LogoutButton", false)
                     </div>
                 </div>
@@ -88,7 +82,6 @@
                         <div style="display: flex; flex-direction: row;margin: 5px 0;overflow-y: auto;width: max-content;">
                             <div style="max-height: 100vh;max-width:33vh">
                                 @RenderSection("CoreButtons", required: false)
-                                @* @RenderSection("IisLinks", required: false) *@
                             </div>
                             @RenderSection("AuthenticationOptimizationOptions", required: false)
                         </div>
@@ -103,54 +96,31 @@
             </main>
         </div>
         <script>
-            // console.log(sessionStorage.getItem('comaconbearertoken'));
             if (sessionStorage.getItem("comaconbearertoken") != null && sessionStorage.getItem('comaconbearertoken') != undefined) {
                 var token = sessionStorage.getItem('comaconbearertoken');
-                // console.log("Verifying token is still valid.");
-                fetch(apiRootUrl + '/api/Endpoint/VerifyTokenV2', {
+            fetch(sessionStorage.getItem('apiRootUrl') + '/api/Endpoint/VerifyToken', {
                     method: 'GET', // or 'POST', 'PUT', 'DELETE', etc.
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
-                        // Add other headers if needed
                     },
-                    // body: JSON.stringify(data) // If sending data with POST/PUT request
                 })
                 .then(response => {
                     setTimeout(() => {
                         if(response.ok && currentPage == "Login"){
-                            // console.log("Redirecting to Home page.");
-                            window.location.href = "/core/home";
-                            // return response.json()
-                        // }else if((response.status === 401 || response.status === 400) & currentPage != "Login"){
+                            window.location.href = sessionStorage.getItem('apiRootUrl') + "/core/home";
                         } else if (response.redirected) {
-                            window.location.href = response.url;
+                            window.location.href = sessionStorage.getItem('apiRootUrl') + response.url;
                         }
-                        // else{
-                        //     if (currentPage != "Login") {
-                        //         window.location.href = "/core/login";
-                        //     }else if(currentPage == "Login"){
-                        //         window.location.href = "/core/home";
-                        //     }
-                        // }
                     }, 50);
                 })
-                // .then(data => {
-                //     console.log(data);
-                //     if (data == false && currentPage != "Login") {
-                //         window.location.href = "/core/login";
-                //     }else if(currentPage == "Login" && data == true){
-                //         window.location.href = "/core/home";
-                //     }
-                // })
                 .catch(error => console.error('Error:', error));
             } else if (currentPage != "Login") {
-                window.location.href = "/core/login";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/core/login";
             }
 
             window.onload = function () {
                 onPageLoadLogic();
-                // console.log(sessionStorage.getItem('comaconbearertoken'));
             };
         </script>
     </body>

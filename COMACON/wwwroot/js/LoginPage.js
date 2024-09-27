@@ -26,7 +26,6 @@ function login(event) {
                 return response.json();
             } else {
                 return response.json().then(errorData => {
-                    console.log(errorData);
                     switch (errorData.error) {
                         case "1":
                             //Missing Username
@@ -63,12 +62,10 @@ function login(event) {
             }
         })
         .then(data => {
-            console.log(data);
             sessionStorage.setItem("comaconbearertoken", data.access_token);
-            window.location.href = '/core/home';
+            window.location.href = sessionStorage.getItem('apiRootUrl') + '/core/home';
         })
         .catch(error => {
-            console.log(error);
             console.error('Error:', error.message);
         });
 }
@@ -88,7 +85,7 @@ function logout() {
                     if (response.redirected) {
                         sessionStorage.removeItem('comaconbearertoken');
                         // Handle the redirect
-                        window.location.href = response.url;
+                        window.location.href = sessionStorage.getItem('apiRootUrl') + response.url;
                     }
                 })
                 .catch(error => console.error('Error:', error));
@@ -100,7 +97,7 @@ function logout() {
                 if (response.redirected) {
                     sessionStorage.removeItem('comaconbearertoken');
                     // Handle the redirect
-                    window.location.href = response.url;
+                    window.location.href = sessionStorage.getItem('apiRootUrl') + response.url;
                 }
             })
             .catch(error => console.error('Error:', error));
@@ -115,12 +112,10 @@ function checkPasswordMatch(input) {
         document.getElementById("passwordMatchMessage").textContent = "Passwords match";
         document.getElementById("passwordMatchMessage").style.color = "green";
         document.getElementById("resetpasswordbutton").disabled = false;
-        //input.style.border = "5px solid green";
     } else {
         document.getElementById("passwordMatchMessage").textContent = "Passwords do not match";
         document.getElementById("passwordMatchMessage").style.color = "red";
         document.getElementById("resetpasswordbutton").disabled = true;
-        //input.style.border = "5px solid red";
     }
 }
 
@@ -153,7 +148,6 @@ function resetpassword(event) {
                     document.getElementById("passwordresetform").reset();
                     document.getElementById("currentpassword").focus();
                     document.getElementById("passwordMatchMessage").textContent = "";
-                    console.log(data);
                 });
             } else {
                 closePasswordResetModal();

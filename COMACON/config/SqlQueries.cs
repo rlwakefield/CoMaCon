@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Reflection.Metadata;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Azure.Core;
+using COMACON.DatabaseContexts.SQLite;
 
 namespace COMACON.config;
 
@@ -124,8 +125,8 @@ public interface SqlQueries
     /// </returns>
     public void StoreSessionInformation(string access_Token,
         string token_type,
-        DateTime issued,
-        DateTime expires,
+        DateTimeOffset issued,
+        DateTimeOffset expires,
         SqlConnection connection,
         int usernumloggingin);
     /// <summary>
@@ -146,6 +147,14 @@ public interface SqlQueries
     /// 
     /// </returns>
     public string GetAllPasswordPolicies();
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns>
+    /// 
+    /// </returns>
+    public string hashpassword(string password);
 }
 
 internal class DefaultSqlQueries : SqlQueries
@@ -155,19 +164,6 @@ internal class DefaultSqlQueries : SqlQueries
     private readonly Dictionary<int, string> _securityLogs = new()
     {
         //Values 0 through 1000 are User Account actions.
-        //{ 1, "User logged in." }, //Used when a user logs in.
-        //{ 2, "User logged out." }, //Used when a user logs out.
-        //{ 3, "New user created." }, //Used when a new user is created.
-        //{ 4, "Username changed from {oldusername} to {newusername}." }, //Used when an admin changes a users username.
-        //{ 5, "First Name changed from {oldfirstname} to {newfirstname}." }, //Used when an admin changes a users first name.
-        //{ 6, "Last Name changed from {oldlastname} to {newlastname}." }, //Used when an admin changes a users last name.
-        //{ 7, "Changed users password." }, //Used when an admin changes a users password.
-        //{ 8, "Email Address changed from {oldemailaddress} to {newemailaddress}." }, //Used when an admin changes a users email address.
-        //{ 9, "User account enabled." }, //Used when an admin enables a user account.
-        //{ 10, "User account disabled." }, //Used when an admin disables a user account.
-        //{ 11, "User account password changed." }, //Used when the user changes their own password.
-        //{ 12, "Authentication Method changed from {oldauthmethod} to {newauthmethod}." }, //Used when an admin changes a users authentication method.
-        //{ 13, "Role changed from {oldroleid} to {newroleid}." }, //Used when an admin changes a users role.
         { 1, "User logged in" },
         { 2, "User logged out" },
         { 3, "User logged in with invalid username/password." },
@@ -194,369 +190,243 @@ internal class DefaultSqlQueries : SqlQueries
         { 1007, "Closed Web Application" },
         //Values 5001 through 10000 are Client actions.
     };
-    private string _storesessioninformationinsert = "INSERT INTO [COMACON].[dbo].[sessions] ([access_token], [token_type], [creationdate], [expirationdate], [usernum]) VALUES (@access_Token, @token_type, @issued, @expires, @usernum)";
-    private string _deletesessioninformationquery = "DELETE from [COMACON].[dbo].[sessions] WHERE [access_token] = @access_token";
-    private string _securityloginsertdefaultquery = "INSERT INTO [COMACON].[dbo].[securitylog] (eventid, usernum, eventdescription, logdate) VALUES (@eventid, @usernum, @eventdescription, @logdate)";
-    private string _securityloginsertaffecteduserquery = "INSERT INTO [COMACON].[dbo].[securitylog] (eventid, usernum, eventdescription, affectedusernum, logdate) VALUES (@eventid, @usernum, @eventdescription, @affectedusernum, @logdate)";
-    private string _securityloginsertoldvaluenewvaluequery = "INSERT INTO [COMACON].[dbo].[securitylog] (eventid, usernum, eventdescription, affectedusernum, logdate) VALUES (@eventid, @usernum, @eventdescription, @affectedusernum @logdate)";
-    private string _securityloginsertaffecteduseroldvaluenewvaluequery = "INSERT INTO [COMACON].[dbo].[securitylog] (eventid, usernum, eventdescription, affectedusernum, logdate) VALUES (@eventid, @usernum, @eventdescription, @affectedusernum, @logdate)";
-    private string _getuserbyusernamequery = "SELECT * FROM [COMACON].[dbo].[useraccounts] WHERE [username] = @username";
-    private string _createuserquery = "INSERT INTO [COMACON].[dbo].[useraccounts] (username, firstname, lastname, password, emailaddress, status, passwordresetonnextlogin, passwordlastchanged, authmethod, creationdate, createdby, lastediteddate, lasteditedby, roleid) VALUES (@username, @firstname, @lastname, @password, @emailaddress, @status, @passwordresetonnextlogin, @passwordlastchanged, @authmethod, @creationdate, @createdby, @lastediteddate, @lasteditedby, @roleid)";
-    private string _getrolesquery = "SELECT * FROM [COMACON].[dbo].[roles]";
+    private string _storesessioninformationinsert = "INSERT INTO [dbo].[sessions] ([access_token], [token_type], [creationdate], [expirationdate], [usernum]) VALUES (@access_Token, @token_type, @issued, @expires, @usernum)";
+    private string _deletesessioninformationquery = "DELETE from [dbo].[sessions] WHERE [access_token] = @access_token";
+    private string _securityloginsertdefaultquery = "INSERT INTO [dbo].[securitylog] (eventid, usernum, eventdescription, logdate) VALUES (@eventid, @usernum, @eventdescription, @logdate)";
+    private string _securityloginsertaffecteduserquery = "INSERT INTO [dbo].[securitylog] (eventid, usernum, eventdescription, affectedusernum, logdate) VALUES (@eventid, @usernum, @eventdescription, @affectedusernum, @logdate)";
+    private string _securityloginsertoldvaluenewvaluequery = "INSERT INTO [dbo].[securitylog] (eventid, usernum, eventdescription, affectedusernum, logdate) VALUES (@eventid, @usernum, @eventdescription, @affectedusernum @logdate)";
+    private string _securityloginsertaffecteduseroldvaluenewvaluequery = "INSERT INTO [dbo].[securitylog] (eventid, usernum, eventdescription, affectedusernum, logdate) VALUES (@eventid, @usernum, @eventdescription, @affectedusernum, @logdate)";
+    private string _getuserbyusernamequery = "SELECT * FROM [dbo].[useraccounts] WHERE [username] = @username";
+    private string _createuserquery = "INSERT INTO [dbo].[useraccounts] (username, firstname, lastname, password, emailaddress, status, passwordresetonnextlogin, passwordlastchanged, authmethod, creationdate, createdby, lastediteddate, lasteditedby, roleid) VALUES (@username, @firstname, @lastname, @password, @emailaddress, @status, @passwordresetonnextlogin, @passwordlastchanged, @authmethod, @creationdate, @createdby, @lastediteddate, @lasteditedby, @roleid)";
+    private string _getrolesquery = "SELECT * FROM [dbo].[roles]";
     private string _validateaccesstokenquery = "SELECT * FROM sessions WHERE access_token = '@access_token'";
     private string _updateuserquery = "UPDATE [dbo].[useraccounts] SET {0} WHERE [usernum] = @usernum";
-    private string _getallusersquery = "SELECT * FROM [COMACON].[dbo].[useraccounts]";
-    private string _getuserquery = "SELECT * FROM [COMACON].[dbo].[useraccounts] WHERE [usernum] = @usernum";
-    private string _getallpasswordpoliciesquery = "SELECT * FROM [COMACON].[dbo].[passwordpolicies]";
-    private string _getpolicyrulebypswdpolicyidquery = "SELECT * FROM [COMACON].[dbo].[passwordrules] WHERE [pswdpolicyid] = @pswdpolicyid";
+    private string _getallusersquery = "SELECT * FROM [dbo].[useraccounts]";
+    private string _getuserquery = "SELECT * FROM [dbo].[useraccounts] WHERE [usernum] = @usernum";
+    private string _getallpasswordpoliciesquery = "SELECT * FROM [dbo].[passwordpolicies]";
+    private string _getpolicyrulebypswdpolicyidquery = "SELECT * FROM [dbo].[passwordrules] WHERE [pswdpolicyid] = @pswdpolicyid";
+    private readonly COMACONSqliteDbContext _context;
 
-    public DefaultSqlQueries(IConfiguration configuration)
+    public DefaultSqlQueries(IConfiguration configuration,
+        COMACONSqliteDbContext context)
     {
         _connectionString = configuration.GetConnectionString("DefaultConnection");
+        _context = context;
     }
 
     public string GetUser(int usernum)
     {
-        //string _getuserquery = "SELECT * FROM [COMACON].[dbo].[useraccounts] WHERE [usernum] = @usernum";
-        Dictionary<string, int> parameters = new Dictionary<string, int>
+        var usr = _context.UserAccounts
+            .Where(u => u.UserNum == usernum)
+            .ToList();
+
+        if(usr.Count <= 0)
         {
-            { "@usernum", usernum }
-        };
-
-        using (SqlConnection connection = new SqlConnection(_connectionString))
-        {
-            connection.Open();
-
-            using (SqlCommand command = new SqlCommand(_getuserquery, connection))
-            {
-                command.Parameters.AddWithValue("@usernum", usernum);
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.HasRows)
-                    {
-                        UsersDataStructure usersds = new UsersDataStructure();
-                        while (reader.Read())
-                        {
-                            User u = new User();
-                            u.usernum = int.Parse(reader["usernum"].ToString());
-                            u.username = reader["username"].ToString();
-                            u.firstname = reader["firstname"].ToString();
-                            u.lastname = reader["lastname"].ToString();
-                            u.emailaddress = reader["emailaddress"].ToString();
-                            u.enabled = bool.Parse(reader["status"].ToString()) ? 1 : 0;
-                            u.passwordresetonnextlogin = bool.Parse(reader["passwordresetonnextlogin"].ToString()) ? 1 : 0;
-                            u.passwordlastchanged = DateTime.Parse(reader["passwordlastchanged"].ToString());
-                            u.authmethod = reader["authmethod"].ToString();
-                            u.creationdate = DateTime.Parse(reader["creationdate"].ToString());
-                            u.createdby = int.Parse(reader["createdby"].ToString());
-                            u.lastediteddate = DateTime.Parse(reader["lastediteddate"].ToString());
-                            u.lasteditedby = int.Parse(reader["lasteditedby"].ToString());
-                            u.roleid = int.Parse(reader["roleid"].ToString());
-                            usersds.users.Add(u);
-                        }
-
-                        return JsonConvert.SerializeObject(usersds);
-                    }
-                    else
-                    {
-                        return "";
-                    }
-                }
-            }
+            return "";
         }
+
+        UsersDataStructure usersds = new UsersDataStructure();
+        foreach (UserAccount u in usr)
+        {
+            User u2 = new User();
+            u2.usernum = u.UserNum;
+            u2.username = u.Username;
+            u2.firstname = u.FirstName;
+            u2.lastname = u.LastName;
+            u2.emailaddress = u.EmailAddress;
+            u2.enabled = u.Status ? 1 : 0;
+            u2.passwordresetonnextlogin = u.PasswordResetOnNextLogin ? 1 : 0;
+            u2.passwordlastchanged = DateTimeOffset.Parse(u.PasswordLastChanged);
+            u2.authmethod = u.AuthMethod;
+            u2.creationdate = DateTimeOffset.Parse(u.CreationDate);
+            u2.createdby = u.CreatedBy;
+            u2.lastediteddate = DateTimeOffset.Parse(u.LastEditedDate);
+            u2.lasteditedby = u.LastEditedBy;
+            u2.roleid = u.RoleId;
+            usersds.users.Add(u2);
+        }
+
+        return JsonConvert.SerializeObject(usersds);
     }
 
     public string GetAllUsers()
     {
-        //string _getallusersquery = "SELECT * FROM [COMACON].[dbo].[useraccounts]";
-        var (reader, connection) = createAndExecuteSqlNoParameters(_getallusersquery);
+        var usr = _context.UserAccounts
+            .ToList();
 
-        using (reader)
-        using (connection)
+        if (usr.Count <= 0)
         {
-            if (reader.HasRows)
-            {
-                UsersDataStructure usersds = new UsersDataStructure();
-                while (reader.Read())
-                {
-                    User u = new User();
-                    u.usernum = int.Parse(reader["usernum"].ToString());
-                    u.username = reader["username"].ToString();
-                    u.firstname = reader["firstname"].ToString();
-                    u.lastname = reader["lastname"].ToString();
-                    u.emailaddress = reader["emailaddress"].ToString();
-                    u.enabled = bool.Parse(reader["status"].ToString()) ? 1 : 0;
-                    u.passwordresetonnextlogin = bool.Parse(reader["passwordresetonnextlogin"].ToString()) ? 1 : 0;
-                    u.passwordlastchanged = DateTime.Parse(reader["passwordlastchanged"].ToString());
-                    u.authmethod = reader["authmethod"].ToString();
-                    u.creationdate = DateTime.Parse(reader["creationdate"].ToString());
-                    u.createdby = int.Parse(reader["createdby"].ToString());
-                    u.lastediteddate = DateTime.Parse(reader["lastediteddate"].ToString());
-                    u.lasteditedby = int.Parse(reader["lasteditedby"].ToString());
-                    u.roleid = int.Parse(reader["roleid"].ToString());
-                    usersds.users.Add(u);
-                }
-
-                return JsonConvert.SerializeObject(usersds);
-            }
-            else
-            {
-                return "";
-            }
+            return "";
         }
+
+        UsersDataStructure usersds = new UsersDataStructure();
+        foreach (UserAccount u in usr)
+        {
+            User u2 = new User();
+            u2.usernum = u.UserNum;
+            u2.username = u.Username;
+            u2.firstname = u.FirstName;
+            u2.lastname = u.LastName;
+            u2.emailaddress = u.EmailAddress;
+            u2.enabled = u.Status ? 1 : 0;
+            u2.passwordresetonnextlogin = u.PasswordResetOnNextLogin ? 1 : 0;
+            u2.passwordlastchanged = DateTimeOffset.Parse(u.PasswordLastChanged);
+            u2.authmethod = u.AuthMethod;
+            u2.creationdate = DateTimeOffset.Parse(u.CreationDate);
+            u2.createdby = u.CreatedBy;
+            u2.lastediteddate = DateTimeOffset.Parse(u.LastEditedDate);
+            u2.lasteditedby = u.LastEditedBy;
+            u2.roleid = u.RoleId;
+            usersds.users.Add(u2);
+        }
+
+        return JsonConvert.SerializeObject(usersds);
     }
 
     public string UpdateUser(User user, int userdoingupdates)
     {
-        //string _updateuserquery = "UPDATE [dbo].[useraccounts] SET {0} WHERE [usernum] = @usernum";
-        string updateQuery = _updateuserquery;
-        User useroriginalvalues = JsonConvert.DeserializeObject<User>(GetUser(user.usernum));
-        string columnValueToSet = createUpdateUserSetString(user, userdoingupdates, useroriginalvalues);
+        var usrtoupdate = _context.UserAccounts
+            .Where(u => u.UserNum == user.usernum)
+            .ToList();
 
-        if (string.IsNullOrEmpty(columnValueToSet))
-        {
-            throw new Exception("No values to update.");
-        }
-
-        using (SqlConnection connection = new SqlConnection(_connectionString))
-        {
-            connection.Open();
-
-            updateQuery = string.Format(updateQuery, columnValueToSet);
-
-            using (SqlCommand command = new SqlCommand(updateQuery, connection))
-            {
-                command.Parameters.AddWithValue("@usernum", user.usernum);
-                command.Parameters.AddWithValue("@lasteditedby", userdoingupdates);
-                if (user.username != null) command.Parameters.AddWithValue("@username", user.username);
-                if (user.firstname != null) command.Parameters.AddWithValue("@firstname", user.firstname);
-                if (user.lastname != null) command.Parameters.AddWithValue("@lastname", user.lastname);
-                if (user.password != null) command.Parameters.AddWithValue("@password", user.password);
-                if (user.emailaddress != null) command.Parameters.AddWithValue("@emailaddress", user.emailaddress);
-                if (user.enabled != null) command.Parameters.AddWithValue("@status", user.enabled);
-                if (user.passwordresetonnextlogin != null) command.Parameters.AddWithValue("@passwordresetnextlogin", user.passwordresetonnextlogin);
-                if (user.authmethod != null) command.Parameters.AddWithValue("@authmethod", user.authmethod);
-
-                try
-                {
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        return GetUser(user.usernum);
-                    }
-                    else
-                    {
-                        Log.Logger.Warning("No rows affected.");
-                        throw new Exception("No rows affected.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.Logger.Error("Error: " + ex.Message);
-                    throw new Exception("Error: " + ex.Message);
-                }
-            }
-        }
-    }
-
-    private string createUpdateUserSetString(User user, int userdoingudpates, User useroriginalvalues)
-    {
-        string columnValueToSet = "";
         if (user.username != null)
         {
-            writeToSecurityLogTable(6, userdoingudpates, user.usernum, useroriginalvalues.username, user.username);
-            columnValueToSet += "[username] = @username,";
+            writeToSecurityLogTable(6, userdoingupdates, user.usernum, usrtoupdate[0].Username, user.username);
+            usrtoupdate[0].Username = user.username;
         }
         if (user.firstname != null)
         {
-            writeToSecurityLogTable(7, userdoingudpates, user.usernum, useroriginalvalues.firstname, user.firstname);
-            columnValueToSet += "[firstname] = @firstname,";
+            writeToSecurityLogTable(7, userdoingupdates, user.usernum, usrtoupdate[0].FirstName, user.firstname);
+            usrtoupdate[0].FirstName = user.firstname;
         }
         if (user.lastname != null)
         {
-            writeToSecurityLogTable(8, userdoingudpates, user.usernum, useroriginalvalues.lastname, user.lastname);
-            columnValueToSet += "[lastname] = @lastname,";
+            writeToSecurityLogTable(8, userdoingupdates, user.usernum, usrtoupdate[0].LastName, user.lastname);
+            usrtoupdate[0].LastName = user.lastname;
         }
         if (user.password != null)
         {
-            writeToSecurityLogTable(13, userdoingudpates, user.usernum);
-            columnValueToSet += "[password] = @password, [passwordlastchanged] = GETDATE(),";
+            writeToSecurityLogTable(13, userdoingupdates, user.usernum);
+            usrtoupdate[0].Password = hashpassword(user.password);
         }
         if (user.emailaddress != null)
         {
-            writeToSecurityLogTable(9, userdoingudpates, user.usernum, useroriginalvalues.emailaddress, user.emailaddress);
-            columnValueToSet += "[emailaddress] = @emailaddress,";
+            writeToSecurityLogTable(9, userdoingupdates, user.usernum, usrtoupdate[0].EmailAddress, user.emailaddress);
+            usrtoupdate[0].EmailAddress = user.emailaddress;
         }
         if (user.enabled != null)
         {
-            writeToSecurityLogTable(user.enabled == 1 ? 14 : 15, userdoingudpates, user.usernum);
-            columnValueToSet += "[status] = @status,";
+            writeToSecurityLogTable(user.enabled == 1 ? 14 : 15, userdoingupdates, user.usernum);
+            usrtoupdate[0].Status = user.enabled == 1;
         }
         if (user.passwordresetonnextlogin != null)
         {
-            writeToSecurityLogTable(5, userdoingudpates, user.usernum, useroriginalvalues.passwordresetonnextlogin == 1 ? "1" : "0", user.passwordresetonnextlogin == 1 ? "1" : "0");
-            columnValueToSet += "[passwordresetnextlogin] = @passwordresetnextlogin,";
+            writeToSecurityLogTable(5, userdoingupdates, user.usernum, usrtoupdate[0].PasswordResetOnNextLogin ? "1" : "0", user.passwordresetonnextlogin == 1 ? "1" : "0");
+            usrtoupdate[0].PasswordResetOnNextLogin = user.passwordresetonnextlogin == 1;
         }
         if (user.authmethod != null)
         {
-            writeToSecurityLogTable(10, userdoingudpates, user.usernum, useroriginalvalues.authmethod, user.authmethod);
-            columnValueToSet += "[authmethod] = @authmethod,";
+            writeToSecurityLogTable(10, userdoingupdates, user.usernum, usrtoupdate[0].AuthMethod.ToString(), user.authmethod.ToString());
+            usrtoupdate[0].AuthMethod = (byte)user.authmethod;
         }
-        if(user.roleid != null)
+        if (user.roleid != null)
         {
-            writeToSecurityLogTable(11, userdoingudpates, user.usernum, useroriginalvalues.roleid.ToString(), user.roleid.ToString());
-            columnValueToSet += "[roleid] = @roleid,";
+            writeToSecurityLogTable(11, userdoingupdates, user.usernum, usrtoupdate[0].Role.RoleId.ToString(), user.roleid.ToString());
+            usrtoupdate[0].Role.RoleId = (int)user.roleid;
         }
-        columnValueToSet += "[lastediteddate] = GETDATE(), [lasteditedby] = @lasteditedby";
+        usrtoupdate[0].LastEditedDate = DateTimeOffset.Now.ToString();
+        usrtoupdate[0].LastEditedBy = userdoingupdates;
 
-        if (columnValueToSet.StartsWith(","))
-        {
-            columnValueToSet = columnValueToSet.Substring(1);
-        }
+        _context.SaveChanges();
 
-        if (columnValueToSet.EndsWith(","))
-        {
-            columnValueToSet = columnValueToSet.Substring(0, columnValueToSet.Length - 1);
-        }
-
-        return columnValueToSet;
+        return GetUser(user.usernum);
     }
 
-    public void StoreSessionInformation(string access_Token, string token_type, DateTime issued, DateTime expires, SqlConnection connection, int usernumloggingin)
+    public void StoreSessionInformation(string access_Token, string token_type, DateTimeOffset issued, DateTimeOffset expires, SqlConnection connection, int usernumloggingin)
     {
-        int numRowsAffected = 0;
-
-        using (SqlCommand command = new SqlCommand(_storesessioninformationinsert, connection))
+        Session session = new Session
         {
-            command.Parameters.AddWithValue("@access_token", access_Token);
-            command.Parameters.AddWithValue("@token_type", token_type);
-            command.Parameters.AddWithValue("@issued", issued);
-            command.Parameters.AddWithValue("@expires", expires);
-            command.Parameters.AddWithValue("@usernum", usernumloggingin);
-            //Console.WriteLine(command.CommandText);
-            do
-            {
-                numRowsAffected = command.ExecuteNonQuery();
+            AccessToken = access_Token,
+            TokenType = token_type,
+            CreationDate = issued.ToString(),
+            ExpirationDate = expires.ToString(),
+            UserNum = usernumloggingin
+        };
 
-                if (numRowsAffected == 0)
-                {
-                    Log.Logger.Error("Failed to store session information.");
-                }
-                else
-                {
-                    Log.Logger.Information("Successfully stored session information.");
-                }
-            } while (numRowsAffected == 0);
-        }
+        _context.Sessions.Add(session);
+
+        _context.SaveChanges();
     }
 
     public bool validateAccessToken(string access_token, SqlConnection connection)
     {
-        Log.Logger.Information("Validating access token");
-        //string _validateaccesstokenquery = "SELECT * FROM sessions WHERE access_token = '@access_token'";
-        using (SqlCommand command = new SqlCommand(_validateaccesstokenquery, connection))
+        var sessionvalidation = _context.Sessions
+            .Where(s => s.AccessToken == access_token)
+            .ToList();
+        
+        if(sessionvalidation.Count <= 0)
         {
-            command.Parameters.AddWithValue("@access_token", access_token);
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                if (!reader.HasRows)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 
     public string GetRoles()
     {
-        //string _getrolesquery = "SELECT * FROM [COMACON].[dbo].[roles]";
+        var roles = _context.Roles
+            .ToList();
 
-        using(SqlCommand command = new SqlCommand(_getrolesquery, new SqlConnection(_connectionString)))
+        if(roles.Count <= 0)
         {
-            command.Connection.Open();
-            using(SqlDataReader reader = command.ExecuteReader())
-            {
-                if (reader.HasRows)
-                {
-                    Roles rolesds = new Roles();
-                    while (reader.Read())
-                    {
-                        role r = new role();
-                        r.roleid = int.Parse(reader["roleid"].ToString());
-                        r.rolename = reader["rolename"].ToString();
-                        r.roledescription = reader["roledescription"].ToString();
-                        rolesds.roles.Add(r);
-                    }
-
-                    return JsonConvert.SerializeObject(rolesds);
-                }
-                else
-                {
-                    return "";
-                }
-            }
+            return "";
         }
+
+        Roles rolesds = new Roles();
+        foreach (Role r1 in roles)
+        {
+            role r = new role();
+            r.roleid = r1.RoleId;
+            r.rolename = r1.RoleName;
+            r.roledescription = r1.RoleDescription;
+            rolesds.roles.Add(r);
+        }
+
+        return JsonConvert.SerializeObject(rolesds);
     }
 
     public string CreateUser(User user, int userdoingcreation)
     {
-        Console.WriteLine(userdoingcreation);
-        //string _createuserquery = "INSERT INTO [COMACON].[dbo].[useraccounts] (username, firstname, lastname, password, emailaddress, status, passwordresetonnextlogin, passwordlastchanged, authmethod, creationdate, createdby, lastediteddate, lasteditedby, roleid) VALUES (@username, @firstname, @lastname, @password, @emailaddress, @status, @passwordresetonnextlogin, @passwordlastchanged, @authmethod, @creationdate, @createdby, @lastediteddate, @lasteditedby, @roleid)";
-
-        using(SqlConnection connection = new SqlConnection(_connectionString))
+        UserAccount ua = new UserAccount
         {
-            connection.Open();
+            Username = user.username,
+            FirstName = user.firstname,
+            LastName = user.lastname,
+            Password = hashpassword(user.password),
+            EmailAddress = user.emailaddress,
+            Status = user.enabled == 1,
+            PasswordResetOnNextLogin = user.passwordresetonnextlogin == 1,
+            PasswordLastChanged = DateTimeOffset.Now.ToString(),
+            AuthMethod = (byte)user.authmethod,
+            CreationDate = DateTimeOffset.Now.ToString(),
+            CreatedBy = userdoingcreation,
+            LastEditedDate = DateTimeOffset.Now.ToString(),
+            LastEditedBy = userdoingcreation,
+            RoleId = (int)user.roleid
+        };
 
-            using(SqlCommand command = new SqlCommand(_createuserquery, connection))
-            {
-                command.Parameters.AddWithValue("@username", user.username);
-                command.Parameters.AddWithValue("@firstname", user.firstname);
-                command.Parameters.AddWithValue("@lastname", user.lastname);
-                command.Parameters.AddWithValue("@password", hashpassword(user.password));
-                command.Parameters.AddWithValue("@emailaddress", user.emailaddress);
-                command.Parameters.AddWithValue("@status", user.enabled);
-                command.Parameters.AddWithValue("@passwordresetonnextlogin", user.passwordresetonnextlogin);
-                //Create new DateTime variable of current DateTime.
-                DateTime currentDateTime = DateTime.Now;
-                command.Parameters.AddWithValue("@passwordlastchanged", currentDateTime);
-                command.Parameters.AddWithValue("@authmethod", user.authmethod);
-                command.Parameters.AddWithValue("@creationdate", currentDateTime);
-                command.Parameters.AddWithValue("@createdby", userdoingcreation);
-                command.Parameters.AddWithValue("@lastediteddate", currentDateTime);
-                command.Parameters.AddWithValue("@lasteditedby", userdoingcreation);
-                command.Parameters.AddWithValue("@roleid", user.roleid);
+        _context.UserAccounts.Add(ua);
 
-                try
-                {
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        string usercreated = GetUserByUsername(user.username);
-                        Console.WriteLine(usercreated);
-                        Console.WriteLine(JsonConvert.DeserializeObject<UsersDataStructure>(usercreated).users[0].usernum);
-                        writeToSecurityLogTable(12, userdoingcreation, JsonConvert.DeserializeObject<UsersDataStructure>(usercreated).users[0].usernum);
-                        return usercreated;
-                    }
-                    else
-                    {
-                        Log.Logger.Warning("No rows affected.");
-                        throw new Exception("No rows affected.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.Logger.Error("Error: " + ex.Message);
-                    throw new Exception("Error: " + ex.Message);
-                }
-            }
-        }
+        _context.SaveChanges();
+
+        string usercreated = GetUserByUsername(user.username);
+        writeToSecurityLogTable(12, userdoingcreation, JsonConvert.DeserializeObject<UsersDataStructure>(usercreated).users[0].usernum);
+        return usercreated;
     }
 
-    private string hashpassword(string password)
+    public string hashpassword(string password)
     {
         using (SHA256 sha256Hash = SHA256.Create())
         {
@@ -576,266 +446,209 @@ internal class DefaultSqlQueries : SqlQueries
 
     private string GetUserByUsername(string username)
     {
-        using (SqlConnection connection = new SqlConnection(_connectionString))
+        var usr = _context.UserAccounts
+            .Where(u => u.Username == username)
+            .ToList();
+
+        if (usr.Count <= 0)
         {
-            connection.Open();
-            //string getuserbyusernamequery = "SELECT * FROM [COMACON].[dbo].[useraccounts] WHERE [username] = @username";
-
-            using (SqlCommand command = new SqlCommand(_getuserbyusernamequery, connection))
-            {
-                command.Parameters.AddWithValue("@username", username);
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.HasRows)
-                    {
-                        UsersDataStructure usersds = new UsersDataStructure();
-                        while (reader.Read())
-                        {
-                            User u = new User();
-                            u.usernum = int.Parse(reader["usernum"].ToString());
-                            u.username = reader["username"].ToString();
-                            u.firstname = reader["firstname"].ToString();
-                            u.lastname = reader["lastname"].ToString();
-                            u.emailaddress = reader["emailaddress"].ToString();
-                            u.enabled = bool.Parse(reader["status"].ToString()) ? 1 : 0;
-                            u.passwordresetonnextlogin = bool.Parse(reader["passwordresetonnextlogin"].ToString()) ? 1 : 0;
-                            u.passwordlastchanged = DateTime.Parse(reader["passwordlastchanged"].ToString());
-                            u.authmethod = reader["authmethod"].ToString();
-                            u.creationdate = DateTime.Parse(reader["creationdate"].ToString());
-                            u.createdby = int.Parse(reader["createdby"].ToString());
-                            u.lastediteddate = DateTime.Parse(reader["lastediteddate"].ToString());
-                            u.lasteditedby = int.Parse(reader["lasteditedby"].ToString());
-                            u.roleid = int.Parse(reader["roleid"].ToString());
-                            usersds.users.Add(u);
-                        }
-
-                        return JsonConvert.SerializeObject(usersds);
-                    }
-                    else
-                    {
-                        return "";
-                    }
-                }
-            }
+            return "";
         }
-    }
-
-    private (SqlDataReader, SqlConnection) createAndExecuteSqlNoParameters(string query)
-    {
-        SqlConnection connection = new SqlConnection(_connectionString);
-        connection.Open();
-
-        SqlCommand command = new SqlCommand(query, connection);
-
-        return (command.ExecuteReader(), connection);
-    }
-
-    private SqlDataReader createAndExecuteSqlWithParameters(string query, Dictionary<string, int> parameters)
-    {
-        SqlConnection connection = new SqlConnection(_connectionString);
-
-        connection.Open();
-
-        SqlCommand command = new SqlCommand(query, connection);
-
-        if (parameters != null)
+        else
         {
-            foreach (KeyValuePair<string, int> kvp in parameters)
+            UsersDataStructure usersds = new UsersDataStructure();
+            foreach (UserAccount u in usr)
             {
-                command.Parameters.AddWithValue(kvp.Key, kvp.Value);
+                User u2 = new User();
+                u2.usernum = u.UserNum;
+                u2.username = u.Username;
+                u2.firstname = u.FirstName;
+                u2.lastname = u.LastName;
+                u2.emailaddress = u.EmailAddress;
+                u2.enabled = u.Status ? 1 : 0;
+                u2.passwordresetonnextlogin = u.PasswordResetOnNextLogin ? 1 : 0;
+                u2.passwordlastchanged = DateTimeOffset.Parse(u.PasswordLastChanged);
+                u2.authmethod = u.AuthMethod;
+                u2.creationdate = DateTimeOffset.Parse(u.CreationDate);
+                u2.createdby = u.CreatedBy;
+                u2.lastediteddate = DateTimeOffset.Parse(u.LastEditedDate);
+                u2.lasteditedby = u.LastEditedBy;
+                u2.roleid = u.RoleId;
+                usersds.users.Add(u2);
             }
-        }
 
-        return command.ExecuteReader();
-    }
-
-    private SqlDataReader createAndExecuteSqlWithParameters(string query, Dictionary<string, string> parameters)
-    {
-        using (SqlConnection connection = new SqlConnection(_connectionString))
-        {
-            connection.Open();
-
-            using (SqlCommand command = new SqlCommand(query, connection))
-            {
-                if (parameters != null)
-                {
-                    foreach (KeyValuePair<string, string> kvp in parameters)
-                    {
-                        command.Parameters.AddWithValue(kvp.Key, kvp.Value);
-                    }
-                }
-
-                return command.ExecuteReader();
-            }
-        }
-    }
-
-    private int executeUpdateSqlQuery(string query)
-    {
-        using (SqlConnection connection = new SqlConnection(_connectionString))
-        {
-            connection.Open();
-
-            using (SqlCommand command = new SqlCommand(query, connection))
-            {
-                return command.ExecuteNonQuery();
-            }
+            return JsonConvert.SerializeObject(usersds);
         }
     }
 
     public void writeToSecurityLogTable(int eventid, int usernumdoingaction)
     {
-        //string securityloginsert = "INSERT INTO [COMACON].[dbo].[securitylog] (eventid, usernum, eventdescription, logdate) VALUES (@eventid, @usernum, @eventdescription, @logdate)";
-
-        using (SqlConnection connection = new SqlConnection(_connectionString))
+        SecurityLog sl = new SecurityLog
         {
-            connection.Open();
+            EventId = (short)eventid,
+            UserNum = usernumdoingaction,
+            EventDescription = _securityLogs[eventid],
+            LogDate = DateTimeOffset.Now.ToString()
+        };
 
-            using (SqlCommand command = new SqlCommand(_securityloginsertdefaultquery, connection))
-            {
-                command.Parameters.AddWithValue("@eventid", eventid);
-                command.Parameters.AddWithValue("@usernum", usernumdoingaction);
-                _securityLogs.TryGetValue(eventid, out string eventdescriptionvalue);
-                command.Parameters.AddWithValue("@eventdescription", eventdescriptionvalue);
-                command.Parameters.AddWithValue("@logdate", DateTime.Now);
+        _context.SecurityLogs.Add(sl);
 
-                command.ExecuteNonQuery();
-            }
-        }
+        _context.SaveChanges();
+
+        return;
     }
 
     public void writeToSecurityLogTable(int eventid, int usernumdoingaction, int affectedusernum)
     {
-        //string securityloginsert = "INSERT INTO [COMACON].[dbo].[securitylog] (eventid, usernum, eventdescription, affectedusernum, logdate) VALUES (@eventid, @usernum, @eventdescription, @affectedusernum, @logdate)";
-
-        using (SqlConnection connection = new SqlConnection(_connectionString))
+        SecurityLog sl = new SecurityLog
         {
-            connection.Open();
+            EventId = (short)eventid,
+            UserNum = usernumdoingaction,
+            EventDescription = _securityLogs[eventid],
+            AffectedUserNum = affectedusernum,
+            LogDate = DateTimeOffset.Now.ToString()
+        };
 
-            using (SqlCommand command = new SqlCommand(_securityloginsertaffecteduserquery, connection))
-            {
-                command.Parameters.AddWithValue("@eventid", eventid);
-                command.Parameters.AddWithValue("@usernum", usernumdoingaction);
-                _securityLogs.TryGetValue(eventid, out string eventdescriptionvalue);
-                command.Parameters.AddWithValue("@eventdescription", eventdescriptionvalue);
-                command.Parameters.AddWithValue("@affectedusernum", affectedusernum);
-                command.Parameters.AddWithValue("@logdate", DateTime.Now);
+        _context.SecurityLogs.Add(sl);
 
-                command.ExecuteNonQuery();
-            }
-        }
+        _context.SaveChanges();
+
+        return;
     }
 
     public void writeToSecurityLogTable(int eventid, int usernumdoingaction, string oldvalue, string newvalue)
     {
-        //string securityloginsert = "INSERT INTO [COMACON].[dbo].[securitylog] (eventid, usernum, eventdescription, affectedusernum, logdate) VALUES (@eventid, @usernum, @eventdescription, @affectedusernum @logdate)";
-
-        using (SqlConnection connection = new SqlConnection(_connectionString))
+        SecurityLog sl = new SecurityLog
         {
-            connection.Open();
+            EventId = (short)eventid,
+            UserNum = usernumdoingaction,
+            EventDescription = string.Format(_securityLogs[eventid], oldvalue, newvalue),
+            LogDate = DateTimeOffset.Now.ToString()
+        };
 
-            using (SqlCommand command = new SqlCommand(_securityloginsertoldvaluenewvaluequery, connection))
-            {
-                command.Parameters.AddWithValue("@eventid", eventid);
-                command.Parameters.AddWithValue("@usernum", usernumdoingaction);
-                _securityLogs.TryGetValue(eventid, out string eventdescriptionvalue);
-                command.Parameters.AddWithValue("@eventdescription", string.Format(eventdescriptionvalue, oldvalue, newvalue));
-                command.Parameters.AddWithValue("@logdate", DateTime.Now);
+        _context.SecurityLogs.Add(sl);
 
-                command.ExecuteNonQuery();
-            }
-        }
+        _context.SaveChanges();
+
+        return;
     }
 
     public void writeToSecurityLogTable(int eventid, int usernumdoingaction, int affectedusernum, string oldvalue, string newvalue)
     {
-        //string securityloginsert = "INSERT INTO [COMACON].[dbo].[securitylog] (eventid, usernum, eventdescription, affectedusernum, logdate) VALUES (@eventid, @usernum, @eventdescription, @affectedusernum, @logdate)";
-
-        using (SqlConnection connection = new SqlConnection(_connectionString))
+        SecurityLog sl = new SecurityLog
         {
-            connection.Open();
+            EventId = (short)eventid,
+            UserNum = usernumdoingaction,
+            EventDescription = string.Format(_securityLogs[eventid], oldvalue, newvalue),
+            AffectedUserNum = affectedusernum,
+            LogDate = DateTimeOffset.Now.ToString()
+        };
 
-            using (SqlCommand command = new SqlCommand(_securityloginsertaffecteduseroldvaluenewvaluequery, connection))
-            {
-                command.Parameters.AddWithValue("@eventid", eventid);
-                command.Parameters.AddWithValue("@usernum", usernumdoingaction);
-                _securityLogs.TryGetValue(eventid, out string eventdescriptionvalue);
-                command.Parameters.AddWithValue("@eventdescription", string.Format(eventdescriptionvalue,oldvalue,newvalue));
-                command.Parameters.AddWithValue("@affectedusernum", affectedusernum);
-                command.Parameters.AddWithValue("@logdate", DateTime.Now);
+        _context.SecurityLogs.Add(sl);
 
-                command.ExecuteNonQuery();
-            }
-        }
+        _context.SaveChanges();
+
+        return;
     }
 
     public void DeleteSessionInformation(string access_token, SqlConnection connection)
     {
-        //string deletesessioninformationquery = "DELETE from [COMACON].[dbo].[sessions] WHERE [access_token] = @access_token";
-        using (SqlCommand command = new SqlCommand(_deletesessioninformationquery, connection))
+        var session = _context.Sessions
+            .Where(s => s.AccessToken == access_token)
+            .ToList();
+
+        if(session.Count <= 0)
         {
-            command.Parameters.AddWithValue("@access_token", access_token);
-
-            command.ExecuteNonQuery();
+            return;
         }
-    }
+        else
+        {
+            _context.Sessions.Remove(session[0]);
+            _context.SaveChanges();
+        }
 
-    public void getSessionInformation(string access_token, SqlConnection connection)
-    {
-        throw new NotImplementedException();
+        return;
     }
 
     public string GetAllPasswordPolicies()
     {
+        //TODO: Need to update this to use the SQLite database context.
+        var databasepolicies = _context.PasswordPolicies
+            .ToList();
+
         PasswordPolicies pwp = new PasswordPolicies();
-        using (SqlConnection connection = new SqlConnection(_connectionString))
+        foreach (COMACON.DatabaseContexts.SQLite.PasswordPolicy pp1 in databasepolicies)
         {
-            connection.Open();
-            List<int> passwordpolicyids = new List<int>();
-            using (SqlCommand command = new SqlCommand(_getallpasswordpoliciesquery, connection))
-            {
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    if (!reader.HasRows)
-                    {
-                        throw new Exception("No Policies are configured.");
-                    }
+            var rules = _context.PasswordRules
+                .Where(pr => pr.PswdPolicyId == pp1.PswdPolicyId)
+                .ToList();
+            PasswordPolicy pp2 = new PasswordPolicy();
+            pp2.passwordpolicyid = (int)pp1.PswdPolicyId;
+            pp2.passwordpolicytype = pp1.PolicyType;
+            pp2.passwordpolicyname = pp1.PolicyName;
+            pp2.passwordpolicydescription = pp1.PolicyDescription;
+            pp2.passwordpolicyenabled = pp1.PolicyEnabled ? 1 : 0;
 
-                    while (reader.Read())
-                    {
-                        PasswordPolicy pp = new PasswordPolicy();
-                        pp.passwordpolicyid = int.Parse(reader["pswdpolicyid"].ToString());
-                        pp.passwordpolicytype = int.Parse(reader["policytype"].ToString());
-                        pp.passwordpolicyname = reader["policyname"].ToString();
-                        pp.passwordpolicydescription = reader["policydescription"].ToString();
-                        pp.passwordpolicyenabled = bool.Parse(reader["policyenabled"].ToString()) ? 1 : 0;
-                        pwp.passwordpolicies.Add(pp);
-                    }
-                }
-            }
-
-            foreach(PasswordPolicy pp in pwp.passwordpolicies)
+            foreach(PasswordRule pr in pp1.PasswordRules)
             {
-                using (SqlCommand command = new SqlCommand(_getpolicyrulebypswdpolicyidquery, connection))
-                {
-                    command.Parameters.AddWithValue("@pswdpolicyid", pp.passwordpolicyid);
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.HasRows)
-                        {
-                            while (reader.Read())
-                            {
-                                PasswordPolicyRule ppr = new PasswordPolicyRule();
-                                ppr.ruletype = int.Parse(reader["ruletype"].ToString());
-                                ppr.rulevalue = int.Parse(reader["rulevalue"].ToString());
-                                ppr.ruleenabled = bool.Parse(reader["ruleenabled"].ToString()) ? 1 : 0;
-                                pp.rules.Add(ppr);
-                            }
-                        }
-                    }
-                }
+                PasswordPolicyRule ppr = new PasswordPolicyRule();
+                ppr.ruletype = pr.RuleType;
+                ppr.rulevalue = (int)pr.RuleValue;
+                ppr.ruleenabled = pr.RuleEnabled ? 1 : 0;
+                pp2.rules.Add(ppr);
             }
+            pwp.passwordpolicies.Add(pp2);
         }
+
+        
+        //using (SqlConnection connection = new SqlConnection(_connectionString))
+        //{
+        //    connection.Open();
+        //    List<int> passwordpolicyids = new List<int>();
+        //    using (SqlCommand command = new SqlCommand(_getallpasswordpoliciesquery, connection))
+        //    {
+        //        using (SqlDataReader reader = command.ExecuteReader())
+        //        {
+        //            if (!reader.HasRows)
+        //            {
+        //                throw new Exception("No Policies are configured.");
+        //            }
+
+        //            while (reader.Read())
+        //            {
+        //                PasswordPolicy pp = new PasswordPolicy();
+        //                pp.passwordpolicyid = int.Parse(reader["pswdpolicyid"].ToString());
+        //                pp.passwordpolicytype = int.Parse(reader["policytype"].ToString());
+        //                pp.passwordpolicyname = reader["policyname"].ToString();
+        //                pp.passwordpolicydescription = reader["policydescription"].ToString();
+        //                pp.passwordpolicyenabled = bool.Parse(reader["policyenabled"].ToString()) ? 1 : 0;
+        //                pwp.passwordpolicies.Add(pp);
+        //            }
+        //        }
+        //    }
+
+        //    foreach(PasswordPolicy pp in pwp.passwordpolicies)
+        //    {
+        //        using (SqlCommand command = new SqlCommand(_getpolicyrulebypswdpolicyidquery, connection))
+        //        {
+        //            command.Parameters.AddWithValue("@pswdpolicyid", pp.passwordpolicyid);
+        //            using (SqlDataReader reader = command.ExecuteReader())
+        //            {
+        //                if (reader.HasRows)
+        //                {
+        //                    while (reader.Read())
+        //                    {
+        //                        PasswordPolicyRule ppr = new PasswordPolicyRule();
+        //                        ppr.ruletype = int.Parse(reader["ruletype"].ToString());
+        //                        ppr.rulevalue = int.Parse(reader["rulevalue"].ToString());
+        //                        ppr.ruleenabled = bool.Parse(reader["ruleenabled"].ToString()) ? 1 : 0;
+        //                        pp.rules.Add(ppr);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         return JsonConvert.SerializeObject(pwp);
     }

@@ -6,18 +6,48 @@
 <partial name="~/Views/PartialViews/General/Settings/Users/NewAndEditingUserModal.cshtml" />
 <div class="settings-container">
     <div class="settings-categories">
-        <button id="General" class="settings-category" onclick="activateSettingsButton(this)">General</button>
+        @* <button id="General" class="settings-category" onclick="activateSettingsButton(this)">General</button> *@
         <button id="Users" class="settings-category" onclick="activateSettingsButton(this)">Users</button>
         @* <button id="Roles" class="settings-category">Roles</button> *@
         @* <button id="Permissions" class="settings-category">Permissions</button> *@
     </div>
     <div class="settings-content">
         <partial name="~/Views/PartialViews/General/Settings/Users/SettingsUsers.cshtml" />
-        <partial name="~/Views/PartialViews/General/Settings/GeneralSettings/GeneralSettings.cshtml" />
+        @* <partial name="~/Views/PartialViews/General/Settings/GeneralSettings/GeneralSettings.cshtml" /> *@
     </div>
 </div>
 <script>
     currentPage = "Settings";
+
+    Array.from(document.getElementsByClassName("CreateUserRequiredFields")).forEach(field => {
+        field.addEventListener('input', (event) => {
+            console.log(event.target.value);
+            switch(event.target.id){
+                case "Username":
+                    if (event.target.value == "") {
+                        event.target.classList.add('invalidnewuserfield');
+                    } else if (allusers.find(user => user.username == event.target.value) != null) {
+
+                        event.target.classList.add('invalidnewuserfield');
+                    }else {
+                        event.target.classList.remove('invalidnewuserfield');
+                    }
+                    break;
+                default:
+                    if (event.target.value == "") {
+                        event.target.classList.add('invalidnewuserfield');
+                    } else {
+                        event.target.classList.remove('invalidnewuserfield');
+                    }
+                    break;
+            }
+            if(document.getElementsByClassName("invalidnewuserfield").length > 0){
+                document.getElementById("SaveViewAndEditUserModal").disabled = true;
+            } else {
+                document.getElementById("SaveViewAndEditUserModal").disabled = false;
+            }
+        });
+    });
 </script>
 
 

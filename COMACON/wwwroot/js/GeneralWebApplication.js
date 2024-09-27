@@ -247,41 +247,25 @@ setTimeout(() => {
  *                  Page Load SCript
  ********************************************************/
 async function onPageLoadLogic() {
-    // console.log("Home Page Loaded");
-    // console.log(window.location);
-    //if (window.location.href.endsWith("/")) {
-    //    apiRootUrl = window.location.href.slice(0, -1);
-    //    sessionStorage.setItem('apiRootUrl', apiRootUrl);
-    //} else {
-    //    apiRootUrl = window.location;
-    //    sessionStorage.setItem('apiRootUrl', apiRootUrl);
-    //}
-
-    //console.log(sessionStorage.getItem('apiRootUrl'));
     if (sessionStorage.getItem('apiRootUrl') == null || sessionStorage.getItem('apiRootUrl') == undefined) {
-        fetch(apiRootUrl + '/api/Endpoint/GetRootUrl', {
-            method: 'GET', // or 'POST', 'PUT', 'DELETE', etc.
-        })
-            .then(response => response.json())
-            .then(data => {
-                //console.log(data.rooturl)
-                sessionStorage.setItem('apiRootUrl', data.rooturl);
-                //console.log(sessionStorage.getItem('apiRootUrl'));
-            })
-            .catch(error => console.error('Error:', error));
+        if (window.location.href.endsWith("/")) {
+            apiRootUrl = window.location.href.slice(0, -1);
+            sessionStorage.setItem('apiRootUrl', apiRootUrl);
+        } else {
+            apiRootUrl = window.location.href;
+            sessionStorage.setItem('apiRootUrl', apiRootUrl);
+        }
+        //fetch(apiRootUrl + '/api/Endpoint/GetRootUrl', {
+        //    method: 'GET', // or 'POST', 'PUT', 'DELETE', etc.
+        //})
+        //    .then(response => response.json())
+        //    .then(data => {
+        //        sessionStorage.setItem('apiRootUrl', data.rooturl);
+        //    })
+        //    .catch(error => console.error('Error:', error));
     } else {
-        
+        apiRootUrl = sessionStorage.getItem('apiRootUrl');
     }
-    apiRootUrl = sessionStorage.getItem('apiRootUrl');
-    //console.log(apiRootUrl);
-
-    //if (currentPage == "Login" || currentPage == "Settings" || currentPage == "Home") {
-    //    document.getElementById("core-action-buttons-div").style.display = "none";
-    //}
-
-    //if (currentPage == "Login") {
-    //    document.getElementById("logoutbutton").style.display = "none";
-    //}
 
     if (localStorage.getItem("darkModeState") != null) {
         if (localStorage.getItem("darkModeState") == "true") {
@@ -294,22 +278,21 @@ async function onPageLoadLogic() {
 
     if (sessionStorage.getItem('WebApplicationChosenArray') != null && sessionStorage.getItem('WebApplicationChosenArray') != undefined) {
         let object = JSON.parse(sessionStorage.getItem('WebApplicationChosenArray'));
-        //console.log(object);
         sessionStorage.removeItem('WebApplicationChosenArray');
-        apiRootUrl = sessionStorage.getItem('apiRootUrl');
+        //apiRootUrl = sessionStorage.getItem('apiRootUrl');
 
         document.getElementById("ProcessingWebConfig-Label").innerText = "Loading " + object[0].name + " Web Application...";
         document.getElementById("ProcessingWebConfigValuesProgress").style.display = "block";
         loadWebApplicationConfiguration(object[0].webConfigPhysicalPath, object[0].type, object[0].version, object[0].site, object[0].name, object[0].path, object[0].physicalPath, object[0].bitness);
     } else {
-        //console.log((sessionStorage.getItem('WebApplicationChosenArray') == null || sessionStorage.getItem('WebApplicationChosenArray') == undefined));
-        //console.log((currentPage != "Home" && currentPage != "Login" && currentPage != "Settings"));
         if ((sessionStorage.getItem('WebApplicationChosenArray') == null || sessionStorage.getItem('WebApplicationChosenArray') == undefined)
             && (currentPage != "Home" && currentPage != "Login" && currentPage != "Settings")) {
-            //console.log("Redirecting to Home.");
-            window.location.href = "/core/home"
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/core/home"
         }
     }
+
+    document.getElementById("COMACON-HeaderHomeLink").href = sessionStorage.getItem('apiRootUrl') + "/core/home";
+    document.getElementById("SettingsButton").href = sessionStorage.getItem('apiRootUrl') + "/core/settings";
 }
 
 
@@ -317,7 +300,7 @@ async function onPageLoadLogic() {
  *       Load Web Application Configuration Script
  ********************************************************/
 function loadWebApplicationConfiguration(webConfigPhysicalPathVariable, webApplicationType, webApplicationVersion, webApplicationSiteName, webApplicationName, webApplicationPath, physicalPath, bitness) {
-    fetch(apiRootUrl + '/api/Endpoint/GetConfiguration?webconfig=' + encodeURIComponent(webConfigPhysicalPathVariable) +
+    fetch(sessionStorage.getItem('apiRootUrl') + '/api/Endpoint/GetConfiguration?webconfig=' + encodeURIComponent(webConfigPhysicalPathVariable) +
         "&type=" + encodeURIComponent(webApplicationType) +
         "&version=" + encodeURIComponent(webApplicationVersion) +
         "&siteName=" + encodeURIComponent(webApplicationSiteName) +
@@ -332,7 +315,7 @@ function loadWebApplicationConfiguration(webConfigPhysicalPathVariable, webAppli
 }
 
 async function checkWhatWebApplicationToParse(config, executionMethod) {
-    console.log(config);
+    //console.log(config);
 
     if (config["processingErrors"]["CriticalErrors"].length > 0) {
         populateErrorLoadModal(config["processingErrors"]["CriticalErrors"], "Critical");
@@ -375,7 +358,7 @@ function loadWebApplications() {
     if (tbody != null) {
         webAppTable.removeChild(webAppTable.getElementsByTagName('tbody')[0]);
     }
-    fetch(apiRootUrl + "/api/Endpoint/GetApplications", {
+    fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/GetApplications", {
         method: "GET",
     })
         .then(response => response.json())
@@ -454,34 +437,34 @@ function okButtonClicked() {
 function goToWebApplicationConfigurationPage(object) {
     switch (object[0].type) {
         case "Application Server":
-            window.location.href = apiRootUrl + "/Core/ApplicationServer";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/ApplicationServer";
             break;
         case "Agenda Online":
-            window.location.href = apiRootUrl + "/Core/AgendaOnlineServer";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/AgendaOnlineServer";
             break;
         case "Electronic Plan Review":
-            window.location.href = apiRootUrl + "/Core/ElectronicPlanReview";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/ElectronicPlanReview";
             break;
         case "Gateway Caching Server":
-            window.location.href = apiRootUrl + "/Core/GatewayCachingServer";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/GatewayCachingServer";
             break;
         case "Healthcare Form Manager":
-            window.location.href = apiRootUrl + "/Core/HealthcareFormManager";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/HealthcareFormManager";
             break;
         case "Patient Window":
-            window.location.href = apiRootUrl + "/Core/OnBasePatientWindow";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/OnBasePatientWindow";
             break;
         case "Public Access - Legacy":
-            window.location.href = apiRootUrl + "/Core/PublicAccessViewerLegacy"
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/PublicAccessViewerLegacy"
             break;
         case "Public Access - Next Gen":
-            window.location.href = apiRootUrl + "/Core/PublicAccessViewerNextGen"
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/PublicAccessViewerNextGen"
             break;
         case "Reporting Viewer":
-            window.location.href = apiRootUrl + "/Core/ReportingWebViewer";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/ReportingWebViewer";
             break;
         case "Web Server":
-            window.location.href = apiRootUrl + "/Core/WebServer";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/WebServer";
             break;
     }
 }
@@ -716,7 +699,7 @@ function parseIisConfigurationApplicationPool(config) {
 ********************************************************/
 async function createNewConfiguration() {
     document.getElementById("NewWebApplicationModal").style.display = "block";
-    await fetch(apiRootUrl + "/api/Endpoint/GetNewConfigurationDetails")
+    await fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/GetNewConfigurationDetails")
         .then(response => response.json())
         .then(data => {
             newConfigurationDetails = data;
@@ -808,7 +791,7 @@ function pushWebApplicationConfiguration() {
         body: JSON.stringify(coreConfigData)
     };
     let stringifiedDataStructure = JSON.stringify(coreConfigData);
-    fetch(apiRootUrl + "/api/Endpoint/SaveWebApplication", fetchOptions)
+    fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/SaveWebApplication", fetchOptions)
         .then(response => response.json())
         .then(data => processWebApplicationSaveResponse(data));
 }
@@ -936,7 +919,7 @@ function copyWebApplication() {
 
 function validateNoDuplicateApplicationName(field) {
     if (field.value != "") {
-        fetch(apiRootUrl + "/api/Endpoint/DuplicateApplicationCheck?applicationName=" + encodeURI(field.value) +
+        fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/DuplicateApplicationCheck?applicationName=" + encodeURI(field.value) +
             "&siteName=" + encodeURI(coreConfigData["SiteName"]) +
             "&applicationPath=" + encodeURI(coreConfigData["Path"]) +
             "&physicalPath=" + encodeURI(coreConfigData["PhysicalPath"] +
@@ -964,7 +947,7 @@ function parseValidateNoDuplicateApplicationName(data) {
 
 function validateNoDuplicateApplicationPoolName(field) {
     if (field.value != "") {
-        fetch(apiRootUrl + "/api/Endpoint/DuplicateAppPoolCheck?appPoolName=" + encodeURI(field.value), {
+        fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/DuplicateAppPoolCheck?appPoolName=" + encodeURI(field.value), {
             method: "GET",
         })
             .then(response => response.json())
@@ -995,7 +978,7 @@ function validateApplicationServerURL(field) {
                 'Content-Type': 'application/json'
             }
         }
-        fetch(apiRootUrl + "/api/Endpoint/UrlValidation?url=" + encodeURIComponent(field.value), applicationServerUrlValidationOptions)
+        fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/UrlValidation?url=" + encodeURIComponent(field.value), applicationServerUrlValidationOptions)
             .then(response => {
                 //console.log(response.json());
                 let section = document.getElementById("ApplicationServerUrl-ResultContainer");
@@ -1207,7 +1190,7 @@ function testUrl(field) {
                 'Content-Type': 'application/json'
             }
         }
-        fetch(apiRootUrl + "/api/Endpoint/UrlValidation?url=" + encodeURIComponent(field.currentTarget.value), urlValidationOptions)
+        fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/UrlValidation?url=" + encodeURIComponent(field.currentTarget.value), urlValidationOptions)
             .then(response => {
                 //console.log(response.json());
                 let section = document.getElementById("ApplicationServerUrl-ResultContainer");
@@ -3423,7 +3406,7 @@ async function testConnectionString() {
             'Content-Type': 'application/json'
         }
     };
-    fetch(apiRootUrl + "/api/Endpoint/TestConnectionString?cstringobject=" + JSON.stringify(selectedConnectionString[0]), testConnectionStringOptions)
+    fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/TestConnectionString?cstringobject=" + JSON.stringify(selectedConnectionString[0]), testConnectionStringOptions)
         .then(response => {
             if (response.ok) {
                 return response.json().then(data => {
@@ -3438,7 +3421,7 @@ async function testConnectionString() {
                     }
                 })
             } else if(response.redirected){
-                window.location.href = response.url;
+                window.location.href = sessionStorage.getItem('apiRootUrl') + response.url;
             }
             //response.json();
         });
@@ -3853,7 +3836,6 @@ async function nextButtonClicked() {
                 webApplicationBitness: bitness,
                 webApplicationPoolName: document.getElementById("WebApplicationPoolName").value
             };
-            console.log(webApplicationToCreate["virtualDirectory"]);
             let dupResult = await newWebApplicationValidateNoDuplicate(webApplicationToCreate)
             if (dupResult) {
                 const fetchOptions = {
@@ -3863,10 +3845,9 @@ async function nextButtonClicked() {
                     },
                     body: JSON.stringify(webApplicationToCreate)
                 };
-                fetch(apiRootUrl + "/api/Endpoint/CreateNewWebApplication?action=FromScratch", fetchOptions)
+                fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/CreateNewWebApplication?action=FromScratch", fetchOptions)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data);
                         switch (data) {
                             case 0:
                                 let virtualDirectoryPath = "";
@@ -3894,37 +3875,36 @@ async function nextButtonClicked() {
                                     }
                                 ];
                                 sessionStorage.setItem('WebApplicationChosenArray', JSON.stringify(webApplicationToLoad));
-                                console.log(sessionStorage.getItem('WebApplicationChosenArray'));
                                 switch (webAppType) {
                                     case "Application Server":
-                                        window.location.href = apiRootUrl + "/Core/ApplicationServer";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/ApplicationServer";
                                         break;
                                     case "Agenda Online":
-                                        window.location.href = apiRootUrl + "/Core/AgendaOnlineServer";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/AgendaOnlineServer";
                                         break;
                                     case "Electronic Plan Review":
-                                        window.location.href = apiRootUrl + "/Core/ElectronicPlanReview";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/ElectronicPlanReview";
                                         break;
                                     case "Gateway Caching Server":
-                                        window.location.href = apiRootUrl + "/Core/GatewayCachingServer";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/GatewayCachingServer";
                                         break;
                                     case "Healthcare Form Manager":
-                                        window.location.href = apiRootUrl + "/Core/HealthcareFormManager";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/HealthcareFormManager";
                                         break;
                                     case "Patient Window":
-                                        window.location.href = apiRootUrl + "/Core/OnBasePatientWindow";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/OnBasePatientWindow";
                                         break;
                                     case "Public Access - Legacy":
-                                        window.location.href = apiRootUrl + "/Core/PublicAccessViewerLegacy"
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/PublicAccessViewerLegacy"
                                         break;
                                     case "Public Access - Next Gen":
-                                        window.location.href = apiRootUrl + "/Core/PublicAccessViewerNextGen"
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/PublicAccessViewerNextGen"
                                         break;
                                     case "Reporting Viewer":
-                                        window.location.href = apiRootUrl + "/Core/ReportingWebViewer";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/ReportingWebViewer";
                                         break;
                                     case "Web Server":
-                                        window.location.href = apiRootUrl + "/Core/WebServer";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/WebServer";
                                         break;
                                 }
                                 break;
@@ -3948,7 +3928,6 @@ async function nextButtonClicked() {
 function webSiteChanged(field) {
     if (field.value != "") {
         document.getElementById("ChoosePath").disabled = false;
-        //document.getElementById("ChoosePath").innerHTML = `<option value="Root">Root</option>`;
         document.getElementById("ChoosePath").innerHTML = "";
         let applicationPaths = Array.from(newConfigurationDetails["webApplicationConfiguration"]["webSiteDetails"]).find(result => result["siteName"] == field.value);
         for (let i = 0; i < applicationPaths["virtualDirectories"].length; i++) {
@@ -4181,7 +4160,7 @@ async function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
         body: JSON.stringify(webApplicationToCheck)
     };
     let returnValue = false;
-    if (await fetch(apiRootUrl + "/api/Endpoint/CheckNewWebApplicationDuplicates", fetchOptions)
+    if (await fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/CheckNewWebApplicationDuplicates", fetchOptions)
         .then(response => response.json())
         .then(data => {
             switch (data) {
