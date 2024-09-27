@@ -99,8 +99,34 @@ CREATE TABLE passwordrules (
 INSERT INTO roles (RoleName, RoleDescription)
 VALUES ('Admin', '');
 
-INSERT INTO useraccounts (Username, FirstName, LastName, Password, EmailAddress, Status, PasswordResetOnNextLogin, PasswordLastChanged, AuthMethod, CreationDate, CreatedBy, LastEditedDate, LastEditedBy, RoleId)
-VALUES ('admin', 'admin', 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'admin@dummy.com', 1, 0, CURRENT_TIMESTAMP, 1, CURRENT_TIMESTAMP, 1, CURRENT_TIMESTAMP, 1, 1);
+INSERT INTO useraccounts (Username,
+FirstName,
+LastName,
+Password,
+EmailAddress,
+Status,
+PasswordResetOnNextLogin,
+PasswordLastChanged,
+AuthMethod,
+CreationDate,
+CreatedBy,
+LastEditedDate,
+LastEditedBy,
+RoleId)
+VALUES ('admin',
+'admin',
+'admin',
+'8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918',
+'admin@dummy.com',
+1,
+0,
+CURRENT_TIMESTAMP,
+1,
+CURRENT_TIMESTAMP,
+1,
+CURRENT_TIMESTAMP,
+1,
+1);
 
 INSERT INTO systemtable (Id, DatabaseVersion)
 VALUES (1, '1.0.0');
