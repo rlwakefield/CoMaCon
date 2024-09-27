@@ -14,10 +14,8 @@ let formattedTextIframeSupportedDomainNewDataStructure = { "Domain": "[domain]",
  *                 General Scripting
  ********************************************************/
 function sessionTimeoutChecked(checkbox, editablefield) {
-    //window.confirm("Warning! This setting is a hard cutoff. Please make sure you are aware the implications this could cause to your solution.")
     if (checkbox.checked == true) {
         if (window.confirm("Warning! This setting is a hard cutoff. Please make sure you are aware the implications this could cause to your solution.")) {
-            //document.getElementById(editablefield).disabled = false;
             checkbox.checked = true;
         } else {
             checkbox.checked = false;

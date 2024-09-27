@@ -1,0 +1,169 @@
+<div id="HealthcareFormManagerSection" class="tabcontent">
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Core
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Data-Source">Data Source: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Data-Source-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Data-Source" id="Data-Source">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Virtual-Directory">Virtual Directory: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Virtual-Directory-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Virtual-Directory" id="Virtual-Directory">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Web-Client-Type">Web Client Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Web-Client-Type-Tooltip" class="tooltiptext">Determines which type of Web Client to use.<br>-activex: This will enable the ActiveX web client.<br>-html: This will enable the HTML Only web client.<br>-selectable: This will provide users an option upon login to select which client type (ActiveX or HTML Only) to use.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select name="Web-Client-Type" id="Web-Client-Type" class="dark_mode_select">
+                                <option value="html">html</option>
+                                <option value="activex" selected>activex</option>
+                                <option value="selectable">selectable</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Allow Insecure Connections: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Allow-Insecure-Connections-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Allow-Insecure-Connections" class="switch">
+                                <input id="Allow-Insecure-Connections" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Session & Logout
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Session Expire: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Enable-Session-Expiration-Tooltip" class="tooltiptext">The end user will be logged out when no activity is detected.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Enable-Session-Expiration" class="switch">
+                                <input id="Enable-Session-Expiration" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Session-Timeout">Session Timeout: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Session-Timeout-Tooltip" class="tooltiptext">Session timeout (in minutes) (minimum 2 minutes, maximum 1440 minutes).</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Session-Timeout" id="Session-Timeout" value="20">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Prompt On Session Expire: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Prompt-On-Session-Expire-Tooltip" class="tooltiptext">Prompts the user with a warning 30 seconds before the session expires.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Prompt-On-Session-Expire" class="switch">
+                                <input id="Prompt-On-Session-Expire" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ExtraRowSection">
+        <div class="sectionWithTitleBar">
+            <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                Miscellaneous
+            </div>
+            <div class="coreSection">
+                <div class="row">
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Row Coloring: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Row-Coloring-Tooltip" class="tooltiptext">Make every other row have a shaded background in the document select list.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="Row-Coloring" class="switch">
+                                    <input id="Row-Coloring" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Prevent Viewer Client Caching: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Prevent-Viewer-Client-Caching-Tooltip" class="tooltiptext">Preventing caching will impact Viewer performance.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="Prevent-Viewer-Client-Caching" class="switch">
+                                    <input id="Prevent-Viewer-Client-Caching" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement" id="Allowed-Domain-SectionElement">
+                            <div class="labelElement">
+                                <label for="Allowed-Domain">Allowed Domain: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Allowed-Domain-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <input type="text" name="Allowed-Domain" id="Allowed-Domain">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Allow View Source: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Allow-View-Source-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="Allow-View-Source" class="switch">
+                                    <input id="Allow-View-Source" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Web-Theme">Web Theme: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Web-Theme-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <select name="Web-Theme" id="Web-Theme" class="dark_mode_select" disabled>
+                                    <option value="XP" selected>XP</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

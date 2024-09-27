@@ -1,0 +1,109 @@
+<div id="TrustedCertificatesSection" class="tabcontent">
+    <div class="row">
+        <div class="column" style="width: 25%;">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Trust Mode: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Trust-Mode-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Trust-Mode" class="switch">
+                        <input id="Trust-Mode" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="column"></div>
+    </div>
+    <div class="row">
+        <div class="column" style="width: 20%;">
+            <select id="TrustedClients-SelectList" name="TrustedClients-SelectList" size="15" style="width:100%;" onchange="trustedClientChanged(this)" class="dark_mode_select">
+            </select>
+            <div style="display:flex;justify-content:space-around;">
+                <button id="Add-Trusted-Client-Button" onclick="addNewTrustedClient()" type="button">Add</button>
+                <button id="Remove-Trusted-Client-Button" onclick="removeTrustedClient()" type="button" disabled>Remove</button>
+            </div>
+        </div>
+        <div class="column" style="width: 60%;">
+            <div style="border: 1px solid black; padding-left: 10px;">
+                <div style="margin-top: 16px;margin-bottom: 16px;">
+                    <div class="labelElement">
+                        <label for="Store-Location">Store Location</label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                        <span id="Store-Location-Tooltip" class="tooltiptext">This is the help text.</span>
+                    </div>
+                    <div class="inputElement">
+                        <select name="Store-Location" id="Store-Location" onchange="trustedClientFieldUpdated('StoreLocation')" class="dark_mode_select" disabled>
+                            <option value="CurrentUser">Current User</option>
+                            <option value="LocalMachine">Local Machine</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top: 16px;margin-bottom: 16px;">
+                    <div class="labelElement">
+                        <label for="Store-Name">Store Name</label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                        <span id="Store-Name-Tooltip" class="tooltiptext">This is the help text.</span>
+                    </div>
+                    <div class="inputElement">
+                        <select name="Store-Name" id="Store-Name" onchange="trustedClientFieldUpdated('StoreName')" class="dark_mode_select" disabled>
+                            <option value="AddressBook">Address Book</option>
+                            <option value="CertificateAuthority">Certificate Authority</option>
+                            <option value="My">Personal Certificate (My)</option>
+                            <option value="Disallowed">Revoked Certificates (Disallowed)</option>
+                            <option value="Root">Root</option>
+                            <option value="AuthRoot">Third-Party Certificate Authority (Auth Root)</option>
+                            <option value="TrustedPeople">Trusted-People</option>
+                            <option value="TrustedPublisher">Trusted Publisher</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top: 16px;margin-bottom: 16px;">
+                    <div class="labelElement">
+                        <label for="Find-Type">Find Type</label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                        <span id="Find-Type-Tooltip" class="tooltiptext">This is the help text.</span>
+                    </div>
+                    <div class="inputElement">
+                        <select name="Find-Type" id="Find-Type" onchange="trustedClientFieldUpdated('FindType')" class="dark_mode_select" disabled>
+                            <option value="FindByApplicationPolicy">Find By Application Policy</option>
+                            <option value="FindByCertificatePolicy">Find By Certificate Policy</option>
+                            <option value="FindByExtension">Find By Extension</option>
+                            <option value="FindByIssuerDistinguishedName">Find By Issuer Distinguished Name</option>
+                            <option value="FindByIssuerName">Find By Issuer Name</option>
+                            <option value="FindByKeyUsage">Find By Key Usage</option>
+                            <option value="FindBySerialNumber">Find By Serial Number</option>
+                            <option value="FindBySubjectName">Find By Subject Name</option>
+                            <option value="FindBySubjectDistinguishedName">Find By Subject Distinguished Name</option>
+                            <option value="FindBySubjectKeyIdentifier">Find By Subject Key Identifier</option>
+                            <option value="FindByTemplateName">Find By Template Name</option>
+                            <option value="FindByThumbprint">Find By Thumbprint</option>
+                            <option value="FindByTimeExpired">Find By Time Expired</option>
+                            <option value="FindByTimeNotYetValid">Find By Time Not Yet Valid</option>
+                            <option value="FindByTimeValid">Find By Time Valid</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top: 16px;margin-bottom: 16px;">
+                    <div class="labelElement">
+                        <label for="Find-Value">Find Value</label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                        <span id="Find-Value-Tooltip" class="tooltiptext">This is the help text.</span>
+                    </div>
+                    <div class="inputElement">
+                        <input type="text" name="Find-Value" id="Find-Value" oninput="trustedClientFieldUpdated('FindValue')" disabled>
+                        <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Find-Value-RequiredSvg" class="requiredAlertSvg">
+                            <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div style="margin-top: 16px;margin-bottom: 16px;">
+                    <div class="labelElement">
+                        <label for="Description">Description</label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                        <span id="Description-Tooltip" class="tooltiptext">This is the help text.</span>
+                    </div>
+                    <div class="inputElement">
+                        <input type="text" name="Description" id="Description" style="margin-bottom: 20px;" oninput="trustedClientFieldUpdated('Description')" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

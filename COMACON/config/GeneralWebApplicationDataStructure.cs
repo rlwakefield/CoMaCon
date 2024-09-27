@@ -209,7 +209,7 @@ public class HylandLogging
     public string? truncateloggingcharacters { get; set; }
     public WindowsEventLogging windowsEventLogging = new WindowsEventLogging();
     public List<Route> Routes = new List<Route>();
-    public string[] profilesForHTML { get; set; }
+    public string[]? profilesForHTML { get; set; }  
 }
 
 public class Route
@@ -661,4 +661,70 @@ public class WebApplicationToCreate
     public string? webApplicationVersion { get; set; }
     public string? webApplicationBitness { get; set; }
     public string? webApplicationPoolName { get; set; }
+}
+
+
+/********************************************************
+*              Get Users Data Structure
+********************************************************/
+public class UsersDataStructure
+{
+    public List<User> users = new List<User>();
+}
+
+public class User
+{
+    public int usernum { get; set; }
+    public string? username { get; set; }
+    public string? firstname { get; set; }
+    public string? lastname { get; set; }
+    public string password { get; set; } = "";
+    public string? emailaddress { get; set; }
+    public int? enabled { get; set; }
+    public int? passwordresetonnextlogin { get; set; }
+    public DateTimeOffset? passwordlastchanged { get; set; }
+    public int? authmethod { get; set; }
+    public DateTimeOffset? creationdate { get; set; }
+    public int? createdby { get; set; }
+    public DateTimeOffset? lastediteddate { get; set; }
+    // Might look at getting this value from the audit history table whenever it is setup.
+    public int? lasteditedby { get; set; }
+    public int? roleid { get; set; }
+}
+
+public class Roles
+{
+        public List<role> roles = new List<role>();
+}
+
+public class role
+{
+    public int roleid { get; set; }
+    public string rolename { get; set; }
+    public string roledescription { get; set; }
+}
+
+
+/********************************************************
+*         General Settings - Password Policies
+********************************************************/
+public class PasswordPolicies
+{
+    public List<PasswordPolicy> passwordpolicies = new List<PasswordPolicy>();
+}
+public class PasswordPolicy
+{
+    public int passwordpolicyid { get; set; }
+    public int passwordpolicytype { get; set; }
+    public string? passwordpolicyname { get; set; }
+    public string? passwordpolicydescription { get; set; }
+    public int passwordpolicyenabled { get; set; }
+    public List<PasswordPolicyRule> rules = new List<PasswordPolicyRule>();
+}
+
+public class PasswordPolicyRule
+{
+    public int ruletype { get; set; }
+    public int rulevalue { get; set; }
+    public int ruleenabled { get; set; }
 }

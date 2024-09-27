@@ -1,0 +1,242 @@
+<div id="DocPopSection" class="tabcontent">
+    <div class="row">
+        <p class="BlockDescription">The following settings are specfic to DocPop. The only required key is Data Source, which can be configured here or passed in a query string.</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Data Source
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="DocPop-Data-Source">Default Data Source: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="DocPop-Data-Source-Tooltip" class="tooltiptext">ODBC data source to use with DocPop.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="DocPop-Data-Source" id="DocPop-Data-Source">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>HTTP Data Source: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="DocPop-HTTP-Data-Source-Tooltip" class="tooltiptext">Set to true to set the data source from the query string.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="DocPop-HTTP-Data-Source" class="switch">
+                                <input id="DocPop-HTTP-Data-Source" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Checksum
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Validate Against Checksum: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="DocPop-Validate-Against-Checksum-Tooltip" class="tooltiptext">Set to true to validate DocPop URL against a checksum value.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="DocPop-Validate-Against-Checksum" class="switch">
+                                <input id="DocPop-Validate-Against-Checksum" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="DocPop-Checksum-Key">Checksum Key: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="DocPop-Checksum-Key-Tooltip" class="tooltiptext">Unique string value used for external, dynamic checksum creation when enableChecksum is true.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="DocPop-Checksum-Key" id="DocPop-Checksum-Key">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Authentication
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Default Login: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="DocPop-Default-Login-Tooltip" class="tooltiptext">Set to true to get login credentials from the web.config (this file).</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="DocPop-Default-Login" class="switch">
+                                <input id="DocPop-Default-Login" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>HTTP Login: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="DocPop-HTTP-Login-Tooltip" class="tooltiptext">Set to true to set login credentials from the query string.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="DocPop-HTTP-Login" class="switch">
+                                <input id="DocPop-HTTP-Login" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Auto Login: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="DocPop-Auto-Login-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="DocPop-Auto-Login" class="switch">
+                                <input id="DocPop-Auto-Login" type="checkbox" onclick="autoLoginCheckAgainstOptimized(this)">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Login Credentials
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Default-DocPop-Domain-Name">Default DocPop Domain Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Default-DocPop-Domain-Name-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Default-DocPop-Domain-Name" id="Default-DocPop-Domain-Name">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Default-DocPop-Username">Default DocPop Username: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Default-DocPop-Username-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Default-DocPop-Username" id="Default-DocPop-Username">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Default-DocPop-Password">Default DocPop Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Default-DocPop-Password-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="password" name="Default-DocPop-Password" id="Default-DocPop-Password">
+                            <button class="passwordShowHideButton" id="DocPop-ShowHide-Password" onclick="passwordFieldShowHide('Default-DocPop-Password',this)">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.873 17.129c-1.845-1.31-3.305-3.014-4.13-4.09a1.693 1.693 0 0 1 0-2.077C4.236 9.013 7.818 5 12 5c1.876 0 3.63.807 5.13 1.874"></path>
+                                    <path d="M14.13 9.887a3 3 0 1 0-4.243 4.242"></path>
+                                    <path d="M4 20 20 4"></path>
+                                    <path d="M10 18.704A7.124 7.124 0 0 0 12 19c4.182 0 7.764-4.013 9.257-5.962a1.694 1.694 0 0 0-.001-2.078A22.939 22.939 0 0 0 19.57 9"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Default-DocPop-Institution">Default DocPop Institution: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Default-DocPop-Institution-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Default-DocPop-Institution" id="Default-DocPop-Institution">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ExtraRowSection">
+        <div class="sectionWithTitleBar">
+            <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                Miscellaneous
+            </div>
+            <div class="coreSection">
+                <div class="row">
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Embedded DocPop: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Embedded-DocPop-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="Embedded-DocPop" class="switch">
+                                    <input id="Embedded-DocPop" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Core Query API License: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="DocPop-Core-Query-API-License-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="DocPop-Core-Query-API-License" class="switch">
+                                    <input id="DocPop-Core-Query-API-License" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Encrypt-DocPop: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Encrypt-DocPop-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="Encrypt-DocPop" class="switch">
+                                    <input id="Encrypt-DocPop" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Auto Display One Document: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="DocPop-Auto-Display-One-Document-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="DocPop-Auto-Display-One-Document" class="switch">
+                                    <input id="DocPop-Auto-Display-One-Document" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Disable Context Menus in DocPop: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Disable-Context-Menus-in-DocPop-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="Disable-Context-Menus-in-DocPop" class="switch">
+                                    <input id="Disable-Context-Menus-in-DocPop" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

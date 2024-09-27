@@ -1,0 +1,102 @@
+<div id="WorkflowSection" class="tabcontent">
+    <div class="row">
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Workflow-Height-px">Workflow Height (px): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Workflow-Height-px-Tooltip" class="tooltiptext">Height, in pixels, of the Workflow user interaction area - must be greater than 150.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Workflow-Height-px" id="Workflow-Height-px" value="375">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Display-Related-Documents">Display Related Documents: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Display-Related-Documents-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <select name="Display-Related-Documents" id="Display-Related-Documents" class="dark_mode_select">
+                        <option value="always" selected>always</option>
+                        <option value="document">document</option>
+                        <option value="never">never</option>
+                    </select>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Show Queue Counts: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Show-Queue-Counts-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Show-Queue-Counts" class="switch">
+                        <input id="Show-Queue-Counts" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Workflow-Max-Results">Workflow Max Results: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Workflow-Max-Results-Tooltip" class="tooltiptext">Maximum amount of results to be displayed within the Workflow Inbox.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Workflow-Max-Results" id="Workflow-Max-Results" value="2000">
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Default-Workflow-Layout">Default Workflow Layout: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Default-Workflow-Layout-Tooltip" class="tooltiptext">
+                        <span>
+                            "horizontal" - displays the Workflow interface in its original, horizontal layout.
+                        </span>
+                        <br>
+                        <span>
+                            "vertical" - displays the Workflow interface in its vertical layout.
+                        </span>
+                        <br>
+                        <span>
+                            "separateviewer" - displays the Workflow interface so that the viewer is displayed separately from the rest of the interface.
+                        </span>
+                        <br>
+                        <span>
+                            "selectable" - allows the user to select between horizontal, vertical, and split viewer layouts.
+                        </span>
+                    </span>
+                </div>
+                <div class="inputElement">
+                    <select name="Default-Workflow-Layout" id="Default-Workflow-Layout" class="dark_mode_select">
+                        <option value="selectable">selectable</option>
+                        <option value="horizontal">horizontal</option>
+                        <option value="vertical">vertical</option>
+                        <option value="separateviewer">separateviewer</option>
+                    </select>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Show Combined Inbox: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Show-Combined-Inbox-Tooltip" class="tooltiptext">Display Workflow Combined Inbox.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Show-Combined-Inbox" class="switch">
+                        <input id="Show-Combined-Inbox" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement" id="Reselect-Delta-SectionElement">
+                <div class="labelElement">
+                    <label for="Reselect-Delta">Reselect Delta: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Reselect-Delta-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Reselect-Delta" id="Reselect-Delta" value="15">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

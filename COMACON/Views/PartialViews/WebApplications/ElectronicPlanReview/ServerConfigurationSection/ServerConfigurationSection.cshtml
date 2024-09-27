@@ -1,0 +1,48 @@
+<div id="ServerConfigurationSection" class="tabcontent">
+    <div class="row">
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Application-Server-URL">Application Server URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Application-Server-URL-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <div id="Application-Server-URL-Loader" class="loader"></div>
+                    <input type="url" name="Application-Server-URL" id="Application-Server-URL" oninput="resetBorderStyling(event)" onfocusout="testUrl(event)">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div>
+                    <label for="HTTP-Runtime-Maximum-Request-Length">HTTP Runtime Maximum Request Length (KB): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="HTTP-Runtime-Maximum-Request-Length-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div>
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="HTTP-Runtime-Maximum-Request-Length" id="HTTP-Runtime-Maximum-Request-Length">
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Service-Client-Type">Service Client Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Service-Client-Type-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <select name="Service-Client-Type" id="Service-Client-Type" class="dark_mode_select">
+                        <option value="SOAP" selected>SOAP</option>
+                        <option value="Remoting">Remoting</option>
+                    </select>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Max-Allowed-Content-Length">Max Allowed Content Length (Bytes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Max-Allowed-Content-Length-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Max-Allowed-Content-Length" id="Max-Allowed-Content-Length">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

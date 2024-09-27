@@ -1,68 +1,69 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <OutputType>Exe</OutputType>
-    <Configurations>Debug;Release;Production;Publish</Configurations>
-    <Version>0.8.0</Version>
-    <BaseOutputPath></BaseOutputPath>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <OutputType>Exe</OutputType>
+        <Configurations>Debug;Release;Production;Publish</Configurations>
+        <Version>1.0.0</Version>
+        <BaseOutputPath></BaseOutputPath>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Production|AnyCPU'">
-    <Optimize>True</Optimize>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Production|AnyCPU'">
+        <Optimize>True</Optimize>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Publish|AnyCPU'">
-    <Optimize>True</Optimize>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Publish|AnyCPU'">
+        <Optimize>True</Optimize>
+    </PropertyGroup>
 
-  <!--<ItemGroup>
-    <None Remove="OtherDependencies\COMACON Helper.exe" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Resources\" />
+        <Folder Include="wwwroot\images\" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="OtherDependencies\COMACON Helper.exe" />
-  </ItemGroup>-->
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Web.Administration" Version="11.1.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.4.0" />
+        <PackageReference Include="Serilog" Version="4.0.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+        <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+        <PackageReference Include="Serilog.Enrichers.Process" Version="3.0.0" />
+        <PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+        <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.1" />
+        <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+        <PackageReference Include="System.Data.OracleClient" Version="1.0.8" />
+        <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+        <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="8.0.0" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Web.Administration" Version="11.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.4.0" />
-    <PackageReference Include="Serilog" Version="4.0.0" />
-    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
-    <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
-    <PackageReference Include="Serilog.Enrichers.Process" Version="3.0.0" />
-    <PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
-    <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.1" />
-    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
-    <PackageReference Include="System.Data.OracleClient" Version="1.0.8" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
-    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="8.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\COMACONTranslationToHelperUtility\COMACONTranslationToHelperUtility.csproj">
-      <Private>True</Private>
-      <CopyLocalSatelliteAssemblies>True</CopyLocalSatelliteAssemblies>
-    </ProjectReference>
-    <ProjectReference Include="..\COMACON_Helper\COMACON_Helper.csproj">
-      <CopyLocalSatelliteAssemblies>True</CopyLocalSatelliteAssemblies>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\COMACONTranslationToHelperUtility\COMACONTranslationToHelperUtility.csproj">
+            <Private>True</Private>
+            <CopyLocalSatelliteAssemblies>True</CopyLocalSatelliteAssemblies>
+        </ProjectReference>
+        <ProjectReference Include="..\COMACON_Helper\COMACON_Helper.csproj">
+            <CopyLocalSatelliteAssemblies>True</CopyLocalSatelliteAssemblies>
+            <Private>True</Private>
+        </ProjectReference>
+    </ItemGroup>
   
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(ProjectDir)OtherDependencies\*&quot; &quot;$(TargetDir)OtherDependencies&quot; /Y /E /I" />
-  </Target>
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <Exec Command="xcopy &quot;$(ProjectDir)OtherDependencies\*&quot; &quot;$(TargetDir)OtherDependencies&quot; /Y /E /I" />
+    </Target>
   
-  <Target Name="PostBuild-Publish" AfterTargets="PostBuildEvent" Condition="'$(Configuration)'=='Publish'">
-    <Exec Command="xcopy &quot;$(ProjectDir)OtherDependencies\*&quot; &quot;$(ProjectDir)publish\OtherDependencies\&quot; /Y /E /I" />
-  </Target>
+    <Target Name="PostBuild-Publish" AfterTargets="PostBuildEvent" Condition="'$(Configuration)'=='Publish'">
+        <Exec Command="xcopy &quot;$(ProjectDir)OtherDependencies\*&quot; &quot;$(ProjectDir)publish\OtherDependencies\&quot; /Y /E /I" />
+    </Target>
   
 </Project>

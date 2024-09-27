@@ -1,0 +1,62 @@
+<div id="DashboardViewerSection" class="tabcontent">
+    <div class="row">
+        <div class="column">
+            <div class="settingElement" id="Use-Theme-SettingElement">
+                <div class="labelElement">
+                    <label for="Use-Theme">Use Theme: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Use-Theme-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <select name="Use-Theme" id="Use-Theme" class="dark_mode_select">
+                        <option value="light" selected>light</option>
+                        <option value="dark">dark</option>
+                    </select>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Reporting-Page-Limit">Reporting Page Limit: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Reporting-Page-Limit-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="Reporting-Page-Limit" id="Reporting-Page-Limit" value="50">
+                </div>
+            </div>
+            @* <div class="settingElement" id="Dashboard-Cache-Timeout-SettingElement">
+            <div class="labelElement">
+            <label for="Dashboard-Cache-Timeout">Dashboard Cache Timeout: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+            <span id="Dashboard-Cache-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
+            </div>
+            <div class="inputElement">
+            <input type="number" name="Dashboard-Cache-Timeout" id="Dashboard-Cache-Timeout">
+            </div>
+            </div> *@
+        </div>
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Enable Export Dashboard: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Enable-Export-Dashboard-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Enable-Export-Dashboard" class="switch">
+                        <input id="Enable-Export-Dashboard" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Enable Export Dashboard Items: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Enable-Export-Dashboard-Items-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Enable-Export-Dashboard-Items" class="switch">
+                        <input id="Enable-Export-Dashboard-Items" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

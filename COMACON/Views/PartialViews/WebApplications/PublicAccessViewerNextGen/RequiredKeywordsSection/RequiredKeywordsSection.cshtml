@@ -1,0 +1,43 @@
+<div id="RequiredKeywordsSection" class="tabcontent">
+    <div class="row" style="justify-content:normal;">
+        <div class="column" style="width: 30%;">
+            <div id="Required-Keywords-Table-Wrapper" class="RequiredKeywordsTable">
+                <table id="Required-Keywords-Table">
+                    <thead>
+                        <tr>
+                            <th>Query ID#</th>
+                            <th>Keyword ID#</th>
+                        </tr>
+                    </thead>
+                    <tbody id="Required-Keywords-Table-Tbody">
+                    </tbody>
+                </table>
+            </div>
+            <div style="display: flex;justify-content: space-around;">
+                <button id="RequiredKeywords-NewButton" onclick="newRequiredKeywordsData()">New</button>
+                <button id="RequiredKeywords-SaveButton" onclick="saveRequiredKeywordsData(event)" disabled>Save</button>
+                <button id="RequiredKeywords-DeleteButton" onclick="deleteRequiredKeywordsData()">Delete</button>
+            </div>
+        </div>
+        <div class="column" style="width: 30%;">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Query-ID">Query ID#: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Query-ID-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="text" name="Query-ID" id="Query-ID" oninput="checkToEnableRequiredKeywordsSaveButton()">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="Keyword-ID">Keyword ID#: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Keyword-ID-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" name="Keyword-ID" id="Keyword-ID" oninput="checkToEnableRequiredKeywordsSaveButton()">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

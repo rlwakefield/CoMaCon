@@ -144,6 +144,7 @@ let tdIdValue = 0;
 let apiRootUrl = "";
 let configurationChanged = false;
 let newConfigurationDetails = [];
+let currentPage = "";
 
 /* ADFS Settings Variables */
 let audienceUrisIdNumber = 0;
@@ -181,10 +182,36 @@ let keywordTypeAheadArray = [];
 let keywordTypeAheadIdNumber = 0;
 
 
+
+setTimeout(() => {
+
+}, 50);
+
+
 /********************************************************
  *                  Page Load SCript
  ********************************************************/
 async function onPageLoadLogic() {
+    if (sessionStorage.getItem('apiRootUrl') == null || sessionStorage.getItem('apiRootUrl') == undefined) {
+        if (window.location.href.endsWith("/")) {
+            apiRootUrl = window.location.href.slice(0, -1);
+            sessionStorage.setItem('apiRootUrl', apiRootUrl);
+        } else {
+            apiRootUrl = window.location.href;
+            sessionStorage.setItem('apiRootUrl', apiRootUrl);
+        }
+        //fetch(apiRootUrl + '/api/Endpoint/GetRootUrl', {
+        //    method: 'GET', // or 'POST', 'PUT', 'DELETE', etc.
+        //})
+        //    .then(response => response.json())
+        //    .then(data => {
+        //        sessionStorage.setItem('apiRootUrl', data.rooturl);
+        //    })
+        //    .catch(error => console.error('Error:', error));
+    } else {
+        apiRootUrl = sessionStorage.getItem('apiRootUrl');
+    }
+
     if (localStorage.getItem("darkModeState") != null) {
         if (localStorage.getItem("darkModeState") == "true") {
             document.getElementById("checkbox").checked = true;
@@ -193,24 +220,23 @@ async function onPageLoadLogic() {
         }
         toggleDarkLightMode(document.getElementById("checkbox"));
     }
-    
+
     if (sessionStorage.getItem('WebApplicationChosenArray') != null && sessionStorage.getItem('WebApplicationChosenArray') != undefined) {
         let object = JSON.parse(sessionStorage.getItem('WebApplicationChosenArray'));
-        console.log(object);
         sessionStorage.removeItem('WebApplicationChosenArray');
-        apiRootUrl = sessionStorage.getItem('apiRootUrl');
 
         document.getElementById("ProcessingWebConfig-Label").innerText = "Loading " + object[0].name + " Web Application...";
         document.getElementById("ProcessingWebConfigValuesProgress").style.display = "block";
         loadWebApplicationConfiguration(object[0].webConfigPhysicalPath, object[0].type, object[0].version, object[0].site, object[0].name, object[0].path, object[0].physicalPath, object[0].bitness);
     } else {
-        //Need to redirect the user back to the home page.
-        console.log(window.location.href);
-        console.log(apiRootUrl);
-        //if (window.location.href != apiRootUrl + "/") {
-        //    window.location.href = apiRootUrl;
-        //}
+        if ((sessionStorage.getItem('WebApplicationChosenArray') == null || sessionStorage.getItem('WebApplicationChosenArray') == undefined)
+            && (currentPage != "Home" && currentPage != "Login" && currentPage != "Settings")) {
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/core/home"
+        }
     }
+
+    document.getElementById("COMACON-HeaderHomeLink").href = sessionStorage.getItem('apiRootUrl') + "/core/home";
+    document.getElementById("SettingsButton").href = sessionStorage.getItem('apiRootUrl') + "/core/settings";
 }
 
 
@@ -218,7 +244,7 @@ async function onPageLoadLogic() {
  *       Load Web Application Configuration Script
  ********************************************************/
 function loadWebApplicationConfiguration(webConfigPhysicalPathVariable, webApplicationType, webApplicationVersion, webApplicationSiteName, webApplicationName, webApplicationPath, physicalPath, bitness) {
-    fetch(apiRootUrl + '/api/Endpoint/GetConfiguration?webconfig=' + encodeURIComponent(webConfigPhysicalPathVariable) +
+    fetch(sessionStorage.getItem('apiRootUrl') + '/api/Endpoint/GetConfiguration?webconfig=' + encodeURIComponent(webConfigPhysicalPathVariable) +
         "&type=" + encodeURIComponent(webApplicationType) +
         "&version=" + encodeURIComponent(webApplicationVersion) +
         "&siteName=" + encodeURIComponent(webApplicationSiteName) +
@@ -233,7 +259,7 @@ function loadWebApplicationConfiguration(webConfigPhysicalPathVariable, webAppli
 }
 
 async function checkWhatWebApplicationToParse(config, executionMethod) {
-    console.log(config);
+    //console.log(config);
 
     if (config["processingErrors"]["CriticalErrors"].length > 0) {
         populateErrorLoadModal(config["processingErrors"]["CriticalErrors"], "Critical");
@@ -246,8 +272,8 @@ async function checkWhatWebApplicationToParse(config, executionMethod) {
 
         coreConfigData = config;
         await parseData(config);
-        document.getElementById("LoadedApplicationName").innerText = coreConfigData["ApplicationName"] + " (" + coreConfigData["Version"] + ")";
-        document.getElementById("LoadedApplicationType").innerText = coreConfigData["Type"];
+        document.getElementById("LoadedWebApplicationName").innerText = coreConfigData["ApplicationName"] + " (" + coreConfigData["Version"] + ")";
+        document.getElementById("LoadedWebApplicationType").innerText = coreConfigData["Type"];
 
         switch (executionMethod) {
             case "LoadWebApplication":
@@ -256,7 +282,6 @@ async function checkWhatWebApplicationToParse(config, executionMethod) {
             case "CopyWebApplication":
                 document.getElementById("AlertModal-Text-Paragraph").innerText = "Your " + coreConfigData["ApplicationName"] + " Application is ready. Click OK to start updating the configuration."
                 document.getElementById("ProcessingWebConfigValuesProgress").style.display = "none";
-                //document.getElementById("OnBase-Configuration-Main-Button").click();
                 document.getElementById("AlertModal").style.display = "block";
                 break;
         }
@@ -276,7 +301,7 @@ function loadWebApplications() {
     if (tbody != null) {
         webAppTable.removeChild(webAppTable.getElementsByTagName('tbody')[0]);
     }
-    fetch(apiRootUrl + "/api/Endpoint/GetApplications", {
+    fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/GetApplications", {
         method: "GET",
     })
         .then(response => response.json())
@@ -355,34 +380,34 @@ function okButtonClicked() {
 function goToWebApplicationConfigurationPage(object) {
     switch (object[0].type) {
         case "Application Server":
-            window.location.href = apiRootUrl + "/Core/ApplicationServer";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/ApplicationServer";
             break;
         case "Agenda Online":
-            window.location.href = apiRootUrl + "/Core/AgendaOnlineServer";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/AgendaOnlineServer";
             break;
         case "Electronic Plan Review":
-            window.location.href = apiRootUrl + "/Core/ElectronicPlanReview";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/ElectronicPlanReview";
             break;
         case "Gateway Caching Server":
-            window.location.href = apiRootUrl + "/Core/GatewayCachingServer";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/GatewayCachingServer";
             break;
         case "Healthcare Form Manager":
-            window.location.href = apiRootUrl + "/Core/HealthcareFormManager";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/HealthcareFormManager";
             break;
         case "Patient Window":
-            window.location.href = apiRootUrl + "/Core/OnBasePatientWindow";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/OnBasePatientWindow";
             break;
         case "Public Access - Legacy":
-            window.location.href = apiRootUrl + "/Core/PublicAccessViewerLegacy"
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/PublicAccessViewerLegacy"
             break;
         case "Public Access - Next Gen":
-            window.location.href = apiRootUrl + "/Core/PublicAccessViewerNextGen"
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/PublicAccessViewerNextGen"
             break;
         case "Reporting Viewer":
-            window.location.href = apiRootUrl + "/Core/ReportingWebViewer";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/ReportingWebViewer";
             break;
         case "Web Server":
-            window.location.href = apiRootUrl + "/Core/WebServer";
+            window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/WebServer";
             break;
     }
 }
@@ -462,7 +487,6 @@ async function validateNumericValue(field) {
             document.querySelectorAll("[id$='Section']").forEach((element) => {
                 if (element.contains(field)) {
                     pushErrorToArray([field.id, element.id.replace(/Section$/, ''), "Value below the minimum", "The value input is below the minimum value of " + field.attributes["min"].value + ". Correct to allow saving."]);
-                    //document.getElementById(currentErrorSelected[1].innerText + "Link").click();
                 }
             });
         } else {
@@ -473,7 +497,6 @@ async function validateNumericValue(field) {
     if(field.attributes["max"]?.value != null || field.attributes["max"]?.value != undefined)
     {
         if (parseFloat(field.value) > field.attributes["max"].value) {
-            //field.value = field.attributes["max"].value;
             document.querySelectorAll("[id$='Section']").forEach((element) => {
                 if (element.contains(field)) {
                     pushErrorToArray([field.id, element.id.replace(/Section$/, ''), "Value above the maximum", "The value input is above the maximum value of " + field.attributes["max"].value + ". Correct to allow saving."]);
@@ -617,7 +640,7 @@ function parseIisConfigurationApplicationPool(config) {
 ********************************************************/
 async function createNewConfiguration() {
     document.getElementById("NewWebApplicationModal").style.display = "block";
-    await fetch(apiRootUrl + "/api/Endpoint/GetNewConfigurationDetails")
+    await fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/GetNewConfigurationDetails")
         .then(response => response.json())
         .then(data => {
             newConfigurationDetails = data;
@@ -629,6 +652,7 @@ async function createNewConfiguration() {
     {
         let newOptGroup = document.createElement("optgroup");
         newOptGroup.setAttribute("label", versiongroups[i]["majorVersion"]);
+        newOptGroup.classList.add("dark_mode_select_optgroup");
         let versions = versiongroups[i]["versions"];
         for (let j = 0; j < versions.length; j++) {
             let newOpt = document.createElement("option");
@@ -699,7 +723,7 @@ async function checkIfOkToIgnoreChangedFields() {
 }
 
 function pushWebApplicationConfiguration() {
-    console.log(JSON.stringify(coreConfigData));
+    //console.log(JSON.stringify(coreConfigData));
     const fetchOptions = {
         method: "POST",
         headers: {
@@ -708,7 +732,7 @@ function pushWebApplicationConfiguration() {
         body: JSON.stringify(coreConfigData)
     };
     let stringifiedDataStructure = JSON.stringify(coreConfigData);
-    fetch(apiRootUrl + "/api/Endpoint/SaveWebApplication", fetchOptions)
+    fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/SaveWebApplication", fetchOptions)
         .then(response => response.json())
         .then(data => processWebApplicationSaveResponse(data));
 }
@@ -836,7 +860,7 @@ function copyWebApplication() {
 
 function validateNoDuplicateApplicationName(field) {
     if (field.value != "") {
-        fetch(apiRootUrl + "/api/Endpoint/DuplicateApplicationCheck?applicationName=" + encodeURI(field.value) +
+        fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/DuplicateApplicationCheck?applicationName=" + encodeURI(field.value) +
             "&siteName=" + encodeURI(coreConfigData["SiteName"]) +
             "&applicationPath=" + encodeURI(coreConfigData["Path"]) +
             "&physicalPath=" + encodeURI(coreConfigData["PhysicalPath"] +
@@ -864,7 +888,7 @@ function parseValidateNoDuplicateApplicationName(data) {
 
 function validateNoDuplicateApplicationPoolName(field) {
     if (field.value != "") {
-        fetch(apiRootUrl + "/api/Endpoint/DuplicateAppPoolCheck?appPoolName=" + encodeURI(field.value), {
+        fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/DuplicateAppPoolCheck?appPoolName=" + encodeURI(field.value), {
             method: "GET",
         })
             .then(response => response.json())
@@ -888,11 +912,24 @@ function parseValidateNoDuplicateApplicationPoolName(data) {
 
 function validateApplicationServerURL(field) {
     if (field.value != "") {
-        fetch(apiRootUrl + "/api/Endpoint/UrlValidation?url=" + encodeURIComponent(field.value), {
+        const applicationServerUrlValidationOptions = {
             method: "GET",
-        })
-            .then(response => response.json())
-            .then(data => parseValidateApplicationServerURL(data));
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        }
+        fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/UrlValidation?url=" + encodeURIComponent(field.value), applicationServerUrlValidationOptions)
+            .then(response => {
+                let section = document.getElementById("ApplicationServerUrl-ResultContainer");
+                if (response.ok) {
+                    section.replaceChildren();
+                    section.insertAdjacentHTML("beforeend", greenCheckMark);
+                } else if (!response.ok) {
+                    section.replaceChildren();
+                    section.insertAdjacentHTML("beforeend", blackQuestionMark);
+                }
+            })
     } else {
         checkValidFieldValuesToEnableCopyButton();
     }
@@ -901,8 +938,7 @@ function validateApplicationServerURL(field) {
 function parseValidateApplicationServerURL(data) {
     let section = document.getElementById("ApplicationServerUrl-ResultContainer");
     if (data != '200') {
-        section.replaceChildren();
-        section.insertAdjacentHTML("beforeend", blackQuestionMark);
+        
     } else {
         section.replaceChildren();
         section.insertAdjacentHTML("beforeend", greenCheckMark);
@@ -1081,9 +1117,25 @@ function testUrl(field) {
         let id = field.currentTarget.id;
         field.currentTarget.disabled = true;
         document.getElementById(id + "-Loader").style.display = "block";
-        fetch(apiRootUrl + "/api/Endpoint/UrlValidation?url=" + encodeURIComponent(field.currentTarget.value))
-            .then(response => response.json())
-            .then(data => parseTestUrlResponse(data, id));
+        const urlValidationOptions = {
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        }
+        fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/UrlValidation?url=" + encodeURIComponent(field.currentTarget.value), urlValidationOptions)
+            .then(response => {
+                let section = document.getElementById("ApplicationServerUrl-ResultContainer");
+                if (response.ok) {
+                    document.getElementById(id).classList.add("validUrl");
+                } else if (!response.ok) {
+                    document.getElementById(id).classList.add("invalidUrl");
+                }
+
+                document.getElementById(id + "-Loader").style.display = "none";
+                document.getElementById(id).disabled = false;
+            })
     }
 }
 
@@ -1390,8 +1442,8 @@ async function parseData(config) {
             break;
     }
 
-    if (config["unknownElementKeys"].length == 0 && config["unknownAttributeKeys"].length == 0) {
-        document.getElementById("Unknown-Configuration-Keys-Link").style.display = "none";
+    if (config["unknownElementKeys"].length > 0 && config["unknownAttributeKeys"].length > 0) {
+        document.getElementById("Unknown-Configuration-Keys-Link").style.display = "block";
     } else if (config["unknownElementKeys"].length == 0 && config["unknownAttributeKeys"].length > 0) {
         document.getElementById("UnknownConfigurationKeysElements-Section").style.display = "none";
         document.getElementById("UnknownConfigurationKeysAttributes-Section").style.display = "block";
@@ -2187,7 +2239,6 @@ async function DestinationTypeChange(optionSelected) {
 }
 
 function profilesReviewV2(optionChosen) {
-    var i, profiles;
     let objectToUpdate = diagnosticsRoutes.filter(route => route.id == document.getElementById("DiagnosticsSettingsRoutes-SelectList").value);
 
     if (objectToUpdate.length > 0) {
@@ -2685,7 +2736,6 @@ async function connectionStringSelectedV3() {
     await (function () {
         document.getElementById("Data-Source-Name").value = result[0]["Name"];
         document.getElementById("Data-Provider").value = result[0]["Provider"];
-        //document.getElementById("Additional-Options").value = result[0]["AdditionalOptions"];
         document.getElementById("Integrated-Security").checked = (result[0]["IntegratedSecurity"].toLowerCase() === 'true');
         document.getElementById("User-ID").value = result[0]["UserId"];
         document.getElementById("Password").value = result[0]["Password"];
@@ -2732,8 +2782,6 @@ async function dataProviderV3(selection) {
             arrayObject[0].sql.DataSource = document.getElementById("Sql-Data-Source").value;
             arrayObject[0].sql.Database = document.getElementById("Sql-Database").value;
             await setRequiredFieldAlertsV3(["sql"]);
-            //document.getElementById("Sql-AdditionalOptions").style.display = "block";
-            //document.getElementById("Oracle-AdditionalOptions").style.display = "none";
             break;
         case "Oracle.ManagedDataAccess.Client":
             document.getElementById(selection.value + ".Fields").style.display = "block"
@@ -2749,8 +2797,6 @@ async function dataProviderV3(selection) {
             } else {
                 await setRequiredFieldAlertsV3(["oracle2"]);
             }
-            //document.getElementById("Sql-AdditionalOptions").style.display = "none";
-            //document.getElementById("Oracle-AdditionalOptions").style.display = "block";
             break;
     }
 }
@@ -2880,65 +2926,7 @@ async function connectionStringTextInputFieldUpdatedV3(field) {
             break;
     }
     document.getElementById("TestConnectionString-Alert").innerText = "";
-    //await checkSetAppendedTextErrorV3();
 }
-
-//async function checkForDuplicateConnectionStringNamesV3() {
-//    let duplicate = ConnectionStringsArray.filter(cstring => cstring.Name === document.getElementById("Data-Source-Name").value && cstring.id != document.getElementById("ConnectionStrings-SelectList").value);
-
-//    if (duplicate.length > 0) {
-//        duplicate.forEach(dup => {
-//            //Need to select the option element where the dup.id value is equal to the option value.
-//            let options = document.getElementById("ConnectionStrings-SelectList").options;
-
-//            for (let i = 0; i < options.length; i++) {
-//                if (options[i].value === dup.id) {
-//                    options[i].classList.add("duplicateConnectionStringName");
-//                    //Checks to verify that the error text to append does not already contain the word duplicate.
-//                    if (!options[i].attributes["error-text-to-append"].value.includes(" (duplicate)")){
-//                        options[i].attributes["error-text-to-append"].value += " (duplicate)";
-//                    }
-//                    //Checks to verify that currently selected option does not already contain the value of the current option[i].value.
-//                    if (!document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicates"].value.includes(options[i].value)) {
-//                        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicates"].value = options[i].value;
-//                    }
-//                    //Checks to verify that the related-duplicates attribute does not already contain the the currently selected Connection Strings value.
-//                    if (!options[i].attributes["related-duplicates"].value.includes(document.getElementById("ConnectionStrings-SelectList").value)) {
-//                        let relatedDuplicatesArray = [];
-//                        if (options[i].attributes["related-duplicates"].value == "") {
-//                            options[i].attributes["related-duplicates"].value = document.getElementById("ConnectionStrings-SelectList").value;
-//                        } else {
-//                            relatedDuplicatesArray = options[i].attributes["related-duplicates"].value.split(",");
-//                            relatedDuplicatesArray.push(document.getElementById("ConnectionStrings-SelectList").value);
-//                            options[i].attributes["related-duplicates"].value = relatedDuplicatesArray.join(",");
-//                        }
-//                    }
-//                }
-
-//                if (options[i].attributes["related-duplicates"].value == document.getElementById("ConnectionStrings-SelectList").value && options[i].value != dup.id && options[i].innerText == dup.Name) {
-//                    options[i].attributes["related-duplicates"].value.replace(document.getElementById("ConnectionStrings-SelectList").value, "");
-//                    options[i].classList.remove("duplicateConnectionStringName");
-//                    options[i].attributes["error-text-to-append"].value = options[i].attributes["error-text-to-append"].value.replace(" (duplicate)", "");
-//                }
-//            }
-//        });
-//        await updateDataSourceOptionsV3();
-//        return true;
-//    } else {
-//        let relatedDuplicates = document.getElementById("ConnectionStrings-SelectList").options;
-//        for (let i = 0; i < relatedDuplicates.length; i++) {
-//            if (relatedDuplicates[i].attributes["related-duplicates"].value == document.getElementById("ConnectionStrings-SelectList").value) {
-//                relatedDuplicates[i].classList.remove("duplicateConnectionStringName");
-//                document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicates"].value = "";
-//                relatedDuplicates[i].attributes["related-duplicates"].value = relatedDuplicates[i].attributes["related-duplicates"].value.replace(document.getElementById("ConnectionStrings-SelectList").value, "");
-//                relatedDuplicates[i].attributes["error-text-to-append"].value = relatedDuplicates[i].attributes["error-text-to-append"].value.replace(" (duplicate)", "");
-//            }
-//        }
-
-//        await updateDataSourceOptionsV3();
-//        return false;
-//    }
-//}
 
 async function updateDataSourceOptionsV3() {
     let dataSourceElement = document.getElementById("Data-Source");
@@ -3003,36 +2991,6 @@ async function checkSetAppendedTextErrorV3() {
         await spliceErrorFromArray("connectionStringDataSourceName");
         document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["error-text-to-append"].value = document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["error-text-to-append"].value.replace(" (incomplete)", "");
     }
-
-    //if (incompletefields) {
-    //    if (duplicatename) {
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("incompleteConnectionString");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("duplicateConnectionStringName");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", " (duplicate) (incomplete)");
-    //        document.getElementById("DuplicateConnectionString-Alert").style.display = "block";
-    //        checkErroredConnectionStrings();
-    //    } else {
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("incompleteConnectionString");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("duplicateConnectionStringName");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", " (incomplete)");
-    //        document.getElementById("DuplicateConnectionString-Alert").style.display = "none";
-    //        checkErroredConnectionStrings();
-    //    }
-    //} else {
-    //    if (duplicatename) {
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("incompleteConnectionString");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("duplicateConnectionStringName");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", " (duplicate)");
-    //        document.getElementById("DuplicateConnectionString-Alert").style.display = "block";
-    //        checkErroredConnectionStrings();
-    //    } else {
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("incompleteConnectionString");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("duplicateConnectionStringName");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", "");
-    //        document.getElementById("DuplicateConnectionString-Alert").style.display = "none";
-    //        checkErroredConnectionStrings();
-    //    }
-    //}
 }
 
 async function tnsConnectionStringCheckCheckboxV3(field) {
@@ -3116,7 +3074,6 @@ async function addDataSourceOptionV3(idvalue) {
 async function resetConnectionStringFieldsV3() {
     document.getElementById("Data-Source-Name").value = "";
     document.getElementById("Data-Provider").value = "System.Data.SqlClient";
-    //document.getElementById("Additional-Options").value = "";
     document.getElementById("Integrated-Security").checked = true;
     document.getElementById("User-ID").value = "";
     document.getElementById("User-ID").disabled = true;
@@ -3278,24 +3235,29 @@ async function testConnectionString() {
     //Get the selected connection string from the ConnectionStringsArray.
     let selectedConnectionString = ConnectionStringsArray.filter(cstring => cstring.id === document.getElementById("ConnectionStrings-SelectList").value);
     document.getElementById("connectionStringTestModal").style.display = "flex";
-    const fetchOptions = {
-        method: "POST",
+    const testConnectionStringOptions = {
+        method: "GET",
         headers: {
+            'Authorization': 'Bearer ' + sessionStorage.getItem('comaconbearertoken'),
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(selectedConnectionString[0])
+        }
     };
-    fetch(apiRootUrl + "/api/Endpoint/TestConnectionString?cstringobject=" + JSON.stringify(selectedConnectionString[0]))
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("connectionStringTestModal").style.display = "none";
-            let testconnectionalert = document.getElementById("TestConnectionString-Alert");
-            if (data["ResultCode"] == "0") {
-                testconnectionalert.innerText = data["ResultMessage"];
-                testconnectionalert.style.color = "green";
-            } else if (data["ResultCode"] == "1") {
-                testconnectionalert.innerText = data["ResultMessage"];
-                testconnectionalert.style.color = "red";
+    fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/TestConnectionString?cstringobject=" + JSON.stringify(selectedConnectionString[0]), testConnectionStringOptions)
+        .then(response => {
+            if (response.ok) {
+                return response.json().then(data => {
+                    document.getElementById("connectionStringTestModal").style.display = "none";
+                    let testconnectionalert = document.getElementById("TestConnectionString-Alert");
+                    if (data["ResultCode"] == "0") {
+                        testconnectionalert.innerText = data["ResultMessage"];
+                        testconnectionalert.style.color = "green";
+                    } else if (data["ResultCode"] == "1") {
+                        testconnectionalert.innerText = data["ResultMessage"];
+                        testconnectionalert.style.color = "red";
+                    }
+                })
+            } else if(response.redirected){
+                window.location.href = sessionStorage.getItem('apiRootUrl') + response.url;
             }
         });
 }
@@ -3400,89 +3362,11 @@ function toggleDarkLightMode(checkbox) {
     if (checkbox.checked) {
         localStorage.setItem("darkModeState", true);
         //Elements to add "dark_mode" class to:
-        document.body.classList.add('dark_mode');
-        document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.add('dark_mode');
-        document.getElementById("Loading-Web-Applications-Progress-Section").classList.add('dark_mode');
-        document.getElementById("CopyWebApplicationModal-Container").classList.add('dark_mode');
-        document.getElementById("SaveErrors-Content").classList.add('dark_mode');
-        document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.add('dark_mode');
-        document.getElementById("errorLoadModal-content").classList.add('dark_mode');
-        document.getElementById("NewWebApplicationModal-Container").classList.add('dark_mode');
-        document.getElementById("NewWebApplicationModal-BodySection").classList.add('dark_mode');
-        document.getElementById("NewWebApplicationModal-Footer").classList.add('dark_mode');
-
-        //Elements to add "dark_mode_titlebar" class to:
-        document.getElementById("h1-container").classList.add('dark_mode_titlebar');
-        document.getElementById("core-action-buttons-div").classList.add('dark_mode_titlebar');
-        document.getElementById("ChooseApplicationTitleBar").classList.add('dark_mode_titlebar');
-        document.getElementById("NewWebApplicationModal-TitleBar").classList.add('dark_mode_titlebar');
-        Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
-            element.classList.add('dark_mode_titlebar')
-        });
-        Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
-            element.classList.add('dark_mode_titlebar');
-        });
-
-        //Elements to add "dark_mode_button" class to:
-        Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
-            element.classList.add('dark_mode_button')
-        });
-
-        //Elements to add "dark_mode_select" class to:
-        Array.from(document.getElementsByTagName("select")).forEach(element => {
-            element.classList.add('dark_mode_select');
-        });
-
-        //Elements to add "dark_mode_links" class to:
-        Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
-            element.classList.add('dark_mode_links');
-        });
-
-        Array.from(document.getElementsByTagName("optgroup")).forEach(element => {
-            element.classList.add('dark_mode_select_optgroup');
-        });
+        document.body.classList.add('dark_mode_body');
     } else {
         localStorage.setItem("darkModeState", false);
-        //Elements to remove "dark_mode" class to:
-        document.body.classList.remove('dark_mode');
-        document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.remove('dark_mode');
-        document.getElementById("Loading-Web-Applications-Progress-Section").classList.remove('dark_mode');
-        document.getElementById("CopyWebApplicationModal-Container").classList.remove('dark_mode');
-        document.getElementById("SaveErrors-Content").classList.remove('dark_mode');
-        document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.remove('dark_mode');
-        document.getElementById("errorLoadModal-content").classList.remove('dark_mode');
-        document.getElementById("NewWebApplicationModal-Container").classList.remove('dark_mode');
-        document.getElementById("NewWebApplicationModal-BodySection").classList.remove('dark_mode');
-        document.getElementById("NewWebApplicationModal-Footer").classList.remove('dark_mode');
-
-        //Elements to add "dark_mode_titlebar" class to:
-        document.getElementById("h1-container").classList.remove('dark_mode_titlebar');
-        document.getElementById("core-action-buttons-div").classList.remove('dark_mode_titlebar');
-        document.getElementById("ChooseApplicationTitleBar").classList.remove('dark_mode_titlebar');
-        document.getElementById("NewWebApplicationModal-TitleBar").classList.remove('dark_mode_titlebar');
-        Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
-            element.classList.remove('dark_mode_titlebar')
-        });
-        Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
-            element.classList.remove('dark_mode_titlebar');
-        });
-
-        //Elements to add "dark_mode_button" class to:
-        Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
-            element.classList.remove('dark_mode_button')
-        });
-
-        //Elements to add "dark_mode_select" class to:
-        Array.from(document.getElementsByTagName("select")).forEach(element => {
-            element.classList.remove('dark_mode_select');
-        });
-        Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
-            element.classList.remove('dark_mode_links');
-        });
-
-        Array.from(document.getElementsByTagName("optgroup")).forEach(element => {
-            element.classList.remove('dark_mode_select_optgroup');
-        });
+        //Elements to remove "dark_mode" class from:
+        document.body.classList.remove('dark_mode_body');
     }
 }
 
@@ -3517,7 +3401,7 @@ async function groupByNameKey(array,groupingKeyName) {
 /********************************************************
 *              New Web Application Functions
 ********************************************************/
-let currentPage = "NewWebApplicationModal-StartPage";
+let currentNewWebApplicationPage = "NewWebApplicationModal-StartPage";
 
 function webApplicationVersionChanged(field) {
     //Clear the current options from the ChooseWebApplication select element.
@@ -3545,7 +3429,7 @@ function webApplicationTypeChanged(field) {
 }
 
 function backButtonClicked() {
-    switch (currentPage) {
+    switch (currentNewWebApplicationPage) {
         case "NewWebApplicationModal-StartPage":
             break;
         case "NewWebApplicationModal-FromExistingOrScratch":
@@ -3557,31 +3441,29 @@ function backButtonClicked() {
                 document.getElementById("NewWebApplicationModal-StartPage").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-StartPage").hidden = false;
                 document.getElementById("NewWebApplicationModal-FromExistingOrScratch").hidden = true;
-                currentPage = "NewWebApplicationModal-StartPage";
+                currentNewWebApplicationPage = "NewWebApplicationModal-StartPage";
             }, 250);
             break;
         case "NewWebApplicationModal-FromExisting":
             document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
             document.getElementById("NewWebApplicationModal-FromExisting").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
             document.getElementById("NewWebApplicationModal-FromExisting").classList.add("slide-out-right");
-            //document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
             setTimeout(function () {
                 document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-FromExistingOrScratch").hidden = false;
                 document.getElementById("NewWebApplicationModal-FromExisting").hidden = true;
-                currentPage = "NewWebApplicationModal-FromExistingOrScratch";
+                currentNewWebApplicationPage = "NewWebApplicationModal-FromExistingOrScratch";
             }, 250);
             break;
         case "NewWebApplicationModal-VersionClientChoice":
             document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
             document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
             document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.add("slide-out-right");
-            //document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
             setTimeout(function () {
                 document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-FromExistingOrScratch").hidden = false;
                 document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = true;
-                currentPage = "NewWebApplicationModal-FromExistingOrScratch";
+                currentNewWebApplicationPage = "NewWebApplicationModal-FromExistingOrScratch";
             }, 250);
             break;
         case "NewWebApplicationModal-WebSiteChoiceAndNaming":
@@ -3592,7 +3474,7 @@ function backButtonClicked() {
                 document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = false;
                 document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = true;
-                currentPage = "NewWebApplicationModal-VersionClientChoice";
+                currentNewWebApplicationPage = "NewWebApplicationModal-VersionClientChoice";
             }, 250);
             document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
             break;
@@ -3604,7 +3486,7 @@ function backButtonClicked() {
                 document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = true;
                 document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = false;
-                currentPage = "NewWebApplicationModal-WebSiteChoiceAndNaming";
+                currentNewWebApplicationPage = "NewWebApplicationModal-WebSiteChoiceAndNaming";
             }, 250);
             document.getElementById("NewWebApplicationModal-NextCreateButton").innerText = "Next >";
             document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
@@ -3617,7 +3499,7 @@ function backButtonClicked() {
                 document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").style.display = "none";
                 document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").style.display = "flex";
-                currentPage = "NewWebApplicationModal-WebApplicationAppPoolNaming";
+                currentNewWebApplicationPage = "NewWebApplicationModal-WebApplicationAppPoolNaming";
             }, 250);
             document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
             document.getElementById("NewWebApplicationModal-CloseModal").style.display = "block";
@@ -3627,7 +3509,7 @@ function backButtonClicked() {
 }
 
 async function nextButtonClicked() {
-    switch (currentPage) {
+    switch (currentNewWebApplicationPage) {
         case "NewWebApplicationModal-VersionClientChoice":
             document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
             document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.add("slide-out-left");
@@ -3636,10 +3518,9 @@ async function nextButtonClicked() {
                 document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").classList.add("slide-in-right");
                 document.getElementById("NewWebApplicationModal-VersionClientChoice").hidden = true;
                 document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = false;
-                currentPage = "NewWebApplicationModal-WebSiteChoiceAndNaming";
+                currentNewWebApplicationPage = "NewWebApplicationModal-WebSiteChoiceAndNaming";
             }, 250);
             document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
-            //document.getElementById("ChooseWebSite").innerHTML = `<option value="Default Web Site">Default Web Site</option>`;
             document.getElementById("ChooseWebSite").value = "";
             document.getElementById("ChoosePath").innerHTML = "";
             document.getElementById("ChoosePath").disabled = true;
@@ -3653,7 +3534,7 @@ async function nextButtonClicked() {
                 document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").classList.add("slide-in-right");
                 document.getElementById("NewWebApplicationModal-WebSiteChoiceAndNaming").hidden = true;
                 document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = false;
-                currentPage = "NewWebApplicationModal-WebApplicationAppPoolNaming";
+                currentNewWebApplicationPage = "NewWebApplicationModal-WebApplicationAppPoolNaming";
             }, 250);
             document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
             document.getElementById("WebApplicationName").value = "";
@@ -3670,7 +3551,7 @@ async function nextButtonClicked() {
                 document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").classList.add("slide-in-right");
                 document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").style.display = "none";
                 document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").style.display = "flex";
-                currentPage = "NewWebApplicationModal-CheckingNewWebApplicationProgress";
+                currentNewWebApplicationPage = "NewWebApplicationModal-CheckingNewWebApplicationProgress";
             }, 250);
             document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
             document.getElementById("NewWebApplicationModal-CloseModal").style.display = "none";
@@ -3685,7 +3566,6 @@ async function nextButtonClicked() {
                 webApplicationBitness: bitness,
                 webApplicationPoolName: document.getElementById("WebApplicationPoolName").value
             };
-            console.log(webApplicationToCreate["virtualDirectory"]);
             let dupResult = await newWebApplicationValidateNoDuplicate(webApplicationToCreate)
             if (dupResult) {
                 const fetchOptions = {
@@ -3695,10 +3575,9 @@ async function nextButtonClicked() {
                     },
                     body: JSON.stringify(webApplicationToCreate)
                 };
-                fetch(apiRootUrl + "/api/Endpoint/CreateNewWebApplication?action=FromScratch", fetchOptions)
+                fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/CreateNewWebApplication?action=FromScratch", fetchOptions)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data);
                         switch (data) {
                             case 0:
                                 let virtualDirectoryPath = "";
@@ -3726,37 +3605,36 @@ async function nextButtonClicked() {
                                     }
                                 ];
                                 sessionStorage.setItem('WebApplicationChosenArray', JSON.stringify(webApplicationToLoad));
-                                console.log(sessionStorage.getItem('WebApplicationChosenArray'));
                                 switch (webAppType) {
                                     case "Application Server":
-                                        window.location.href = apiRootUrl + "/Core/ApplicationServer";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/ApplicationServer";
                                         break;
                                     case "Agenda Online":
-                                        window.location.href = apiRootUrl + "/Core/AgendaOnlineServer";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/AgendaOnlineServer";
                                         break;
                                     case "Electronic Plan Review":
-                                        window.location.href = apiRootUrl + "/Core/ElectronicPlanReview";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/ElectronicPlanReview";
                                         break;
                                     case "Gateway Caching Server":
-                                        window.location.href = apiRootUrl + "/Core/GatewayCachingServer";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/GatewayCachingServer";
                                         break;
                                     case "Healthcare Form Manager":
-                                        window.location.href = apiRootUrl + "/Core/HealthcareFormManager";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/HealthcareFormManager";
                                         break;
                                     case "Patient Window":
-                                        window.location.href = apiRootUrl + "/Core/OnBasePatientWindow";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/OnBasePatientWindow";
                                         break;
                                     case "Public Access - Legacy":
-                                        window.location.href = apiRootUrl + "/Core/PublicAccessViewerLegacy"
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/PublicAccessViewerLegacy"
                                         break;
                                     case "Public Access - Next Gen":
-                                        window.location.href = apiRootUrl + "/Core/PublicAccessViewerNextGen"
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/PublicAccessViewerNextGen"
                                         break;
                                     case "Reporting Viewer":
-                                        window.location.href = apiRootUrl + "/Core/ReportingWebViewer";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/ReportingWebViewer";
                                         break;
                                     case "Web Server":
-                                        window.location.href = apiRootUrl + "/Core/WebServer";
+                                        window.location.href = sessionStorage.getItem('apiRootUrl') + "/Core/WebServer";
                                         break;
                                 }
                                 break;
@@ -3780,7 +3658,6 @@ async function nextButtonClicked() {
 function webSiteChanged(field) {
     if (field.value != "") {
         document.getElementById("ChoosePath").disabled = false;
-        //document.getElementById("ChoosePath").innerHTML = `<option value="Root">Root</option>`;
         document.getElementById("ChoosePath").innerHTML = "";
         let applicationPaths = Array.from(newConfigurationDetails["webApplicationConfiguration"]["webSiteDetails"]).find(result => result["siteName"] == field.value);
         for (let i = 0; i < applicationPaths["virtualDirectories"].length; i++) {
@@ -3888,7 +3765,6 @@ function selectWebConfigChanged(field) {
                 document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = true;
                 document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
             }
-            //document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
         }
     } else {
         document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
@@ -3925,15 +3801,13 @@ function newWebApplication() {
     document.getElementById("NewWebApplicationModal-StartPage").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
     document.getElementById('NewWebApplicationModal-StartPage').classList.add('slide-out-left');
     setTimeout(function () {
-        //document.getElementById("ChooseWebApplicationVersion").value = "";
-        //document.getElementById("ChooseWebApplication").value = "";
         document.getElementById('NewWebApplicationModal-StartPage').hidden = true;
         document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = false;
         document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
         document.getElementById('NewWebApplicationModal-FromExistingOrScratch').classList.add('slide-in-right');
     }, 250);
     document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
-    currentPage = "NewWebApplicationModal-FromExistingOrScratch";
+    currentNewWebApplicationPage = "NewWebApplicationModal-FromExistingOrScratch";
     document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
 }
 
@@ -3950,7 +3824,7 @@ function newWebApplicationFromExisting() {
     }, 250);
     document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
     document.getElementById("FromExisting-ChooseWebApplication").value = "";
-    currentPage = "NewWebApplicationModal-FromExisting";
+    currentNewWebApplicationPage = "NewWebApplicationModal-FromExisting";
     document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
     document.getElementById("SelectSessionAdminSecurityConfig-Section").style.display = "none";
     document.getElementById("SelectWebConfig").value = "";
@@ -3969,7 +3843,7 @@ function newWebApplicationFromScratch() {
         document.getElementById('NewWebApplicationModal-VersionClientChoice').classList.add('slide-in-right');
     }, 250);
     document.getElementById("NewWebApplicationModal-Footer").style.display = "flex";
-    currentPage = "NewWebApplicationModal-VersionClientChoice";
+    currentNewWebApplicationPage = "NewWebApplicationModal-VersionClientChoice";
     document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
 }
 
@@ -3987,7 +3861,7 @@ function closeNewWebApplicationModal() {
     document.getElementById("NewWebApplicationModal-WebApplicationAppPoolNaming").hidden = true;
     document.getElementById('NewWebApplicationModal-FromExisting').hidden = true;
     document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = true;
-    currentPage = "NewWebApplicationModal-StartPage";
+    currentNewWebApplicationPage = "NewWebApplicationModal-StartPage";
     document.getElementById("NewWebApplicationModal-NextCreateButton").innerText = "Next >";
     document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
     document.getElementById("ChooseWebApplication").disabled = true;
@@ -4013,7 +3887,7 @@ async function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
         body: JSON.stringify(webApplicationToCheck)
     };
     let returnValue = false;
-    if (await fetch(apiRootUrl + "/api/Endpoint/CheckNewWebApplicationDuplicates", fetchOptions)
+    if (await fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/CheckNewWebApplicationDuplicates", fetchOptions)
         .then(response => response.json())
         .then(data => {
             switch (data) {
@@ -4026,7 +3900,7 @@ async function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
                             document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").classList.add("slide-in-right");
                             document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress").style.display = "none";
                             document.getElementById("NewWebApplicationModal-CreatingNewWebApplicationProgress").style.display = "flex";
-                            currentPage = "NewWebApplicationModal-CreatingNewWebApplicationProgress";
+                            currentNewWebApplicationPage = "NewWebApplicationModal-CreatingNewWebApplicationProgress";
                         }, 250);
                         document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
                         document.getElementById("NewWebApplicationModal-CloseModal").style.display = "none";
@@ -4051,7 +3925,6 @@ async function newWebApplicationValidateNoDuplicate(webApplicationToCheck) {
                         backButtonClicked(document.getElementById("NewWebApplicationModal-CheckingNewWebApplicationProgress"));
                     }, 250);
                     break;
-
             }
         }))
     {

@@ -1,0 +1,298 @@
+<div id="WebClientSection" class="tabcontent">
+    <div class="row">
+        <p class="BlockDescription">The following keys are settings in the Web Client.</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Core
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Core-Data-Source">Data Source: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Core-Data-Source-Tooltip" class="tooltiptext">The ADO.NET data source for the Web Server.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Core-Data-Source" id="Core-Data-Source">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Web-Virtual-Directory">Virtual Directory: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Web-Virtual-Directory-Tooltip" class="tooltiptext">The root location of the virtual directory where the Web Server resides.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="url" name="Web-Virtual-Directory" id="Web-Virtual-Directory">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Server-Designation">Server Designation: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Server-Designation-Tooltip" class="tooltiptext">(Optional) Enter a value to designate which server the user is connecting to, which will display in the window title. This is helpful in a load balanced environment.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Server-Designation" id="Server-Designation">
+                        </div>
+                    </div>
+                    <div class="settingElement" id="Web-Client-Type-SettingElement">
+                        <div class="labelElement">
+                            <label for="Web-Client-Type">Web Client Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Web-Client-Type-Tooltip" class="tooltiptext">
+                                <span>
+                                    activex - This will enable the ActiveX web client.
+                                </span>
+                                <br>
+                                <span>
+                                    html - This will enable the HTML Only web client.
+                                </span>
+                                <br>
+                                <span>
+                                    selectable - This will provide users an option upon login to select which client type (ActiveX or HTML Only) to use.
+                                </span>
+                            </span>
+                        </div>
+                        <div class="inputElement">
+                            <select name="Web-Client-Type" id="Web-Client-Type" class="dark_mode_select">
+                                <option value="html">html</option>
+                                <option value="activex" selected>activex</option>
+                                <option value="selectable">selectable</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Allow Insecure Connections: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Allow-Insecure-Connections-Tooltip" class="tooltiptext">This setting controls if the server will accept only https connections or not. If you set this to false all incoming requests have to be made over https. If you set this to true then both http and https connections are accepted. The recommended setting is false.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Allow-Insecure-Connections" class="switch">
+                                <input id="Allow-Insecure-Connections" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Max-Results">Max Results: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Max-Results-Tooltip" class="tooltiptext">The maximum number of documents displayed in a results list.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Max-Results" id="Max-Results" value="1000">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    UI Language/Locale
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Override UI Language: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Override-UI-Language-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Override-UI-Language" class="switch">
+                                <input id="Override-UI-Language" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Default UI Local: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Default-UI-Local-Tooltip" class="tooltiptext">When Override UI Language is set to true this key sets the behavior of the UI. To have a specific language be the default regardless of locale setting, set this value to the locale.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Default-UI-Local" class="switch">
+                                <input id="Default-UI-Local" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Session & Logout
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Session Expire: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Enable-Session-Expiration-Tooltip" class="tooltiptext">The end user will be logged out when no activity is detected.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Enable-Session-Expiration" class="switch">
+                                <input id="Enable-Session-Expiration" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Session-Timeout">Session Timeout: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Session-Timeout-Tooltip" class="tooltiptext">Session timeout (in minutes) (minimum 2 minutes, maximum 1440 minutes).</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Session-Timeout" id="Session-Timeout" value="20">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div>
+                            <span>Prompt On Session Expire: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Prompt-On-Session-Expire-Tooltip" class="tooltiptext">Prompts the user with a warning 30 seconds before the session expires.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Prompt-On-Session-Expire" class="switch">
+                                <input id="Prompt-On-Session-Expire" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Close On Logout: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Close-On-Logout-Tooltip" class="tooltiptext">If set to true, the window is automatically closed when the user logs out, Otherwise, the user is returned to the login screen.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Close-On-Logout" class="switch">
+                                <input id="Close-On-Logout" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Logout-Redirect-URL">Logout Redirect URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Logout-Redirect-URL-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <div id="Logout-Redirect-URL-Loader" class="loader"></div>
+                            <input type="url" name="Logout-Redirect-URL" id="Logout-Redirect-URL" oninput="resetBorderStyling(event)" onfocusout="testUrl(event)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Pages
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Target-Page">Target Page: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Target-Page-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Target-Page" id="Target-Page" value="NavPanel.aspx">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Login-Page">Login Page: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Login-Page-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Login-Page" id="Login-Page" value="Login.aspx">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ExtraRowSection">
+        <div class="sectionWithTitleBar">
+            <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                Miscellaneous
+            </div>
+            <div class="coreSection">
+                <div class="row">
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Collapse Check Select Lists: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Collapse-Check-Select-Lists-Tooltip" class="tooltiptext">When set to true, all CheckSelect list controls will begin in a collapsed state.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="Collapse-Check-Select-Lists" class="switch">
+                                    <input id="Collapse-Check-Select-Lists" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement" id="Native-Mail-System-SettingElement">
+                            <div class="labelElement">
+                                <label for="Native-Mail-System">Native Mail System: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Native-Mail-System-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <select name="Native-Mail-System" id="Native-Mail-System" class="dark_mode_select">
+                                    <option value="0" selected>Default</option>
+                                    <option value="1">MAPI</option>
+                                    <option value="2">VIM (vendor-independent message)</option>
+                                    <option value="3">MHS</option>
+                                    <option value="5">CSERVE CompuServe MS Mail Driver</option>
+                                    <option value="9">ACTIVE MESSAGING</option>
+                                    <option value="10">SMTP/POP</option>
+                                    <option value="11">Lotus Notes</option>
+                                    <option value="12">GroupWise</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Allowed-Function-Key-List">Allowed Function Key List: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Allowed-Function-Key-List-Tooltip" class="tooltiptext">Comma separated list of function key shortcuts that should not be blocked or overridden by the Web Client.</span>
+                            </div>
+                            <div class="inputElement">
+                                <input type="text" name="Allowed-Function-Key-List" id="Allowed-Function-Key-List">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Windows-Server-Locale-Format">Windows Server Locale Format: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Windows-Server-Locale-Format-Tooltip" class="tooltiptext">Specify the Windows Server version to pull locale formats from. You do not need to be running the server version you pick. This is not required; the version will be automatically detected as the version running on the server if this value is not present. Valid values are 2008, 2012, 2016, and no value (blank). Any other input will cause the aforementioned autodetection to take over.</span>
+                            </div>
+                            <div class="inputElement">
+                                <select name="Windows-Server-Locale-Format" id="Windows-Server-Locale-Format" class="dark_mode_select">
+                                    <option value="None"></option>
+                                    <option value="2008">2008</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2016">2016</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Internal-Mail-Timer-In-Seconds">Internal Mail Timer (in seconds): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Internal-Mail-Timer-In-Seconds-Tooltip" class="tooltiptext">This timer controls how often the Web Client will check for new Internal Mail messages if the "Notify on New Mail" user option is enabled. By default, it will check every 300 seconds (5 minutes). This is the minimum allowed value. Setting InternalMailTimerSeconds to 0 will disable mail notifications for all users.</span>
+                            </div>
+                            <div class="inputElement">
+                                <input type="number" pattern="[0-9]*" inputmode="numeric" name="Internal-Mail-Timer-In-Seconds" id="Internal-Mail-Timer-In-Seconds" value="300">
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Web-Theme">Web Theme: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Web-Theme-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <select name="Web-Theme" id="Web-Theme" class="dark_mode_select" disabled>
+                                    <option value="XP" selected>XP</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

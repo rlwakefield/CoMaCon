@@ -1,0 +1,24 @@
+﻿<div id="DeleteUserConfirmationModal">
+    <div id="DeleteUserConfirmationModal-Outer" style="border: 1px solid black;border-radius: 1rem;width: 50%;">
+        <div id="DeleteUserConfirmationModal-Inner" style="display: flex; justify-content: center; align-items: center;">
+            <form>
+                <h1 id="DeleteUserConfirmationModal-Header">Delete User</h1>
+                <p id="DeleteUserConfirmationModal-Message">Are you sure you want to delete this user?</p>
+                <p id="DeleteUserConfirmationModal-UserDetails">
+                    Usernum: <span id="DeleteUserConfirmationModal-Usernum"></span><br>
+                    Username: <span id="DeleteUserConfirmationModal-Username"></span><br>
+                    First Name: <span id="DeleteUserConfirmationModal-FirstName"></span><br>
+                    Last Name: <span id="DeleteUserConfirmationModal-LastName"></span>
+                </p>
+                <div class="DeleteUserConfirmationModal-ConfirmationCheckbox">
+                    <input type="checkbox" name="DeleteUserConfirmation" id="DeleteUserConfirmation" onclick="deleteUserConfirmationCheckbox(this)" required>
+                    <label for="DeleteUserConfirmation">Yes, I want to delete this user.</label>
+                </div>
+                <div id="DeleteUserConfirmationModal-ActionButtons">
+                    <button id="DeleteUserConfirmationModal-DeleteUserButton" type="submit" onclick="deleteUser(event)" disabled>Delete</button>
+                    <button id="DeleteUserConfirmationModal-CancelDeleteUser" type="reset" onclick="closeDeleteUserConfirmationModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

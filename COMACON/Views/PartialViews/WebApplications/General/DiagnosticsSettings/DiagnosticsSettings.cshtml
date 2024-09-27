@@ -1,0 +1,221 @@
+<div id="DiagnosticsSettingsSection" class="tabcontent" style="border: 1px solid black;">
+    <p class="BlockDescription">A logging route specifies where the application will direct diagnostics and/or audit events. By default most audit events are persisted to the OnBase Database. Audit routes provide the ability to mirror these events to additional endpoints for compliance purposes.</p>
+    <div class="row">
+        <div class="sectionWithTitleBar" style="width: 70%;">
+            <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                General Diagnostics Settings
+            </div>
+            <div class="coreSection">
+                <div class="settingElement">
+                    <div class="labelElement">
+                        <label for="DiagnosticsSettings-TruncateLogValues">Number of characters to truncate log sections to: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                        <span id="DiagnosticsSettings-TruncateLogValues-Tooltip" class="tooltiptext">This is the help text.</span>
+                    </div>
+                    <div class="inputElement">
+                        <input type="number" pattern="[0-9]*" inputmode="numeric" name="DiagnosticsSettings-TruncateLogValues" id="DiagnosticsSettings-TruncateLogValues">
+                    </div>
+                </div>
+                <div class="settingElement">
+                    <div class="labelElement">
+                        <label for="DiagnosticsSettings-WindowsEventLogging-SourceName">Windows Event Logging Source Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                        <span id="DiagnosticsSettings-WindowsEventLogging-SourceName-Tooltip" class="tooltiptext">This is the help text.</span>
+                    </div>
+                    <div class="inputElement">
+                        <input type="text" name="DiagnosticsSettings-WindowsEventLogging-SourceName" id="DiagnosticsSettings-WindowsEventLogging-SourceName">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="" style="display:flex;justify-content:space-between;">
+        <div class="column" style="min-width: fit-content;max-width: 30%;padding:0;">
+            <select id="DiagnosticsSettingsRoutes-SelectList" size="30" onchange="diagnosticsSettingRouteSelected(this)" style="width: 100%;" class="dark_mode_select">
+            </select>
+            <div style="display: flex;justify-content: space-around;padding-top: 5px;">
+                <button onclick="addDiagnosticsRouteV2()" type="button">Add</button>
+                <button onclick="copyDiagnosticsRouteV2()" type="button">Copy</button>
+                <button onclick="deleteDiagnosticsRouteV2()" type="button">Delete</button>
+            </div>
+        </div>
+        <div class="column" style="width: 65%;padding:0;">
+            <div id="SourceDetails" style="border: 1px solid black; padding-left: 5px; padding-right: 5px;">
+                <h2>Source Details</h2>
+                <div class="setting-element">
+                    <label for="Source-Details-Name">Name: </label>
+                    <input style="width: 50%;" type="text" name="Source-Details-Name" id="Source-Details-Name" oninput="diagnosticsSettingRouteNameChanged(this)">
+                </div>
+                <div class="setting-element">
+                    <span>Source:</span>
+                    <div>
+                        <input type="radio" name="Source-Details-Source-Radio" id="Source-Details-Source-Radio-Diagnostics-Events" onclick="updateAuditEventsSourceOnRoute(this)" checked>
+                        <label for="Source-Details-Source">Diagnostics Events</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="Source-Details-Source-Radio" id="Source-Details-Source-Radio-Audit-Events" onclick="updateAuditEventsSourceOnRoute(this)">
+                        <label for="Source-Details-Source-Radio-Audit-Events">Audit Events</label>
+                    </div>
+                </div>
+                <div class="setting-element">
+                    <input type="checkbox" name="Enable-IP-Address-Masking" id="Enable-IP-Address-Masking" onclick="udpateEnableIpAddressMaskingOnRoute(this)" checked>
+                    <label for="Enable-IP-Address-Masking">Enable IP Address Masking: </label>
+                </div>
+            </div>
+            <div id="FilteringOptions" style="border: 1px solid black; padding: 5px;">
+                <h2>Filtering Options</h2>
+                <div class="setting-element">
+                    <label for="Filtering-Options-Minimum-Error-Level">Minimum Error Level: </label>
+                    <select name="Filtering-Options-Minimum-Error-Level" id="Filtering-Options-Minimum-Error-Level" onclick="errorLevelChanged(this)" class="dark_mode_select">
+                        <option value="1">Trace</option>
+                        <option value="2">Debug</option>
+                        <option value="3">Information</option>
+                        <option value="4">Warning</option>
+                        <option value="5">Error</option>
+                        <option value="6">Critical</option>
+                    </select>
+                </div>
+                <div class="setting-element">
+                    <label for="Filtering-Options-Maximum-Error-Level">Maximum Error Level: </label>
+                    <select name="Filtering-Options-Maximum-Error-Level" id="Filtering-Options-Maximum-Error-Level" onclick="errorLevelChanged(this)" class="dark_mode_select">
+                        <option value="1">Trace</option>
+                        <option value="2">Debug</option>
+                        <option value="3">Information</option>
+                        <option value="4">Warning</option>
+                        <option value="5">Error</option>
+                        <option value="6">Critical</option>
+                    </select>
+                </div>
+                <div class="setting-element" style="gap: 1rem;">
+                    <div>
+                        <input type="radio" name="Filter-Options-Profiles-Radio" id="Filter-Options-Neither-Profiles-Radio" onclick="profilesReviewV2(this)" checked>
+                        <label for="Filter-Options-Neither-Profiles-Radio">Neither</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="Filter-Options-Profiles-Radio" id="Filter-Options-Included-Profiles-Radio" onclick="profilesReviewV2(this)">
+                        <label for="Filter-Options-Included-Profiles-Radio">Included Profiles</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="Filter-Options-Profiles-Radio" id="Filter-Options-Excluded-Profiles-Radio" onclick="profilesReviewV2(this)">
+                        <label for="Filter-Options-Excluded-Profiles-Radio">Excluded Profiles</label>
+                    </div>
+                </div>
+                <div class="ProfilesPanel">
+                    <div id="ProfilesPanel-Column1">
+                    </div>
+                    <div id="ProfilesPanel-Column2">
+                    </div>
+                </div>
+            </div>
+            <div id="Destination" style="border: 1px solid black; padding-left: 5px;">
+                <div class="setting-element">
+                    <label for="Destination-Type">Type: </label>
+                    <select name="Destination-Type" id="Destination-Type" onchange="DestinationTypeChange(this)" class="dark_mode_select">
+                        <option value="Console">Console</option>
+                        <option value="DurableHttp">DurableHttp</option>
+                        <option value="EventLog">EventLog</option>
+                        <option value="File">File</option>
+                        <option value="Http">Http</option>
+                        <option value="Splunk">Splunk</option>
+                    </select>
+                </div>
+                <div id="Destination-Type-Console" class="DestinationTypeFields">
+                    <div class="row">
+                        <div class="setting-element">
+                            <label for="Destination-Type-Console-Output-Format">Output Format: </label>
+                            <select name="Destination-Type-Console-Output-Format" id="Destination-Type-Console-Output-Format" onchange="updateDestinationDetails()" class="dark_mode_select">
+                                <option value="Minimal">Minimal</option>
+                                <option value="Text">Text</option>
+                                <option value="JSON">JSON</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div id="Destination-Type-DurableHttp" class="DestinationTypeFields">
+                    <div class="row">
+                        <div class="setting-element">
+                            <label for="Destination-Type-DurableHttp-Server-URL">Server URL: </label>
+                            <input style="width: 60%;" type="url" name="Destination-Type-DurableHttp-Server-URL" id="Destination-Type-DurableHttp-Server-URL" oninput="updateDestinationDetails()">
+                        </div>
+                    </div>
+                </div>
+                <div id="Destination-Type-Http" class="DestinationTypeFields">
+                    <div class="row">
+                        <div class="setting-element">
+                            <div id="-Loader" class="loader"></div>
+                            <label for="Destination-Type-Http-Server-URL">Server URL: </label>
+                            <input style="width: 60%;" type="url" name="Destination-Type-Http-Server-URL" id="Destination-Type-Http-Server-URL" oninput="updateDestinationDetails()">
+                        </div>
+                    </div>
+                </div>
+                <div id="Destination-Type-EventLog" class="DestinationTypeFields">
+                    <div class="row">
+                        <div class="setting-element">
+                            <label for="Destination-Type-EventLog-SourceName">Source Name: </label>
+                            <input style="width: 60%;" type="text" name="Destination-Type-EventLog-SourceName" id="Destination-Type-EventLog-SourceName" oninput="updateDestinationDetails()">
+                        </div>
+                    </div>
+                </div>
+                <div id="Destination-Type-File" class="DestinationTypeFields">
+                    <div class="setting-element">
+                        <label for="Destination-Type-File-File-Path">File Path: </label>
+                        <input style="width: 60%;" type="text" name="Destination-Type-File-File-Path" id="Destination-Type-File-File-Path" oninput="updateDestinationDetails()">
+                    </div>
+                    <div class="setting-element">
+                        <label for="Destination-Type-File-File-Size-Limit">File Size Limits (Bytes): </label>
+                        <input type="number" pattern="[0-9]*" inputmode="numeric" name="Destination-Type-File-File-Size-Limit" id="Destination-Type-File-File-Size-Limit" oninput="updateDestinationDetails()">
+                        <input type="checkbox" name="Destination-Type-File-Roll-When-Limit-Reached" id="Destination-Type-File-Roll-When-Limit-Reached" onchange="destinationFileTypeRollOnIntervalCheckbox(this);updateDestinationDetails()">
+                        <label for="Destination-Type-File-Roll-When-Limit-Reached">Roll When Limit Reached</label>
+                    </div>
+                    <div class="setting-element">
+                        <label for="Destination-Type-File-Roll-Interval">Roll Interval: </label>
+                        <select name="Destination-Type-File-Roll-Interval" id="Destination-Type-File-Roll-Interval" onchange="updateDestinationDetails()" class="dark_mode_select" disabled>
+                            <option value="Infinite">Infinite</option>
+                            <option value="Year">Year</option>
+                            <option value="Month">Month</option>
+                            <option value="Day">Day</option>
+                            <option value="Hour">Hour</option>
+                            <option value="Minute">Minute</option>
+                        </select>
+                    </div>
+                    <div class="setting-element">
+                        <label for="Destination-Type-File-Retained-Files-Count">Retained Files Count: </label>
+                        <input type="number" pattern="[0-9]*" inputmode="numeric" name="Destination-Type-File-Retained-Files-Count" id="Destination-Type-File-Retained-Files-Count" value="31" onchange="checkNumericBoundaries(this)"><span>  Set to 0 (zero) to disable.</span>
+                    </div>
+                    <div class="setting-element">
+                        <label for="Destination-Type-File-Output-Format">Output Format: </label>
+                        <select name="Destination-Type-File-Output-Format" id="Destination-Type-File-Output-Format" onchange="updateDestinationDetails()" class="dark_mode_select">
+                            <option value="JSON">JSON</option>
+                            <option value="Text">Text</option>
+                            <option value="JSON">JSON</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="Destination-Type-Splunk" class="DestinationTypeFields">
+                    <div class="setting-element">
+                        <label for="Destination-Type-Splunk-Server-URL">Server URL: </label>
+                        <input style="width: 60%;" type="url" name="Destination-Type-Splunk-Server-URL" id="Destination-Type-Splunk-Server-URL" oninput="updateDestinationDetails()">
+                    </div>
+                    <div class="setting-element">
+                        <label for="Destination-Type-Splunk-Token">Splunk Token: </label>
+                        <input style="width: 60%;" type="text" name="Destination-Type-Splunk-Token" id="Destination-Type-Splunk-Token" oninput="updateDestinationDetails()">
+                    </div>
+                    <div class="setting-element">
+                        <label for="Destination-Type-Splunk-Index">Splunk Index: </label>
+                        <input style="width: 60%;" type="text" name="Destination-Type-Splunk-Index" id="Destination-Type-Splunk-Index" oninput="updateDestinationDetails()">
+                    </div>
+                    <div class="setting-element">
+                        <label for="Destination-Type-Splunk-Source">Splunk Source: </label>
+                        <input style="width: 60%;" type="text" name="Destination-Type-Splunk-Source" id="Destination-Type-Splunk-Source" oninput="updateDestinationDetails()">
+                    </div>
+                    <div class="setting-element">
+                        <label for="Destination-Type-Splunk-Source-Type">Splunk Source Type: </label>
+                        <input style="width: 60%;" type="text" name="Destination-Type-Splunk-Source-Type" id="Destination-Type-Splunk-Source-Type" oninput="updateDestinationDetails()">
+                    </div>
+                    <div class="setting-element">
+                        <label for="Destination-Type-Splunk-Host">Splunk Host: </label>
+                        <input style="width: 60%;" type="url" name="Destination-Type-Splunk-Host" id="Destination-Type-Splunk-Host" oninput="updateDestinationDetails()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

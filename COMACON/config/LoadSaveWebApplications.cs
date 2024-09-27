@@ -48,12 +48,17 @@ internal sealed class DefaultLoadSaveWebApplications : LoadSaveWebApplications
     private readonly ComaconHelperProxy ComaconHelperProxy;
     private readonly GenericHelperMethods GenericHelperMethods;
     private readonly WebApplicationDataStructures webApplicationDataStructures;
+    private readonly SessionManagement sessionManagement;
 
-    public DefaultLoadSaveWebApplications(ComaconHelperProxy proxy, GenericHelperMethods genericHelperMethods, WebApplicationDataStructures WebApplicationDataStructures)
+    public DefaultLoadSaveWebApplications(ComaconHelperProxy proxy,
+        GenericHelperMethods genericHelperMethods,
+        WebApplicationDataStructures WebApplicationDataStructures,
+        SessionManagement SessionManagement)
     {
         ComaconHelperProxy = proxy;
         GenericHelperMethods = genericHelperMethods;
         webApplicationDataStructures = WebApplicationDataStructures;
+        sessionManagement = SessionManagement;
     }
 
     public string LoadWebApplicationConfiguration(TextReader reader,

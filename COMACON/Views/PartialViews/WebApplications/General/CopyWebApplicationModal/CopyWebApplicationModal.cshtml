@@ -1,0 +1,72 @@
+<div id="CopyWebApplicationModal" class="CopyWebApplicationModal">
+    <!-- Window Container -->
+    <div id="CopyWebApplicationModal-Container" class="CopyWebApplicationModal-Container dark_mode">
+        <!-- Title Bar Container for styling -->
+        <div class="CopyWebApplicationModal-TitleBar-Container-Styling dark_mode_titlebar">
+            <!-- Actual Title Bar Container -->
+            <div class="CopyWebApplicationModal-TitleBar-Container">
+                <h2>Copy Web Application</h2>
+                <span class="close" onclick="closeCopyWebApplicationModal()">&times;</span>
+            </div>
+        </div>
+        <!-- Body Section -->
+        <div class="CopyWebApplicationModal-BodySection">
+            <!-- Information Section -->
+            <div class="CopyWebApplicationModal-Body-InformationSection">
+                <p>All settings and Application folder location will be copied from the existing application.<br>(<span class="underline">NOTE: Application Name/Pool Name must be unique.</span>)</p>
+            </div>
+            <!-- Field Section -->
+            <div class="CopyWebApplicationModal-BodySection-FieldSection">
+                <!-- Field Container -->
+                <div class="CopyWebApplicationModal-Body-FieldContainer">
+                    <!-- Label -->
+                    <div class="CopyWebApplicationModal-Body-FieldContainer-Label">
+                        <label for="CopyWebApplicationModal-NewApplicationName">New Application Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                        <span class="tooltiptext">This is the help text.</span>
+                    </div>
+                    <!-- Field -->
+                    <div class="CopyWebApplicationModal-Body-FieldContainer-Field">
+                        <input id="CopyWebApplicationModal-NewApplicationName" type="text" onfocusout="validateNoDuplicateApplicationName(this)" oninput="resetCopyApplicationFieldContainerStatusSvg('NewApplicationName-ResultContainer')">
+                        <div id="NewApplicationName-ResultContainer">
+                        </div>
+                    </div>
+                </div>
+                <!-- Field Container -->
+                <div class="CopyWebApplicationModal-Body-FieldContainer">
+                    <!-- Label -->
+                    <div class="CopyWebApplicationModal-Body-FieldContainer-Label">
+                        <label for="CopyWebApplicationModal-NewApplicationPoolName">New Application Pool Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                        <span class="tooltiptext">This is the help text.</span>
+                    </div>
+                    <!-- Field -->
+                    <div class="CopyWebApplicationModal-Body-FieldContainer-Field">
+                        <input type="text" id="CopyWebApplicationModal-NewApplicationPoolName" onfocusout="validateNoDuplicateApplicationPoolName(this)" oninput="resetCopyApplicationFieldContainerStatusSvg('NewApplicationPoolName-ResultContainer')">
+                        <div id="NewApplicationPoolName-ResultContainer">
+                        </div>
+                    </div>
+                </div>
+                <!-- Field Container -->
+                <div id="CopyWebApplicationModal-ApplicationServerURLField" class="CopyWebApplicationModal-Body-FieldContainer">
+                    <!-- Label -->
+                    <div class="CopyWebApplicationModal-Body-FieldContainer-Label">
+                        <label for="CopyWebApplicationModal-ApplicationServerUrl">Application Server URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                        <span class="tooltiptext">This is the help text.</span>
+                    </div>
+                    <!-- Field -->
+                    <div class="CopyWebApplicationModal-Body-FieldContainer-Field">
+                        <input type="url" id="CopyWebApplicationModal-ApplicationServerUrl" onfocusout="validateApplicationServerURL(this)" oninput="resetCopyApplicationFieldContainerStatusSvg('ApplicationServerUrl-ResultContainer')">
+                        <div id="ApplicationServerUrl-ResultContainer">
+                        </div>
+                    </div>
+                </div>
+                <!-- Action Buttons -->
+                <div class="CopyWebApplicationModal-Body-ActionButtons">
+                    <div class="CopyWebApplicationModal-Body-ActionButtons-ButtonsContainer">
+                        <button id="Copy-Button" onclick="copyWebApplication()">Copy</button>
+                        <button id="Cancel-Button-CopyWebApplication" onclick="closeCopyWebApplicationModal()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

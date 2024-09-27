@@ -1,0 +1,239 @@
+<div id="FormPopSection" class="tabcontent">
+    <div class="row">
+        <p class="BlockDescription">The following settings are specfic to FormPop. The only required key is Data Source, which can be configured here or passed in a query string.</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Data Source
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="FormPop-Data-Source">Default Data Source: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="FormPop-Data-Source-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="FormPop-Data-Source" id="FormPop-Data-Source">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>HTTP Data Source: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="FormPop-HTTP-Data-Source-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="FormPop-HTTP-Data-Source" class="switch">
+                                <input id="FormPop-HTTP-Data-Source" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Checksum
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Validate Against Checksum: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="FormPop-Validate-Against-Checksum-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="FormPop-Validate-Against-Checksum" class="switch">
+                                <input id="FormPop-Validate-Against-Checksum" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="FormPop-Checksum-Key">Checksum Key: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="FormPop-Checksum-Key-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="FormPop-Checksum-Key" id="FormPop-Checksum-Key">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Authentication
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Default Login: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="FormPop-Default-Login-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="FormPop-Default-Login" class="switch">
+                                <input id="FormPop-Default-Login" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>HTTP Login: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="FormPop-HTTP-Login-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="FormPop-HTTP-Login" class="switch">
+                                <input id="FormPop-HTTP-Login" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div>
+                            <span>Auto Login: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="FormPop-Auto-Login-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="FormPop-Auto-Login" class="switch">
+                                <input id="FormPop-Auto-Login" type="checkbox" onclick="autoLoginCheckAgainstOptimized(this)">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Login Credentials
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Default-FormPop-Domain-Name">Default FormPop Domain Name: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Default-FormPop-Domain-Name-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Default-FormPop-Domain-Name" id="Default-FormPop-Domain-Name">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Default-FormPop-Username">Default FormPop Username: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Default-FormPop-Username-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Default-FormPop-Username" id="Default-FormPop-Username">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Default-FormPop-Password">Default FormPop Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Default-FormPop-Password-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="password" name="Default-FormPop-Password" id="Default-FormPop-Password">
+                            <button class="passwordShowHideButton" id="FormPop-ShowHide-Password" onclick="passwordFieldShowHide('Default-FormPop-Password',this)">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.873 17.129c-1.845-1.31-3.305-3.014-4.13-4.09a1.693 1.693 0 0 1 0-2.077C4.236 9.013 7.818 5 12 5c1.876 0 3.63.807 5.13 1.874"></path>
+                                    <path d="M14.13 9.887a3 3 0 1 0-4.243 4.242"></path>
+                                    <path d="M4 20 20 4"></path>
+                                    <path d="M10 18.704A7.124 7.124 0 0 0 12 19c4.182 0 7.764-4.013 9.257-5.962a1.694 1.694 0 0 0-.001-2.078A22.939 22.939 0 0 0 19.57 9"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Default-FormPop-Institution">Default FormPop Institution: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Default-FormPop-Institution-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Default-FormPop-Institution" id="Default-FormPop-Institution">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ExtraRowSection">
+        <div class="sectionWithTitleBar">
+            <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                Miscellaneous
+            </div>
+            <div class="coreSection">
+                <div class="row">
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Embedded FormPop: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Embedded-FormPop-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="Embedded-FormPop" class="switch">
+                                    <input id="Embedded-FormPop" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Core Query API License: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="FormPop-Core-Query-API-License-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="FormPop-Core-Query-API-License" class="switch">
+                                    <input id="FormPop-Core-Query-API-License" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement" id="Target-Origin-SettingElement">
+                            <div class="labelElement">
+                                <label for="Target-Origin">Target Origin: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Target-Origin-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <input type="url" name="Target-Origin" id="Target-Origin">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Auto Display One Document: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="FormPop-Auto-Display-One-Document-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="FormPop-Auto-Display-One-Document" class="switch">
+                                    <input id="FormPop-Auto-Display-One-Document" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <span>Encrypt-FormPop: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Encrypt-FormPop-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <label for="Encrypt-FormPop" class="switch">
+                                    <input id="Encrypt-FormPop" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

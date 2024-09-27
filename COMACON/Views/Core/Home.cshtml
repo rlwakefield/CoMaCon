@@ -14,15 +14,14 @@
         </div>
     </div>
     <script>
-        // console.log("Home Page Loaded");
-        // console.log(window.location);
-        if (window.location.href.endsWith("/")) {
-            apiRootUrl = window.location.href.slice(0, -1);
-            sessionStorage.setItem('apiRootUrl', apiRootUrl);
-        } else {
-            apiRootUrl = window.location;
-            sessionStorage.setItem('apiRootUrl', apiRootUrl);
-        }
-        document.getElementById("core-action-buttons-div").style.display = "none";
+        currentPage = "Home";
     </script>
+}
+
+@section LogoutButton {
+    <partial name="~/Views/PartialViews/General/LogoutButton/LogoutButton.cshtml" />
+}
+
+@section SettingsButton {
+    <partial name="~/Views/PartialViews/General/SettingsButton/SettingsButton.cshtml" />
 }

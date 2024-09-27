@@ -1,0 +1,159 @@
+<div id="HylandServicesSection" class="tabcontent">
+    <div class="sectionWithTitleBar">
+        <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+            Pool Settings
+        </div>
+        <div class="coreSection">
+            <p class="BlockDescription">Controls the size of the session pools when using disconnected web services.</p>
+            <div class="row">
+                <div class="column">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Hyland-Services-AppPool-Minimum-Sessions">Minimum Sessions: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Hyland-Services-AppPool-Minimum-Sessions-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" name="Hyland-Services-AppPool-Minimum-Sessions" id="Hyland-Services-AppPool-Minimum-Sessions">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Hyland-Services-AppPool-Maximum-Sessions">Maximum Sessions: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Hyland-Services-AppPool-Maximum-Sessions-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" name="Hyland-Services-AppPool-Maximum-Sessions" id="Hyland-Services-AppPool-Maximum-Sessions">
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="settingElement" id="Hyland-Services-AppPool-Username-ElementSection">
+                        <div class="labelElement">
+                            <label for="Hyland-Services-AppPool-Username">Username: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Hyland-Services-AppPool-Username-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Hyland-Services-AppPool-Username" id="Hyland-Services-AppPool-Username">
+                        </div>
+                    </div>
+                    <div class="settingElement" id="Hyland-Services-AppPool-Password-ElementSection">
+                        <div class="labelElement">
+                            <label for="Hyland-Services-AppPool-Password">Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Hyland-Services-AppPool-Password-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Hyland-Services-AppPool-Password" id="Hyland-Services-AppPool-Password">
+                            <button class="passwordShowHideButton" id="-ShowHide-Password" onclick="passwordFieldShowHide('Hyland-Services-AppPool-Password',this)">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.873 17.129c-1.845-1.31-3.305-3.014-4.13-4.09a1.693 1.693 0 0 1 0-2.077C4.236 9.013 7.818 5 12 5c1.876 0 3.63.807 5.13 1.874"></path>
+                                    <path d="M14.13 9.887a3 3 0 1 0-4.243 4.242"></path>
+                                    <path d="M4 20 20 4"></path>
+                                    <path d="M10 18.704A7.124 7.124 0 0 0 12 19c4.182 0 7.764-4.013 9.257-5.962a1.694 1.694 0 0 0-.001-2.078A22.939 22.939 0 0 0 19.57 9"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sectionWithTitleBar">
+        <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+            Hyland API Security Settings
+        </div>
+        <div class="coreSection">
+            <p class="BlockDescription">Controls the security behavior of the Hyland APIs.</p>
+            <div class="row">
+                <div class="column">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Use Query Context: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Use-Query-Context-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Use-Query-Context" class="switch">
+                                <input id="Use-Query-Context" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Filter Exceptions: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Filter-Exceptions-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Filter-Exceptions" class="switch">
+                                <input id="Filter-Exceptions" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Endpoint Use Remoting: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Endpoint-Use-Remoting-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Endpoint-Use-Remoting" class="switch">
+                                <input id="Endpoint-Use-Remoting" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sectionWithTitleBar">
+        <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+            Session Settings
+        </div>
+        <div class="coreSection">
+            <div class="row">
+                <div class="column">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Application-Server-Callback-URL">Application Server Callback URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Application-Server-Callback-URL-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="url" name="Application-Server-Callback-URL" id="Application-Server-Callback-URL">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Web-Server-Base-URL">Web Server Base URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Web-Server-Base-URL-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="url" name="Web-Server-Base-URL" id="Web-Server-Base-URL">
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Request Validation Minimum Version: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Request-Validation-Minimum-Version-Tooltip" class="tooltiptext">
+                                Request Validation increases the security of your application server installation. It controls the level at which the application server will validate client requests.<br><br>
+
+                                Currently the only valid values for minVersion are 0 and 1. A value of zero (0) indicates that the application server will not validate incoming requests. Requests will still be authenticated, but will not be verified to be coming from a valid source. Anything other than zero (0) enables validation. A value of one (1) is currently the only supported validation level.<br><br>
+
+                                Setting minVersion to 1 will force the application server to validate that incoming requests are coming from a valid source. Note that if older clients are communicating to the application server that do not support request validation and this value is set to anything other than zero (0), those clients will not be able to communicate to the application server. If there are clients older than the release version of the application server that will not be upgraded you should leave this value at zero (0).
+                            </span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Request-Validation-Minimum-Version" class="switch">
+                                <input id="Request-Validation-Minimum-Version" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

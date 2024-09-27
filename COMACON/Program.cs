@@ -1,8 +1,14 @@
 using COMACON.ComaconHelper;
 using COMACON.config;
+using COMACON.DatabaseContexts.SQLite;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Data.Common;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<COMACONSqliteDbContext>(options =>
+        options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -33,19 +39,19 @@ builder.Services.AddSingleton(proxyOptions);
 builder.Services.AddTransient<ComaconHelperProxy, DefaultComaconHelperProxy>();
 builder.Services.AddTransient<GenericHelperMethods, DefaultGenericHelperMethods>();
 builder.Services.AddTransient<WebApplicationDataStructures, DefaultWebApplicationDataStructures>();
+builder.Services.AddTransient<SessionManagement, DefaultSessionManagement>();
+builder.Services.AddTransient<SqlQueries, DefaultSqlQueries>();
 
 builder.Services.AddTransient<Core, DefaultCore>();
 builder.Services.AddTransient<LoadSaveWebApplications, DefaultLoadSaveWebApplications>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//if (!app.Environment.IsDevelopment())
-//{
-//    app.UseExceptionHandler("/Home/Error");
-//    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-//    app.UseHsts();
-//}
+using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetService<COMACONSqliteDbContext>();
+    context.Database.EnsureCreated();
+}
 
 app.UseSerilogRequestLogging();
 
@@ -58,7 +64,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Core}/{action=Home}");
+    pattern: "{controller=Core}/{action=Login}");
 
 app.MapControllers();
 

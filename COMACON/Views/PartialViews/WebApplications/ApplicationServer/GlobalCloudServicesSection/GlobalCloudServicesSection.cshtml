@@ -1,0 +1,55 @@
+<div id="GlobalCloudServicesSection" class="tabcontent">
+    <div class="row">
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="GCS-Username">Username: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="GCS-Username-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="text" name="GCS-Username" id="GCS-Username">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="GCS-Password">Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="GCS-Password-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="text" name="GCS-Password" id="GCS-Password">
+                    <button class="passwordShowHideButton" id="-ShowHide-Password" onclick="passwordFieldShowHide('GCS-Password',this)">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.873 17.129c-1.845-1.31-3.305-3.014-4.13-4.09a1.693 1.693 0 0 1 0-2.077C4.236 9.013 7.818 5 12 5c1.876 0 3.63.807 5.13 1.874"></path>
+                            <path d="M14.13 9.887a3 3 0 1 0-4.243 4.242"></path>
+                            <path d="M4 20 20 4"></path>
+                            <path d="M10 18.704A7.124 7.124 0 0 0 12 19c4.182 0 7.764-4.013 9.257-5.962a1.694 1.694 0 0 0-.001-2.078A22.939 22.939 0 0 0 19.57 9"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="GCS-Phone-Home-Interval">Phone Home Interval(Minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="GCS-Phone-Home-Interval-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" name="GCS-Phone-Home-Interval" id="GCS-Phone-Home-Interval">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Use Legacy Key For Usage Based Billing: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Use-Legacy-Key-For-Usage-Based-Billing-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Use-Legacy-Key-For-Usage-Based-Billing" class="switch">
+                        <input id="Use-Legacy-Key-For-Usage-Based-Billing" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

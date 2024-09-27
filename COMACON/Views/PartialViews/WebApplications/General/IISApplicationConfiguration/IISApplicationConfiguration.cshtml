@@ -1,0 +1,368 @@
+<div id="IISApplicationSection" class="tabcontent">
+    <div name="IisConfigurationApplicationGeneral" class="row">
+        <p class="BlockDescription"></p>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    General Settings
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="IIS-Configuration-Application-Application-Pool">Application Pool: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="IIS-Configuration-Application-Application-Pool-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="IIS-Configuration-Application-Application-Pool" id="IIS-Configuration-Application-Application-Pool" disabled>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="IIS-Configuration-Application-Default-Document">Default Document: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="IIS-Configuration-Application-Default-Document-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="IIS-Configuration-Application-Default-Document" id="IIS-Configuration-Application-Default-Document">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Pre-Load Enabled: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="IIS-Configuration-Application-PreLoad-Enabled-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="IIS-Configuration-Application-PreLoad-Enabled" class="switch">
+                                <input id="IIS-Configuration-Application-PreLoad-Enabled" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Root Authentication
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Anonymous Authentication: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="IIS-Configuration-Application-Anonymous-Authentication-RootSpecific-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="IIS-Configuration-Application-Anonymous-Authentication-RootSpecific" class="switch">
+                                <input id="IIS-Configuration-Application-Anonymous-Authentication-RootSpecific" type="checkbox" onclick="AuthenticationToggled(this)">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>ASP.NET Impersonation: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="IIS-Configuration-Application-ASPNET-Impersonation-RootSpecific-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="IIS-Configuration-Application-ASPNET-Impersonation-RootSpecific" class="switch">
+                                <input id="IIS-Configuration-Application-ASPNET-Impersonation-RootSpecific" type="checkbox" onclick="AuthenticationToggled(this)">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Windows Authentication: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="IIS-Configuration-Application-Windows-Authentication-RootSpecific-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="IIS-Configuration-Application-Windows-Authentication-RootSpecific" class="switch">
+                                <input id="IIS-Configuration-Application-Windows-Authentication-RootSpecific" type="checkbox" onclick="AuthenticationToggled(this)">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Use Application Pool Credentials: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="IIS-Configuration-Application-Use-Application-Pool-Credentials-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="IIS-Configuration-Application-Use-Application-Pool-Credentials" class="switch">
+                                <input id="IIS-Configuration-Application-Use-Application-Pool-Credentials" type="checkbox" onclick="AuthenticationToggled(this)">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* <div name="IisConfigurationApplicationFileSpecificAuthentication" class="row" style="display: none;">
+    <div class="sectionWithTitleBar">
+    <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+    File Specific Authentication
+    </div>
+    <div class="coreSection">
+    <div class="row">
+    <div class="column" style="width: 30%;">
+    <p class="BlockDescription">Files</p>
+    <div name="FileSpecificAuthenticationScrollPanel" class="CustomValidationPagesListSection">
+    <ul id="IisConfigurationApplicationFileSpecificAuthenticationList" class="CustomValidationApplicationListKeywordsList">
+    </ul>
+    </div>
+    <div name="actionbuttons" class="CustomValidationApplicationListKeywordsButtons">
+    <button id="Custom-Validation-Page-Add-Button" onclick="">Add</button>
+    <button id="Custom-Validation-Page-Delete-Button" onclick="">Delete</button>
+    </div>
+    </div>
+    <div class="column" style="width: 60%;">
+    <div class="settingElement" style="margin-top: 10%;">
+    <div class="labelElement">
+    <span>Anonymous Authentication: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+    <span class="tooltiptext">This is the help text.</span>
+    </div>
+    <div class="inputElement">
+    <label for="IIS-Configuration-Application-Anonymous-Authentication-PagSpecific" class="switch">
+    <input id="IIS-Configuration-Application-Anonymous-Authentication-PagSpecific" type="checkbox">
+    <span class="slider round"></span>
+    </label>
+    </div>
+    </div>
+    <div class="settingElement">
+    <div class="labelElement">
+    <span>ASP.NET Impersonation: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+    <span class="tooltiptext">This is the help text.</span>
+    </div>
+    <div class="inputElement">
+    <label for="IIS-Configuration-Application-ASPNET-Impersonation-PagSpecific" class="switch">
+    <input id="IIS-Configuration-Application-ASPNET-Impersonation-PageSpecific" checkbox">
+    <span class="slider round"></span>
+    </label>
+    </div>
+    </div>
+    <div class="settingElement">
+    <div class="labelElement">
+    <span>Windows Authentication: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+    <span class="tooltiptext">This is the help text.</span>
+    </div>
+    <div class="inputElement">
+    <label for="IIS-Configuration-Application-Windows-Authentication-PagSpecific" class="switch">
+    <input id="IIS-Configuration-Application-Windows-Authentication-PagSpecific" type="checkbox">
+    <span class="slider round"></span>
+    </label>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div> *@
+</div>
+<div id="IISApplicationPoolSection" class="tabcontent">
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    General
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Iis-Configuration-Application-AppPool-General-Net-CLR-Version">.NET CLR Version: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Iis-Configuration-Application-AppPool-General-Net-CLR-Version-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="Iis-Configuration-Application-AppPool-General-Net-CLR-Version" id="Iis-Configuration-Application-AppPool-General-Net-CLR-Version" disabled>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enable 32-Bit Applications: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Iis-Configuration-Application-AppPool-General-Enable-32-Bit-Applications-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Iis-Configuration-Application-AppPool-General-Enable-32-Bit-Applications" class="switch">
+                                <input id="Iis-Configuration-Application-AppPool-General-Enable-32-Bit-Applications" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Iis-Configuration-Application-AppPool-General-Managed-Pipeline-Mode">Managed Pipeline Mode: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Iis-Configuration-Application-AppPool-General-Managed-Pipeline-Mode-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select name="Iis-Configuration-Application-AppPool-General-Managed-Pipeline-Mode" id="Iis-Configuration-Application-AppPool-General-Managed-Pipeline-Mode" class="dark_mode_select">
+                                <option value="Integrated" selected>Integrated</option>
+                                <option value="Classic">Classic</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Iis-Configuration-Application-AppPool-General-Queue-Length">Queue Length: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Iis-Configuration-Application-AppPool-General-Queue-Length-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Iis-Configuration-Application-AppPool-General-Queue-Length" id="Iis-Configuration-Application-AppPool-General-Queue-Length" value="10000">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Iis-Configuration-Application-AppPool-General-Start-Mode">Start Mode: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Iis-Configuration-Application-AppPool-General-Start-Mode-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select name="Iis-Configuration-Application-AppPool-General-Start-Mode" id="Iis-Configuration-Application-AppPool-General-Start-Mode" class="dark_mode_select">
+                                <option value="OnDemand" selected>On Demand</option>
+                                <option value="AlwaysRunning">Always Running</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Process Model
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Iis-Configuration-Application-AppPool-Process-Model-Identity-Type">Identity Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Type-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select name="Iis-Configuration-Application-AppPool-Process-Model-Identity-Type" id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Type" onchange="processModelIdentityTypeChanged(this)" class="dark_mode_select">
+                                <option value="LocalService">Local Service</option>
+                                <option value="LocalSystem">Local System</option>
+                                <option value="NetworkService">Network Service</option>
+                                <option value="ApplicationPoolIdentity">Application Pool Identity</option>
+                                <option value="SpecificUser">Specific User</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Iis-Configuration-Application-AppPool-Process-Model-Identity-Username">Identity (Username): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Username-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Username-RequiredSvg" class="requiredAlertSvg">
+                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                            </svg>
+                            <input type="text" name="Iis-Configuration-Application-AppPool-Process-Model-Identity-Username" id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Username" oninput="validateApplicationPoolCredentialsLength(this)" disabled>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Iis-Configuration-Application-AppPool-Process-Model-Identity-Password">Identity (Password): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Password-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Password-RequiredSvg" class="requiredAlertSvg">
+                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                            </svg>
+                            <input type="password" name="Iis-Configuration-Application-AppPool-Process-Model-Identity-Password" id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Password" oninput="validateApplicationPoolCredentialsLength(this)" disabled>
+                            <button class="passwordShowHideButton" id="Iis-Configuration-Application-AppPool-Process-Model-Identity-Password-ShowHide-Password" onclick="passwordFieldShowHide('Iis-Configuration-Application-AppPool-Process-Model-Identity-Password',this)">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.873 17.129c-1.845-1.31-3.305-3.014-4.13-4.09a1.693 1.693 0 0 1 0-2.077C4.236 9.013 7.818 5 12 5c1.876 0 3.63.807 5.13 1.874"></path>
+                                    <path d="M14.13 9.887a3 3 0 1 0-4.243 4.242"></path>
+                                    <path d="M4 20 20 4"></path>
+                                    <path d="M10 18.704A7.124 7.124 0 0 0 12 19c4.182 0 7.764-4.013 9.257-5.962a1.694 1.694 0 0 0-.001-2.078A22.939 22.939 0 0 0 19.57 9"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Iis-Configuration-Application-AppPool-Process-Model-Idle-Time-out">Idle Time-out (Minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Iis-Configuration-Application-AppPool-Process-Model-Idle-Time-out-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Iis-Configuration-Application-AppPool-Process-Model-Idle-Time-out" id="Iis-Configuration-Application-AppPool-Process-Model-Idle-Time-out">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Ping Enabled: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Iis-Configuration-Application-AppPool-Process-Model-Ping-Enabled-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Iis-Configuration-Application-AppPool-Process-Model-Ping-Enabled" class="switch">
+                                <input id="Iis-Configuration-Application-AppPool-Process-Model-Ping-Enabled" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    CPU
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Iis-Configuration-Application-AppPool-Cpu-Limit-Interval">Limit Interval (minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Iis-Configuration-Application-AppPool-Cpu-Limit-Interval-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Iis-Configuration-Application-AppPool-Cpu-Limit-Interval" id="Iis-Configuration-Application-AppPool-Cpu-Limit-Interval">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Rapid-Fail Protection
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enabled</span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Iis-Configuration-Application-AppPool-Rapid-Fail-Protection-Enabled-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Iis-Configuration-Application-AppPool-Rapid-Fail-Protection-Enabled" class="switch">
+                                <input id="Iis-Configuration-Application-AppPool-Rapid-Fail-Protection-Enabled" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Recycling
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Iis-Configuration-Application-AppPool-Regular-Time-Interval">Regular Time Interval (minutes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Iis-Configuration-Application-AppPool-Regular-Time-Interval-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Iis-Configuration-Application-AppPool-Regular-Time-Interval" id="Iis-Configuration-Application-AppPool-Regular-Time-Interval" value="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿<div id="settings-content-users" class="settings-content-users">
+    <div style="display: flex;justify-content: space-between;margin: 0.5rem 0;align-items: center;">
+        <div class="radio-group">
+            <label for="status">Status:</label>
+            <div class="radio-button">
+                <input type="radio" id="all" name="status" value="all" onclick="filterUsers('all')" checked>
+                <label for="all">All</label>
+            </div>
+            <div class="radio-button">
+                <input type="radio" id="enabled" name="status" onclick="filterUsers('enabled')" value="enabled">
+                <label for="enabled">Enabled</label>
+            </div>
+            <div class="radio-button">
+                <input type="radio" id="disabled" name="status" onclick="filterUsers('disabled')" value="disabled">
+                <label for="disabled">Disabled</label>
+            </div>
+        </div>
+        <button id="NewUserButton" onclick="displayNewAndEditUserModal('new',event)">New User</button>
+    </div>
+    <div class="settings-content-users-TableContainer">
+        <table id="UsersTable">
+            <thead>
+                <tr>
+                    <th>Usernum</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Enabled</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>

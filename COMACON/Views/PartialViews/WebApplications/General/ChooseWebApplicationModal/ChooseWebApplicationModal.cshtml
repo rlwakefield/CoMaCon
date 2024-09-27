@@ -1,0 +1,42 @@
+<div id="chooseWebApplicationModal" class="chooseWebApplicationModal">
+    @* <!-- Modal content --> *@
+    <div class="chooseWebApplicationModal-content">
+        @* <!-- Modal header --> *@
+        <div id="ChooseApplicationTitleBar" class="ChooseApplicationTitleBar dark_mode_titlebar">
+            <div>
+                <h2>Choose Application</h2>
+            </div>
+            <div>
+                <span class="close" onclick="closeModalX()">&times;</span>
+            </div>
+        </div>
+        @* <!-- Loading Web Applications Progress Bar --> *@
+        <div id="Loading-Web-Applications-Progress-Section" class="loadingWebApplicationsProgressSection dark_mode">
+            <label class="loadingWebApplicationsProgressLabel" for="Loading-Web-Applications-Progress-Bar">Getting Web Applications...</label>
+            <progress class="loadingWebApplicationsProgressBar" id="Loading-Web-Applications-Progress-Bar"></progress>
+        </div>
+        <div id="chooseWebApplicationModal-Table-Buttons-Container" class="chooseWebApplicationModalTableButtonsContainer dark_mode">
+            @* <!-- Modal body --> *@
+            <div class="chooseWebApplicationModal-Table-Wrapper">
+                <table id="webApplicationTable">
+                    <thead>
+                        <tr>
+                            <th number=1 id="table-head-Name" onclick="sortTable(0,'webApplicationTable')">Name</th>
+                            <th number=2 id="table-head-Type" onclick="sortTable(1,'webApplicationTable')">Type</th>
+                            <th number=3 id="table-head-Version" onclick="sortTable(2,'webApplicationTable')">Version</th>
+                            <th number=4 id="table-head-Site" onclick="sortTable(3,'webApplicationTable')">Site</th>
+                            <th number=5 id="table-head-Location" onclick="sortTable(4,'webApplicationTable')">Location</th>
+                            <th number=6 id="table-head-Bitness" onclick="sortTable(5,'webApplicationTable')">Bitness</th>
+                        </tr>
+                    </thead>
+                    @* <!-- <tbody></tbody> --> *@
+                </table>
+            </div>
+            <div class="chooseWebApplication-Buttons">
+                <button id="Refresh-Button" class="chooseWebApplication-RefreshButton" onclick="loadWebApplications()">Refresh</button>
+                <button id="Open-Button" class="chooseWebApplication-OpenButton" onclick="okButtonClicked()">Open</button>
+                <button id="Cancel-Button-ChooseWebApplication" class="chooseWebApplication-CancelButton" onclick="closeModalX()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

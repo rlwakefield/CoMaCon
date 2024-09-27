@@ -1,0 +1,135 @@
+<div id="ServerConfigurationSection" class="tabcontent">
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Application Server
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Application-Server-URL">Application Server URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Application-Server-URL-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <div id="Application-Server-URL-Loader" class="loader"></div>
+                            <input type="url" name="Application-Server-URL" id="Application-Server-URL" oninput="resetBorderStyling(event)" onfocusout="testUrl(event)">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Service-Client-Type">Service Client Type: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Service-Client-Type-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select name="Service-Client-Type" id="Service-Client-Type" class="dark_mode_select">
+                                <option value="SOAP" selected>SOAP</option>
+                                <option value="Remoting">Remoting</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settingElement" id="Allow-NT-Authentication-On-Forwarding-SettingElement">
+                        <div class="labelElement">
+                            <span>Allow NT Authentication On Forwarding: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Allow-NT-Authentication-On-Forwarding-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Allow-NT-Authentication-On-Forwarding" class="switch">
+                                <input id="Allow-NT-Authentication-On-Forwarding" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Upload Settings
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div>
+                            <label for="HTTP-Runtime-Maximum-Request-Length">HTTP Runtime Maximum Request Length (KB): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="HTTP-Runtime-Maximum-Request-Length-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div>
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="HTTP-Runtime-Maximum-Request-Length" id="HTTP-Runtime-Maximum-Request-Length">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Max-Allowed-Content-Length">Max Allowed Content Length (Bytes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Max-Allowed-Content-Length-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="Max-Allowed-Content-Length" id="Max-Allowed-Content-Length">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="HTTP-Runtime-Execution-Timeout">HTTP Runtime Execution Timeout (Seconds): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="HTTP-Runtime-Execution-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" name="HTTP-Runtime-Execution-Timeout" id="HTTP-Runtime-Execution-Timeout">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ExtraRowSection">
+        <div class="sectionWithTitleBar">
+            <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                Miscellaneous
+            </div>
+            <div class="coreSection">
+                <div class="row">
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Tracing-Info-Level">Tracing Info Level: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Tracing-Info-Level-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <select name="Tracing-Info-Level" id="Tracing-Info-Level" class="dark_mode_select">
+                                    <option value="0">0 - Off</option>
+                                    <option value="1">1 - Minimal</option>
+                                    <option value="2">2 - Normal</option>
+                                    <option value="3">3 - Detailed</option>
+                                    <option value="4">4 - Verbose</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Samesite-Cookie-Policy">Samesite Cookie Policy: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Samesite-Cookie-Policy-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <select name="Samesite-Cookie-Policy" id="Samesite-Cookie-Policy" class="dark_mode_select">
+                                    <option value="Lax">Lax</option>
+                                    <option value="Strict">Strict</option>
+                                    <option value="None">None</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="settingElement">
+                            <div class="labelElement">
+                                <label for="Stream-Settings">Stream Settings (Bytes): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                                <span id="Stream-Settings-Tooltip" class="tooltiptext">This is the help text.</span>
+                            </div>
+                            <div class="inputElement">
+                                <input type="number" pattern="[0-9]*" inputmode="numeric" name="Stream-Settings" id="Stream-Settings" value="64000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

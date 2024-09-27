@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<partial name="~/Views/PartialViews/General/Login/PasswordResetModal/PasswordResetModal.cshtml" />
+@* <partial name="~/Views/PartialViews/General/Login/ForgotPassword/ForgotPassword.cshtml" /> *@
+<div id="login-form-container" class="container dark_mode_titlebar">
+    <h2>Login</h2>
+    <form id="login-form">
+        <span id="genericloginerror" class="loginerrortext"></span>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" class="loginfield">
+            <span id="username-errortext" class="loginerrortext"></span>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" class="loginfield">
+            <span id="password-errortext" class="loginerrortext"></span>
+        </div>
+        <div class="form-group">
+            <button onclick="login(event)" type="submit">Login</button>
+        </div>
+        @* <div style="display:flex;justify-content:center;">
+            <button onclick="openForgotPasswordModal()" type="button" style="text-decoration: underline;cursor: pointer;border: none;background: inherit;font-size: medium;">
+                Forgot Password
+            </button>
+        </div> *@
+    </form>
+</div>
+<script>
+    currentPage = "Login";
+    // document.getElementById("SettingsButton").style.display = "none";
+
+    Array.from(document.getElementsByClassName("loginfield")).forEach((element) => {
+        element.addEventListener("input", resetLoginErrorTextFields);
+    });
+</script>

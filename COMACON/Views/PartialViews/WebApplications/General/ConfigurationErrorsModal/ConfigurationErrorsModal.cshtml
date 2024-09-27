@@ -1,0 +1,38 @@
+<div id="SaveErrors-Modal" class="sectionWithTitleBar">
+    <div id="SaveErrors-Content" class="SaveErrors-Content dark_mode">
+        <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+            <h2>Errors</h2>
+        </div>
+        <div class="coreSection">
+            <div id="SaveErrors" class="SaveErrors">
+                <div id="SaveErrors-Section" class="SaveErrors-Section">
+                    <div class="SaveErrors-ErrorText">
+                        <!--This is where the error text will be.-->
+                        <p>Please review the errors below. You and click on one of them and then click View to jump to that location.</p>
+                    </div>
+                    <div class="SaveErrors-ErrorTable">
+                        <!--This is where the "table" of the different errors will go.-->
+                        <table id="SaveErrorsTable">
+                            <thead>
+                                <tr>
+                                    <th>Error #</th>
+                                    <th>Section</th>
+                                    <th>Title</th>
+                                    <th>Reason</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="SaveErrors-Footer">
+                        <div class="SaveErrors-ButtonContainer">
+                            <button id="SaveErrors-ViewButton" class="SaveErrors-ViewButton" onclick="viewButtonClicked()" disabled>View</button>
+                            <button id="SaveErrors-CancelButton" class="SaveErrors-CancelButton" onclick="closeErrorModal()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

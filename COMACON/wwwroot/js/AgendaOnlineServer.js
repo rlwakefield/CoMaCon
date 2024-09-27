@@ -16,8 +16,6 @@ let AgendaOnlineIntegrationsNewMeetingTypeObject = { "Name": "[Name]", "id": "" 
  *              Agenda Form Field Functions
  ********************************************************/
 function formFieldSelected(selection) {
-    //console.log(AgendaOnlineAgendaFields);
-    //console.log(selection.value);
     let foundObject = AgendaOnlineAgendaFields.find(item => item.Name === selection.value);
     let fieldName = document.getElementById("Form-Field-Name").value;
     let fieldId = document.getElementById("Form-Field-ID").value;
@@ -124,8 +122,6 @@ async function validateNoDuplicateFieldNames() {
     } else {
         //Check if the error SVG is the first child. If yes, then remove it.
         if (document.getElementById("Form-Field-Name").parentNode.firstElementChild.tagName === "svg") {
-            //let firstChild = document.getElementById("Form-Field-Name").parentNode.firstChild;
-            //let parentNode = document.getElementById("Form-Field-Name").parentNode;
             document.getElementById("Form-Field-Name").parentNode.removeChild(document.getElementById("Form-Field-Name").parentNode.firstChild);
         }
         validateRequiredFieldsInputForAdd();
@@ -167,7 +163,6 @@ async function setIntegrationFields(integration) {
 }
 
 async function setAgendaUnityFormFieldsSelectList(AgendaOnlineAgendaFields) {
-    //console.log(AgendaOnlineAgendaFields);
     let selectListFieldsDropDown = document.getElementById("Form-Field-Select-List");
     for (let i = 0; i < AgendaOnlineAgendaFields.length; i++) {
         let newFieldDropDownOption = document.createElement("option");
@@ -186,7 +181,6 @@ async function setAgendaUnityFormFieldsSelectList(AgendaOnlineAgendaFields) {
 }
 
 async function setMeetingTypesSelectList(meetingTypes) {
-    //console.log(meetingTypes);
     let selectListMeetingTypesDropDown = document.getElementById("Meeting-Type-Name-Select-List");
     for (let i = 0; i < meetingTypes.length; i++) {
         let newFieldDropDownOption = document.createElement("option");
@@ -366,7 +360,6 @@ function addNewMeetingType() {
     currentlySelectedObject.meetingTypes.push(newMeetingTypeObject);
     document.getElementById("Meeting-Type-Name-Select-List").selectedIndex = document.getElementById("Meeting-Type-Name-Select-List").length - 1;
     setAgendaOnlineIntegrationsMeetingTypesButtons(["Meeting-Type-Name-Select-List-DeleteButton"], false);
-    //checkForDuplicateMeetingTypes(currentlySelectedObject, newMeetingTypeObject, newMeetingTypeObject.Name);
     checkForDuplicateMeetingTypes(currentlySelectedObject)
 }
 
@@ -430,16 +423,14 @@ function integrationfieldUpdated(field) {
             meetingTypeObject.Name = field.value;
             //Update the name of the Meeting Type in the select list.
             document.getElementById("Meeting-Type-Name-Select-List").options[document.getElementById("Meeting-Type-Name-Select-List").selectedIndex].text = field.value;
-            //checkForDuplicateMeetingTypes(currentlySelectedObject, meetingTypeObject, field.value);
             checkForDuplicateMeetingTypes(currentlySelectedObject);
             break;
     }
-    console.log(AgendaOnlineIntegrations);
+    //console.log(AgendaOnlineIntegrations);
 }
 
 async function checkForDuplicateMeetingTypes(currentlySelectedIntegration) {
     let groupedByName = await groupByNameKey(currentlySelectedIntegration.meetingTypes,"Name");
-    //console.log(groupedByName);
 
     let selectList = document.getElementById("Meeting-Type-Name-Select-List");
     Object.keys(groupedByName).forEach(key => {
@@ -467,7 +458,6 @@ async function checkForDuplicateMeetingTypes(currentlySelectedIntegration) {
                         let errorTextToReplace = selectList.options[i].attributes["error-text-to-append"].value;
                         //Replace the string " (Duplicate)" with "" on the errorTextToReplace variable.
                         selectList.options[i].attributes["error-text-to-append"].value = errorTextToReplace.replace(' (Duplicate)', '');
-                        //selectList.options[i].attributes["error-text-to-append"].value.replace(' (Duplicate)', '');
                     }
                 }
             });

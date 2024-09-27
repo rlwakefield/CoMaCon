@@ -1,0 +1,200 @@
+<div id="ReportingViewerSection" class="tabcontent">
+    <p class="BlockDescription"></p>
+    <div class="row">
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Encrypt Dashboard Viewer Settings: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Encrypt-Dashboard-Viewer-Settings-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Encrypt-Dashboard-Viewer-Settings" class="switch">
+                        <input id="Encrypt-Dashboard-Viewer-Settings" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Login
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="OB-Username">Username: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="OB-Username-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="OB-Username" id="OB-Username">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="OB-Password">Password: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="OB-Password-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="text" name="OB-Password" id="OB-Password">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Autologin: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Autologin-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Autologin" class="switch">
+                                <input id="Autologin" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Allow HTTP Parameters: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Allow-HTTP-Parameters-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Allow-HTTP-Parameters" class="switch">
+                                <input id="Allow-HTTP-Parameters" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Identity Provider
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="IdP-Server-Location">IdP Server Location: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="IdP-Server-Location-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <div id="IdP-Server-Location-Loader" class="loader"></div>
+                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="IdP-Server-Location-RequiredSvg" class="idpRequiredAlertSvg">
+                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                            </svg>
+                            <input type="url" name="IdP-Server-Location" id="IdP-Server-Location" oninput="validateIdentityProviderFields(this)">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="IdP-Tenant">IdP Tenant: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="IdP-Tenant-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="IdP-Tenant-RequiredSvg" class="idpRequiredAlertSvg">
+                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                            </svg>
+                            <input type="text" name="IdP-Tenant" id="IdP-Tenant" oninput="validateIdentityProviderFields(this)">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="IdP-Client">IdP Client: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="IdP-Client-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="IdP-Client-RequiredSvg" class="idpRequiredAlertSvg">
+                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                            </svg>
+                            <input type="text" name="IdP-Client" id="IdP-Client" oninput="validateIdentityProviderFields(this)">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="IdP-Secret">IdP Secret: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="IdP-Secret-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <svg width="20" height="20" fill="#ff0000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="IdP-Secret-RequiredSvg" class="idpRequiredAlertSvg">
+                                <path d="M16.325 2.183A.625.625 0 0 0 15.884 2H8.116a.625.625 0 0 0-.441.183L2.183 7.675A.625.625 0 0 0 2 8.116v7.768c0 .165.066.324.183.441l5.492 5.492a.625.625 0 0 0 .441.183h7.768a.625.625 0 0 0 .441-.183l5.492-5.492a.625.625 0 0 0 .183-.441V8.116a.625.625 0 0 0-.183-.441l-5.492-5.492ZM12 7a1.13 1.13 0 0 1 1.125 1.244l-.438 4.383a.69.69 0 0 1-1.374 0l-.438-4.383A1.131 1.131 0 0 1 12 7Zm.002 7.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"></path>
+                            </svg>
+                            <input type="text" name="IdP-Secret" id="IdP-Secret" oninput="validateIdentityProviderFields(this)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Core Dashboard Settings
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Dashboard-Theme">Dashboard Theme: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Dashboard-Theme-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <select name="Dashboard-Theme" id="Dashboard-Theme" class="dark_mode_select">
+                                <option value="light">light</option>
+                                <option value="dark">dark</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Export Dashboard: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Export-Dashboard-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Export-Dashboard" class="switch">
+                                <input id="Export-Dashboard" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Export Dashboard Items: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Export-Dashboard-Items-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Export-Dashboard-Items" class="switch">
+                                <input id="Export-Dashboard-Items" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Report-Paging-Limit">Report Paging Limit: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Report-Paging-Limit-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" name="Report-Paging-Limit" id="Report-Paging-Limit">
+                        </div>
+                    </div>
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <label for="Dashboard-Tracing-Info-Level">Dashboard Tracing Info Level: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Dashboard-Tracing-Info-Level-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" name="Dashboard-Tracing-Info-Level" id="Dashboard-Tracing-Info-Level">
+                        </div>
+                    </div>
+                    <div class="settingElement" id="Dashboard-Cache-Timeout-SettingElement">
+                        <div class="labelElement">
+                            <label for="Dashboard-Cache-Timeout">Dashboard Cache Timeout (seconds): </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Dashboard-Cache-Timeout-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <input type="number" name="Dashboard-Cache-Timeout" id="Dashboard-Cache-Timeout">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

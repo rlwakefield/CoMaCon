@@ -1,0 +1,73 @@
+<div id="WorkViewSection" class="tabcontent">
+    <div class="row">
+        <p class="BlockDescription">The following settings customize WorkView.</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="settingElement">
+                <div class="labelElement">
+                    <label for="WorkView-Max-Results">WorkView Max Results: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="WorkView-Max-Results-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" name="WorkView-Max-Results" id="WorkView-Max-Results" value="1000">
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>Display Created E-Forms: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="Display-Created-EForms-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="Display-Created-EForms" class="switch">
+                        <input id="Display-Created-EForms" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settingElement">
+                <div class="labelElement">
+                    <span>WorkView Filter Count: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                    <span id="WorkView-Filter-Count-Tooltip" class="tooltiptext">This is the help text.</span>
+                </div>
+                <div class="inputElement">
+                    <label for="WorkView-Filter-Count" class="switch">
+                        <input id="WorkView-Filter-Count" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="sectionWithTitleBar">
+                <div class="titleBar dark_mode_titlebar" name="Title-Bar">
+                    Standalone WorkView Client
+                </div>
+                <div class="coreSection">
+                    <div class="settingElement">
+                        <div class="labelElement">
+                            <span>Enable Standalone WorkView Client: </span><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="Enable-Standalone-WorkView-Client-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <label for="Enable-Standalone-WorkView-Client" class="switch">
+                                <input id="Enable-Standalone-WorkView-Client" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settingElement" id="WorkView-Client-URL-SettingElement">
+                        <div class="labelElement">
+                            <label for="WorkView-Client-URL">WorkView Client URL: </label><img class="tooltipimage" src="~/images/blue question mark icon - extra small.png" alt="Blue Tooltip Question Mark">
+                            <span id="WorkView-Client-URL-Tooltip" class="tooltiptext">This is the help text.</span>
+                        </div>
+                        <div class="inputElement">
+                            <div id="WorkView-Client-URL-Loader" class="loader"></div>
+                            <input type="url" name="WorkView-Client-URL" id="WorkView-Client-URL" oninput="resetBorderStyling(event)" onfocusout="testUrl(event)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

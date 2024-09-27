@@ -1135,7 +1135,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         {
             //Get the serialized output and store it.
             string serializedObject = ComaconHelperProxy.Get(applicationPath, applicationName, webApplicationType, webApplicationVersion);
-            //Console.WriteLine(serializedObject);
 
             serializedObject = Encoding.UTF8.GetString(ProtectedData.Unprotect(Convert.FromBase64String(serializedObject), null, DataProtectionScope.LocalMachine));
 
@@ -1211,8 +1210,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                 ParseAppSettingsKeysV2(ds, node, sect, xmlDocument);
                 break;
             case "Hyland.Applications.AgendaPubAccess.PublicComment":
-                //ParseSpecificKeys(ds, node, sect);
-                //ParseHylandApplicationsAgendaPubAccessPublicCommentExtraKeys(ds, node, sect);
                 ParseHylandApplicationsAgendaPubAccessPublicComment(ds, node, sect);
                 break;
             case "Hyland.Logging":
@@ -1802,13 +1799,11 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                         ha.TrustMode = "false";
                         break;
                 }
-                //ha.TrustMode = trustedClients.Attributes["trustMode"].Value ?? "On";
             }
             catch
             {
                 ha.TrustMode = "false";
             }
-            //ha.TrustMode = trustedClients?.Attributes?["trustMode"]?.Value ?? "On";
             foreach (XmlNode tc in trustedClients.ChildNodes)
             {
                 TrustedClient tc1 = new TrustedClient();
@@ -2653,11 +2648,9 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
     {
         try
         {
-            //TODO: Need to add an "action" string variable to this method possibly so it can handle both the parsing and the saving.
             switch (type)
             {
                 case "Application Server":
-                    //parseApplicationServerTranslator(translator, webconfigconfig);
                     break;
                 case "Agenda Online":
                     break;
@@ -2692,7 +2685,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
      ********************************************************/
     public void SaveKnownKeys(webApplicationWebConfigConfiguration ds, string sect, XmlNode node, XmlDocument xmlDoc)
     {
-        //Console.WriteLine("Saving " + sect);
         switch (sect)
         {
             case "appSettings":
@@ -2717,7 +2709,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                 }
                 break;
             case "Hyland.Applications.AgendaPubAccess.PublicComment":
-                //SaveHylandApplicationsAgendaPubAccessPublicCommentExtraKeys(xmlDoc, node, ds);
                 SaveHylandApplicationsAgendaPubAccessPublicComment(xmlDoc, node, ds);
                 break;
             case "Hyland.Logging":
@@ -2793,7 +2784,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         try
         {
             XmlNode trustedClientsNode = node.SelectSingleNode("trustedClients");
-            //trustedClientsNode.Attributes["trustMode"].Value = core.hylandAuthentication.TrustMode;
             trustedClientsNode.RemoveAll();
             XmlAttribute trustmode = configurationDocument.CreateAttribute("trustMode");
             switch (core.hylandAuthentication.TrustMode)
@@ -3056,12 +3046,10 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                 if (kwddta == "")
                 {
                     kwddta = cm.KeywordID + ":" + cm.CharacterCount;
-                    //Console.WriteLine(kwddta);
                 }
                 else
                 {
                     kwddta += "," + cm.KeywordID + ":" + cm.CharacterCount;
-                    //Console.WriteLine(kwddta);
                 }
             }
 
@@ -3080,7 +3068,7 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         {
             XmlNode sourceOrigins = node.SelectSingleNode("epicScanViewerApi/sourceOriginWhitelist");
             sourceOrigins.RemoveAll();
-            //<add origin="https://example.com" />
+            
             foreach (SourceOrigin so in core.healthcareWebViewer.Origins)
             {
                 XmlElement origin = configurationDocument.CreateElement("add");
@@ -3270,36 +3258,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         }
     }
 
-    //public void SaveHylandApplicationsAgendaPubAccessPublicCommentExtraKeys(XmlDocument configurationDocument, XmlNode node, webApplicationWebConfigConfiguration core)
-    //{
-    //    try
-    //    {
-    //        node.SelectSingleNode("integrations/integration/meeting_types").RemoveAll();
-    //        XmlNode mts = node.SelectSingleNode("integrations/integration/meeting_types");
-    //        foreach (MeetingType mt in core.hylandApplicationsAgendaPubAccessPublicComment.meetingTypes)
-    //        {
-    //            XmlElement ele = configurationDocument.CreateElement("meeting_type");
-    //            ele.SetAttribute("name", mt.Name);
-    //            mts.AppendChild(ele);
-    //        }
-
-    //        node.SelectSingleNode("integrations/integration/agenda_fields").RemoveAll();
-    //        XmlNode afs = node.SelectSingleNode("integrations/integration/agenda_fields");
-    //        foreach (AgendaField af in core.hylandApplicationsAgendaPubAccessPublicComment.agendaUnityFormFields)
-    //        {
-    //            XmlElement ele1 = configurationDocument.CreateElement("field");
-    //            ele1.SetAttribute("name", af.Name);
-    //            ele1.SetAttribute("form_field_id", af.FormFieldID);
-    //            afs.AppendChild(ele1);
-    //        }
-    //    }
-    //    catch (Exception e)
-    //    {
-    //        Log.Logger.Error(e.Message);
-    //        Log.Logger.Error(e.StackTrace);
-    //    }
-    //}
-
     private void SaveHylandApplicationsAgendaPubAccessPublicComment(XmlDocument xmlDoc, XmlNode node, webApplicationWebConfigConfiguration ds)
     {
         try
@@ -3313,20 +3271,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
      This value can be a whole number, decimal, or negative value (a negative value disables the button by the number of hours specified before the meeting start time).
      The default value is 0, meaning that once the meeting start time passes, the button is disabled.");
             node.SelectSingleNode("integrations").AppendChild(initialComment);
-
-            /*Sample Integration XML for structure.
-             
-             <integration name="Silly Name" url="[URL from Unity forms config]" token="[Token from Unity forms config]" AvailabilityFromMeetingStart="0">
-        <meeting_types>
-          <meeting_type name="Test" />
-        </meeting_types>
-        <agenda_fields>
-          <field name="meeting_name" form_field_id="" />
-          <field name="meeting_date" form_field_id="" />
-          <field name="item_id" form_field_id="" />
-          <field name="item_title" form_field_id="" />
-        </agenda_fields>
-      </integration>*/
 
             if(ds.publicCommentIntegrations.Count > 0)
             {
@@ -3400,11 +3344,8 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
             else
             {
                 testCreateXmlAttribute(configurationDocument, node.SelectSingleNode("Hyland.Authentication/adfs"), "enabled", haadfs.ADFSEnabled);
-                //node.SelectSingleNode("Hyland.Authentication/adfs").Attributes["enabled"].Value = haadfs.ADFSEnabled;
                 testCreateXmlAttribute(configurationDocument, node.SelectSingleNode("Hyland.Authentication/adfs"), "synchronizeUserAttributes", haadfs.SynchronizeUserAttributes);
-                //node.SelectSingleNode("Hyland.Authentication/adfs").Attributes["synchronizeUserAttributes"].Value = haadfs.SynchronizeUserAttributes;
                 testCreateXmlAttribute(configurationDocument, node.SelectSingleNode("Hyland.Authentication/adfs"), "authenticationOnly", haadfs.AuthenticationOnly);
-                //node.SelectSingleNode("Hyland.Authentication/adfs").Attributes["authenticationOnly"].Value = haadfs.AuthenticationOnly;
             }
 
             if (node.SelectSingleNode("system.web/httpRuntime") == null)
@@ -3418,7 +3359,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
             else
             {
                 testCreateXmlAttribute(configurationDocument, node.SelectSingleNode("system.web/httpRuntime"), "requestValidationMode", haadfs.RequestValidationMode);
-                //node.SelectSingleNode("system.web/httpRuntime").Attributes["requestValidationMode"].Value = haadfs.RequestValidationMode;
             }
 
             if (node.SelectSingleNode("system.web/authentication") == null)
@@ -3432,7 +3372,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
             else
             {
                 testCreateXmlAttribute(configurationDocument, node.SelectSingleNode("system.web/authentication"), "mode", haadfs.AuthenticationMode);
-                //node.SelectSingleNode("system.web/authentication").Attributes["mode"].Value = haadfs.AuthenticationMode;
             }
         }
         catch (Exception e)
@@ -3521,10 +3460,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                                         SaveSystemIdentityModel(configurationDocument, node, core);
                                         childNode.ParentNode.ReplaceChild(node, childNode);
                                         break;
-                                        //case "system.identityModel.services":
-                                        //    SaveSystemIdentityModelServices(configurationDocument, root, node,core);
-                                        //    childNode.ParentNode.ReplaceChild(node, childNode);
-                                        //    break;
                                 }
                             }
                         }
@@ -3549,10 +3484,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
 
                                 switch (node.Name)
                                 {
-                                    //case "system.identityModel":
-                                    //    SaveSystemIdentityModel(configurationDocument, root, node, core);
-                                    //    childNode.ParentNode.ReplaceChild(node, childNode);
-                                    //    break;
                                     case "system.identityModel.services":
                                         SaveSystemIdentityModelServices(configurationDocument, node, core);
                                         childNode.ParentNode.ReplaceChild(node, childNode);
@@ -4161,7 +4092,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         switch (type)
         {
             case "Application Server":
-                createApplicationServerTranslatorToReturn(translatortoreturn, core);
                 break;
             case "Agenda Online":
                 break;
@@ -4233,128 +4163,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         }
     }
 
-    private void createApplicationServerTranslatorToReturn(NETCoreToNetFrameworkTranslator translatortoreturn, webApplicationWebConfigConfiguration core)
-    {
-        //try
-        //{
-        //    foreach (Key keys in core.knownKeys)
-        //    {
-        //        if (keys.Section == "Hyland.Web.AppServerPop")
-        //        {
-        //            switch (keys.PathName)
-        //            {
-        //                case "EnableChecksum":
-        //                    translatortoreturn.ApplicationServer.AppServerPopIntegration.EnableCheckSum = keys.Value;
-        //                    break;
-        //                case "ChecksumKey":
-        //                    translatortoreturn.ApplicationServer.AppServerPopIntegration.ChecksumKey = keys.Value;
-        //                    break;
-        //                case "EnableLegacyChecksumCreation":
-        //                    translatortoreturn.ApplicationServer.AppServerPopIntegration.EnableLegacyChecksumCreation = keys.Value;
-        //                    break;
-        //                case "IsEncrypted":
-        //                    translatortoreturn.ApplicationServer.AppServerPopIntegration.IsEncrypted = keys.Value;
-        //                    break;
-        //            }
-        //        }
-        //        else if (keys.Section == "Hyland.Applications.Portals.ExternalAccess")
-        //        {
-        //            switch (keys.PathName)
-        //            {
-        //                case "username":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerExernalAccess.Username = keys.Value;
-        //                    break;
-        //                case "password":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerExernalAccess.Password = keys.Value;
-        //                    break;
-        //                case "minPoolSize":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerExernalAccess.MinPoolSize = keys.Value;
-        //                    break;
-        //                case "maxPoolSize":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerExernalAccess.MaxPoolSize = keys.Value;
-        //                    break;
-        //                case "IsEncrypted":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerExernalAccess.IsEncrypted = keys.Value;
-        //                    break;
-        //            }
-        //        }
-        //        else if (keys.Section == "Hyland.ContentComposer.Core")
-        //        {
-        //            switch (keys.PathName)
-        //            {
-        //                case "ClientId":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerContentComposer.ClientID = keys.Value;
-        //                    break;
-        //                case "ClientSecret":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerContentComposer.ClientSecret = keys.Value;
-        //                    break;
-        //                case "Username":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerContentComposer.Username = keys.Value;
-        //                    break;
-        //                case "Password":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerContentComposer.Password = keys.Value;
-        //                    break;
-        //                case "IsEncrypted":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerContentComposer.IsEncrypted = keys.Value;
-        //                    break;
-        //            }
-        //        }
-        //        else if (keys.Section == "Hyland.Core.Media.HostedApplicationServer")
-        //        {
-        //            switch (keys.PathName)
-        //            {
-        //                case "url":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerMedia.URL = keys.Value;
-        //                    break;
-        //                case "datasource":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerMedia.Datasource = keys.Value; ;
-        //                    break;
-        //                case "username":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerMedia.Username = keys.Value;
-        //                    break;
-        //                case "password":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerMedia.Password = keys.Value; ;
-        //                    break;
-        //                case "IsEncrypted":
-        //                    translatortoreturn.ApplicationServer.ApplicationServerMedia.IsEncrypted = keys.Value; ;
-        //                    break;
-        //            }
-        //        }
-        //    }
-
-        //    foreach (ConnectionString cstring in core.connectionStrings.connectionStrings)
-        //    {
-        //        COMACONTranslationToHelperUtility.ConnectionString cstring1 = new COMACONTranslationToHelperUtility.ConnectionString();
-        //        cstring1.Name = cstring.Name;
-        //        cstring1.ProviderName = cstring.Provider;
-        //        cstring1.IntegratedSecurity = cstring.IntegratedSecurity;
-        //        cstring1.UserID = cstring.UserId;
-        //        cstring1.Password = cstring.Password;
-        //        cstring1.AdditionalParameters = cstring.AdditionalOptions;
-        //        switch (cstring.Provider)
-        //        {
-        //            case "System.Data.SqlClient":
-        //                cstring1.DataSource = cstring.sql.DataSource;
-        //                cstring1.Database = cstring.sql.Database;
-        //                break;
-        //            case "Oracle.ManagedDataAccess.Client":
-        //                cstring1.TnsConnectionString = cstring.oracle.TNSConnectionString;
-        //                cstring1.OracleHost = cstring.oracle.Host;
-        //                cstring1.Database = cstring.oracle.Database;
-        //                cstring1.OracleProtocol = cstring.oracle.Protocol;
-        //                cstring1.OraclePort = cstring.oracle.Port;
-        //                break;
-        //        }
-        //        translatortoreturn.ApplicationServer.AppServerConnectionStrings.ConnectionStrings.Add(cstring1);
-        //    }
-        //}
-        //catch (Exception e)
-        //{
-        //    Log.Logger.Error(e.Message);
-        //    Log.Logger.Error(e.StackTrace);
-        //}
-    }
-
 
 
     /********************************************************
@@ -4380,28 +4188,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
             return null;
         }
     }
-
-//    private Key FindAppSettingsKey(List<Key> knownKeys, string section, string pathName, XmlNode appSettingsNode)
-//    {
-//        try
-//        {
-//            string attributeName = appSettingsNode.Attributes["key"].Value;
-
-//#pragma warning disable CS8603 // Possible null reference return.
-//            return knownKeys.FirstOrDefault(key =>
-//                key.Section == section &&
-//                key.PathName == pathName &&
-//                key.AttributeName == attributeName
-//            );
-//#pragma warning restore CS8603 // Possible null reference return.
-//        }
-//        catch (Exception e)
-//        {
-//            Log.Logger.Error(e.Message);
-//            Log.Logger.Error(e.StackTrace);
-//            return null;
-//        }
-//    }
 
     public void testCreateSetXmlNodePath(XmlDocument configurationDocument, XmlNode rootNode, string path, string[,]? attributes)
     {
@@ -4710,23 +4496,17 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
 
     private void setUseAppPoolCredentials(bool value, Configuration config)
     {
-        //Console.WriteLine($"Setting the UseAppPoolCredentials value to {value}");
         config.GetSection(@"system.webServer/security/authentication/windowsAuthentication").SetAttributeValue("useAppPoolCredentials", value);
-        //Console.WriteLine("Use App Pool Credentials: " + config.GetSection(@"system.webServer/security/authentication/windowsAuthentication").GetAttributeValue("useAppPoolCredentials"));
     }
 
     private void setAnonymousAuthentication(bool value, Configuration config)
     {
-        //Console.WriteLine($"Setting the Anonymous Authentication value to {value}");
         config.GetSection(@"system.webServer/security/authentication/anonymousAuthentication").SetAttributeValue("enabled", value);
-        //Console.WriteLine("Anonymous Authentication: " + config.GetSection(@"system.webServer/security/authentication/anonymousAuthentication").GetAttributeValue("enabled"));
     }
 
     private void setWindowsAuthentication(bool value, Configuration config)
     {
-        //Console.WriteLine($"Setting the Windows Authentication value to {value}");
         config.GetSection(@"system.webServer/security/authentication/windowsAuthentication").SetAttributeValue("enabled", value);
-        //Console.WriteLine("Windows Authentication: " + config.GetSection(@"system.webServer/security/authentication/windowsAuthentication").GetAttributeValue("enabled"));
     }
 
     private void revertAllLocationAuthorizationRules(string[] PagesToProcess, string SiteName, string ApplicationPath, string ApplicationName, bool revertImpersonation = false)
@@ -4810,7 +4590,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
         {
             foreach (string page in PagesToProcess)
             {
-                //Console.WriteLine(page);
                 Microsoft.Web.Administration.ConfigurationSection authorizationSection = config.GetSection(section, page);
                 ConfigurationElementCollection authorizationRules = authorizationSection.GetCollection();
 
@@ -4821,10 +4600,8 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
                 {
                     foreach (ConfigurationElement existingRule in authorizationRules)
                     {
-                        //Console.WriteLine(existingRule.Attributes[attributeName2].Value.ToString());
                         if (existingRule.Attributes[attributeName2].Value.ToString() == attributeValue2)
                         {
-                            //Console.WriteLine("Rule exists!");
                             ruleExists = true;
                         }
                     }
@@ -5162,7 +4939,6 @@ internal class DefaultGenericHelperMethods : GenericHelperMethods
 
                 XmlNode commentedOutNode = xmlDoc.CreateNode(XmlNodeType.Comment, "", null);
                 commentedOutNode.InnerText = "<add name=\"X-Frame-Options\" value=\"SAMEORIGIN\" />";
-                //systemwebserver.SelectSingleNode("httpProtocol/customHeaders").ReplaceChild(commentedOutNode, systemwebserverNode);
                 systemwebserverNode.ParentNode.ReplaceChild(commentedOutNode, systemwebserverNode);
             }
             catch (Exception e)
