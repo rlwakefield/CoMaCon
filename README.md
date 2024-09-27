@@ -50,7 +50,7 @@ You will also need to have IIS installed and configured on the server you wish t
 11. Expand the Default Site and locate a folder called "COMACON".
 12. Right-click on that folder and select "Convert to Application".
 13. Change the Application Pool to the COMACON one and then click OK.
-14. At this point, COMACON should be available to be loaded by going to your browser and going to the URL of "http://{servername}/COMACON" or "https://{servername}/COMACON" (if your server is configured for HTTPS communications.)
+14. At this point, COMACON should be available to be loaded by going to your browser and going to the URL of "http://{servername}/COMACON" or "https://{servername}/COMACON" (if your server is configured for HTTPS communications.) (NOTE: Default login is Username: admin, Password: admin. This can be changed once you login. In a future release, this will be changed for security reasons.)
 
 Please make sure to open any issues whenever you encounter them. I might need to get a copy of the web.config file that you were working with so I can do further testing on my side. Of course, please remove any PII from the files as I would hate to assume that risk. 😄 Thanks!
 
