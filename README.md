@@ -7,7 +7,7 @@
 </div>
 
 # COMACON
-This is my personal concept of what a web based version of the WAMCON (Web Application Management Console) could look like. However, my vision for this utility is not just a utility that configures web applications on the servers, but also allows for the configuration of client configuration files and more!
+This is my personal concept of what a web based version of the OnBase WAMCON (Web Application Management Console) could look like. However, my vision for this utility is not just a utility that configures web applications on the servers, but also allows for the configuration of client configuration files and more!
 
 My vision for this new Configuration Management Console's features are:
 
