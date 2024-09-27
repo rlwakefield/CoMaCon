@@ -184,62 +184,7 @@ let keywordTypeAheadIdNumber = 0;
 
 
 setTimeout(() => {
-    //document.getElementById("login-form").addEventListener('submit', function (event) {
-    //    event.preventDefault(); // Prevent the default form submission
 
-    //    const username = document.getElementById('username').value;
-    //    const password = document.getElementById('password').value;
-
-    //    fetch(apiRootUrl + '/api/Endpoint/Authentication', {
-    //        method: 'POST',
-    //        headers: {
-    //            'Content-Type': 'application/json'
-    //        },
-    //        body: JSON.stringify({ username, password })
-    //    })
-    //        .then(response => response.json())
-    //        .then(data => {
-    //            console.log(data);
-    //            switch (data.error) {
-    //                case "0":
-    //                    //Successful authentication
-    //                    localStorage.setItem("comaconbearertoken", data.token);
-    //                    window.location.href = '/core/home';
-    //                    break;
-    //                case "1":
-    //                    //Missing Username
-    //                    document.getElementById("username-errortext").innerText = data.message;
-    //                    break;
-    //                case "2":
-    //                    //Missing Password
-    //                    document.getElementById("password-errortext").innerText = data.message;
-    //                    break;
-    //                case "3":
-    //                    //Invalid Username or Password
-    //                    document.getElementById("genericloginerror").innerText = data.message;
-    //                    break;
-    //                case "4":
-    //                    //Multiple users found with the same username/password.
-    //                    document.getElementById("genericloginerror").innerText = data.message;
-    //                    break;
-    //            }
-                
-    //            //if (data.success) {
-    //            //    // Handle successful login
-    //            //    window.location.href = '/dashboard'; // Redirect to dashboard or another page
-    //            //} else {
-    //            //    // Handle login failure
-    //            //    document.getElementById('username-errortext').textContent = data.message;
-    //            //}
-    //        })
-    //        .catch(error => {
-    //            console.error('Error:', error);
-    //        });
-    //});
-
-    //Array.from(document.getElementsByClassName("loginfield")).forEach((element) => {
-    //    element.addEventListener("input", resetLoginErrorTextFields);
-    //});
 }, 50);
 
 
@@ -279,7 +224,6 @@ async function onPageLoadLogic() {
     if (sessionStorage.getItem('WebApplicationChosenArray') != null && sessionStorage.getItem('WebApplicationChosenArray') != undefined) {
         let object = JSON.parse(sessionStorage.getItem('WebApplicationChosenArray'));
         sessionStorage.removeItem('WebApplicationChosenArray');
-        //apiRootUrl = sessionStorage.getItem('apiRootUrl');
 
         document.getElementById("ProcessingWebConfig-Label").innerText = "Loading " + object[0].name + " Web Application...";
         document.getElementById("ProcessingWebConfigValuesProgress").style.display = "block";
@@ -338,7 +282,6 @@ async function checkWhatWebApplicationToParse(config, executionMethod) {
             case "CopyWebApplication":
                 document.getElementById("AlertModal-Text-Paragraph").innerText = "Your " + coreConfigData["ApplicationName"] + " Application is ready. Click OK to start updating the configuration."
                 document.getElementById("ProcessingWebConfigValuesProgress").style.display = "none";
-                //document.getElementById("OnBase-Configuration-Main-Button").click();
                 document.getElementById("AlertModal").style.display = "block";
                 break;
         }
@@ -544,7 +487,6 @@ async function validateNumericValue(field) {
             document.querySelectorAll("[id$='Section']").forEach((element) => {
                 if (element.contains(field)) {
                     pushErrorToArray([field.id, element.id.replace(/Section$/, ''), "Value below the minimum", "The value input is below the minimum value of " + field.attributes["min"].value + ". Correct to allow saving."]);
-                    //document.getElementById(currentErrorSelected[1].innerText + "Link").click();
                 }
             });
         } else {
@@ -555,7 +497,6 @@ async function validateNumericValue(field) {
     if(field.attributes["max"]?.value != null || field.attributes["max"]?.value != undefined)
     {
         if (parseFloat(field.value) > field.attributes["max"].value) {
-            //field.value = field.attributes["max"].value;
             document.querySelectorAll("[id$='Section']").forEach((element) => {
                 if (element.contains(field)) {
                     pushErrorToArray([field.id, element.id.replace(/Section$/, ''), "Value above the maximum", "The value input is above the maximum value of " + field.attributes["max"].value + ". Correct to allow saving."]);
@@ -980,7 +921,6 @@ function validateApplicationServerURL(field) {
         }
         fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/UrlValidation?url=" + encodeURIComponent(field.value), applicationServerUrlValidationOptions)
             .then(response => {
-                //console.log(response.json());
                 let section = document.getElementById("ApplicationServerUrl-ResultContainer");
                 if (response.ok) {
                     section.replaceChildren();
@@ -989,13 +929,7 @@ function validateApplicationServerURL(field) {
                     section.replaceChildren();
                     section.insertAdjacentHTML("beforeend", blackQuestionMark);
                 }
-
-                //return response.json().then(data => {
-                //    console.log(data);
-                //})
             })
-            //.then(response => response.json())
-            //.then(data => parseValidateApplicationServerURL(data));
     } else {
         checkValidFieldValuesToEnableCopyButton();
     }
@@ -1192,7 +1126,6 @@ function testUrl(field) {
         }
         fetch(sessionStorage.getItem('apiRootUrl') + "/api/Endpoint/UrlValidation?url=" + encodeURIComponent(field.currentTarget.value), urlValidationOptions)
             .then(response => {
-                //console.log(response.json());
                 let section = document.getElementById("ApplicationServerUrl-ResultContainer");
                 if (response.ok) {
                     document.getElementById(id).classList.add("validUrl");
@@ -1203,8 +1136,6 @@ function testUrl(field) {
                 document.getElementById(id + "-Loader").style.display = "none";
                 document.getElementById(id).disabled = false;
             })
-            //.then(response => response.json())
-            //.then(data => parseTestUrlResponse(data, id));
     }
 }
 
@@ -2308,7 +2239,6 @@ async function DestinationTypeChange(optionSelected) {
 }
 
 function profilesReviewV2(optionChosen) {
-    var i, profiles;
     let objectToUpdate = diagnosticsRoutes.filter(route => route.id == document.getElementById("DiagnosticsSettingsRoutes-SelectList").value);
 
     if (objectToUpdate.length > 0) {
@@ -2806,7 +2736,6 @@ async function connectionStringSelectedV3() {
     await (function () {
         document.getElementById("Data-Source-Name").value = result[0]["Name"];
         document.getElementById("Data-Provider").value = result[0]["Provider"];
-        //document.getElementById("Additional-Options").value = result[0]["AdditionalOptions"];
         document.getElementById("Integrated-Security").checked = (result[0]["IntegratedSecurity"].toLowerCase() === 'true');
         document.getElementById("User-ID").value = result[0]["UserId"];
         document.getElementById("Password").value = result[0]["Password"];
@@ -2853,8 +2782,6 @@ async function dataProviderV3(selection) {
             arrayObject[0].sql.DataSource = document.getElementById("Sql-Data-Source").value;
             arrayObject[0].sql.Database = document.getElementById("Sql-Database").value;
             await setRequiredFieldAlertsV3(["sql"]);
-            //document.getElementById("Sql-AdditionalOptions").style.display = "block";
-            //document.getElementById("Oracle-AdditionalOptions").style.display = "none";
             break;
         case "Oracle.ManagedDataAccess.Client":
             document.getElementById(selection.value + ".Fields").style.display = "block"
@@ -2870,8 +2797,6 @@ async function dataProviderV3(selection) {
             } else {
                 await setRequiredFieldAlertsV3(["oracle2"]);
             }
-            //document.getElementById("Sql-AdditionalOptions").style.display = "none";
-            //document.getElementById("Oracle-AdditionalOptions").style.display = "block";
             break;
     }
 }
@@ -3001,65 +2926,7 @@ async function connectionStringTextInputFieldUpdatedV3(field) {
             break;
     }
     document.getElementById("TestConnectionString-Alert").innerText = "";
-    //await checkSetAppendedTextErrorV3();
 }
-
-//async function checkForDuplicateConnectionStringNamesV3() {
-//    let duplicate = ConnectionStringsArray.filter(cstring => cstring.Name === document.getElementById("Data-Source-Name").value && cstring.id != document.getElementById("ConnectionStrings-SelectList").value);
-
-//    if (duplicate.length > 0) {
-//        duplicate.forEach(dup => {
-//            //Need to select the option element where the dup.id value is equal to the option value.
-//            let options = document.getElementById("ConnectionStrings-SelectList").options;
-
-//            for (let i = 0; i < options.length; i++) {
-//                if (options[i].value === dup.id) {
-//                    options[i].classList.add("duplicateConnectionStringName");
-//                    //Checks to verify that the error text to append does not already contain the word duplicate.
-//                    if (!options[i].attributes["error-text-to-append"].value.includes(" (duplicate)")){
-//                        options[i].attributes["error-text-to-append"].value += " (duplicate)";
-//                    }
-//                    //Checks to verify that currently selected option does not already contain the value of the current option[i].value.
-//                    if (!document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicates"].value.includes(options[i].value)) {
-//                        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicates"].value = options[i].value;
-//                    }
-//                    //Checks to verify that the related-duplicates attribute does not already contain the the currently selected Connection Strings value.
-//                    if (!options[i].attributes["related-duplicates"].value.includes(document.getElementById("ConnectionStrings-SelectList").value)) {
-//                        let relatedDuplicatesArray = [];
-//                        if (options[i].attributes["related-duplicates"].value == "") {
-//                            options[i].attributes["related-duplicates"].value = document.getElementById("ConnectionStrings-SelectList").value;
-//                        } else {
-//                            relatedDuplicatesArray = options[i].attributes["related-duplicates"].value.split(",");
-//                            relatedDuplicatesArray.push(document.getElementById("ConnectionStrings-SelectList").value);
-//                            options[i].attributes["related-duplicates"].value = relatedDuplicatesArray.join(",");
-//                        }
-//                    }
-//                }
-
-//                if (options[i].attributes["related-duplicates"].value == document.getElementById("ConnectionStrings-SelectList").value && options[i].value != dup.id && options[i].innerText == dup.Name) {
-//                    options[i].attributes["related-duplicates"].value.replace(document.getElementById("ConnectionStrings-SelectList").value, "");
-//                    options[i].classList.remove("duplicateConnectionStringName");
-//                    options[i].attributes["error-text-to-append"].value = options[i].attributes["error-text-to-append"].value.replace(" (duplicate)", "");
-//                }
-//            }
-//        });
-//        await updateDataSourceOptionsV3();
-//        return true;
-//    } else {
-//        let relatedDuplicates = document.getElementById("ConnectionStrings-SelectList").options;
-//        for (let i = 0; i < relatedDuplicates.length; i++) {
-//            if (relatedDuplicates[i].attributes["related-duplicates"].value == document.getElementById("ConnectionStrings-SelectList").value) {
-//                relatedDuplicates[i].classList.remove("duplicateConnectionStringName");
-//                document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["related-duplicates"].value = "";
-//                relatedDuplicates[i].attributes["related-duplicates"].value = relatedDuplicates[i].attributes["related-duplicates"].value.replace(document.getElementById("ConnectionStrings-SelectList").value, "");
-//                relatedDuplicates[i].attributes["error-text-to-append"].value = relatedDuplicates[i].attributes["error-text-to-append"].value.replace(" (duplicate)", "");
-//            }
-//        }
-
-//        await updateDataSourceOptionsV3();
-//        return false;
-//    }
-//}
 
 async function updateDataSourceOptionsV3() {
     let dataSourceElement = document.getElementById("Data-Source");
@@ -3124,36 +2991,6 @@ async function checkSetAppendedTextErrorV3() {
         await spliceErrorFromArray("connectionStringDataSourceName");
         document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["error-text-to-append"].value = document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].attributes["error-text-to-append"].value.replace(" (incomplete)", "");
     }
-
-    //if (incompletefields) {
-    //    if (duplicatename) {
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("incompleteConnectionString");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("duplicateConnectionStringName");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", " (duplicate) (incomplete)");
-    //        document.getElementById("DuplicateConnectionString-Alert").style.display = "block";
-    //        checkErroredConnectionStrings();
-    //    } else {
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("incompleteConnectionString");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("duplicateConnectionStringName");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", " (incomplete)");
-    //        document.getElementById("DuplicateConnectionString-Alert").style.display = "none";
-    //        checkErroredConnectionStrings();
-    //    }
-    //} else {
-    //    if (duplicatename) {
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("incompleteConnectionString");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.add("duplicateConnectionStringName");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", " (duplicate)");
-    //        document.getElementById("DuplicateConnectionString-Alert").style.display = "block";
-    //        checkErroredConnectionStrings();
-    //    } else {
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("incompleteConnectionString");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].classList.remove("duplicateConnectionStringName");
-    //        document.getElementById("ConnectionStrings-SelectList").options[document.getElementById("ConnectionStrings-SelectList").selectedIndex].setAttribute("error-text-to-append", "");
-    //        document.getElementById("DuplicateConnectionString-Alert").style.display = "none";
-    //        checkErroredConnectionStrings();
-    //    }
-    //}
 }
 
 async function tnsConnectionStringCheckCheckboxV3(field) {
@@ -3237,7 +3074,6 @@ async function addDataSourceOptionV3(idvalue) {
 async function resetConnectionStringFieldsV3() {
     document.getElementById("Data-Source-Name").value = "";
     document.getElementById("Data-Provider").value = "System.Data.SqlClient";
-    //document.getElementById("Additional-Options").value = "";
     document.getElementById("Integrated-Security").checked = true;
     document.getElementById("User-ID").value = "";
     document.getElementById("User-ID").disabled = true;
@@ -3423,19 +3259,7 @@ async function testConnectionString() {
             } else if(response.redirected){
                 window.location.href = sessionStorage.getItem('apiRootUrl') + response.url;
             }
-            //response.json();
         });
-        //.then(data => {
-        //    document.getElementById("connectionStringTestModal").style.display = "none";
-        //    let testconnectionalert = document.getElementById("TestConnectionString-Alert");
-        //    if (data["ResultCode"] == "0") {
-        //        testconnectionalert.innerText = data["ResultMessage"];
-        //        testconnectionalert.style.color = "green";
-        //    } else if (data["ResultCode"] == "1") {
-        //        testconnectionalert.innerText = data["ResultMessage"];
-        //        testconnectionalert.style.color = "red";
-        //    }
-        //});
 }
 
 
@@ -3539,101 +3363,10 @@ function toggleDarkLightMode(checkbox) {
         localStorage.setItem("darkModeState", true);
         //Elements to add "dark_mode" class to:
         document.body.classList.add('dark_mode_body');
-        //document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.add('dark_mode');
-        //document.getElementById("Loading-Web-Applications-Progress-Section").classList.add('dark_mode');
-        //document.getElementById("CopyWebApplicationModal-Container").classList.add('dark_mode');
-        //document.getElementById("SaveErrors-Content").classList.add('dark_mode');
-        //document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.add('dark_mode');
-        //document.getElementById("errorLoadModal-content").classList.add('dark_mode');
-        //document.getElementById("NewWebApplicationModal-Container").classList.add('dark_mode');
-        //document.getElementById("NewWebApplicationModal-BodySection").classList.add('dark_mode');
-        //document.getElementById("NewWebApplicationModal-Footer").classList.add('dark_mode');
-
-        //Elements to add "dark_mode_titlebar" class to:
-        //document.getElementById("h1-container").classList.add('dark_mode_titlebar');
-        //document.getElementById("core-action-buttons-div").classList.add('dark_mode_titlebar');
-        //document.getElementById("ChooseApplicationTitleBar").classList.add('dark_mode_titlebar');
-        //document.getElementById("NewWebApplicationModal-TitleBar").classList.add('dark_mode_titlebar');
-        //Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
-        //    element.classList.add('dark_mode_titlebar')
-        //});
-        //Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
-        //    element.classList.add('dark_mode_titlebar');
-        //});
-        //try {
-        //    document.getElementById("login-form-container").classList.add('dark_mode_titlebar');
-        //} catch {
-
-        //}
-        
-
-        //Elements to add "dark_mode_button" class to:
-        //Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
-        //    element.classList.add('dark_mode_button')
-        //});
-
-        //Elements to add "dark_mode_select" class to:
-        //Array.from(document.getElementsByTagName("select")).forEach(element => {
-        //    element.classList.add('dark_mode_select');
-        //});
-
-        //Elements to add "dark_mode_links" class to:
-        //Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
-        //    element.classList.add('dark_mode_links');
-        //});
-
-        //Array.from(document.getElementsByTagName("optgroup")).forEach(element => {
-        //    element.classList.add('dark_mode_select_optgroup');
-        //});
     } else {
         localStorage.setItem("darkModeState", false);
         //Elements to remove "dark_mode" class from:
         document.body.classList.remove('dark_mode_body');
-        //document.getElementById("chooseWebApplicationModal-Table-Buttons-Container").classList.remove('dark_mode');
-        //document.getElementById("Loading-Web-Applications-Progress-Section").classList.remove('dark_mode');
-        //document.getElementById("CopyWebApplicationModal-Container").classList.remove('dark_mode');
-        //document.getElementById("SaveErrors-Content").classList.remove('dark_mode');
-        //document.getElementById("ProcessingWebConfigValuesProgress-Content").classList.remove('dark_mode');
-        //document.getElementById("errorLoadModal-content").classList.remove('dark_mode');
-        //document.getElementById("NewWebApplicationModal-Container").classList.remove('dark_mode');
-        //document.getElementById("NewWebApplicationModal-BodySection").classList.remove('dark_mode');
-        //document.getElementById("NewWebApplicationModal-Footer").classList.remove('dark_mode');
-
-        //Elements to remove "dark_mode_titlebar" class to:
-        //document.getElementById("h1-container").classList.remove('dark_mode_titlebar');
-        //document.getElementById("core-action-buttons-div").classList.remove('dark_mode_titlebar');
-        //document.getElementById("ChooseApplicationTitleBar").classList.remove('dark_mode_titlebar');
-        //document.getElementById("NewWebApplicationModal-TitleBar").classList.remove('dark_mode_titlebar');
-        //Array.from(document.getElementsByClassName("titleBar")).forEach(element => {
-        //    element.classList.remove('dark_mode_titlebar')
-        //});
-        //Array.from(document.getElementsByClassName("CopyWebApplicationModal-TitleBar-Container-Styling")).forEach(element => {
-        //    element.classList.remove('dark_mode_titlebar');
-        //});
-        //try {
-        //    document.getElementById("login-form-container").classList.remove('dark_mode_titlebar');
-        //} catch {
-
-        //}
-
-        //Elements to remove "dark_mode_button" class from:
-        //Array.from(document.getElementsByClassName("core-action-buttons")).forEach(element => {
-        //    element.classList.remove('dark_mode_button')
-        //});
-
-        //Elements to remove "dark_mode_select" class from:
-        //Array.from(document.getElementsByTagName("select")).forEach(element => {
-        //    element.classList.remove('dark_mode_select');
-        //});
-
-        //Elements to remove "dark_mode_links" class from:
-        //Array.from(document.getElementsByClassName("sectionLinks")).forEach(element => {
-        //    element.classList.remove('dark_mode_links');
-        //});
-
-        //Array.from(document.getElementsByTagName("optgroup")).forEach(element => {
-        //    element.classList.remove('dark_mode_select_optgroup');
-        //});
     }
 }
 
@@ -3715,7 +3448,6 @@ function backButtonClicked() {
             document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
             document.getElementById("NewWebApplicationModal-FromExisting").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
             document.getElementById("NewWebApplicationModal-FromExisting").classList.add("slide-out-right");
-            //document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
             setTimeout(function () {
                 document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-FromExistingOrScratch").hidden = false;
@@ -3727,7 +3459,6 @@ function backButtonClicked() {
             document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
             document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
             document.getElementById("NewWebApplicationModal-VersionClientChoice").classList.add("slide-out-right");
-            //document.getElementById("NewWebApplicationModal-Footer").style.display = "none";
             setTimeout(function () {
                 document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.add("slide-in-left");
                 document.getElementById("NewWebApplicationModal-FromExistingOrScratch").hidden = false;
@@ -3790,7 +3521,6 @@ async function nextButtonClicked() {
                 currentNewWebApplicationPage = "NewWebApplicationModal-WebSiteChoiceAndNaming";
             }, 250);
             document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
-            //document.getElementById("ChooseWebSite").innerHTML = `<option value="Default Web Site">Default Web Site</option>`;
             document.getElementById("ChooseWebSite").value = "";
             document.getElementById("ChoosePath").innerHTML = "";
             document.getElementById("ChoosePath").disabled = true;
@@ -4035,7 +3765,6 @@ function selectWebConfigChanged(field) {
                 document.getElementById("SelectSessionAdminSecurityConfig-ErrorText").hidden = true;
                 document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
             }
-            //document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = false;
         }
     } else {
         document.getElementById("NewWebApplicationModal-NextCreateButton").disabled = true;
@@ -4072,8 +3801,6 @@ function newWebApplication() {
     document.getElementById("NewWebApplicationModal-StartPage").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
     document.getElementById('NewWebApplicationModal-StartPage').classList.add('slide-out-left');
     setTimeout(function () {
-        //document.getElementById("ChooseWebApplicationVersion").value = "";
-        //document.getElementById("ChooseWebApplication").value = "";
         document.getElementById('NewWebApplicationModal-StartPage').hidden = true;
         document.getElementById('NewWebApplicationModal-FromExistingOrScratch').hidden = false;
         document.getElementById("NewWebApplicationModal-FromExistingOrScratch").classList.remove("slide-in-right", "slide-in-left", "slide-out-left", "slide-out-right");
