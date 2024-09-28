@@ -236,7 +236,11 @@ async function onPageLoadLogic() {
     }
 
     document.getElementById("COMACON-HeaderHomeLink").href = sessionStorage.getItem('apiRootUrl') + "/core/home";
-    document.getElementById("SettingsButton").href = sessionStorage.getItem('apiRootUrl') + "/core/settings";
+    try {
+        document.getElementById("SettingsButton").href = sessionStorage.getItem('apiRootUrl') + "/core/settings";
+    } catch {
+
+    }
 }
 
 
