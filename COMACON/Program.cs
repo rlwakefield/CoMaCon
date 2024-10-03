@@ -58,8 +58,6 @@ app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseMiddleware<BasePathMiddleware>();
-
 app.UseRouting();
 
 app.UseAuthorization();

@@ -225,29 +225,28 @@ internal class DefaultSqlQueries : SqlQueries
             return "";
         }
 
-        //UsersDataStructure usersds = new UsersDataStructure();
-        //foreach (UserAccount u in usr)
-        //{
-        //    User u2 = new User();
-        //    u2.usernum = u.UserNum;
-        //    u2.username = u.Username;
-        //    u2.firstname = u.FirstName;
-        //    u2.lastname = u.LastName;
-        //    u2.emailaddress = u.EmailAddress;
-        //    u2.enabled = u.Status ? 1 : 0;
-        //    u2.passwordresetonnextlogin = u.PasswordResetOnNextLogin ? 1 : 0;
-        //    u2.passwordlastchanged = DateTimeOffset.Parse(u.PasswordLastChanged);
-        //    u2.authmethod = u.AuthMethod;
-        //    u2.creationdate = DateTimeOffset.Parse(u.CreationDate);
-        //    u2.createdby = u.CreatedBy;
-        //    u2.lastediteddate = DateTimeOffset.Parse(u.LastEditedDate);
-        //    u2.lasteditedby = u.LastEditedBy;
-        //    u2.roleid = u.RoleId;
-        //    usersds.users.Add(u2);
-        //}
+        UsersDataStructure usersds = new UsersDataStructure();
+        foreach (UserAccount u in usr)
+        {
+            User u2 = new User();
+            u2.usernum = u.UserNum;
+            u2.username = u.Username;
+            u2.firstname = u.FirstName;
+            u2.lastname = u.LastName;
+            u2.emailaddress = u.EmailAddress;
+            u2.enabled = u.Status ? 1 : 0;
+            u2.passwordresetonnextlogin = u.PasswordResetOnNextLogin ? 1 : 0;
+            u2.passwordlastchanged = DateTimeOffset.Parse(u.PasswordLastChanged);
+            u2.authmethod = u.AuthMethod;
+            u2.creationdate = DateTimeOffset.Parse(u.CreationDate);
+            u2.createdby = u.CreatedBy;
+            u2.lastediteddate = DateTimeOffset.Parse(u.LastEditedDate);
+            u2.lasteditedby = u.LastEditedBy;
+            u2.roleid = u.RoleId;
+            usersds.users.Add(u2);
+        }
 
-        //return JsonConvert.SerializeObject(usersds);
-        return JsonConvert.SerializeObject(createUserDataStructureObject(usr));
+        return JsonConvert.SerializeObject(usersds);
     }
 
     public string GetAllUsers()
@@ -260,29 +259,28 @@ internal class DefaultSqlQueries : SqlQueries
             return "";
         }
 
-        //UsersDataStructure usersds = new UsersDataStructure();
-        //foreach (UserAccount u in usr)
-        //{
-        //    User u2 = new User();
-        //    u2.usernum = u.UserNum;
-        //    u2.username = u.Username;
-        //    u2.firstname = u.FirstName;
-        //    u2.lastname = u.LastName;
-        //    u2.emailaddress = u.EmailAddress;
-        //    u2.enabled = u.Status ? 1 : 0;
-        //    u2.passwordresetonnextlogin = u.PasswordResetOnNextLogin ? 1 : 0;
-        //    u2.passwordlastchanged = DateTimeOffset.Parse(u.PasswordLastChanged);
-        //    u2.authmethod = u.AuthMethod;
-        //    u2.creationdate = DateTimeOffset.Parse(u.CreationDate);
-        //    u2.createdby = u.CreatedBy;
-        //    u2.lastediteddate = DateTimeOffset.Parse(u.LastEditedDate);
-        //    u2.lasteditedby = u.LastEditedBy;
-        //    u2.roleid = u.RoleId;
-        //    usersds.users.Add(u2);
-        //}
+        UsersDataStructure usersds = new UsersDataStructure();
+        foreach (UserAccount u in usr)
+        {
+            User u2 = new User();
+            u2.usernum = u.UserNum;
+            u2.username = u.Username;
+            u2.firstname = u.FirstName;
+            u2.lastname = u.LastName;
+            u2.emailaddress = u.EmailAddress;
+            u2.enabled = u.Status ? 1 : 0;
+            u2.passwordresetonnextlogin = u.PasswordResetOnNextLogin ? 1 : 0;
+            u2.passwordlastchanged = DateTimeOffset.Parse(u.PasswordLastChanged);
+            u2.authmethod = u.AuthMethod;
+            u2.creationdate = DateTimeOffset.Parse(u.CreationDate);
+            u2.createdby = u.CreatedBy;
+            u2.lastediteddate = DateTimeOffset.Parse(u.LastEditedDate);
+            u2.lasteditedby = u.LastEditedBy;
+            u2.roleid = u.RoleId;
+            usersds.users.Add(u2);
+        }
 
-        //return JsonConvert.SerializeObject(usersds);
-        return JsonConvert.SerializeObject(createUserDataStructureObject(usr));
+        return JsonConvert.SerializeObject(usersds);
     }
 
     public string UpdateUser(User user, int userdoingupdates)
@@ -458,29 +456,28 @@ internal class DefaultSqlQueries : SqlQueries
         }
         else
         {
-            //UsersDataStructure usersds = new UsersDataStructure();
-            //foreach (UserAccount u in usr)
-            //{
-            //    User u2 = new User();
-            //    u2.usernum = u.UserNum;
-            //    u2.username = u.Username;
-            //    u2.firstname = u.FirstName;
-            //    u2.lastname = u.LastName;
-            //    u2.emailaddress = u.EmailAddress;
-            //    u2.enabled = u.Status ? 1 : 0;
-            //    u2.passwordresetonnextlogin = u.PasswordResetOnNextLogin ? 1 : 0;
-            //    u2.passwordlastchanged = DateTimeOffset.Parse(u.PasswordLastChanged);
-            //    u2.authmethod = u.AuthMethod;
-            //    u2.creationdate = DateTimeOffset.Parse(u.CreationDate);
-            //    u2.createdby = u.CreatedBy;
-            //    u2.lastediteddate = DateTimeOffset.Parse(u.LastEditedDate);
-            //    u2.lasteditedby = u.LastEditedBy;
-            //    u2.roleid = u.RoleId;
-            //    usersds.users.Add(u2);
-            //}
+            UsersDataStructure usersds = new UsersDataStructure();
+            foreach (UserAccount u in usr)
+            {
+                User u2 = new User();
+                u2.usernum = u.UserNum;
+                u2.username = u.Username;
+                u2.firstname = u.FirstName;
+                u2.lastname = u.LastName;
+                u2.emailaddress = u.EmailAddress;
+                u2.enabled = u.Status ? 1 : 0;
+                u2.passwordresetonnextlogin = u.PasswordResetOnNextLogin ? 1 : 0;
+                u2.passwordlastchanged = DateTimeOffset.Parse(u.PasswordLastChanged);
+                u2.authmethod = u.AuthMethod;
+                u2.creationdate = DateTimeOffset.Parse(u.CreationDate);
+                u2.createdby = u.CreatedBy;
+                u2.lastediteddate = DateTimeOffset.Parse(u.LastEditedDate);
+                u2.lasteditedby = u.LastEditedBy;
+                u2.roleid = u.RoleId;
+                usersds.users.Add(u2);
+            }
 
-            //return JsonConvert.SerializeObject(usersds);
-            return JsonConvert.SerializeObject(createUserDataStructureObject(usr));
+            return JsonConvert.SerializeObject(usersds);
         }
     }
 
@@ -654,31 +651,5 @@ internal class DefaultSqlQueries : SqlQueries
         //}
 
         return JsonConvert.SerializeObject(pwp);
-    }
-
-    private UsersDataStructure createUserDataStructureObject(List<UserAccount> users)
-    {
-        UsersDataStructure usersds = new UsersDataStructure();
-        foreach (UserAccount u in users)
-        {
-            User u2 = new User();
-            u2.usernum = u.UserNum;
-            u2.username = u.Username;
-            u2.firstname = u.FirstName;
-            u2.lastname = u.LastName;
-            u2.emailaddress = u.EmailAddress;
-            u2.enabled = u.Status ? 1 : 0;
-            u2.passwordresetonnextlogin = u.PasswordResetOnNextLogin ? 1 : 0;
-            u2.passwordlastchanged = DateTimeOffset.Parse(u.PasswordLastChanged);
-            u2.authmethod = u.AuthMethod;
-            u2.creationdate = DateTimeOffset.Parse(u.CreationDate);
-            u2.createdby = u.CreatedBy;
-            u2.lastediteddate = DateTimeOffset.Parse(u.LastEditedDate);
-            u2.lasteditedby = u.LastEditedBy;
-            u2.roleid = u.RoleId;
-            usersds.users.Add(u2);
-        }
-
-        return usersds;
     }
 }

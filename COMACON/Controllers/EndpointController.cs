@@ -33,15 +33,12 @@ namespace COMACON.Controllers
         private static string authorizationResponse = "{\"error\":\"@errorNumber\",\"message\":\"@errorMessage\",\"timestamp\":\"\"}";
         private static string genericResponse = "{\"result\":\"@result\",\"message\":\"@message\"}";
         private readonly COMACONSqliteDbContext _context;
-        private readonly IWebHostEnvironment _webhostenvironment;
 
         public EndpointController(Core core,
             LoadSaveWebApplications loadSaveWebApplications,
             IConfiguration configuration,
             SessionManagement sessionManagement,
-            SqlQueries sqlQueries,
-            COMACONSqliteDbContext context,
-            IWebHostEnvironment webhostenvironment)
+            SqlQueries sqlQueries, COMACONSqliteDbContext context)
         {
             Core = core;
             LoadSaveWebApplications = loadSaveWebApplications;
@@ -49,32 +46,21 @@ namespace COMACON.Controllers
             _sessionManagement = sessionManagement;
             _SqlQueries = sqlQueries;
             _context = context;
-            _webhostenvironment = webhostenvironment;
         }
 
         // GET: api/Endpoint/GetRootUrl
         [HttpGet("GetRootUrl")]
         public string GetRootUrl()
         {
-            Log.Logger.Information("Getting root URL.");
             var request = HttpContext.Request;
             var scheme = request.Scheme;
-            Log.Logger.Information("Path: " + request.Path);
-            Log.Logger.Information("BasePath: " + request.PathBase);
+            Console.WriteLine(request.Host);
+            Console.WriteLine(request.PathBase);
+            Console.WriteLine(request.Path);
             var host = request.Host.ToUriComponent();
             var pathbase = request.PathBase.ToUriComponent();
 
-            var rootUrl = "";
-
-            if (_webhostenvironment.EnvironmentName == "Development")
-            {
-                rootUrl = $"{scheme}://{host}";
-            }
-            else
-            {
-                rootUrl = $"{scheme}://{host}{pathbase}";
-            }
-            Log.Logger.Information($"The root URL is {rootUrl}.");
+            var rootUrl = $"{scheme}://{host}{pathbase}";
 
             return "{\"rooturl\":\""+rootUrl+"\"}";
         }
@@ -100,13 +86,13 @@ namespace COMACON.Controllers
             if (username == "")
             {
                 Log.Logger.Warning("Username is required.");
-                return BadRequest(authorizationResponse.Replace("@errorNumber", "1").Replace("@errorMessage", "Username is required."));
+                return Unauthorized(authorizationResponse.Replace("@errorNumber", "1").Replace("@errorMessage", "Username is required."));
             }
 
             if (password == "")
             {
                 Log.Logger.Warning("Password is required.");
-                return BadRequest(authorizationResponse.Replace("@errorNumber", "2").Replace("@errorMessage", "Password is required."));
+                return Unauthorized(authorizationResponse.Replace("@errorNumber", "2").Replace("@errorMessage", "Password is required."));
             }
 
             JsonNode validationResults = JsonNode.Parse(_sessionManagement.ValidateUserLoggingIn(username, password));
@@ -128,22 +114,16 @@ namespace COMACON.Controllers
         [HttpGet("VerifyToken")]
         public IActionResult VerifyToken([FromHeader(Name = "Authorization")] string authorizationHeader)
         {
-            //string rooturl = GetRootUrl();
-            //Console.WriteLine("Root URL: " + rooturl);
-            //JsonDocument jsonDocument = JsonDocument.Parse(rooturl);
-            //Console.WriteLine("Root URL Value: " + jsonDocument.RootElement.GetProperty("rooturl"));
-            //Console.WriteLine("Root URL Value: " + JsonDocument.Parse(GetRootUrl()).RootElement.GetProperty("rooturl"));
-
             if (string.IsNullOrEmpty(authorizationHeader))
             {
                 Log.Logger.Warning("No authorization token provided.");
-                return Redirect(JsonDocument.Parse(GetRootUrl()).RootElement.GetProperty("rooturl") + "/core/login");
+                return Redirect("/core/login");
             }
 
             if (!authorizationHeader.StartsWith("Bearer "))
             {
                 Log.Logger.Warning("Invalid authorization token type.");
-                return Redirect(JsonDocument.Parse(GetRootUrl()).RootElement.GetProperty("rooturl") + "/core/login");
+                return Redirect("/core/login");
             }
 
             JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActive(authorizationHeader.Substring("Bearer ".Length).Trim()));
@@ -155,7 +135,7 @@ namespace COMACON.Controllers
                     return Ok(validationResults);
                 default:
                     Log.Logger.Warning("Token is expired.");
-                    return Unauthorized(JsonDocument.Parse(GetRootUrl()).RootElement.GetProperty("rooturl") + "/core/login");
+                    return Unauthorized(authorizationResponse.Replace("@errorNumber", validationResults["error"].ToString()).Replace("@errorMessage", validationResults["message"].ToString()));
             }
         }
 
@@ -183,7 +163,7 @@ namespace COMACON.Controllers
                     Log.Logger.Information("Logging out user.");
 
                     _sessionManagement.logoutUser(authorizationHeader.Substring("Bearer ".Length).Trim());
-                    return Redirect(JsonDocument.Parse(GetRootUrl()).RootElement.GetProperty("rooturl") + "/core/login");
+                    return Redirect("/core/login");
                 default:
                     Log.Logger.Warning("Token is expired.");
                     return Unauthorized(authorizationResponse.Replace("@errorNumber", validationResults["error"].ToString()).Replace("@errorMessage", validationResults["message"].ToString()));
@@ -484,13 +464,13 @@ namespace COMACON.Controllers
             if (string.IsNullOrEmpty(authorization))
             {
                 Log.Logger.Warning("No authorization token provided.");
-                return Redirect(JsonDocument.Parse(GetRootUrl()).RootElement.GetProperty("rooturl") + "/core/login");
+                return Redirect("/core/login");
             }
 
             if (!authorization.StartsWith("Bearer "))
             {
                 Log.Logger.Warning("Invalid authorization token type.");
-                return Redirect(JsonDocument.Parse(GetRootUrl()).RootElement.GetProperty("rooturl") + "/core/login");
+                return Redirect("/core/login");
             }
 
             JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActive(authorization.Substring("Bearer ".Length).Trim()));
@@ -498,7 +478,7 @@ namespace COMACON.Controllers
             if (validationResults["error"].ToString() != "0")
             {
                 Log.Logger.Warning("Token is expired.");
-                return Redirect(JsonDocument.Parse(GetRootUrl()).RootElement.GetProperty("rooturl") + "/core/login");
+                return Redirect("/core/login");
             }
 
             switch (version)
@@ -528,13 +508,13 @@ namespace COMACON.Controllers
             if(string.IsNullOrEmpty(authorization))
             {
                 Log.Logger.Warning("No authorization token provided.");
-                return Redirect(JsonDocument.Parse(GetRootUrl()).RootElement.GetProperty("rooturl") + "/core/login");
+                return Redirect("/core/login");
             }
 
             if(!authorization.StartsWith("Bearer "))
             {
                 Log.Logger.Warning("Invalid authorization token type.");
-                return Redirect(JsonDocument.Parse(GetRootUrl()).RootElement.GetProperty("rooturl") + "/core/login");
+                return Redirect("/core/login");
             }
 
             JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActive(authorization.Substring("Bearer ".Length).Trim()));
@@ -542,7 +522,7 @@ namespace COMACON.Controllers
             if(validationResults["error"].ToString() != "0")
             {
                 Log.Logger.Warning("Token is expired.");
-                return Redirect(JsonDocument.Parse(GetRootUrl()).RootElement.GetProperty("rooturl") + "/core/login");
+                return Redirect("/core/login");
             }
 
             Log.Logger.Verbose("Testing connection string.");
@@ -655,13 +635,13 @@ namespace COMACON.Controllers
             if (string.IsNullOrEmpty(authorization))
             {
                 Log.Logger.Warning("No authorization token provided.");
-                return Redirect(JsonDocument.Parse(GetRootUrl()).RootElement.GetProperty("rooturl") + "/core/login");
+                return Redirect("/core/login");
             }
 
             if (!authorization.StartsWith("Bearer "))
             {
                 Log.Logger.Warning("Invalid authorization token type.");
-                return Redirect(JsonDocument.Parse(GetRootUrl()).RootElement.GetProperty("rooturl") + "/core/login");
+                return Redirect("/core/login");
             }
 
             JsonNode validationResults = JsonNode.Parse(_sessionManagement.validateAccessTokenStillActive(authorization.Substring("Bearer ".Length).Trim()));
@@ -669,7 +649,7 @@ namespace COMACON.Controllers
             if (validationResults["error"].ToString() != "0")
             {
                 Log.Logger.Warning("Token is expired.");
-                return Redirect(JsonDocument.Parse(GetRootUrl()).RootElement.GetProperty("rooturl") + "/core/login");
+                return Redirect("/core/login");
             }
 
             Log.Logger.Verbose("Validating \"{url}\" URL.", url.ToString());
