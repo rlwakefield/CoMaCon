@@ -192,7 +192,25 @@ setTimeout(() => {
  *                  Page Load SCript
  ********************************************************/
 async function onPageLoadLogic() {
-    await getApiRootUrl();
+    if (sessionStorage.getItem('apiRootUrl') == null || sessionStorage.getItem('apiRootUrl') == undefined) {
+        if (window.location.href.endsWith("/")) {
+            apiRootUrl = window.location.href.slice(0, -1);
+            sessionStorage.setItem('apiRootUrl', apiRootUrl);
+        } else {
+            apiRootUrl = window.location.href;
+            sessionStorage.setItem('apiRootUrl', apiRootUrl);
+        }
+        //fetch(apiRootUrl + '/api/Endpoint/GetRootUrl', {
+        //    method: 'GET', // or 'POST', 'PUT', 'DELETE', etc.
+        //})
+        //    .then(response => response.json())
+        //    .then(data => {
+        //        sessionStorage.setItem('apiRootUrl', data.rooturl);
+        //    })
+        //    .catch(error => console.error('Error:', error));
+    } else {
+        apiRootUrl = sessionStorage.getItem('apiRootUrl');
+    }
 
     if (localStorage.getItem("darkModeState") != null) {
         if (localStorage.getItem("darkModeState") == "true") {
@@ -222,32 +240,6 @@ async function onPageLoadLogic() {
         document.getElementById("SettingsButton").href = sessionStorage.getItem('apiRootUrl') + "/core/settings";
     } catch {
 
-    }
-    //console.log(sessionStorage.getItem('apiRootUrl'));
-}
-
-async function getApiRootUrl() {
-    if (sessionStorage.getItem('apiRootUrl') == null || sessionStorage.getItem('apiRootUrl') == undefined) {
-        if (window.location.href.endsWith("/")) {
-            apirooturl = window.location.href.slice(0, -1);
-            //sessionstorage.setitem('apirooturl', apirooturl);
-        }
-        else
-        {
-            apirooturl = window.location.href;
-            //sessionstorage.setitem('apirooturl', apirooturl);
-        }
-        await fetch(apirooturl + '/api/Endpoint/GetRootUrl', {
-            method: 'GET',
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.rooturl);
-                sessionStorage.setItem('apiRootUrl', data.rooturl);
-            })
-            .catch(error => console.error('Error:', error));
-    } else {
-        apiRootUrl = sessionStorage.getItem('apiRootUrl');
     }
 }
 
