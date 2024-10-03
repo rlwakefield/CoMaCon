@@ -98,7 +98,7 @@
         <script>
             if (sessionStorage.getItem("comaconbearertoken") != null && sessionStorage.getItem('comaconbearertoken') != undefined) {
                 var token = sessionStorage.getItem('comaconbearertoken');
-            fetch(sessionStorage.getItem('apiRootUrl') + '/api/Endpoint/VerifyToken', {
+                fetch(sessionStorage.getItem('apiRootUrl') + '/api/Endpoint/VerifyToken', {
                     method: 'GET', // or 'POST', 'PUT', 'DELETE', etc.
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -111,12 +111,15 @@
                             window.location.href = sessionStorage.getItem('apiRootUrl') + "/core/home";
                         } else if (response.redirected) {
                             window.location.href = sessionStorage.getItem('apiRootUrl') + response.url;
+                        } else if (response.status === 401){
+                            console.log(response.url);
+                            window.location.href = response.url;
                         }
                     }, 50);
                 })
                 .catch(error => console.error('Error:', error));
             } else if (currentPage != "Login") {
-            window.location.href = sessionStorage.getItem('apiRootUrl') + "/core/login";
+                window.location.href = sessionStorage.getItem('apiRootUrl') + "/core/login";
             }
 
             window.onload = function () {

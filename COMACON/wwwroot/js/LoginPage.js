@@ -97,7 +97,8 @@ function logout() {
                 if (response.redirected) {
                     sessionStorage.removeItem('comaconbearertoken');
                     // Handle the redirect
-                    window.location.href = sessionStorage.getItem('apiRootUrl') + response.url;
+                    console.log(response.url);
+                    window.location.href = response.url;
                 }
             })
             .catch(error => console.error('Error:', error));
