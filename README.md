@@ -1,8 +1,12 @@
 <div align="center">
 
-[![GitHub repo size](https://img.shields.io/github/repo-size/rlwakefield/CoMaCon?style=flat-square)](#)
-[![GitHub release (release name instead of tag name)](https://img.shields.io/github/v/release/rlwakefield/CoMaCon?style=flat-square)](https://github.com/rlwakefield/CoMaCon/releases/latest)
-[![GitHub all releases](https://img.shields.io/github/downloads/rlwakefield/CoMaCon/total?style=flat-square)](https://github.com/rlwakefield/CoMaCon/releases/)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/rlwakefield/CoMaCon?label=Code%20Size)
+![GitHub repo size](https://img.shields.io/github/repo-size/rlwakefield/CoMaCon?label=Repo%20Size)
+<br>
+![GitHub Release](https://img.shields.io/github/v/release/rlwakefield/CoMaCon?label=Current%20Stable%20Version)
+[![GitHub Release](https://img.shields.io/github/v/release/rlwakefield/CoMaCon?include_prereleases&label=Latest%20Pre-Release%20Version)](https://github.com/rlwakefield/CoMaCon/releases/latest?)
+<br>
+[![GitHub all releases](https://img.shields.io/github/downloads/rlwakefield/CoMaCon/total?label=Downloads)](https://github.com/rlwakefield/CoMaCon/releases/)
 
 </div>
 
@@ -23,11 +27,11 @@ With this utility, that challenge will become a thing of the past. No longer wil
 ![image](https://github.com/rlwakefield/COMACON-MVC/assets/33588807/cc7c6524-2926-4b2b-bcb9-c2875a62c9ce)
 
 Current supported versions include:
-- [ X ] 21.1 (EP5)
-- [ X ] 22.1
-- [ X ] 23.1
-- [ X ] 24.1
-- [  ] 25.1
+- [x] 21.1 (EP5)
+- [x] 22.1
+- [x] 23.1
+- [x] 24.1
+- [ ] 25.1
 
 
 # Installation Instructions
